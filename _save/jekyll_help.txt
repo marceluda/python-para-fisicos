@@ -1,0 +1,11 @@
+
+# Comando para aramr la web desde el jekyll localmente
+
+jekyll build --destination /var/www/html/rp_lock-in_pid/
+
+# Luego abrir en:
+# http://localhost/rp_lock-in_pid
+
+
+
+#  https://www.tablesgenerator.com/markdown_tables
