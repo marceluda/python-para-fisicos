@@ -43,6 +43,9 @@ Por muchas razones:
     nuestra libertad como usuarios. Más aún, nos estimula a compartir lo que producimos
     y generar una comunidad basada en la ayuda mutua.
   - Es simple y entendible, incluso si uno es principiante.
+  - Es un leguaje "interpretable". No tenes que "compilar" el programa que armás, sino que
+    se escriben "scripts", programas en texto plano que se ejecutan directamente como si fuese
+    una línea de comandos.
   - Es multiplataforma, por lo que se lo puede usar en Windows, MAC,
     [GNU/Linux](https://es.wikipedia.org/wiki/GNU/Linux)
     (como [Ubuntu](https://www.ubuntu.com/desktop), [Mint](https://linuxmint.com/) o
