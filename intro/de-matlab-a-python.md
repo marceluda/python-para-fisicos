@@ -73,7 +73,7 @@ from pylab import *
 Con esa importación vamos a disponer directamente de comandos como `ones`, `diag`, `eye`, `plot` y
 varios idénticos de MATLAB. Sola hay que escribirlos.
 
-La forma más mecánica de importar librerías sería la siguiente:
+La forma más canónica de importar librerías sería la siguiente:
 
 ```python
 import numpy as np
@@ -82,11 +82,9 @@ import matplotlib.pyplot as plt
 En este caso, las funciones importadas hay que llamarlas anteponiendo el "alias" de la
 librería de donde vienen: `np.diag`, `np.eye`, `plt.plot`.
 
-<a data-toggle="collapse" href="#importar_librerias" aria-expanded="false" aria-controls="importar_librerias">¿Por que es importante la forma de importar librerías? <span class="caret"></span></a>
+<a data-toggle="collapse" href="#importar_librerias" aria-expanded="false" aria-controls="importar_librerias">¿Por que usar la importación canónica? <span class="caret"></span></a>
 
 <div id="importar_librerias" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
-
-**Por que usar la importación canónica?**
 
 Hay nombres de funciones que se repiten en diferentes librebrías. Por ejemplo,
 si tenemos dos librerías con la función plot, una la de `matplotlib.pyplot` y otra (que inventamos acá)
@@ -127,3 +125,12 @@ Entonces .. **¿que es mejor?**.
   - **Lo más simple y parecido a MATLAB es imporatar todo scipy con `from pylab import *`
 
 </div>
+
+## Recursos para empezar a programar YA MISMO (y otros)
+
+Si estás apurado/a por empezar, seguramente querés una lista de comandos de MATLAB
+y su traducción a Python, como las que está acá.
+
+<a href="http://mathesaurus.sourceforge.net/matlab-numpy.html" class="btn btn-primary btn-lg" role="button">
+Equivalencias Matlab-Python
+</a>
