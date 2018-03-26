@@ -303,9 +303,9 @@ Para generar la "copia" de los elementos de `a` se usa  `a.copy()`
 
 </div>
 
-- <a data-toggle="collapse" href="#ayudas_copy" aria-expanded="false" aria-controls="ayudas_copy">Cómo acceder a instrumentos VISA del laboratorio <span class="caret"></span></a>
+- <a data-toggle="collapse" href="#ayudas_visa" aria-expanded="false" aria-controls="ayudas_visa">Cómo acceder a instrumentos VISA del laboratorio <span class="caret"></span></a>
 
-<div id="ayudas_copy" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
+<div id="ayudas_visa" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
 Por ahora vamos a referenciar el GitHub de Hernán Grecco, que tiene ejemplos aramados para varios instrumentos:
 
 [hgrecco/labosdf](https://github.com/hgrecco/labosdf/tree/master/software/python/instrumentos)
