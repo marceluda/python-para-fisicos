@@ -188,5 +188,21 @@ Si queremos profundizar, pasando la urgencia, acá hay una serie de recursos út
       [Non-Programmer's_Tutorial_for_Python_3](https://en.wikibooks.org/wiki/Non-Programmer%27s_Tutorial_for_Python_3)
     - En español, este blog es una referencia útil:
       [python-para-impacientes](http://python-para-impacientes.blogspot.com.ar/p/indice.html)
+  - **Gráficos**
+    - [Ejemplos introductorios a Matplotlib](http://webs.ucm.es/info/aocg/python/modulos_cientificos/matplotlib/index.html)
+    - [Galería de emplos oficial de Matplotlib](https://matplotlib.org/gallery.html)
+      - Hacer clic en cada imagen para ver el código de ejemplo que la genera
 
-  ## Errores más comunes al empezar
+## Ayudas y confusiones más frecuentes al empezar
+
+  - <a data-toggle="collapse" href="#ayudas_slices" aria-expanded="false" aria-controls="ayudas_slices">Diferencias entre slices (python) y ":" (MATLAB)  <span class="caret"></span></a>
+
+<div id="ayudas_slices" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
+Completar
+</div>
+
+  - <a data-toggle="collapse" href="#ayudas_copy" aria-expanded="false" aria-controls="ayudas_copy">Cómo copiar un array en Python <span class="caret"></span></a>
+
+<div id="ayudas_copy" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
+Completar
+</div>
