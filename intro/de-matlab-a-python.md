@@ -212,16 +212,95 @@ Además, si uno tiene un vector cualqueira y quiere obtener los elementos de las
 vec = [1 4 7 3 5 8 4 3 8 9 5 3 4 6 2]
 vec(3:6)
 ```
-> ```ans =
+```matlab
+ans =
 
-     7     3     5     8```
+     7     3     5     8
+```
+
+Esto se ve similar a una expresión de NumPy para ver elementos de un array:
+
+```python
+vec = np.array([1,4,7,3,5,8,4,3,8,9,5,3,4,6,2])
+vec[3:6]
+```
+```python
+array([3, 5, 8])
+```
+... pero es en escencia MUY diferente:
+
+  - En python, la expresión `3:6` es un [slice](http://librosweb.es/foro/pregunta/250/como-entender-bien-la-notacion-slice-de-python/). No es un array y
+  no se lo puede multiplicar ni sumar a otro objeto.
+  - En MATLAB los elementos empiezan a contar desde `1`, mientras que en Python se cuentan desde `0`.
+  - Para obtener un vetor equivalente al de MATLAB `1:10` en Python se debe usar: `arange(1,11)`.
 
 </div>
 
   - <a data-toggle="collapse" href="#ayudas_copy" aria-expanded="false" aria-controls="ayudas_copy">Cómo copiar un array en Python <span class="caret"></span></a>
 
 <div id="ayudas_copy" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
-Completar
+
+En MATLAB, la expresión `a = b ;` genera un vector/matriz `a` con todos sus elementos idénticos a los elementos de `b`.
+
+En Python, la expresión `a = b` (para un array) genera un objeto `a` que hace referencia al objeto `b`. Por ende,
+se se modifica `a` también se modifica `b`.
+
+Ejemplo de comportamiento en MATLAB:
+```matlab
+vec = [1 4 7 3 5 8 4 3 8 9 5 3 4 6 2] ;
+a = vec(3:6) ;
+disp(a)
+%      7     3     5     8
+
+disp(a(2))
+%      3
+
+a(2)=10 ;
+
+disp(a)
+%      7    10     5     8
+
+disp(vec)
+%     1     4     7     3     5     8     4     3     8     9     5     3     4     6     2
+
+```
+
+Ejemplo de comportamiento en Python:
+
+```python
+vec = np.array([1,4,7,3,5,8,4,3,8,9,5,3,4,6,2])
+
+print( vec )
+# [1 4 7 3 5 8 4 3 8 9 5 3 4 6 2]
+
+print( a )
+# [3 5 8]
+
+print( a[1] )
+# 5
+
+a[1] = 10
+print( a )
+# [ 3 10  8]
+
+print( vec )
+# [ 1  4  7  3 10  8  4  3  8  9  5  3  4  6  2]
+
+b = a.copy()
+
+print(b)
+# [ 3 10  8]
+
+b[0] = 10
+print(b)
+# [10 10  8]
+
+print(a)
+# [ 3 10  8]
+```
+
+Para generar la "copia" de los elementos de `a` se usa  `a.copy()`
+
 </div>
 
 - <a data-toggle="collapse" href="#ayudas_copy" aria-expanded="false" aria-controls="ayudas_copy">Cómo acceder a instrumentos VISA del laboratorio <span class="caret"></span></a>
