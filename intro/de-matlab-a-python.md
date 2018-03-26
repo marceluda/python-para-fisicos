@@ -195,14 +195,40 @@ Si queremos profundizar, pasando la urgencia, acá hay una serie de recursos út
 
 ## Ayudas y confusiones más frecuentes al empezar
 
+Comandos útile de IPython:
+  - `%reset` borra toda la memoria de la sesion actual (como el `clear all` de MATLAB)
+
+
   - <a data-toggle="collapse" href="#ayudas_slices" aria-expanded="false" aria-controls="ayudas_slices">Diferencias entre slices (python) y ":" (MATLAB)  <span class="caret"></span></a>
 
 <div id="ayudas_slices" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
-Completar
+
+En MATLAB la expresión `1:3:10` es en sí mismo un array que comienza en uno y va en pasos de a 3 hasta 10. Es equivalente
+a un vector `[1, 4, 7, 10]`. O la expresión `3:6` es equivalente a `[3,4,5,6]`.
+
+Además, si uno tiene un vector cualqueira y quiere obtener los elementos de las posiciones 3, 4, 5 y 6, puede hacer:
+
+```matlab
+vec = [1 4 7 3 5 8 4 3 8 9 5 3 4 6 2]
+vec(3:6)
+```
+> ```ans =
+
+     7     3     5     8```
+
 </div>
 
   - <a data-toggle="collapse" href="#ayudas_copy" aria-expanded="false" aria-controls="ayudas_copy">Cómo copiar un array en Python <span class="caret"></span></a>
 
 <div id="ayudas_copy" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
 Completar
+</div>
+
+- <a data-toggle="collapse" href="#ayudas_copy" aria-expanded="false" aria-controls="ayudas_copy">Cómo acceder a instrumentos VISA del laboratorio <span class="caret"></span></a>
+
+<div id="ayudas_copy" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
+Por ahora vamos a referenciar el GitHub de Hernán Grecco, que tiene ejemplos aramados para varios instrumentos:
+
+[hgrecco/labosdf](https://github.com/hgrecco/labosdf/tree/master/software/python/instrumentos)
+
 </div>
