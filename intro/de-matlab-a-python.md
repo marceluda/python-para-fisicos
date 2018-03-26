@@ -46,6 +46,33 @@ Similitudes con la interfase de MATLAB:
   - La consola de comando es interactiva (gracias a [IPython](https://es.wikipedia.org/wiki/IPython)). Por ejemplo,
     se pueden auto-completar comandos con la tecla `TAB` o imprimir la ayuda de un comando con `comando?`
 
+### ¿Que tan parecido se ve el código?
+
+Ejemplo comparativo (extraído de [aquí](http://stsievert.com/blog/2015/09/01/matlab-to-python/)):
+
+```python
+# PYTHON                        | % MATLAB
+from pylab import *             | clc; clear all; close all
+                                |
+# matrix multiplication         | % matrix multiplication
+A = rand(3, 3)                  | A = rand(3, 3);
+A[0:2, 1] = 4                   | A(1:2, 2) = 4;
+I = A @ inv(A)                  | I = A * inv(A);
+I = A.dot(inv(A))               |
+                                |
+# vector manipulations          | % vector manipulations
+t = linspace(0, 4, num=1e3)     | t = linspace(0, 4, 1e3);
+y1 = cos(t/2) * exp(-t)         | y1 = cos(t/2) .* exp(-t);
+y2 = cos(t/2) * exp(-5*t)       | y2 = cos(t/2) .* exp(-5*t);
+                                |
+# plotting                      | % plotting
+figure()                        | figure; hold on
+plot(t, y1, label='Slow decay') | plot(t, y1)
+plot(t, y2, label='Fast decay') | plot(t, y2)
+legend(loc='best')              | legend('Slow decay', 'Fast decay')
+show()                          |
+```
+
 ## Consideraciones rápidas sobre el lenguaje Python
 
 Para realizar cálculo numérico, graficar, hacer estadística, etc, Python utiliza un conjunto de librerías
@@ -131,6 +158,33 @@ Entonces .. **¿que es mejor?**.
 Si estás apurado/a por empezar, seguramente querés una lista de comandos de MATLAB
 y su traducción a Python, como las que está acá.
 
+<center>
 <a href="http://mathesaurus.sourceforge.net/matlab-numpy.html" class="btn btn-primary btn-lg" role="button">
 Equivalencias Matlab-Python
 </a>
+</center>
+
+La mayoría de esos ejemplos asumen que importaste las librerías usando `from pylab import *`.
+
+Si queremos profundizar, pasando la urgencia, acá hay una serie de recursos útiles:
+
+  - **Equivalencias entre comandos de Matlab y de Python - Numpy:**
+    - En HTML: http://mathesaurus.sourceforge.net/matlab-numpy.html
+    - En PDF: http://mathesaurus.sourceforge.net/matlab-python-xref.pdf
+  - **Tutorial (muy completo) de herramientas de python para el ámbito científico:**
+    - En inglés: http://www.scipy-lectures.org/
+    - En español (parcialmente traducido): https://claudiovz.github.io/scipy-lecture-notes-ES/
+    - Fundamentalmente los capítulos de [NumPy](https://claudiovz.github.io/scipy-lecture-notes-ES/intro/numpy/index.html)
+      y [Matplolib](https://claudiovz.github.io/scipy-lecture-notes-ES/intro/matplotlib/matplotlib.html)
+      ([1.3](https://claudiovz.github.io/scipy-lecture-notes-ES/intro/numpy/index.html) y
+      [1.4](https://claudiovz.github.io/scipy-lecture-notes-ES/intro/matplotlib/matplotlib.html))
+      serán de especial interés.
+    - Es una guía pormenorizada.
+  - **Consejos oficiales de SciPy para migrar a Python (en inglés):**
+    - http://scipy.github.io/old-wiki/pages/NumPy_for_Matlab_Users.html
+  - Referencia del lenguaje Python (para programadores, no tanto para ciencia/ingeniería):
+    - El WikiBook es de gran utilidad (inglés): https://en.wikibooks.org/wiki/Python_Programming
+    - Si nunca programaste, podés arrancar por acá:
+      https://en.wikibooks.org/wiki/Non-Programmer%27s_Tutorial_for_Python_3
+    - En español, este blog es una referencia útil:
+      http://python-para-impacientes.blogspot.com.ar/p/indice.html
