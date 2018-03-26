@@ -169,11 +169,11 @@ La mayoría de esos ejemplos asumen que importaste las librerías usando `from p
 Si queremos profundizar, pasando la urgencia, acá hay una serie de recursos útiles:
 
   - **Equivalencias entre comandos de Matlab y de Python - Numpy:**
-    - En HTML: http://mathesaurus.sourceforge.net/matlab-numpy.html
-    - En PDF: http://mathesaurus.sourceforge.net/matlab-python-xref.pdf
+    - En HTML: [mathesaurus](http://mathesaurus.sourceforge.net/matlab-numpy.html)
+    - En PDF: [matlab-python-xref.pdf](http://mathesaurus.sourceforge.net/matlab-python-xref.pdf)
   - **Tutorial (muy completo) de herramientas de python para el ámbito científico:**
-    - En inglés: http://www.scipy-lectures.org/
-    - En español (parcialmente traducido): https://claudiovz.github.io/scipy-lecture-notes-ES/
+    - En inglés: [www.scipy-lectures.org](http://www.scipy-lectures.org/)
+    - En español (parcialmente traducido): [scipy-lecture-notes-ES](https://claudiovz.github.io/scipy-lecture-notes-ES/)
     - Fundamentalmente los capítulos de [NumPy](https://claudiovz.github.io/scipy-lecture-notes-ES/intro/numpy/index.html)
       y [Matplolib](https://claudiovz.github.io/scipy-lecture-notes-ES/intro/matplotlib/matplotlib.html)
       ([1.3](https://claudiovz.github.io/scipy-lecture-notes-ES/intro/numpy/index.html) y
@@ -181,10 +181,12 @@ Si queremos profundizar, pasando la urgencia, acá hay una serie de recursos út
       serán de especial interés.
     - Es una guía pormenorizada.
   - **Consejos oficiales de SciPy para migrar a Python (en inglés):**
-    - http://scipy.github.io/old-wiki/pages/NumPy_for_Matlab_Users.html
-  - Referencia del lenguaje Python (para programadores, no tanto para ciencia/ingeniería):
-    - El WikiBook es de gran utilidad (inglés): https://en.wikibooks.org/wiki/Python_Programming
+    - [NumPy_for_Matlab_Users](http://scipy.github.io/old-wiki/pages/NumPy_for_Matlab_Users.html)
+  - **Referencia del lenguaje Python** (para programadores, no tanto para ciencia/ingeniería):
+    - El WikiBook es de gran utilidad (inglés): [Python_Programming](https://en.wikibooks.org/wiki/Python_Programming)
     - Si nunca programaste, podés arrancar por acá:
-      https://en.wikibooks.org/wiki/Non-Programmer%27s_Tutorial_for_Python_3
+      [Non-Programmer's_Tutorial_for_Python_3](https://en.wikibooks.org/wiki/Non-Programmer%27s_Tutorial_for_Python_3)
     - En español, este blog es una referencia útil:
-      http://python-para-impacientes.blogspot.com.ar/p/indice.html
+      [python-para-impacientes](http://python-para-impacientes.blogspot.com.ar/p/indice.html)
+
+  ## Errores más comunes al empezar
