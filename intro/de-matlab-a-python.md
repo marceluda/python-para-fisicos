@@ -321,9 +321,6 @@ Por ahora vamos a referenciar el GitHub de Hernán Grecco, que tiene ejemplos ar
 <div id="ayuda_ventanas_graficas" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
 
 
-</div>
-
-
 En muchos casos el comportamiento por defecto del IDE Spyder es mostrar los gráficos
 en la propia consola de IPython. Eso resulta muy bonito para una presentación, pero
 es incómodo para el análisis de datos.
@@ -349,3 +346,6 @@ Para habilitar los gráficos en ventanas independientes hay que hacer lo siguien
      haya que **cerrar y reabrir el Spyder**.
 
 ![spyder_pref]({{ site.baseurl }}/img/spyder_preferencias_iphython.png "spyder pref")
+
+
+</div>
