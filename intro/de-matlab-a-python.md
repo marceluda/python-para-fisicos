@@ -182,6 +182,7 @@ Si queremos profundizar, pasando la urgencia, acá hay una serie de recursos út
     - Es una guía pormenorizada.
   - **Consejos oficiales de SciPy para migrar a Python (en inglés):**
     - [NumPy_for_Matlab_Users](http://scipy.github.io/old-wiki/pages/NumPy_for_Matlab_Users.html)
+    - El [sitio de SciPy](https://www.scipy.org/) en general tiene mucha información útil.
   - **Referencia del lenguaje Python** (para programadores, no tanto para ciencia/ingeniería):
     - El WikiBook es de gran utilidad (inglés): [Python_Programming](https://en.wikibooks.org/wiki/Python_Programming)
     - Si nunca programaste, podés arrancar por acá:
@@ -190,12 +191,14 @@ Si queremos profundizar, pasando la urgencia, acá hay una serie de recursos út
       [python-para-impacientes](http://python-para-impacientes.blogspot.com.ar/p/indice.html)
   - **Gráficos**
     - [Ejemplos introductorios a Matplotlib](http://webs.ucm.es/info/aocg/python/modulos_cientificos/matplotlib/index.html)
-    - [Galería de emplos oficial de Matplotlib](https://matplotlib.org/gallery.html)
+    - [Ejemplos más frecuentes de Matplotlib](https://matplotlib.org/users/screenshots.html)
+      - Incluyen código para generar cáda imagen
+    - [Galería completa de ejemplos de Matplotlib](https://matplotlib.org/gallery.html)
       - Hacer clic en cada imagen para ver el código de ejemplo que la genera
 
 ## Ayudas y confusiones más frecuentes al empezar
 
-Comandos útile de IPython:
+Comandos útiles de IPython:
   - `%reset` borra toda la memoria de la sesion actual (como el `clear all` de MATLAB)
 
 
@@ -311,3 +314,38 @@ Por ahora vamos a referenciar el GitHub de Hernán Grecco, que tiene ejemplos ar
 [hgrecco/labosdf](https://github.com/hgrecco/labosdf/tree/master/software/python/instrumentos)
 
 </div>
+
+
+- <a data-toggle="collapse" href="#ayuda_ventanas_graficas" aria-expanded="false" aria-controls="ayuda_ventanas_graficas">Cómo habilitar los gráficos en ventanas independientes en Spyder<span class="caret"></span></a>
+
+<div id="ayuda_ventanas_graficas" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
+
+
+</div>
+
+
+En muchos casos el comportamiento por defecto del IDE Spyder es mostrar los gráficos
+en la propia consola de IPython. Eso resulta muy bonito para una presentación, pero
+es incómodo para el análisis de datos.
+
+Solo algunos ejemplos de la utilidad de tener los gráficos en ventanas independientes:
+
+  - El comportamiento se asemeja al de MATLAB: Se pueden usar figuras independientes
+    para cada gráfico y referenciarlas posteriormente para hacer modificaciones, sin
+    perder de vistas las otras que se hayan graficado.
+  - Permite hacer zoom, mover los ejes o guardar como archivo de imagen con sólo
+    usar el mouse y los íconos de la ventana.
+  - Se pueden usar comandosde interactividad, como por ejemplo el `plt.ginput()`
+    que te permite obtener las coordenadas de un punto del gráfico haciendo clic
+    con el mouse
+
+Para habilitar los gráficos en ventanas independientes hay que hacer lo siguiente:
+  1. Ir al menú **Herramientas** &rarr; **Preferencias**
+  2. Seleccionar la sección de **Terminal de IPython**
+  3. Seleccionar la solapa **Gráficas**
+  4. En el recuadro **Salida gráfica**, seleccionar del menú desplegable
+     la opción **Automático**
+  5. **Aceptar** los cambios. Es posible que, para que el cambia surta efecto,
+     haya que **cerrar y reabrir el Spyder**.
+
+![spyder_pref]({{ site.baseurl }}/img/spyder_preferencias_iphython.png "spyder pref")
