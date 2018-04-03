@@ -428,7 +428,7 @@ datos['texto_mio']
 #       dtype='<U94')
 ```
 
-Notar que todos los objetos fueron guardados con el formato `array()` de numpy, por mas que sean vectores, números
+Notar que todos los objetos fueron guardados con el formato `array()` de NumPy, por mas que sean vectores, números
 o texto. Si queremos que las variables vuelvan a tener los nombres originales solo hay que asignarlas a esos nombres.
 Para los casos en los que no se desea que el formato final sea `array()` se utiliza el método `.tolist()`:
 
@@ -446,5 +446,37 @@ varY
 texto_mio
 # Out[10]: 'Este texto es una descripción que me recuerda para qué son los valores varX y varY que guardé.'
 ```
+
+</div>
+
+- <a data-toggle="collapse" href="#ayuda_exportar_a_matlab" aria-expanded="false" aria-controls="ayuda_exportar_a_matlab">Cómo guardar datos en formato MATLAB (.mat)<span class="caret"></span></a>
+
+<div id="ayuda_exportar_a_matlab" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
+
+Para exportar datos a formato `.mat` se usa la función
+[savemat()](https://docs.scipy.org/doc/scipy-0.19.0/reference/generated/scipy.io.savemat.html) de la librería `scipy.io`.
+Esta función permite exportar a formato MATLAB un objeto
+ [diccionario](https://claudiovz.github.io/scipy-lecture-notes-ES/intro/language/basic_types.html#diccionarios),
+por lo que, si se queire guardar múltimples variables, habrá que
+especificarlas dentro de un diccionario.
+
+```python
+from scipy.io import savemat
+
+varX = np.array([10,20,30,70,90,-1])
+
+varY = -3.1415926535897
+
+texto_mio = 'Este texto es una descripción que me recuerda para qué son los valores varX y varY que guardé.'
+
+savemat('datos.mat', mdict={'varX': varX, 'varY': varY, 'texto_mio': texto_mio})
+```
+
+Luego en matlab, al ejecutar el comando
+
+```matlab
+load datos.mat
+```
+se crearan las variables `varX`, `varY` y `texto_mio`.
 
 </div>
