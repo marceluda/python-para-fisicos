@@ -201,6 +201,7 @@ Si queremos profundizar, pasando la urgencia, acá hay una serie de recursos út
 Comandos útiles de IPython:
   - `%reset` borra toda la memoria de la sesion actual (como el `clear all` de MATLAB)
 
+  - `del nombre_de_variable` elimina la variable `nombre_de_variable`
 
   - <a data-toggle="collapse" href="#ayudas_slices" aria-expanded="false" aria-controls="ayudas_slices">Diferencias entre slices (python) y ":" (MATLAB)  <span class="caret"></span></a>
 
@@ -315,11 +316,9 @@ Por ahora vamos a referenciar el GitHub de Hernán Grecco, que tiene ejemplos ar
 
 </div>
 
-
 - <a data-toggle="collapse" href="#ayuda_ventanas_graficas" aria-expanded="false" aria-controls="ayuda_ventanas_graficas">Cómo habilitar los gráficos en ventanas independientes en Spyder<span class="caret"></span></a>
 
 <div id="ayuda_ventanas_graficas" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
-
 
 En muchos casos el comportamiento por defecto del IDE Spyder es mostrar los gráficos
 en la propia consola de IPython. Eso resulta muy bonito para una presentación, pero
@@ -347,5 +346,105 @@ Para habilitar los gráficos en ventanas independientes hay que hacer lo siguien
 
 ![spyder_pref]({{ site.baseurl }}/img/spyder_preferencias_iphython.png "spyder pref")
 
+</div>
+
+- <a data-toggle="collapse" href="#ayuda_guardar_numpy" aria-expanded="false" aria-controls="ayuda_guardar_numpy">Cómo guardar datos en el formato de NumPy<span class="caret"></span></a>
+
+<div id="ayuda_guardar_numpy" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
+
+### Guardar datos
+En MATLAB basta con ejecutar `save nombre_de_archivo.mat` y se guardarán todas las variables que existen en el entorno de trabajo
+en un archivo binario de formato privativo llamado `nombre_de_archivo.mat`. En Python
+se debe decir explícitamente qué variables se quiere guardar. Paraello se usa el comado
+de NumPy `np.savez()`, cuya [documentación está aquí](https://docs.scipy.org/doc/numpy/reference/generated/numpy.savez.html).
+
+**Syntaxis del comando:**
+Si quiero guardar las variables `varX`, `varY` y `texto_mio` en el archivo
+`datos.npy` puedo escribir:
+
+```python
+np.savez('datos.npz', varX=varX, varY=varY, texto_mio=texto_mio)
+```
+El primer argumento es el nombre del archivo en formato de texto.
+Luego, cada argumento que sige es una variable a guardar. Se lee así:
+`varX=varX` significa "con el nombre `varX` (lo que está antes del igual)
+guardá el objeto llamando `varX` (lo que está después del igual)"
+
+Recordar que, si no se especifica la ruta completa, el archivo será creado en la carpeta de trabajo actual (que se puede averiguar ejecutando el comando `pwd`).
+
+### Recuperar datos
+En MATLAB los datos se recuperan ejecutando `load nombre_de_archivo.mat`. Cada variable es
+cargada a la memoria con su nombre original. Si antes de ejecutar `load` ya existían
+variables con esos nombres, son reemplazadas y se pierden los valores no guardados.
+
+En Python, NumPy lee los archivos `.npz` con la instrucción `np.load` y los carga
+en un objeto nuevo con nombre.
+Por ejemplo, si se trata de recuperar el archivo guardado en el ejemplo anterior:
+
+```python
+datos = np.load('datos.npz')
+```
+
+El objeto `datos` será un [diccionario](https://claudiovz.github.io/scipy-lecture-notes-ES/intro/language/basic_types.html#diccionarios),
+donde cada clave corresponde a una de las variables guardadas.
+
+### Ejemplo completo
+
+Guardamos los datos:
+```python
+varX = np.array([10,20,30,70,90,-1])
+
+varY = -3.1415926535897
+
+texto_mio = 'Este texto es una descripción que me recuerda para qué son los valores varX y varY que guardé.'
+
+# Instrucción para guaradar datos en formato NumPy
+np.savez('datos.npz', varX=varX, varY=varY, texto_mio=texto_mio)
+
+```
+
+Luego los recuperamos en el objeto `datos`:
+
+```python
+datos = np.load('datos.npz')
+
+datos
+# Out[2]: <numpy.lib.npyio.NpzFile at 0x7f71fa8f25f8>
+
+# El método keys() del diccionario nos permite saber los nombres con que se guardaron las variables
+
+datos.keys()
+# Out[3]: ['varX', 'varY', 'texto_mio']
+
+datos['varX']
+# Out[4]: array([10, 20, 30, 70, 90, -1])
+
+datos['varY']
+# Out[5]: array(-3.1415926535897)
+
+datos['texto_mio']
+# Out[6]:
+# array('Este texto es una descripción que me recuerda para qué son los valores varX y varY que guardé.',
+#       dtype='<U94')
+```
+
+Notar que todos los objetos fueron guardados con el formato `array()` de numpy, por mas que sean vectores, números
+o texto. Si queremos que las variables vuelvan a tener los nombres originales solo hay que asignarlas a esos nombres.
+Para los casos en los que no se desea que el formato final sea `array()` se utiliza el método `.tolist()`:
+
+```python
+varX      = datos['varX']
+varY      = datos['varY'].tolist()
+texto_mio = datos['texto_mio'].tolist()
+
+varX
+# Out[8]: array([10, 20, 30, 70, 90, -1])
+
+varY
+# Out[9]: -3.1415926535897
+
+texto_mio
+# Out[10]: 'Este texto es una descripción que me recuerda para qué son los valores varX y varY que guardé.'
+```
 
 </div>
