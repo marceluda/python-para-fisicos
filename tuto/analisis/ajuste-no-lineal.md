@@ -95,7 +95,10 @@ $$
 \min_{a,b,c,d} \sum_i {\color{var}\texttt{residuos}}[i]^2
 $$
 
+Esto es cuadrados mínimos. Un algoritmo se encargará de ir porbando diferentes valores
+para los parámetros, variándolos en la dirección en que los residuos se minimicen.
 
+Al hallar el mínimo se encuentran los parámetros óptimos.
 
 ## Ajustamos un modelo usando `curve_fit`
 
