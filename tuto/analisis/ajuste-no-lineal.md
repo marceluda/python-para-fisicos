@@ -240,11 +240,42 @@ plt.ylabel("y")
 plt.legend(loc='best')
 plt.tight_layout()
 ```
-A continuación se pueden ver los pasos del algoritmo de optimización y cómo
-evolucionan los valores del modelo para cada conjunto de parámetros.
+A continuación se pueden ver los pasos que realiza el algoritmo de optimización.
+A la izquierda están los datos y la predicción del modelo para un dado conjunto
+de parámetros.
+A la derecha, cada uno de los parámetros probados y su evolución. Las líneas celestes
+son los "valores reales" de los parámetros con los que se fabricaron los datos
+(el array `parametros_reales`).
+
 
 ![ajuste-least_squares](ajuste-least_squares.gif "Ajuste least_squares"){:style="width: 100%;"}
 
+
+
+A menudo, la función a minimizar (la suma cuadrática de los residuos, en este caso) tiene mínimos locales
+que no se corresponden con el conjunto óptimo de parámetros que buscamos. Es escencial elegír
+bien los parámetros iniciales para que el algoritmo converja.
+
+<a data-toggle="collapse" href="#ajuste_no_converge" aria-expanded="false" aria-controls="ajuste_no_converge">
+Ejemplo de ajuste que no converge
+<span class="caret"></span></a>
+
+<div id="ajuste_no_converge" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
+El siguiente parte de los párametros iniciales:
+```python
+parametros_iniciales=[0, 3, 8, 3] # Ajusta mal
+```
+
+![ajuste-least_squares que no converge](ajuste-least_squares_mal_inicio.gif.gif "Ajuste least_squares que no converge"){:style="width: 100%;"}
+
+El siguiente parte de los parámetros iniciales:
+```python
+parametros_iniciales=[0, 3, 10, 3]  # No ajusta
+```
+
+![ajuste-least_squares que no converge](ajuste-least_squares_no_ajusta_2.gif.gif "Ajuste least_squares que no converge"){:style="width: 100%;"}
+
+</div>
 
 
 {% include page_navbar.html up=1 %}
