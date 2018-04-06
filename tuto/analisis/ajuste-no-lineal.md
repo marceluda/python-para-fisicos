@@ -223,7 +223,7 @@ def calcular_cov(res,y_datos):
 pcov = calcular_cov(res,y_datos)
 
 # De la matriz de covarinza podemos obtener los valores de desviación estándar
-# de los parametrso hallados
+# de los parametros hallados
 pstd = np.sqrt(np.diag(pcov))
 
 print('Parámetros hallados (con incertezas):')
@@ -253,7 +253,7 @@ son los "valores reales" de los parámetros con los que se fabricaron los datos
 
 
 A menudo, la función a minimizar (la suma cuadrática de los residuos, en este caso) tiene mínimos locales
-que no se corresponden con el conjunto óptimo de parámetros que buscamos. Es escencial elegír
+que no se corresponden con el conjunto óptimo de parámetros que buscamos. Es esencial elegir
 bien los parámetros iniciales para que el algoritmo converja.
 
 <a data-toggle="collapse" href="#ajuste_no_converge" aria-expanded="false" aria-controls="ajuste_no_converge">
