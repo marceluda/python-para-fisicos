@@ -6,8 +6,13 @@ mathjax: true
 navbar: analisis
 ---
 
-
 {% include page_navbar.html %}
+
+
+$$
+\definecolor{var}{RGB}{199,37,78}
+$$
+
 
 <div class="alert alert-danger" role="alert" >
   <strong>Aviso:</strong> La página está en construcción.
@@ -57,9 +62,35 @@ plt.tight_layout()
 ```
 ![Datos fabricados](datos-originales.png =600 )
 
+## Ajuste de modelos
+
+El objetivo de hacer un ajuste es encontrar los parámetros óptimos de un modelo
+determinado que para que los valores que predice el modelo sean lo **"más parecidos
+posible a los datos"**. Esto último es un criterio subjetivo que debe ser formalizado
+para poder hallar el óptimo en términos matemáticos. La forma más usual de hacerlo
+es por **cuadrados mínimos** (en inglés: *least squares*).
+
+El procedimiento es el siguiente.
+Contamos con dos vectores `x_datos` e `y_datos` con la información de nuestras
+mediciones.
+
+Definimos una función modelo que creemos que descrive el fenómeno medido.
+Esta función tiene como argumento de entrada los valores de `x` y como salida
+una predicción para valores de `y`. A su vez, depende de parámetros. Por ejemplo:
+
+$ f_{a,b,c,d}(x)= e^{-\frac{(x-a)^2}{b^2}} + e^{-\frac{(x-c)^2}{d^2}} $
+
+Luego, se define un criterio de optimización. En el caso de cuadrados mínimos
+el criterio es **"minimizar la suma cuadrática de los residuos"**. Esto es:
+
+$ {\color{var}\texttt{residuos}} = f_{a,b,c,d}({\color{var}\texttt{x_datos}}) - {\color{var}\texttt{y_datos}}$
+
+Se busca optimizar:
+$ \min_{a,b,c,d} \sum_i {\color{var}\texttt{residuos}}[i]^2 $
+
+
 
 ## Ajustamos un modelo usando `curve_fit`
-
 
   1. Definimos un modelo. Es una función, cuyo primer argumento son los valores
     del eje x y el resto de los argumentos son los parámetros a hallar.
@@ -95,7 +126,7 @@ plt.ylabel('y')
 plt.tight_layout()
 ```
 
-![ajuste curve_fit](ajuste-con-curve_fit.png =600 )
+![ajuste curve_fit](ajuste-con-curve_fit.png "Ajuste con curve_fit"){:style="width: 80%;"}
 
 Imprimimos los parámetros hallados:
 ```python
