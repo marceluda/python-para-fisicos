@@ -19,6 +19,13 @@ navbar: analisis
 
 ## Introducción
 
+Los artículos alojados acá se basan en los ejemplos publicados en:
+
+<center>
+<a href="https://github.com/marceluda/python-para-fisicos/tree/master/tutoriales/analisis" class="btn btn-primary btn-lg" role="button">
+GitHub python-para-fisicos/as
+</a>
+</center>
 
 ## Lista de temas
 
