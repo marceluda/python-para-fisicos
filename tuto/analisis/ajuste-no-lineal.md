@@ -175,14 +175,20 @@ la función de `least_squares`.
   1. Ejecutamos `curve_fit`
   1. Graficamos
 
-```python
+Como nosotros mismo definimos la función que calcula el residuo, podemos incluir
+más instrucciones para, por ejemplo, graficar paso a paso como el modelo se acerca
+a los datos a medida que se optimizan los parámetros, o para guardar la lista
+de parámetros que se fueron probando.
 
+```python
 from scipy.optimize import least_squares
 
 def modelo(p,x):
     # p es un vector con los parámetros
     # x es el vector de datos x
     return np.exp(-(x-p[0])**2/p[1]**2)+np.exp(-(x-p[2])**2/p[3]**2)
+
+param_list = []
 
 def residuos(p, x, y):
     # p es un vector con los parámetros
@@ -192,21 +198,17 @@ def residuos(p, x, y):
     plt.clf()
     plt.plot(x,y,'o',x,y_modelo,'r-')
     plt.pause(0.05)
+    param_list.append(p)
     return y_modelo - y
 
-
-
-parametros_iniciales=[2, 1, 6, 1]
+parametros_iniciales=[1, 2, 8, 3]  # Ajusta
 res = least_squares(residuos, parametros_iniciales, args=(x_datos, y_datos), verbose=1)
 
+# Estos son los parámetros hallados:
+print('parámetros hallados')
+print(res.x)
 
-# Estos son los parámetros hallados
-res.x
-
-
-# Calculamos la matris de covarianza
-# https://stackoverflow.com/questions/40187517/getting-covariance-matrix-of-fitted-parameters-from-scipy-optimize-least-squares
-
+# Calculamos la matriz de covarianza "pcov"
 def calcular_cov(res,y_datos):
     U, S, V = np.linalg.svd(res.jac, full_matrices=False)
     threshold = np.finfo(float).eps * max(res.jac.shape) * S[0]
@@ -218,17 +220,15 @@ def calcular_cov(res,y_datos):
     pcov = pcov * s_sq
     return pcov
 
-
 pcov = calcular_cov(res,y_datos)
 
-# De la matris de covarinza podemos obtener los valores de desviacion estandar
+# De la matriz de covarinza podemos obtener los valores de desviación estándar
 # de los parametrso hallados
 pstd = np.sqrt(np.diag(pcov))
 
-print('Parámetros hallados:')
+print('Parámetros hallados (con incertezas):')
 for i,param in enumerate(res.x):
     print('parametro[{:d}]: {:5.3f} ± {:5.3f}'.format(i,param,pstd[i]/2))
-
 
 y_modelo = modelo(res.x, x_datos)
 
@@ -239,7 +239,12 @@ plt.xlabel("x")
 plt.ylabel("y")
 plt.legend(loc='best')
 plt.tight_layout()
-
 ```
+A continuación se pueden ver los pasos del algoritmo de optimización y cómo
+evolucionan los valores del modelo para cada conjunto de parámetros.
+
+![ajuste-least_squares](ajuste-least_squares.gif "Ajuste least_squares"){:style="width: 100%;"}
+
+
 
 {% include page_navbar.html up=1 %}
