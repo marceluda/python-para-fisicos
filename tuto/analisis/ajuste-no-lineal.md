@@ -78,12 +78,14 @@ Definimos una función modelo que creemos que describe el fenómeno medido.
 Esta función tiene como argumento de entrada los valores de `x` y como salida
 una predicción para valores de `y`. A su vez, depende de parámetros. Por ejemplo:
 
+
 $$
-f_{a,b,c,d}(x)= e^{-\frac{(x-a)^2}{b^2}} + e^{-\frac{(x-c)^2}{d^2}}
+f_{a,b,c,d}(x) = e^{-\frac{(x-a)^2}{b^2}} + e^{-\frac{(x-c)^2}{d^2}}
 $$
 
 Luego, se define un criterio de optimización. En el caso de cuadrados mínimos
 el criterio es **"minimizar la suma cuadrática de los residuos"**. Esto es:
+
 
 $$
 {\color{var}\texttt{residuos}} = f_{a,b,c,d}({\color{var}\texttt{x_datos}}) - {\color{var}\texttt{y_datos}}
@@ -102,11 +104,11 @@ Al hallar el mínimo se encuentran los parámetros óptimos.
 
 ## Ajustamos un modelo usando `curve_fit`
 
-  1. Definimos un modelo. Es una función, cuyo primer argumento son los valores
+  1. **Definimos un modelo**. Es una función, cuyo primer argumento son los valores
     del eje x y el resto de los argumentos son los parámetros a hallar.
-  1. Luego definimos los parámetros iniciales desde donde ararnca el proceso
+  1. Luego definimos los **parámetros iniciales** desde donde arranca el proceso
     de optimización.
-  1. Ejecutamos `curve_fit`
+  1. **Ejecutamos `curve_fit`**
   1. Graficamos
 
 ```python
@@ -159,6 +161,85 @@ for i,param in enumerate(popt):
 # d = 1.484 ± 0.014
 ```
 
+## Ajustamos un modelo usando `least_squares`: mayor control del proceso
+Para tener un control más riguroso del proceso de optimización se puede utilizar
+la función de `least_squares`.
 
+  1. Definimos un modelo. Es una función, cuyo primer argumento son los valores
+    del eje x y el resto de los argumentos son los parámetros a hallar.
+  1. Definimos una **función para los residuos**. Esta función será la optimizada, y
+    deberá llamar constantemente a la función del modelo. `curve_fit` basicamente
+    utiliza `least_squares` para optimizar la funcion de residuos `residuos = modelo(x_datos) - y_datos`.
+  1. Luego definimos los parámetros iniciales desde donde arranca el proceso
+    de optimización.
+  1. Ejecutamos `curve_fit`
+  1. Graficamos
+
+```python
+
+from scipy.optimize import least_squares
+
+def modelo(p,x):
+    # p es un vector con los parámetros
+    # x es el vector de datos x
+    return np.exp(-(x-p[0])**2/p[1]**2)+np.exp(-(x-p[2])**2/p[3]**2)
+
+def residuos(p, x, y):
+    # p es un vector con los parámetros
+    # x es el vector de datos x
+    # y es el vector de datos y
+    y_modelo = modelo(p, x)
+    plt.clf()
+    plt.plot(x,y,'o',x,y_modelo,'r-')
+    plt.pause(0.05)
+    return y_modelo - y
+
+
+
+parametros_iniciales=[2, 1, 6, 1]
+res = least_squares(residuos, parametros_iniciales, args=(x_datos, y_datos), verbose=1)
+
+
+# Estos son los parámetros hallados
+res.x
+
+
+# Calculamos la matris de covarianza
+# https://stackoverflow.com/questions/40187517/getting-covariance-matrix-of-fitted-parameters-from-scipy-optimize-least-squares
+
+def calcular_cov(res,y_datos):
+    U, S, V = np.linalg.svd(res.jac, full_matrices=False)
+    threshold = np.finfo(float).eps * max(res.jac.shape) * S[0]
+    S = S[S > threshold]
+    V = V[:S.size]
+    pcov = np.dot(V.T / S**2, V)
+
+    s_sq = 2 * res.cost / (y_datos.size - res.x.size)
+    pcov = pcov * s_sq
+    return pcov
+
+
+pcov = calcular_cov(res,y_datos)
+
+# De la matris de covarinza podemos obtener los valores de desviacion estandar
+# de los parametrso hallados
+pstd = np.sqrt(np.diag(pcov))
+
+print('Parámetros hallados:')
+for i,param in enumerate(res.x):
+    print('parametro[{:d}]: {:5.3f} ± {:5.3f}'.format(i,param,pstd[i]/2))
+
+
+y_modelo = modelo(res.x, x_datos)
+
+plt.figure()
+plt.plot(x_datos, y_datos ,  'o', markersize=4, label='datos')
+plt.plot(x_datos, y_modelo, 'r-',               label='modelo fiteado')
+plt.xlabel("x")
+plt.ylabel("y")
+plt.legend(loc='best')
+plt.tight_layout()
+
+```
 
 {% include page_navbar.html up=1 %}
