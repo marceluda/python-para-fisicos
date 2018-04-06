@@ -266,14 +266,14 @@ El siguiente parte de los párametros iniciales:
 parametros_iniciales=[0, 3, 8, 3] # Ajusta mal
 ```
 
-![ajuste-least_squares que no converge](ajuste-least_squares_mal_inicio.gif.gif "Ajuste least_squares que no converge"){:style="width: 100%;"}
+![ajuste-least_squares que no converge](ajuste-least_squares_mal_inicio.gif "Ajuste least_squares que no converge"){:style="width: 100%;"}
 
 El siguiente parte de los parámetros iniciales:
 ```python
 parametros_iniciales=[0, 3, 10, 3]  # No ajusta
 ```
 
-![ajuste-least_squares que no converge](ajuste-least_squares_no_ajusta_2.gif.gif "Ajuste least_squares que no converge"){:style="width: 100%;"}
+![ajuste-least_squares que no converge](ajuste-least_squares_no_ajusta_2.gif "Ajuste least_squares que no converge"){:style="width: 100%;"}
 
 </div>
 
