@@ -30,7 +30,7 @@ GitHub python-para-fisicos/as
 ## Lista de temas
 
   - [Ajuste lineal](tuto/analisis/ajuste_lineal)
-  - [Ajuste no lineal](tuto/analisis/ajuste-no-lineal.md)
+  - [Ajuste no lineal](tuto/analisis/ajuste-no-lineal)
   - Transformada de Fourier
   - Varianza de Allan
 
