@@ -65,6 +65,6 @@ plt.xlabel('x')
 plt.ylabel('y')
 plt.tight_layout()
 ```
-![Datos fabricados](ajuste-no-lineal-01.png "Datos fabricados")
+![Datos fabricados](datos-originales.png "Datos fabricados")
 
 {% include page_navbar.html up=1 %}
