@@ -64,12 +64,12 @@ navbar-links:
 
 pagenav:
   analisis:
-    - title: Análsis de datos
-      url: tuto/analisis-de-datos
+    - title: Análisis de datos
+      url: tuto/analisis
     - title: Ajuste lineal/Polinomial
       url: tuto/analisis/ajuste_lineal
     - title: Ajuste no lineal
-      url: tuto/analisis/ajuste-no-lineal.md
+      url: tuto/analisis/ajuste-no-lineal
 
 
 
