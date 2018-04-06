@@ -55,7 +55,7 @@ navbar-links:
     - Control de instrumentos: tuto/control-de-instrumentos
     - Cálculo numérico: tuto/calculo-numerico
     - Gráficos: tuto/graficos
-    - Análisis de datos: tuto/analisis de datos
+    - Análisis de datos: tuto/analisis-de-datos
     - Simulaciones: tuto/simulaciones
 
 
@@ -63,23 +63,14 @@ navbar-links:
 # --- Navigation bar options  for instruments--- #
 
 pagenav:
-  inst-links:
-    - title: Introduction
-      url: TheApp/instruments/instruments_01_intro
-    - title: Oscilloscope
-      url: TheApp/instruments/instruments_02_scope
-    - title: Outputs
-      url: TheApp/instruments/instruments_03_inout
-    - title: Lock-in
-      url: TheApp/instruments/instruments_04_lock-in
-    - title: Oscillators
-      url: TheApp/instruments/instruments_05_modulation
-    - title: Ramp
-      url: TheApp/instruments/instruments_06_ramp_gen
-    - title: PIDs
-      url: TheApp/instruments/instruments_07_pids
-    - title: Auto-lock
-      url: TheApp/instruments/instruments_08_autolock
+  analisis:
+    - title: Análsis de datos
+      url: tuto/analisis-de-datos
+    - title: Ajuste lineal/Polinomial
+      url: tuto/analisis/ajuste_lineal
+    - title: Ajuste no lineal
+      url: tuto/analisis/ajuste-no-lineal.md
+
 
 
 
