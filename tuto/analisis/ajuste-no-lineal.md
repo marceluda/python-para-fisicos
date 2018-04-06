@@ -78,12 +78,16 @@ Definimos una función modelo que creemos que describe el fenómeno medido.
 Esta función tiene como argumento de entrada los valores de `x` y como salida
 una predicción para valores de `y`. A su vez, depende de parámetros. Por ejemplo:
 
-$ f_{a,b,c,d}(x)= e^{-\frac{(x-a)^2}{b^2}} + e^{-\frac{(x-c)^2}{d^2}} $
+$$
+f_{a,b,c,d}(x)= e^{-\frac{(x-a)^2}{b^2}} + e^{-\frac{(x-c)^2}{d^2}}
+$$
 
 Luego, se define un criterio de optimización. En el caso de cuadrados mínimos
 el criterio es **"minimizar la suma cuadrática de los residuos"**. Esto es:
 
-$ {\color{var}\texttt{residuos}} = f_{a,b,c,d}({\color{var}\texttt{x_datos}}) - {\color{var}\texttt{y_datos}}$
+$$
+{\color{var}\texttt{residuos}} = f_{a,b,c,d}({\color{var}\texttt{x_datos}}) - {\color{var}\texttt{y_datos}}
+$$
 
 Se busca optimizar:
 
