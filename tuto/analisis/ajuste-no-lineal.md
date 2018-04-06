@@ -26,45 +26,34 @@ de ajuste no lineal. Generamos dos tiras de datos que simularán ser el resultad
 de mediciones o relevamientos.
 
 ```python
-# Generamos tiras de datos que simulan ser resultados de modiciones
-# Pensamos en algún fenomeno que da como resultado de una medición dos
-# campanas gaussianas superpuestas. La forma de esas campanas depende de
-# 4 valores que fijamos de forma exacta para fabricarnos los datos
-# Si el ajuste funciona bien, deberíamos recuperarlos luego.
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit,least_squares
 
-# En el eje x, 100 valores equiespaciados entre 0 y 10
 x_datos  = np.linspace(0, 10, 100)
-
-# En el eje y, las gaussianas superpuestas, calculadas a partir de x
 y_exacto = np.exp(-(x_datos-2.8)**2/0.5**2)+np.exp(-(x_datos-4.8)**2/1.5**2)
 
-# Pare comparar despues
-# Parametros en orden de aparición:
+# Pare comparar después, Parámetros en orden de aparición:
 parametros_reales = [2.8, 0.5, 4.8, 1.5]
 
-# Agregamos algo de "ruido" para darle realismo
+# agregamos ruido
 np.random.seed(1729)
-
-# Ruido con distribución normal escalado a 0.05
 y_ruido = 0.05 * np.random.normal(size=x_datos.size)
-
-# Agregamos el ruido para tener la serie de datso de y que simula ser
-# el resultadod e un experimento
 y_datos = y_exacto + y_ruido
 
 
-# Esta es la comparación entre los valoers exatos del fenómeno que uno desea
-# analizar y los que "logramos medir", con el ruido incluido.
-
+# Graficamos
 
 plt.figure()
 plt.plot(x_datos,  y_datos, 'o', label='datos medidos')
-plt.plot(x_datos, y_exacto, '-', label='curva sin ruidos')
+plt.plot(x_datos, y_exacto, '-', label='curva exacta')
 plt.legend(loc='best')
 plt.xlabel('x')
 plt.ylabel('y')
 plt.tight_layout()
 ```
 ![Datos fabricados](datos-originales.png "Datos fabricados")
+
+
 
 {% include page_navbar.html up=1 %}
