@@ -25,13 +25,13 @@
 <div class="text-center{{ dropup }}" style="clear: both;">
   <ul class="breadcrumb justify-content-center">
     {% if prev_i<0  %}
-      <li><span style="color:gray;">Previous</span></li>
+      <li><span style="color:gray;">Anterior</span></li>
     {% else %}
-      <li><a href="{{ site.baseurl }}/{{ site.pagenav[page.navbar][prev_i].url }}">Previous</a></li>
+      <li><a href="{{ site.baseurl }}/{{ site.pagenav[page.navbar][prev_i].url }}">Anterior</a></li>
     {% endif %}
 
     <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Index
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Índice
       <span class="caret"></span></a>
      <ul class="dropdown-menu">
        {% for item in site.pagenav[page.navbar] %}
@@ -40,9 +40,9 @@
      </ul>
     </li>
     {% if next_i<0  %}
-      <li><span style="color:gray;">Next</span></li>
+      <li><span style="color:gray;">Siguiente</span></li>
     {% else %}
-      <li><a href="{{ site.baseurl }}/{{ site.pagenav[page.navbar][next_i].url }}">Next</a></li>
+      <li><a href="{{ site.baseurl }}/{{ site.pagenav[page.navbar][next_i].url }}">Siguiente</a></li>
     {% endif %}
   </ul>
 </div>
