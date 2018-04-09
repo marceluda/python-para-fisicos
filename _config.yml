@@ -58,10 +58,7 @@ navbar-links:
     - Análisis de datos: tuto/analisis-de-datos
     - Simulaciones: tuto/simulaciones
 
-
-
 # --- Navigation bar options  for instruments--- #
-
 pagenav:
   analisis:
     - title: Análisis de datos
@@ -70,9 +67,6 @@ pagenav:
       url: tuto/analisis/ajuste_lineal
     - title: Ajuste no lineal
       url: tuto/analisis/ajuste-no-lineal
-
-
-
 
 
 # Image to show in the navigation bar - image must be a square (width = height)
