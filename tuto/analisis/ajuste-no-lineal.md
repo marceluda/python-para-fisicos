@@ -161,6 +161,83 @@ for i,param in enumerate(popt):
 # d = 1.484 ± 0.014
 ```
 
+
+- <a data-toggle="collapse" href="#ajustar_con_incertezas" aria-expanded="false" aria-controls="ajustar_con_incertezas">Más opciones de ajuste con >span style="font-family: monospace;">curve_fit</span> <span class="caret"></span></a>
+
+<div id="ajustar_con_incertezas" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
+
+Una lista mas completa de parámetros para `curve_fit` es la siguientes:
+
+```python
+curve_fit(
+      funcion_del_modelo,
+      xdata,
+      ydata,
+      p0=parametros_iniciales,
+      sigma=intervalos_de_incerteza,
+      bounds=limites_de_los_parametros,
+      method=metodo_de_fiteo,
+      jac=funcion_que_calcula_el_jacobiano
+    )
+```
+Ya sabesmos que `funcion_del_modelo` es una función que tiene como primer argumento
+el vector de coordenadas `x` de los datos y como argumentos siguientes los valores
+de los parámetros a ajustar:
+
+```python
+def funcion_del_modelo(x, a, b, c):
+    return a * np.exp(-b * x) + c
+```
+
+`parametros_iniciales` es una lista o vector con los parámetros desde los que se parte
+para realizar la optimización. Puede ser cualquiera de estas opciones:
+
+```python
+# orden de los parametros:  a , b , c
+parametros_iniciales = [2, 1, 6]            # lista
+parametros_iniciales = (2, 1, 6)            # tuple
+parametros_iniciales = np.array([2, 1, 6])  # array
+```
+
+`xdata` e `ydata` son los vectores de coordenadas `x` e `y` de los datos.
+
+
+`intervalos_de_incerteza` permite especificar los intervalos de incerteza en `y`.
+Se puede definir de varias formas:
+
+```python
+# Si es un objeto de una dimensión, se lo interpreta como la desviación estandar del error
+# en cada uno de los elementos del vector y de datos
+intervalos_de_incerteza = np.array([0.3, 1.8, ... , 1.2, 0.5])  
+```
+
+`limites_de_los_parametros` es un tuple que especifica en el primer elemento
+los límites inferiores de los parámetros, y en el segundo los límites superiores.
+Por ejemplo:
+
+
+```python
+# Los parámetros en orden son a,b,c
+
+# Especificamos que todos los parametros son como mínimo 0.
+# Luego, a < 10 , b < 100 y c < +infinito
+limites_de_los_parametros = ( 0 , [10,100,np.inf] )
+
+# Tambien podemos especificar límites separados para cada parámetro
+a * np.exp(-b * x) + c
+#         0 < a < 10000
+#         1 < b < 5
+# -infinito < c < -10
+limites_de_los_parametros = ( [0,1,-np.inf] , [10000,5,-10] )
+```
+`metodo_de_fiteo` es uno de estos tres:
+`lm`, `trf`, `dogbox`.
+Para más información [ver la documentacio](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.least_squares.html#scipy.optimize.least_squares).
+
+
+</div>
+
+
 ## Ajustamos un modelo usando `least_squares`: mayor control del proceso
 Para tener un control más riguroso del proceso de optimización se puede utilizar
 la función de `least_squares`.
