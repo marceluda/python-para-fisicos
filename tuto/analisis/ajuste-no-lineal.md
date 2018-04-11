@@ -162,7 +162,7 @@ for i,param in enumerate(popt):
 ```
 
 
-- <a data-toggle="collapse" href="#ajustar_con_incertezas" aria-expanded="false" aria-controls="ajustar_con_incertezas">Más opciones de ajuste con >span style="font-family: monospace;">curve_fit</span> <span class="caret"></span></a>
+<a data-toggle="collapse" href="#ajustar_con_incertezas" aria-expanded="false" aria-controls="ajustar_con_incertezas">Más opciones de ajuste con <span style="font-family: monospace;">curve_fit</span> <span class="caret"></span></a>
 
 <div id="ajustar_con_incertezas" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
 
