@@ -232,7 +232,7 @@ limites_de_los_parametros = ( [0,1,-np.inf] , [10000,5,-10] )
 ```
 `metodo_de_fiteo` es uno de estos tres:
 `lm`, `trf`, `dogbox`.
-Para más información [ver la documentacio](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.least_squares.html#scipy.optimize.least_squares).
+Para más información [ver la documentacion](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.least_squares.html#scipy.optimize.least_squares).
 
 
 </div>
