@@ -180,6 +180,9 @@ Si queremos profundizar, pasando la urgencia, acá hay una serie de recursos út
       [1.4](https://claudiovz.github.io/scipy-lecture-notes-ES/intro/matplotlib/matplotlib.html))
       serán de especial interés.
     - Es una guía pormenorizada.
+  - Tutorial de Python y Numpy para principiantes
+    - En inglés
+    - [http://cs231n.github.io/python-numpy-tutorial/](http://cs231n.github.io/python-numpy-tutorial/)
   - Recetas ya armadas (en ingles):
     - [scipy-cookbook.readthedocs.io](http://scipy-cookbook.readthedocs.io/)
   - **Consejos oficiales de SciPy para migrar a Python (en inglés):**
