@@ -133,13 +133,12 @@ def residuos(p, x, y):
 
 
 # Otros parámetros iniciales
-# parametros_iniciales=[0, 3, 8, 3]  # No ajusta
+# parametros_iniciales=[0, 3, 10, 3]  # No ajusta
 # parametros_iniciales=[0, 3, 8, 3]  # Ajusta mal
 
 parametros_iniciales=[1, 2, 8, 3]  # Ajusta
 
 res = least_squares(residuos, parametros_iniciales, args=(x_datos, y_datos), verbose=1)
-
 
 # Estos son los parámetros hallados
 print(res.x)
