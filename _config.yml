@@ -52,11 +52,12 @@ navbar-links:
     - Dudas más frecuentes: intro/dudas-mas-frecuentes
     - Info útil: intro-info-util
   Tutoriales:
-    - Control de instrumentos: tuto/control-de-instrumentos
-    - Cálculo numérico: tuto/calculo-numerico
-    - Gráficos: tuto/graficos
     - Análisis de datos: tuto/analisis
-    - Simulaciones: tuto/simulaciones
+    - Instructivo Labo2: tuto/labo2
+    # - Control de instrumentos: tuto/control-de-instrumentos
+    # - Cálculo numérico: tuto/calculo-numerico
+    # - Gráficos: tuto/graficos
+    # - Simulaciones: tuto/simulaciones
 
 # --- Navigation bar options  for instruments--- #
 pagenav:
@@ -67,6 +68,17 @@ pagenav:
       url: tuto/analisis/ajuste_lineal
     - title: Ajuste no lineal
       url: tuto/analisis/ajuste-no-lineal
+  labo2:
+    - title: Introducción
+      url: tuto/labo2
+    - title: Introducción a Python
+      url: tuto/labo2/01_intro_python
+    - title: Análisis y ajustes
+      url: tuto/labo2/02_intro_analisis
+    - title: Herramientas útiles
+      url: tuto/labo2/03_herramientas
+
+
 
 
 # Image to show in the navigation bar - image must be a square (width = height)

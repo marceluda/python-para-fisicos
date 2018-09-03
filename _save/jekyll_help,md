@@ -1,0 +1,11 @@
+
+# Comando para armar la web desde el jekyll localmente
+
+jekyll build --destination /var/www/html/python-para-fisicos/
+
+# Luego abrir en:
+# http://localhost/python-para-fisicos
+
+
+
+#  https://www.tablesgenerator.com/markdown_tables
