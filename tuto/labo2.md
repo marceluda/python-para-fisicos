@@ -32,11 +32,27 @@ Se incluyen los archivos relacionados a:
     3. Análisis gráfico
     4. Adquisición remota
   - Recursos en la Web:
-    - Manual SciPy
+    - [De Matlab a Python](https://marceluda.github.io/python-para-fisicos/intro/de-matlab-a-python/)
+    - **Tutorial (muy completo) de herramientas de python para el ámbito científico:**
+      - En inglés: [www.scipy-lectures.org](http://www.scipy-lectures.org/)
+      - En español (parcialmente traducido): [scipy-lecture-notes-ES](https://claudiovz.github.io/scipy-lecture-notes-ES/)
+      - Fundamentalmente los capítulos de [NumPy](https://claudiovz.github.io/scipy-lecture-notes-ES/intro/numpy/index.html)
+        y [Matplolib](https://claudiovz.github.io/scipy-lecture-notes-ES/intro/matplotlib/matplotlib.html)
+        ([1.3](https://claudiovz.github.io/scipy-lecture-notes-ES/intro/numpy/index.html) y
+        [1.4](https://claudiovz.github.io/scipy-lecture-notes-ES/intro/matplotlib/matplotlib.html))
+        serán de especial interés.
+      - Es una guía pormenorizada.
     - Matplotlib Gallery
-    - De MatLab a Python
-    - otros
-
+      - Ejemplos de cómo hacer graficos sofisticados
+      - https://matplotlib.org/gallery.html
+      - [Ejemplos introductorios a Matplotlib](http://webs.ucm.es/info/aocg/python/modulos_cientificos/matplotlib/index.html)
+      - [Ejemplos más frecuentes de Matplotlib](https://matplotlib.org/users/screenshots.html)
+        - Incluyen código para generar cáda imagen
+      - [Galería completa de ejemplos de Matplotlib](https://matplotlib.org/gallery.html)
+        - Hacer clic en cada imagen para ver el código de ejemplo que la genera
+    - Tutorial de Python y Numpy para principiantes
+      - En inglés
+      - [http://cs231n.github.io/python-numpy-tutorial/](http://cs231n.github.io/python-numpy-tutorial/)
 
 
 
