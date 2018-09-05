@@ -426,6 +426,7 @@ for i,param in enumerate(popt):
 
 ## Ejemplo de Ajuste No Lineal
 
+Ver: https://marceluda.github.io/python-para-fisicos/tuto/analisis/ajuste-no-lineal/
 
 
 
