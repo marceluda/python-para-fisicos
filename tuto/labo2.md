@@ -21,7 +21,7 @@ Se incluyen los archivos relacionados a:
     7. Funciones definidas por el usuario
   - [Introducción a análisis de datos y ajustes de modelos](02_intro_analisis)
     1. Introducción al análisis de datos
-    2. Media, Varianza y Desviación estandar
+    2. Media, Varianza y Desviación estándar
     3. Covarianza y Correlación
     4. Ajuste de datos mediante cuadrados mínimos
     5. Ejemplo de Ajuste Lineal

@@ -2,6 +2,7 @@
 title: Herramientas útiles para análisis
 description: Herramientas de análisis
 layout: page
+mathjax: true
 navbar: labo2
 ---
 
