@@ -643,9 +643,10 @@ savetxt('datos.txt', datos.T , delimiter=',', newline='\n', header='', footer=''
 
 Lo recuperamos con `loadtxt`
 
-**datos.txt**
+[**datos.txt**]({{ site.baseurl }}/tuto/labo2/01_intro_python/datos.txt)
+
 ```
-# Datos de velocidad y aceleracion
+# Datos de velocidad y aceleración
 #
 #  Velocidad [m/s]        Error velocidad [m/s]     Aceleracion [m/s2]
 1.490837831787444889e+00,2.778988422540417114e-01,1.490837831787444889e+00
@@ -654,7 +655,9 @@ Lo recuperamos con `loadtxt`
 1.456974175099817330e+02,1.727037889438612361e-01,7.753017980600711567e-01
 1.620603843035981697e+02,1.450515660269059148e-01,1.910305665224660276e-01
 1.630704786086546960e+02,1.517261340087170951e-01,-1.156524575701078960e-03
+...
 ```
+
 
 ```python
 datos = loadtxt('datos.txt', comments='#', delimiter=',')
