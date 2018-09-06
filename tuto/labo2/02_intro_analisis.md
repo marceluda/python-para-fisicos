@@ -139,31 +139,31 @@ plt.tight_layout()
 Ahora supongamos que tenemos un experimento en el que medimos varias veces dos variables al mismo tiempo; por ejemplo x e y. Cada una de estas variables muestran un comportamiento aleatorio, aunque pueden mostrar cierta tendencia en su evolución temporal (Ej: x tiende a crecer con el tiempo). Nos interesa saber si comparten información sobre el sistema o si son variables que evolucionan de forma independiente. Si para cada medición $i$ obtuvimos valores $x_i$ y $y_i$ podemos graficar uno respecto del otro. Estos son posibles ejemplos de resultados:
 
 ```python
-x = random.randn(100)*10
-y = (random.rand(100)-0.5)*10+8
+x1 = random.randn(100)*10
+y1 = (random.rand(100)-0.5)*10+8
 
 plt.subplot(2,2,1)
-plt.plot(x,y,'.')
-plt.ylabel('y')
-plt.xlabel('x')
+plt.plot(x1,y1,'.')
+plt.ylabel('y1')
+plt.xlabel('x1')
 
 plt.subplot(2,2,2)
-plt.plot(x,'.', label='x')
-plt.plot(y,'.', label='y')
+plt.plot(x1,'.', label='x1')
+plt.plot(y1,'.', label='y1')
 plt.ylabel('valor')
 plt.xlabel('posicion')
 plt.legend()
 
 
 plt.subplot(2,2,3)
-plt.hist(x,20)
+plt.hist(x1,20)
 plt.yticks([])
-plt.xlabel('x')
+plt.xlabel('x1')
 
 plt.subplot(2,2,4)
 plt.hist(y,20)
 plt.yticks([])
-plt.xlabel('y')
+plt.xlabel('y1')
 
 plt.tight_layout()
 # plt.savefig('02_04_cov.png')
@@ -175,34 +175,33 @@ plt.tight_layout()
 En el ejemplo no se puede apreciar una dependencia clara de una variable sobre otra. Veamos otro ejemplo:
 
 ```python
-#%%
 random.seed(1024)
 t = linspace(0,5*pi,100)
-x = (sin(t)+1)+t/2 + random.randn(100)/2
-y = ((sin(t)+1)+t/2)*2.1+3 + random.randn(100)/2
+x2 = (sin(t)+1)+t/2 + random.randn(100)/2
+y2 = ((sin(t)+1)+t/2)*2.1+3 + random.randn(100)/2
 
 plt.subplot(2,2,1)
-plt.plot(x,y,'.')
-plt.ylabel('y')
-plt.xlabel('x')
+plt.plot(x2,y2,'.')
+plt.ylabel('y2')
+plt.xlabel('x2')
 
 plt.subplot(2,2,2)
-plt.plot(x,'.', label='x')
-plt.plot(y,'.', label='y')
+plt.plot(x2,'.', label='x2')
+plt.plot(y2,'.', label='y2')
 plt.ylabel('valor')
 plt.xlabel('posicion')
 plt.legend()
 
 
 plt.subplot(2,2,3)
-plt.hist(x,20)
+plt.hist(x2,20)
 plt.yticks([])
-plt.xlabel('x')
+plt.xlabel('x2')
 
 plt.subplot(2,2,4)
-plt.hist(y,20)
+plt.hist(y2,20)
 plt.yticks([])
-plt.xlabel('y')
+plt.xlabel('y2')
 
 plt.tight_layout()
 # plt.savefig('02_05_cov.png')
@@ -372,8 +371,7 @@ R2   = R**2
 
 
 ```python
-#%%  Ejemplo de ajuste lineal simple
-
+# Ejemplo de ajuste lineal simple
 
 from scipy.optimize import curve_fit
 
@@ -390,7 +388,7 @@ popt, pcov = curve_fit(modelo, x2, y2, p0=parametros_iniciales)
 # parámetros óptimos hallados. El segundo (pcov) es la matriz de
 # covarianza de los parámetros hallados.
 
-x_modelo  = np.linspace(0, 10, 1000)
+x_modelo  = linspace(0, 10, 1000)
 
 plt.figure()
 plt.plot( x2,                 y2,  'o', label='datos')
@@ -408,7 +406,7 @@ print(popt)
 
 # De la matris de covarinza podemos obtener los valores de desviacion estandar
 # de los parametros hallados
-pstd = np.sqrt(np.diag(pcov))
+pstd = sqrt(diag(pcov))
 
 nombres_de_param=['A','B']
 print('Parámetros hallados:')
@@ -419,6 +417,8 @@ for i,param in enumerate(popt):
 #
 # A = 1.994 ± 0.049
 # B = 3.392 ± 0.280
+
+# plt.savefig('02_08_ajuste_lineal.png')
 ```
 
 ![grafico](02_08_ajuste_lineal.png "grafico")

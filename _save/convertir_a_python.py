@@ -15,6 +15,8 @@ from glob import glob
 
 #%%
 
+destino='/home/lolo/Dropbox/Doctorado/github/python-para-fisicos/tutoriales/instructivo_labo2/'
+
 os.chdir('/home/lolo/Dropbox/Doctorado/github/python-para-fisicos_pages/tuto/labo2')
 
 for md in glob('*.md'):
@@ -36,5 +38,5 @@ for md in glob('*.md'):
         if cargar:
             bloque[-1] += linea + '\n'
     
-    with open( md[:-3]+'.py' ,'w') as output:
+    with open( destino + md[:-3]+'.py' ,'w') as output:
         output.write( '\n\n\n'.join( bloque )  )
