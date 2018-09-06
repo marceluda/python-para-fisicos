@@ -26,7 +26,7 @@ Se incluyen los archivos relacionados a:
     4. Ajuste de datos mediante cuadrados mínimos
     5. Ejemplo de Ajuste Lineal
     6. Ejemplo de Ajuste No Lineal
-  - [Más herramientas para análisis de datos](03_herramientas_analisis)
+  - [Más herramientas para análisis de datos](03_herramientas)
     1. Transformada de Fourier
     2. Filtros
     3. Análisis gráfico
