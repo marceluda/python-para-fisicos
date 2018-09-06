@@ -232,6 +232,8 @@ medicion_hig1  = lfilter(B, A, medicion      , axis=0)
 # Graficamos los datos con los diferentes filtros
 # Agregamos un bias sólo para visualizarlo mejor
 
+# Vemos el filtrado de frecuencia inferiores a 20 Hz y superiores a 20 Hz
+
 plt.figure(5)
 plt.subplot(2,1,1)
 plt.plot(tiempo , 0  + medicion  )
