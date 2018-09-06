@@ -413,7 +413,7 @@ Para hacer gráficos simples vamos a recurrir a la librería
 `matplolib`. De ella, importamos el `pyplot` con el alias `plt`. `plt` incluye funciones para crear los gráficos con bastante detalle de control.
 Para un gráfico bidimensional clásico solo hace falta el comando `plt.plot(vec_x, vec_y)``, donde `vec_x` es un vector con las coordenadas x de cada punto a graficar y `vec_y` será un vector con las coordenadas y. Veamos un ejemplo.
 
-```Python
+```python
 from numpy import *
 import matplotlib.pyplot as plt
 
@@ -451,15 +451,18 @@ plt.plot(dia, dolar)
 Veamos algunas características útiles de `pyplot` y de los datos en formato `array`. Primero, veamos que se pueden mejorar mucho los gráficos:
 
 ```python
+#%% Comparamos el dolar y el real
 real  = [5.57, 5.92, 6.02, 6.14, 6.19, 6.1, 5.9, 6.18, 6.63, 6.48, 7.26, 7.01, 7.37, 7.63]
 dia_r = [1, 18, 36, 53, 71, 88, 106, 123, 141, 158, 176, 193, 211, 228]
 
-plt.plot(dia  , dolar , '-')
-plt.plot(dia_r, real  , 'o-')
+plt.plot(dia  , dolar , '-'  , label='dolar')
+plt.plot(dia_r, real  , 'o-' , label='real')
 plt.xlabel('Día del año [1 = 1ro de Enero ]')
-plt.ylabel('Dolar [Pesos Arg]')
+plt.ylabel('Cotizacion [Pesos Arg]')
 plt.title('Evolucion del dolar en 2018')
+plt.legend()
 plt.grid(b=True)
+
 # plt.savefig('01_02_dolar.png')
 ```
 
@@ -676,7 +679,7 @@ print('desviacion estandar',  std(datos)  )
 print('Num elementos',        len(datos)  )
 ```
 
-La función diff nos devuelve un vector con la resta entre elementos consecutivos del vector de entrada (osea la diferencia entre cada elemento y su siguiente).
+La función `diff` nos devuelve un vector con la resta entre elementos consecutivos del vector de entrada (osea la diferencia entre cada elemento y su siguiente).
 
 ```python
 diff(datos)
@@ -704,7 +707,7 @@ plt.grid(b=True)
 # plt.savefig('01_04_derivada.png')
 ```
 
-![grafico](01_04_dolar.png "grafico")
+![grafico](01_04_derivada.png "grafico")
 
 También se puede realizar la integral numérica con el comando `trapz` (el área debajo de la curva) y `cumsum` (parecido, pero acumulativo para cada punto):
 
