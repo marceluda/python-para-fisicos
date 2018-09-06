@@ -48,26 +48,26 @@ plt.title('Muestra en el dominio temporal de la señal')
 
 
 ```python
-# Para poder construir el eje de frecuencias de la tranformada de Fourier hace
+# Para poder construir el eje de frecuencias de la transformada de Fourier hace
 # falta:
-#  - Tener los datos en tiempos equiespaciados
-#  - Saber el tiempo de separacion entre los datos, que llamaremos t_step
+#  - Tener los datos en tiempos equi-espaciados
+#  - Saber el tiempo de separación entre los datos, que llamaremos t_step
 
 t_step = mean(diff(t))
 
-# Nos sirve asber el largo del vector temporal
+# Nos sirve saber el largo del vector temporal
 N      = len(y1)
 ii     = arange(N)
 
 # Este factor de normalización corrige artificios de cálculo, debido a que
-# la FFT no es un implementación completa de la Tranformada de Fourier.
+# la FFT no es un implementación completa de la Transformada de Fourier.
 Norma  = sinc(ii/N) * exp(-1j*ii*pi/N)  * 2/N
 
 # Calculamos la transformada
 Y1     = fft.rfft( y1 )[0:N//2] * Norma[0:N//2]
 ff     = fft.fftfreq( N , d=t_step  )[0:N//2]
 
-# Graficamos el valor absoluto en escala lograritmica
+# Graficamos el valor absoluto en escala lograrítmica
 
 plt.figure(2)
 plt.plot( ff , abs(Y1)  , '.-' , alpha=0.5 )
