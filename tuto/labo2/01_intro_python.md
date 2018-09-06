@@ -660,6 +660,13 @@ Lo recuperamos con `loadtxt`
 
 
 ```python
+import os
+import requests
+if not os.path.isfile('datos.txt'): # Si NO tengo el archivo de datos, lo bajo de ineternet
+    res = requests.get('https://marceluda.github.io/python-para-fisicos/tuto/labo2/01_intro_python/datos.txt',{})
+    with open( 'datos.txt' ,'w') as output:
+        output.write( res.text  )
+
 datos = loadtxt('datos.txt', comments='#', delimiter=',')
 
 velocidad   = datos[0,:]
@@ -693,6 +700,13 @@ La combinación de `diff` con operaciones nos permite, por ejemplo, calcular la 
 
 ```python
 #%%
+import os
+import requests
+if not os.path.isfile('datos.txt'): # Si NO tengo el archivo de datos, lo bajo de ineternet
+    res = requests.get('https://marceluda.github.io/python-para-fisicos/tuto/labo2/01_intro_python/datos.txt',{})
+    with open( 'datos.txt' ,'w') as output:
+        output.write( res.text  )
+
 datos = loadtxt('datos.txt', comments='#', delimiter=',')
 
 tiempo      = datos[:,0]
