@@ -27,7 +27,7 @@ Veamos primero cual debe ser la estructura de los informes:
     - Antecedentes. Cosas que ya se saben sobre el fenómeno a estudiar. Alguna cita a trabajos anteriores.
     - Anticipar estructura del resto del documento: "En las sección 2 se presentará el diseño del armado experimental, haciendo incapié en X cosa importante. En la sección 3 se explicará el desarrollo de la experiencia y el proceso de medición. Finalmente, en la sección 4 se presentan los resultados y análisis" ... o similar...
     - **No tiene por que estar TODO esto** si o si en la introducción, pero el marco teórico SI es indispensable.
-  5. Cuerpo
+  5. **Cuerpo**
     - Descripción del armado experimental y de los experimentos.
     - Mediciones, procedimiento experimental. Cuidados y consideraciones relevantes sobre qué se hizo o cómo se lo hizo.
     - El objetivo de esas dos partes es que le puedan contar a un colega de otra universidad, con su mismo nivel de formación, qué hicieron, con información suficiente para que ese colega lo pueda reproducir. Tiene sentido mencionar instrumental usado, durante el texto, no como lista de ingredientes.
@@ -70,4 +70,3 @@ Veamos primero cual debe ser la estructura de los informes:
       - Si es para transmitir la **lógica detrás de un armado experimental**, para que se entienda que algo geenra una señal, eso se transmite a otro lado, actua sobre otra cosa y es medido con otro aparato... entonces un gráfico con bloques puede llegar a ser suficiente, sin detalles gráficos, pero si remarcando las variables relevantes.
       - Puede ser cosas medio mixtas. Está permitido usar la imaginación. Pero sean atentos al objetivo de fondo: ¿Sirve la figura para transmitir lo que quiero transmitir?
   - Las figuras deben ser numeradas y referenciadas en el texto.
-  
