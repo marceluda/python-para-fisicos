@@ -58,3 +58,16 @@ Veamos primero cual debe ser la estructura de los informes:
       - ¿Quiero remarcar que hay un pico a X frecuencia? ... entones lo resalto, hago una flechan una linea vertical, algo que remarque eso
       - ¿Quiero comparar los datos con un modelo?. Entonces incluyo el ajuste, la comparación o algo que me permita evaluarlo. Si hago ajuste, reporto el parámetro relevante que quería encontrar (con su intervalo de incerteza!).
       - ¿Quiero mostrar que sigue una tendencia ... lineal, cuadrataica, logarítmica, etc?. Evaluar si vale la pena linealizar. Si uno quiere reportar "que algo se parece a una recta", reportar estimadores de bondad de ajuste que hablen de eso, como el $R ^2$
+    - Elegir bien las escalas. Si algo está en "segundos", dependiendo del orden de magnitud, pueden ser s, ms, $\mu$s , ns ... etc.
+    - Siempre poner etiqueta a los ejes. No olvidar las unidades
+  - **Graficos de armado experimental **
+    - Los apartos usados no tiene por que tener mucho diseño. Hasta pueden ser cajas, con sus entradas y salidas relevantes.
+    - Sí deben tener nombre o alugna identificación que se referencie en el epígrafe.
+    - Deben estar señaladas las variable importantes. ¿Hay distancias que midieron que son importantes para analizar los resultados?. Márquenlas con una recta, ponganle nombre. Resáltenlas. Señalen las variables y parametros relevantes que se controlan o se miden.
+    - **¿Para que muestran esa figura?**
+      - Si es para dar una idea de dimensiones, de dificultad del armado experimental, de lo delicado de determiado montaje... Tal vez les conviene una FOTO.
+      - Si es para dar idea de la disposicion de elementos, donde la geometría de la disposición es clave... Tal vez conviene un grafico tipo PLANO, respetando dimensiones relevantes, con un buen diseño. (pocas veces es necesario esto)
+      - Si es para transmitir la **lógica detrás de un armado experimental**, para que se entienda que algo geenra una señal, eso se transmite a otro lado, actua sobre otra cosa y es medido con otro aparato... entonces un gráfico con bloques puede llegar a ser suficiente, sin detalles gráficos, pero si remarcando las variables relevantes.
+      - Puede ser cosas medio mixtas. Está permitido usar la imaginación. Pero sean atentos al objetivo de fondo: ¿Sirve la figura para transmitir lo que quiero transmitir?
+  - Las figuras deben ser numeradas y referenciadas en el texto.
+  
