@@ -13,3 +13,27 @@ mathjax: true
 ## Estructura de los informes
 
 Veamos primero cual debe ser la estructura de los informes:
+
+  1. **Título:** En una sola frase, des qué se trata el trabajo o qué tiene de innovador
+  2. **Autores:** Incluir filiación (ej: Laboratorio Tal de Tal Universidad ó Materia del de tal carrera, tal Univ) y contacto (al menos un mail).
+  3. **Resumen:** (un párrafo) Qué se hizo, qué se quiere mostrar, qué resultado se obtuvo.
+  4. **Introducción**
+    - Texto introductorio que nos pone en tema.
+    - Motivación del trabajo. Puede ser histórica (este tema viene de X e Y y acá se continppua aportando Tal cosa) o práctica (queremos lograr hacer tal cosa que ya se hace, pero mas rápido y mas chiquito (?) ) o varias...
+    -  **Marco teórico**.
+      - Introducir / mencionar la **teoría que sirve de base** para entender los fenómenos que se van a ver.
+      - Acá suele haber uno o varias citas a textos que hablen de esa teoría (algun libro de las referencias).
+      - Introducir **fórmulas relevantes**. Relevantes son: Las que son útiles para entender el fenómeno, las que se necesitan para poder procesar o interpretar los datos y las que se necesitan para deducir estas ultimas.
+    - Antecedentes. Cosas que ya se saben sobre el fenómeno a estudiar. Alguna cita a trabajos anteriores.
+    - Anticipar estrcutura del resto del documento: "En las sección 2 se presentará el diseño del armado experimental, haciendo incapié en X cosa importante. En la sección 3 se exlicará el desarrollo de la experiencia y el proceso de medicion. Finalmente, en la sección 4 se presentan los resultados y análisis" ... o similar...
+    - **No tiene por que estar TODO esto** si o si en la introducción, pero el marco teórico SI es indispensable.
+  5. Cuerpo
+    - Descripción del armado experimental y de los experimentos.
+    - Mediciones, precedimiento experimental. Cuidados y consideraciones relevantes sobre qué se hizo o cómo se lo hizo.
+    - El objetivo de esas dos partes es que le puedan contar a un colega de otra universidad, con su mismo nivel de formación, qué hicieron, con información suficiente para que ese colega lo pueda reproducir. Tiene sentido mencionar instrumental usado, durante el texto, no como lista de ingredientes.
+    - Presentación de resultados. Se prefieren gráficos por sobre tablas. En lo posible, gráficos trabajados. No olvidar intervalos de incerteza y propagar errores cuando se deba.
+    - **Análsis de datos**. **Comparación con las ecuaciones relevantes del marco teórico**. Determinación de variables calculadas, parametros de ajustes, etc.
+    - No tiene que ser ordenado de esa forma. Resultados y análisis pueden ir juntos. Sin son varias experiencias, hay varias formas de ordenar posibles. Tiene que ser entendible y coherente.
+  6. Conclusiones
+  7. Referencias
+  8. Apéndices
