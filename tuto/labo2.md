@@ -59,6 +59,10 @@ están los archivos de Python relacionados con los siguientes instructivos:
     - En inglés
     - [http://cs231n.github.io/python-numpy-tutorial/](http://cs231n.github.io/python-numpy-tutorial/)
 
+<div class="alert alert-danger" role="alert" >
+  <strong>Aviso:</strong> Esto último no es parte de Python para Física.
+</div>
 
+[Consejos para escribir Informes de Laboratorio 2](informes)
 
 {% include page_navbar.html up=1 %}

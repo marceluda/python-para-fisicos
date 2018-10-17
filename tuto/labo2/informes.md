@@ -34,6 +34,18 @@ Veamos primero cual debe ser la estructura de los informes:
     - Presentación de resultados. Se prefieren gráficos por sobre tablas. En lo posible, gráficos trabajados. No olvidar intervalos de incerteza y propagar errores cuando se deba.
     - **Análsis de datos**. **Comparación con las ecuaciones relevantes del marco teórico**. Determinación de variables calculadas, parametros de ajustes, etc.
     - No tiene que ser ordenado de esa forma. Resultados y análisis pueden ir juntos. Sin son varias experiencias, hay varias formas de ordenar posibles. Tiene que ser entendible y coherente.
-  6. Conclusiones
-  7. Referencias
-  8. Apéndices
+  6. **Conclusiones:** Conclusiones globales, cierre de discusiones relevantes, perpectivas futuras, problemas abiertos.
+  7. **Referencias:** Deben estar numeradas. Lo estandar es con corchetes tipo [1]  [2]  ... una por línea. Las referencias deben haber sido usadas en el texto y citadas donde corresponda.
+  8. **Apéndices:** Información importante o útil que escapa un poco al relato central del texto.
+    - Puede ser un procedimiento de análisis usado, que se menciona en el texto y se explica detalladamente acá.
+    - Pueden ser gráficos auxiliares generados para obtener información que no es central en el análisis, pero es necesario para poder hacer ese análisis.
+    - Pueden ser deducciones de fórmulas, tablas de información auxiliar, etc
+    - Solo tiene sentido ponerlo si aporta algo, no tiene sentido ponerlo "para agregar info"
+
+
+  ## Consejos para las figuras
+
+    - **Los epígrafes**
+      - Deben contener la información necesaria para entender el gráfico que se presenta. Descripción de lo que se ve y no es evidente, o requiere información textual además de la gráfica.
+      - Se espera tambien que sirva para un "lectura diagonal del texto". Esto es: si alguien lee el texto por arriba, entre el resumen, los epígrafes y las figuras debería entenderse masomenos qué se hizo en el trabajo. Por ende, a veces se agrega en las figura UNA oración sobre la figura contando cómo es el experiemnto (si es un armado experimental) o cómo se la analiza/que resultados brinda (si es un gráfico de resultados). UNA oración.
+    
