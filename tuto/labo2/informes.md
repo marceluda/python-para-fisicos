@@ -60,7 +60,7 @@ Veamos primero cual debe ser la estructura de los informes:
       - ¿Quiero mostrar que sigue una tendencia ... lineal, cuadrataica, logarítmica, etc?. Evaluar si vale la pena linealizar. Si uno quiere reportar "que algo se parece a una recta", reportar estimadores de bondad de ajuste que hablen de eso, como el $R ^2$
     - Elegir bien las escalas. Si algo está en "segundos", dependiendo del orden de magnitud, pueden ser s, ms, $\mu$s , ns ... etc.
     - Siempre poner etiqueta a los ejes. No olvidar las unidades
-  - **Graficos de armado experimental **
+  - **Graficos de armado experimental**
     - Los apartos usados no tiene por que tener mucho diseño. Hasta pueden ser cajas, con sus entradas y salidas relevantes.
     - Sí deben tener nombre o alugna identificación que se referencie en el epígrafe.
     - Deben estar señaladas las variable importantes. ¿Hay distancias que midieron que son importantes para analizar los resultados?. Márquenlas con una recta, ponganle nombre. Resáltenlas. Señalen las variables y parametros relevantes que se controlan o se miden.
