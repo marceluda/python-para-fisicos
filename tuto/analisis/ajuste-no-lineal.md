@@ -161,7 +161,38 @@ for i,param in enumerate(popt):
 # d = 1.484 ± 0.014
 ```
 
+<div class="alert alert-info" role="alert" >
+  <strong>Actualización 2018-11-06:</strong> Cálculo del
+  <a href="https://en.wikipedia.org/wiki/Coefficient_of_determination">Coeficiente de determinación</a> .
+</div>
 
+Un estimador de bondad de ajuste que se puede calcular para evaluar el modelo es el
+[Coeficiente de determinación](https://en.wikipedia.org/wiki/Coefficient_of_determination)
+$R^2$. Este valor coincide con el cuadrado del
+[Coeficiente de correlación de Pearson](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient) $r^2$
+sólo cuando el modelo es lineal
+
+```python
+print('Coeficiente de determinacion R2')
+
+# Suma de los cuadrados de los residuos
+ss_res = np.sum( (y_datos - modelo(x_datos, *popt))**2  )
+
+# Suma total de cuadrados
+ss_tot = np.sum( (y_datos - np.mean(y_datos) )**2  )
+
+R2     = 1 - (ss_res / ss_tot)
+
+print('R2 = {:10.8f}'.format(R2) )
+
+print('Nota 1: Solo en los ajustes lineales este valor coincide con el r2 de pearson.')
+
+print('''Nota 2: Se puede pensar el coeficiente de determinación R2 como
+        "el porcentaje de la varianza que se puede explicar a partir del modelo
+        propuesto (con los parámetros hallados)". En ese sentido, 1-R2 representa
+        la variaza que NO se explica a partir del modelo (que puede ser ruido o
+        un indicio de que el modelo no es bueno).''')
+```
 <a data-toggle="collapse" href="#ajustar_con_incertezas" aria-expanded="false" aria-controls="ajustar_con_incertezas">Más opciones de ajuste con <span style="font-family: monospace;">curve_fit</span> <span class="caret"></span></a>
 
 <div id="ajustar_con_incertezas" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
