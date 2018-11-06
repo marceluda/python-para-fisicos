@@ -242,7 +242,7 @@ La covarianza nos da una idea de si dos variables comparten información de alg�
 **coeficiente de correlación de Pearson** $r$ (`corrcoef`).
 
 $$
-correlacion(x,y) = \frac{covarianza(x,y)}{ \sigma_x sigma_y }
+correlacion(x,y) = \frac{covarianza(x,y)}{ \sigma_x \sigma_y }
 $$
 
 ```python
