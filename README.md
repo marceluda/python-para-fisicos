@@ -1,6 +1,6 @@
 # Python para físicos y físicas
 
-En este repositorio se alojarán archivos de ejemplo sobro cómo hacer
+En este repositorio se alojarán archivos de ejemplo sobre cómo hacer
 tareas habituales para disciplinas como física, ingeniería y diversas ciencias en
 el lenguaje de programación [Python](https://es.wikipedia.org/wiki/Python).
 
@@ -16,4 +16,3 @@ El estado actual es muy preliminar. Por ahora hay dos carpetas:
     Archivos para seguir que dan algún ejemplo de cómo hacer algo
   - **Herramientas:**
     Código disponible para usar, no del todo ordenado. Ayudas útiles.
-    

@@ -136,3 +136,5 @@ if __name__ == '__main__':
     ax[1].plot(xx,-yy**2/max(yy))
 
     ax.all.grid(b=True,linestyle='--',color='lightgray')
+
+
