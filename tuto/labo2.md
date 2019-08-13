@@ -48,8 +48,8 @@ están los archivos de Python relacionados con los siguientes instructivos:
       serán de especial interés.
     - Es una guía pormenorizada.
   - Matplotlib Gallery
-    - Ejemplos de cómo hacer graficos sofisticados
-    - https://matplotlib.org/gallery.html
+    - [Ejemplos de cómo hacer graficos sofisticados](https://matplotlib.org/gallery.html)
+      - Hacer clic en cada imagen para ver el código de ejemplo que la genera
     - [Ejemplos introductorios a Matplotlib](http://webs.ucm.es/info/aocg/python/modulos_cientificos/matplotlib/index.html)
     - [Ejemplos más frecuentes de Matplotlib](https://matplotlib.org/users/screenshots.html)
       - Incluyen código para generar cáda imagen
