@@ -217,21 +217,21 @@ $$
     1 & 0 & 1
   \end{pmatrix}
 $$
-
+<hr>
 $$
   b =
   \begin{pmatrix}
     2 & 1 & 3
   \end{pmatrix}
 $$
-
+<hr>
 $$
   c =
   \begin{bmatrix}
     -1 \\ 2 \\ 0
   \end{bmatrix}
 $$
-
+<hr>
 $$
   A =
   \begin{bmatrix}
@@ -245,8 +245,13 @@ $$
 from numpy import *
 
 a = array( [ 1 , 0 , 1] )
+
+
 b = array( [ 2 , 1 , 3] )
+
+
 c = array( [[ -1 , 2 , 0]] ).T
+
 
 A = array( [[1,1,1],[2,2,2],[3,3,3]] )
 A = array([[1, 1, 1],
@@ -271,18 +276,18 @@ $$
 $$
 
 $$
+a + b =
+\begin{pmatrix}
+  3 & 1 & 4
+\end{pmatrix}
+$$
+
+$$
 \begin{pmatrix}
   \frac{a_0}{b_0} & \frac{a_1}{b_1} & \frac{a_2}{b_2}
 \end{pmatrix} =
 \begin{pmatrix}
   \frac{1}{2} & 0 & \frac{1}{3}
-\end{pmatrix}
-$$
-
-$$
-a + b =
-\begin{pmatrix}
-  3 & 1 & 4
 \end{pmatrix}
 $$
 
@@ -304,13 +309,18 @@ $$
 ```python
 a*b
 
+
 a*c
+
 
 a+b
 
+
 a/b
 
+
 A**2
+
 
 b**b
 ```
@@ -378,12 +388,9 @@ Pero el uso más habitual que le vamos a dar al tipo de dato `array` es guardar 
 generalmente resultados de un experimento o de una adquisición, aunque tambien pueden ser datos generados
 por nosotros mismos para *simular* el comportamiento de un modelo.
 
-Aqúi algunos ejemplos de generación de datos y de aplicación de funciones.
+Aquí algunos ejemplos de generación de datos y de aplicación de funciones.
 
 ```python
-n = arange(10)   # Lista de los primeros 10 enteros
-# array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-
 n = arange(10)   # Lista de los primeros 10 enteros
 # array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 
