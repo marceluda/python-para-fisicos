@@ -53,7 +53,7 @@ navbar-links:
     - Info útil: intro-info-util
   Tutoriales:
     - Análisis de datos: tuto/analisis
-    - Instructivo Labo2: tuto/labo2
+    - Python para Labos: tuto/labo2
     - Repositorio de ejemplos: tuto/repo
     # - Control de instrumentos: tuto/control-de-instrumentos
     # - Cálculo numérico: tuto/calculo-numerico

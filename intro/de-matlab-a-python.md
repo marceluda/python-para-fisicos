@@ -5,9 +5,7 @@ layout: page
 mathjax: true
 ---
 
-<div class="alert alert-danger" role="alert" >
-  <strong>Aviso:</strong> La página está en construcción y aún tiene muchas carencias
-</div>
+
 
 [MATLAB](https://es.wikipedia.org/wiki/MATLAB) es software para reliazar cálculo numérico
 que utiliza el lenguaje interpretado "M". Es un software privativo y costoso, pero muy popular en el ámbito
@@ -16,7 +14,7 @@ científico y de ingeniería. Es por eso que muchas personas buscan reemplazarlo
 y multiplataforma, como [Octave](https://es.wikipedia.org/wiki/GNU_Octave) o
 [Scilab](https://es.wikipedia.org/wiki/Scilab).
 
-Otra opción es reemplazarlo por Python. Existen librerías para cálculo numérico y graficación
+Otra opción es reemplazarlo por [Python](https://www.python.org/). Existen librerías para cálculo numérico y graficación
 que emulan muchas de las funciones más utilizadas de MATLAB (y hasta usan los mismos nombres
 para facilitar la migración!). Vamos a volcar algo de información útil para lograr migrar
 de MATLAB a Python.

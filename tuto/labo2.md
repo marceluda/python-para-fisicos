@@ -1,5 +1,5 @@
 ---
-title: IPython para Labos
+title: Python para Labos
 description: Introducción a Python para laboratorios iniciales
 layout: page
 navbar: labo2
@@ -8,6 +8,17 @@ navbar: labo2
 
 {% include page_navbar.html %}
 
+
+Estas secciones están dedicadas a la introducción de las herramientas que incluye Python 
+para realizar las tareas más habituales en un laboratorio: Cálculo, asálisis, ajustes de modelos,
+generación de gráficos, adquisición de datos. El instructivo incluye también la introducción 
+teórica a algunos de los conceptos utilizados.
+
+<div class="alert alert-info" role="alert" >
+  <strong>Aviso:</strong> Los conceptos tratados son expuestos de forma simple, en detrimento de la rigurosidad,
+  para facilitar una asimilación rápida de las herramientas informáticas. Para un tratamiento riguroso y más extenso
+  ver los links de referencia o bibliografía específica de Estadística o Cálculo numérico.
+</div>
 
 En la dirección:
 
@@ -59,7 +70,7 @@ están los archivos de Python relacionados con los siguientes instructivos:
     - En inglés
     - [http://cs231n.github.io/python-numpy-tutorial/](http://cs231n.github.io/python-numpy-tutorial/)
 
-<div class="alert alert-danger" role="alert" >
+<div class="alert alert-info" role="alert" >
   <strong>Aviso:</strong> Esto último no es parte de Python para Física.
 </div>
 

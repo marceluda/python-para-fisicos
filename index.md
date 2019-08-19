@@ -1,14 +1,37 @@
 ---
 title: Python para hacer física
-description: Información útil para fisicos y físicas que quieran usar Python
+description: Información útil para fisicos y físicas que quieran usar Python en el laboratorio
 layout: page
 mathjax: true
 ---
 
+Esta web está dedicada a recopilar y producir material útil para facilitar el uso de Python el laboratoios de
+física. 
 
-<div class="alert alert-danger" role="alert" >
-  <strong>Aviso:</strong> La página está en construcción y aún tiene muchas carencias
-</div>
+**Recursos disponibles:**
+
+
+<center>
+<a href="{{ site.url }}" class="btn btn-primary btn-lg" role="button">
+Python para Labos iniciales
+</a>
+</center>
+
+<center>
+<a href="{{ site.baseurl }}" class="btn btn-primary btn-lg" role="button">
+Repositorio de ejemplos rápidos
+</a>
+</center>
+
+<center>
+<a href="{{ page.url }}" class="btn btn-primary btn-lg" role="button">
+Análisis de datos (en construcción)</a>
+</center>
+
+
+
+
+
 
 ## ¿Por que?
 A medida que pasan los años cada vez se hace más necesario utilizar herramientas
