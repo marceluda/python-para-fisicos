@@ -19,7 +19,7 @@ navbar: labo2
 ## Sistemas de cálculo numérico
 
 Existen diversos programas de cálculo numérico, diseñados para facilitar la realización de cálculos complejos entre matrices y vectores de datos, así como facilitar diferentes métodos numéricos de análisis de datos. Estos programas suelen tener un modo de uso similar y comparten la misma sintaxis similar. Se los utiliza de forma análoga a un lenguaje de programación por “scripts”.
-Algunos ejemplso de ellos son:
+Algunos ejemplos de ellos son:
 
   - [MATLAB](https://www.mathworks.com/products/matlab.html) (privativo y pago) [**windows**,**linux**,**mac**]
   - [GNU/Octave](https://www.gnu.org/software/octave/) (Libre y gratuito) [**windows**,**linux**,**mac**]
@@ -31,7 +31,7 @@ Algunos ejemplso de ellos son:
   - [Python+librerías](https://www.scipy.org) (Libre y gratuito) [**windows**,**linux**,**mac**]
 
 
-En este instructivo se hará una introducción al uso de Python para reemplazar las herramientas de MATLAB/Octave de análisis y cálculo. Python es un lenguaje multiplataforma (windows, linux, mac, etc) y multipropósito (para cualquier tipo de progrmación) e interpretado (scripts). Para el uso específico que le vamos a dar, se vale de herramientas y librerías específucas.
+En este instructivo se hará una introducción al uso de Python para reemplazar las herramientas de MATLAB/Octave de análisis y cálculo. Python es un lenguaje multiplataforma (windows, linux, mac, etc) y multipropósito (para cualquier tipo de programación) e interpretado (scripts / no se compila). Para el uso específico que le vamos a dar requiere herramientas y librerías particulares.
 
   - Interfaz grafica [Spyder] (https://github.com/spyder-ide/spyder)
   - Línea de comandos [IPhython](https://ipython.org/)
@@ -39,11 +39,11 @@ En este instructivo se hará una introducción al uso de Python para reemplazar 
   - Gráficos con [Matplolib](https://matplotlib.org/)
   - Otras herramientas con [ScyPy ](https://www.scipy.org/)
 
-Todas estas librerías y software se pueden obtener en un solo paquete compacto instalando [Anaconda Python](https://www.anaconda.com/download). Se recomienda bajar e instalar la versión que trae Python 3.6 :
+Todas estas librerías y software se pueden obtener en un solo paquete compacto instalando [Anaconda Python](https://www.anaconda.com/download). Se recomienda bajar e instalar la versión que trae Python 3.7 (o mayor) :
 
 <center>
 <a href="https://www.anaconda.com/download" class="btn btn-primary btn-lg" role="button">
-Anaconda Linux
+Anaconda Python
 </a>
 </center>
 
@@ -52,22 +52,25 @@ La intención de este instructivo es introducir solo algunos ejemplos básicos q
 
 ## Interfaz, uso básico y tipos de datos
 
-El siguietne es un ejemplo de la interfáz gráfica de Spyder:
+El siguietne es un ejemplo de la interfaz gráfica de Spyder:
 
 ![spyder_ejemplo]({{ site.baseurl }}/img/spyder_ejemplo.png "spyder_ejemplo")
 
-Escencialmente vamos a usar dos pestañas: La de **edición de archivos** y la de **línea de comandos**. En la primera se escriben *scripts*, trozos de código a ejecutar. En la segunda, se puede ejecutar código como comandos individuales.
+Escencialmente vamos a usar dos pestañas: La de **edición de archivos** y la de **línea de comandos**. En la primera se escriben *scripts*: trozos de código a ejecutar. En la segunda se puede ejecutar código como comandos individuales.
 
 Para ejecutar código de un archivo se pueden usar las siguientes opciones:
   - La tecla `F5`, que ejecuta el archivo entero
-  - La tecla `F9` que ejectuda lo que esté seleccionado en la pantalla con el cursor
+  - La tecla `F9` que ejecuta lo que esté seleccionado en la pantalla con el cursor
   - Las teclas `Ctrl+Enter`, que ejecuta un bloque. Un bloque es lo que se encuentra entre una línea empezada por `#%% ` hasta la siguiente línea que empieza por `#%% `.
+
+Todas las líneas que comienzan con `#` son comentarios y *no se ejectuan*.
 
 Al utilizar librerías gráficas, los resultados suelen aparacer en una ventana extra o empotrados en la línea de comandos.
 
+
 ### Variables, operadores, tipos de datos y funciones
 
-Como en cualquier lenguaje de programación, Python utilizan *variables, operadores y funciones*. Las **variables** son formas de nombrar a la información que se guarda y procesa. Nos interesa en particular guardar números, vectores o matrices, pero tambien pueden ser texto u otros objetos.
+Como en cualquier lenguaje de programación Python utilizan *variables, operadores y funciones*. Las **variables** son formas de nombrar a la información que se guarda y procesa. Nos interesa en particular guardar números, vectores o matrices, pero tambien pueden ser texto u otros objetos.
 
 A las variables se les asignan valores con el operador “=”, que quiere decir “asignarle tal valor a esta variable” y no tiene nada que ver con el concepto de igualdad matemática.
 
@@ -89,7 +92,7 @@ print(a)
 
 El comando `print()` permite imprimir en en la línea de comandos un resultado o el contenido de una variable.
 
-Los **operadores** definen operaciones entre variables, como puede ser una suma o multiplicación, o asignar un valor.
+Los **operadores** definen operaciones sobre una variable o entre variables, como puede ser una suma o multiplicación, o asignar un valor.
 
 Operadores aritméticos:
 
@@ -144,7 +147,7 @@ Para hacer cálculos más sofisticados necesitamos de funciones y objetos mas co
 Diferentens conjuntos de funciones y objetos son agrupadas en *librerías* para realizar tareas específicas.
 En particular, la librería de `numpy` incluye herramientas para trabajar con vecotres y matrices.
 
-Para usar las librerías es necesario imporarlas con la instrucción `import`:
+Para usar las librerías es necesario importarlas con la instrucción `import`:
 ```python
 import numpy
 
@@ -167,7 +170,7 @@ print('b:',b)
 print('a*b:',  a*b  )
 ```
 
-Tambien se pueden importar sólo algunas fuciones en específico:
+Tambien se pueden importar sólo algunas fuciones en específico, de forma que se las use de manera directa por el nombre propio (sin excribir el nombre o alias de la librería):
 ```python
 from numpy import array,sin,cos,pi
 
@@ -182,8 +185,9 @@ print('c:', c )
 
 <div class="alert alert-info" role="alert" >
   <strong>Aviso:</strong> Notar que hay valores que debieran dar CERO y no son estrictamente CERO.
-  El cálculo numérico no es del todo preciso, maneja una precisión limitada por la cantidad de bits que usa
-  el procesador para procesar los datos.
+  El cálculo numérico no es <emph>"del todo preciso"</emph>, maneja una precisión limitada por la cantidad de bits que usa
+  el procesador para procesar los datos. Por ende, <strong>no trabaja con números REALES, sólo con un subconjunto de los
+  números RACIONALES</strong>.
 </div>
 
 Tambien se pueden cargar todas juntas las funciones sin usar el contenerdor `numpy` ni un alias como `np`:
@@ -197,9 +201,10 @@ c = sin( a )
 
 <div class="alert alert-info" role="alert" >
   <strong>Aviso:</strong> Este uso no es el más recomendable, especialemente porque diferentes librerías
-  pueden usar los mismos nombres para funciones diferentes, y si se las importan así se PISAN entre ellas.
-  De todos modos, para facilitar la lectura, vamos a usar esta forma de improtar Numpy en estes instructivo
-  y vamos a importar el resto de las librerías usando un alias.
+  pueden usar los mismos nombres para funciones diferentes y si se las importan de esta forma se PISAN entre ellas.
+  De todos modos, para facilitar la lectura, vamos a usar esta forma de importar Numpy en este instructivo
+  y vamos a importar el resto de las librerías usando un alias. Esta forma de uso facilita la transición 
+  para quienes llegan a Python conociendo Matlab.
 </div>
 
 El tipo de dato `array` nos permite crear vectores y matrices a partir de listas, con las que podemos
@@ -266,7 +271,7 @@ $$
     a_0 \cdot b_0 & a_1 \cdot b_1 & a_2 \cdot b_2
   \end{pmatrix}
 $$
-
+<hr>
 $$
   \begin{bmatrix}
     a_0 \cdot c_0 & a_1 \cdot c_0 & a_2 \cdot c_0\\
@@ -274,14 +279,14 @@ $$
     a_0 \cdot c_2 & a_1 \cdot c_2 & a_2 \cdot c_2
   \end{bmatrix}
 $$
-
+<hr>
 $$
 a + b =
 \begin{pmatrix}
   3 & 1 & 4
 \end{pmatrix}
 $$
-
+<hr>
 $$
 \begin{pmatrix}
   \frac{a_0}{b_0} & \frac{a_1}{b_1} & \frac{a_2}{b_2}
@@ -290,7 +295,7 @@ $$
   \frac{1}{2} & 0 & \frac{1}{3}
 \end{pmatrix}
 $$
-
+<hr>
 $$
   A^2 =
   \begin{bmatrix}
@@ -299,7 +304,7 @@ $$
     9 & 9 & 9
   \end{bmatrix}
 $$
-
+<hr>
 $$
   \begin{pmatrix}
     b_0^{b_0} & b_1^{b_1} & b_2^{b_2}
@@ -330,35 +335,35 @@ b**b
 $$
 a \cdot b = 5
 $$
-
+<hr>
 $$
 a \cdot c =
   \begin{bmatrix}
     -1
   \end{bmatrix}
 $$
-
+<hr>
 $$
 a \times b =
   \begin{bmatrix}
     -1 & -1 & 1
   \end{bmatrix}
 $$
-
+<hr>
 $$
 a \cdot A =
   \begin{bmatrix}
     4 & 4 & 4
   \end{bmatrix}
 $$
-
+<hr>
 $$
 A \cdot c =
   \begin{bmatrix}
     1 \\ 2 \\ 3
   \end{bmatrix}
 $$
-
+<hr>
 $$
 c^\text{T} \cdot  A^2 \cdot c =
   \begin{bmatrix}
@@ -369,13 +374,18 @@ $$
 ```python
 a.dot(b)
 
+
 a.dot(c)
+
 
 cross(a,b)
 
+
 a.dot(A)
 
+
 A.dot(c)
+
 
 c.T.dot(A**2).dot(c)
 ```
@@ -388,7 +398,8 @@ Pero el uso más habitual que le vamos a dar al tipo de dato `array` es guardar 
 generalmente resultados de un experimento o de una adquisición, aunque tambien pueden ser datos generados
 por nosotros mismos para *simular* el comportamiento de un modelo.
 
-Aquí algunos ejemplos de generación de datos y de aplicación de funciones.
+Aquí algunos ejemplos de generación de datos y de aplicación de funciones. Debajo de cada línea a ejecutar se muestra como comentario
+cual es el vector generado.
 
 ```python
 n = arange(10)   # Lista de los primeros 10 enteros
@@ -412,7 +423,8 @@ sin(x**2)/x              # Ojo con dividir por cero!
 #         0.07201305, -0.04536937, -0.16888007,  0.15570773])
 ```
 
-En este ejemplo, para el primer valor de x que es 0 hay una división por cero, que nos devuelve el elemento `nan`: **Not a Number**. Hay que tener cuidado con los cálculos realizados para evitar encontrarse con cuentas imposibles como esta.
+En este ejemplo, para el primer valor de x que es 0 hay una división por cero, que nos devuelve el elemento `nan`: **Not a Number**.
+Hay que tener cuidado con los cálculos realizados para evitar encontrarse con cuentas imposibles como esta.
 
 ## Gráficos con Matplotlib
 
@@ -476,7 +488,7 @@ plt.grid(b=True)
 ![grafico](01_02_dolar.png "grafico")
 
 ```python
-#%% Ejemplos de manipulación de vectores y mas gráficos
+#%% Ejemplos de manipulación de vectores y más gráficos
 
 dolar = array(dolar)
 
@@ -512,8 +524,10 @@ plt.tight_layout()
 
 Para saber donde estamos trabajando, en la línea de comando ejecutamos el comando `pwd`. Allí se guardaran los archivos y desde allí se cargaran datos si uno no especifica una ruta.
 Los comandos `ls` y `cd` permiten respectivamente listar los archivos de la carpeta de trabajo y cambiar de directorio.
+Desde Spyder tambien se puede ir directamente al directorio del archivo en edición con clic derecho sobre la pestaña del archivo y clic en 
+"Establecer directorio de trabajo". 
 
-Vemos como guardar datos.
+Veamos como guardar datos.
 
 - <a data-toggle="collapse" href="#ayuda_guardar_numpy" aria-expanded="false" aria-controls="ayuda_guardar_numpy">Guardar y cargar datos en el formato de NumPy<span class="caret"></span></a>
 
@@ -539,7 +553,7 @@ guardá el objeto llamando `varX` (lo que está después del igual)"
 Recordar que, si no se especifica la ruta completa, el archivo será creado en la carpeta de trabajo actual (que se puede averiguar ejecutando el comando `pwd`).
 
 ### Recuperar datos
-En Python, NumPy lee los archivos `.npz` con la instrucción `np.load` y los carga
+En Python, NumPy lee los archivos `.npz` con la instrucción `load` y los carga
 en un objeto nuevo con nombre.
 Por ejemplo, si se trata de recuperar el archivo guardado en el ejemplo anterior:
 
@@ -617,7 +631,7 @@ texto_mio
 
 <div id="ayuda_guardar_matlab" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
 
-Para guardar un archivo de forma que lo pueda leer Matlab u Octvave, es necesario
+Para guardar un archivo de forma que lo pueda leer Matlab u Octave, es necesario
 guardar los datos en un Diccionario y luego usar librerías de `scipy`.
 
 ```python
@@ -685,7 +699,7 @@ aceleracion = datos[2,:]
 
 ## Funciones útiles para hacer cálculos
 
-Las funciones `sum`, `mean` y `std` nos permiten obtener rápidamente la suma completa, el promedio y la desviación estándar de todos los elementos de un vector.
+Las funciones `sum`, `mean` y `std` (que importamos desde la librería `numpy`) nos permiten obtener rápidamente la suma completa, el promedio y la desviación estándar de todos los elementos de un vector.
 
 ```python
 datos = array([ 4,  0,  4,  2, 19, 15,  4,  8,  2,  9])
@@ -716,8 +730,8 @@ if not os.path.isfile('datos.txt'): # Si NO tengo el archivo de datos, lo bajo d
 
 datos = loadtxt('datos.txt', comments='#', delimiter=',')
 
-tiempo      = datos[:,0]
-velocidad   = datos[:,1]
+tiempo      = datos[:,0]  # Selecciono la primer columna, columna 0
+velocidad   = datos[:,1]  # Selecciono la segunda columna, columna 1
 vel_error   = datos[:,2]
 aceleracion = datos[:,3]
 
@@ -757,7 +771,7 @@ plt.tight_layout()
 
 
 ## Estructuras de programación
-No es el objetivo de este instructivo enseñar a programar. Pero vale la pena mencionar que existen todas las estructuras de programación clásicas en Python. Solo como ejemplo mencionaremos la del condicional (if/elif/else) y la de iteración (for). Por ejemplo, el condicional siguiente:
+No es el objetivo de este instructivo enseñar a programar. Pero vale la pena mencionar que existen todas las estructuras de programación clásicas en Python. Solo como ejemplo mencionaremos la del condicional (`if`/`elif`/`else`) y la de iteración (`for`). Por ejemplo, el condicional siguiente:
 
 ```python
 if CONDICION:
