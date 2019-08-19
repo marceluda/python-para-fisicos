@@ -155,16 +155,18 @@ datos_y = 0.25*datos_x**2  - 0.5 * datos_x + 4.2 + random.normal(size=len(datos_
 
 ###########################################################
 
-orden_del_polinomio = 2
+grado_del_polinomio = 2
 
 # Cantidad de parámetros
-P = orden_del_polinomio + 1
+P = grado_del_polinomio + 1
 
-# Nímero de datos
+# Número de datos
 N = len(datos_x)
+
+# Grados de libertas (Degrees Of Freedom)
 dof = N-P-1
 
-parametros , covarianza  = polyfit( datos_x, datos_y, orden_del_polinomio, cov=True)
+parametros , covarianza  = polyfit( datos_x, datos_y, grado_del_polinomio, cov=True)
 
 # Cauculamos coordenadas del modelo
 modelo_x    = linspace(0,12)
@@ -173,7 +175,7 @@ modelo_y    = polyval( parametros , modelo_x )
 # Predicción del modelo para los datos_x medidos
 prediccion_modelo = polyval(parametros,datos_x)
 
-
+# Calculos de cantidades estadísticas relevantes
 COV       = covarianza                                # Matriz de Covarianza
 SE        = sqrt(diag( COV  ))                        # Standar Error / Error estandar de los parámetros
 residuos  = datos_y - prediccion_modelo               # diferencia enrte el modelo y los datos
@@ -213,26 +215,6 @@ for i in range(P):
     print('parametro[{:3d}]: '.format(i) , parametros[i], ' ± ' , CI[i])
 
 
-plt.subplot(2,1,1)
-plt.plot( datos_x,  datos_y, 'o',              label='datos')
-plt.plot(modelo_x, modelo_y, '-', color='red', label='modelo')
-
-plt.legend()
-plt.grid(True,linestyle='--',color='lightgray')
-plt.xlabel('Eje X')
-plt.ylabel('Eje Y')
-
-plt.subplot(2,1,2)
-plt.plot( datos_x,  zeros(N),  '-', color='red', linewidth=2 )
-plt.plot( datos_x,  residuos, '.-',              label='residuos')
-
-#plt.legend()
-plt.grid(True,linestyle='--',color='lightgray')
-plt.xlabel('Eje X')
-plt.ylabel('residuos')
-
-plt.tight_layout()
-
 
 #R-squared     0.9709054284131089
 #R-sq_adjusted 0.9654501962405668
@@ -247,7 +229,31 @@ plt.tight_layout()
 #parametro[  2]:  6.685419630405925  ±  2.299536399113428
 
 
+plt.subplot(2,1,1)
+plt.plot( datos_x,  datos_y, 'o',              label='datos')
+plt.plot(modelo_x, modelo_y, '-', color='red', label='modelo')
+
+plt.legend()
+plt.grid(True,linestyle='--',color='lightgray')
+plt.xlabel('Eje X')
+plt.ylabel('Eje Y')
+plt.title('Ajuste polinomio de grado '+ str(grado_del_polinomio))
+
+plt.subplot(2,1,2)
+plt.plot( datos_x,  zeros(N),  '-', color='red', linewidth=2 )
+plt.plot( datos_x,  residuos, '.-',              label='residuos')
+
+#plt.legend()
+plt.grid(True,linestyle='--',color='lightgray')
+plt.xlabel('Eje X')
+plt.ylabel('residuos')
+
+plt.tight_layout()
+
+
+
 # plt.savefig('repo_tutos_ajustes_002.png')
+# plt.savefig('repo_tutos_ajustes_002_lineal.png')
 
 
 
