@@ -11,7 +11,7 @@ Este es el método más rápido para hacer un ajuste lineal
 
 El modelo a usar es:
 
-modelo_y = parametros[0] * modelo_x + parametros[1]
+`modelo_y = parametros[0] * modelo_x + parametros[1]`
 
 """
 from numpy import *
@@ -69,7 +69,7 @@ la coordenada Y y obtener tambien el error estandar de los parametros hallados
 
 El modelo a usar es:
 
-modelo_y = parametros[0] * modelo_x + parametros[1]
+`modelo_y = parametros[0] * modelo_x + parametros[1]`
 
 """
 from numpy import *
@@ -129,3 +129,125 @@ plt.xlabel('Eje X')
 plt.ylabel('Eje Y')
 
 # plt.savefig('repo_tutos_ajustes_001.png')
+
+
+#%%  Ejemplo de ajuste Polinomial con información estadística
+"""
+Ejemplo de un ajuste cuadrático (que puede ser polinomio de cualquier orden)
+y de cómo extraer a información estadística del ajuste más relevante
+  - Error Estandar
+  - Interalos de confianza
+  - r Coeficiente de Pearson
+  - Rsq Coeficiente de determinación
+
+"""
+from numpy import *
+import matplotlib.pyplot as plt
+
+from scipy.stats.distributions import  t,chi2
+
+
+# Fabricamos algunos datos de ejemplo #####################
+random.seed(0)
+
+datos_x = linspace(0,12,20)
+datos_y = 0.25*datos_x**2  - 0.5 * datos_x + 4.2 + random.normal(size=len(datos_x))*2
+
+###########################################################
+
+orden_del_polinomio = 2
+
+# Cantidad de parámetros
+P = orden_del_polinomio + 1
+
+# Nímero de datos
+N = len(datos_x)
+dof = N-P-1
+
+parametros , covarianza  = polyfit( datos_x, datos_y, orden_del_polinomio, cov=True)
+
+# Cauculamos coordenadas del modelo
+modelo_x    = linspace(0,12)
+modelo_y    = polyval( parametros , modelo_x )
+
+# Predicción del modelo para los datos_x medidos
+prediccion_modelo = polyval(parametros,datos_x)
+
+
+COV       = covarianza                                # Matriz de Covarianza
+SE        = sqrt(diag( COV  ))                        # Standar Error / Error estandar de los parámetros
+residuos  = datos_y - prediccion_modelo               # diferencia enrte el modelo y los datos
+
+SSE       = sum(( residuos )**2 )                     # Resitual Sum of Squares
+SST       = sum(( datos_y - mean(datos_y))**2)        # Total Sum of Squares
+
+# http://en.wikipedia.org/wiki/Coefficient_of_determination
+# Expresa el porcentaje de la varianza que logra explicar el modelos propuesto
+Rsq       =  1 - SSE/SST                               # Coeficiente de determinación
+Rsq_adj   = 1-(1-Rsq) * (N-1)/(N-P-1)                  # Coeficiente de determinación Ajustado   
+
+# https://en.wikipedia.org/wiki/Pearson_correlation_coefficient#In_least_squares_regression_analysis
+# Expresa la correlación que hay entre los datos y la predicción del modelo
+r_pearson = corrcoef( datos_y ,  prediccion_modelo )[0,1]
+
+chi2_test = sum( residuos**2 / prediccion_modelo )
+# p-value del ajuste
+p_val  = chi2(dof).cdf( chi2_test )
+
+
+alpha=0.05
+
+sT = t.ppf(1.0 - alpha/2.0, N - P ) # student T multiplier
+CI = sT * SE
+
+print('R-squared    ',Rsq)
+print('R-sq_adjusted',Rsq_adj)
+print('chi2_test    ',chi2_test)
+
+print('Error Estandard (SE):')
+for i in range(P):
+    print('parametro[{:3d}]: '.format(i) , parametros[i], ' ± ' , SE[i])
+
+print('Intervalo de confianza al '+str((1-alpha)*100)+'%:')
+for i in range(P):
+    print('parametro[{:3d}]: '.format(i) , parametros[i], ' ± ' , CI[i])
+
+
+plt.subplot(2,1,1)
+plt.plot( datos_x,  datos_y, 'o',              label='datos')
+plt.plot(modelo_x, modelo_y, '-', color='red', label='modelo')
+
+plt.legend()
+plt.grid(True,linestyle='--',color='lightgray')
+plt.xlabel('Eje X')
+plt.ylabel('Eje Y')
+
+plt.subplot(2,1,2)
+plt.plot( datos_x,  zeros(N),  '-', color='red', linewidth=2 )
+plt.plot( datos_x,  residuos, '.-',              label='residuos')
+
+#plt.legend()
+plt.grid(True,linestyle='--',color='lightgray')
+plt.xlabel('Eje X')
+plt.ylabel('residuos')
+
+plt.tight_layout()
+
+
+#R-squared     0.9709054284131089
+#R-sq_adjusted 0.9654501962405668
+#chi2_test     5.459402288696202
+#Error Estandard (SE):
+#parametro[  0]:  0.2592152018458697  ±  0.03386647721544368
+#parametro[  1]:  -0.8001200646799337  ±  0.42099552262737505
+#parametro[  2]:  6.685419630405925  ±  1.0899229407885471
+#Intervalo de confianza al 95.0%:
+#parametro[  0]:  0.2592152018458697  ±  0.07145202119547556
+#parametro[  1]:  -0.8001200646799337  ±  0.8882229118372572
+#parametro[  2]:  6.685419630405925  ±  2.299536399113428
+
+
+# plt.savefig('repo_tutos_ajustes_002.png')
+
+
+

@@ -60,11 +60,6 @@ mathjax: true
 
 
 
-
-<div class="alert alert-danger" role="alert" >
-  <strong>Aviso:</strong> La página está en construcción.
-</div>
-
 <div class="alert alert-info" role="alert" >
   <strong>Archivo:</strong> <a href="../{1:s}"> {1:s} </a>
 </div>

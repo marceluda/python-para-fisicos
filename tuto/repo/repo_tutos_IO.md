@@ -8,11 +8,6 @@ mathjax: true
 
 
 
-
-<div class="alert alert-danger" role="alert" >
-  <strong>Aviso:</strong> La página está en construcción.
-</div>
-
 <div class="alert alert-info" role="alert" >
   <strong>Archivo:</strong> <a href="../repo_tutos_IO.py"> repo_tutos_IO.py </a>
 </div>
