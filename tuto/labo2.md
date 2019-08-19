@@ -58,7 +58,7 @@ están los archivos de Python relacionados con los siguientes instructivos:
       [1.4](https://claudiovz.github.io/scipy-lecture-notes-ES/intro/matplotlib/matplotlib.html))
       serán de especial interés.
     - Es una guía pormenorizada.
-  - Matplotlib Gallery
+  - **Matplotlib Gallery**
     - [Ejemplos de cómo hacer graficos sofisticados](https://matplotlib.org/gallery.html)
       - Hacer clic en cada imagen para ver el código de ejemplo que la genera
     - [Ejemplos introductorios a Matplotlib](http://webs.ucm.es/info/aocg/python/modulos_cientificos/matplotlib/index.html)
@@ -66,7 +66,7 @@ están los archivos de Python relacionados con los siguientes instructivos:
       - Incluyen código para generar cáda imagen
     - [Galería completa de ejemplos de Matplotlib](https://matplotlib.org/gallery.html)
       - Hacer clic en cada imagen para ver el código de ejemplo que la genera
-  - Tutorial de Python y Numpy para principiantes
+  - **Tutorial de Python y Numpy para principiantes**
     - En inglés
     - [http://cs231n.github.io/python-numpy-tutorial/](http://cs231n.github.io/python-numpy-tutorial/)
 

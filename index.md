@@ -12,20 +12,21 @@ física.
 
 
 <center>
-<a href="{{ site.url }}" class="btn btn-primary btn-lg" role="button">
+<p> <a href="{{ site.baseurl }}/tuto/labo2/" class="btn btn-primary btn-lg" role="button">
 Python para Labos iniciales
-</a>
+</a> </p>
 </center>
 
 <center>
-<a href="{{ site.baseurl }}" class="btn btn-primary btn-lg" role="button">
+<p> <a href="{{ site.baseurl }}/tuto/repo/" class="btn btn-primary btn-lg" role="button">
 Repositorio de ejemplos rápidos
-</a>
+</a></p>
 </center>
 
 <center>
-<a href="{{ page.url }}" class="btn btn-primary btn-lg" role="button">
-Análisis de datos (en construcción)</a>
+<p> <a href="{{ site.baseurl }}/tuto/analisis/" class="btn btn-primary btn-lg" role="button">
+Análisis de datos (en construcción)
+</a></p>
 </center>
 
 
