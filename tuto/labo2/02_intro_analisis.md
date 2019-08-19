@@ -9,11 +9,6 @@ navbar: labo2
 
 {% include page_navbar.html %}
 
-<div class="alert alert-danger" role="alert" >
-  <strong>Aviso:</strong> La página está en construcción.
-</div>
-
-
 ## Introducción al análisis de datos
 
 En física **analizamos los fenómenos** proponiendo **modelos matemáticos** que pueden describirlos cualitativa y cuantitativamente para hacer **predicciones** luego. El fenómeno es descripto recolectando datos de **diferentes variables de interés** a las que después se le buscan relaciones. La mayoría de **las leyes físicas son relaciones funcionales entre variables de un sistema**. Por ende, al desarrollar modelos buscamos encontrar funciones que vinculen las diferentes variables y que sean consistentes con los datos que relevamos.
@@ -288,41 +283,50 @@ $r^2$ es una estimación buena sobre **“cuan bien son explicados los datos por
 
 El método de cuadrados mínimos es uno de los más usados para ajustar los parámetros de una función que intenta modelar un conjunto de datos. El método consiste en lo siguiente:
 
-Se tienen N pares de valores de mediciones asociadas a un fenómeno: $x_i$ e $y_i$ . Se tiene una función $F$ que depende de alguna cantidad de parámetros (propongamos por ejemplo que depende de A y B) y se quieren encontrar los parámetros A y B tal que los valores
-$f_i = F_{A,B}(x_i)$
-aproximen *"lo mejor posible"* a $y_i$.
-El método de cuadrados mínimos propone calcular la siguiente cantidad, denominada chi-cuadrado, a partir de los residuos:
+Se tienen N pares de valores de mediciones asociadas a un fenómeno: $x_i$ e $y_i$ . 
+Se tiene una función $F$ que depende de alguna cantidad de parámetros (propongamos por ejemplo que depende de A y B) 
+y se quieren encontrar los parámetros A y B tal que los valores
+$f_i = F_{A,B}(x_i)$ aproximen *"lo mejor posible"* a $y_i$.
+El método de cuadrados mínimos propone minimizar la cantidad $s^2$, que consiste en la suma cuadrática de los residuos:
 
 $$
 res_i = y_i-f_i
 $$
 
 $$
-\chi^2(A,B) =
+s^2(A,B) =
 \sum_i {res_i\,}^2 =
 \sum_i (y_i-f_i)^2 =
 \sum_i \left[ y_i-F_{A,B}(x_i) \right]^2
 $$
 
-Osea, minimizar la suma cuadrática de los “residuos”. **Eso reduce el problema de “buscar los parámetros de un modelo que ajuste los datos” a un problema de minimización**. Hay que notar que la función
-$\chi^2$
-se construye a partir de los N datos medidos pero solo tiene como variables a los parámetros (es este caso, A  y B). Por ejemplo, si el modelo es una recta
-$F_{A,B}(x)\,=\, A \cdot x + B$
-la función $\chi^2$ sera un paraboloide en 3D y se deberá hallar las coordenadas del mínimo.
+Osea, minimizar la suma cuadrática de los “residuos”. **Eso reduce el problema de “buscar los parámetros de un modelo que ajuste los datos” 
+a un problema de minimización**. Hay que notar que la función $s^2$
+se construye a partir de los N datos medidos pero sólo tiene como variables a los parámetros (es este caso, $A$  y $B$). 
+Por ejemplo, si el modelo es una recta $F_{A,B}(x)\,=\, A \cdot x + B$
+la función $s^2$ será uan combinación de térmicos con $A$, $B$, $A^2$ y $B^2$ (un paraboloide en 3D) y se deberá hallar las coordenadas del mínimo.
 
 ![grafico](02_06_chi2.png "grafico")
 
 
-Para el caso lineal existen métodos muy eficientes para hallar los  parámetros que corresponden al mínimo global. Pero cuando se utilizan modelos no lineales la función $\chi^2$ puede resultar mas compleja. Si se usan dos parámetros, $\chi^2$ puede ser una superficie con varios mínimos locales y no es trivial hallar el mínimo global.
-No nos vamos a detener a explicar como funcionan los diferentes algoritmos de minimización, tema que se trata extensamente en la materia Elementos de calculo numérico. Simplemente es necesario ser conscientes de como funciona el método. En general, se parte de un par de parámetros iniciales y se recorre el camino de mayor pendiente hacia el mínimo. Encontrar el mínimo global dependerá de la elección de esos parámetros iniciales.
+Para el caso lineal existen métodos muy eficientes para hallar los  parámetros que corresponden al mínimo global. 
+Pero cuando se utilizan modelos no lineales la función $s^2$ puede resultar más compleja. 
+Si se usan dos o más parámetros, $s^2$ puede ser una superficie con varios mínimos locales y no es trivial hallar el mínimo global.
+No nos vamos a detener a explicar cómo funcionan los diferentes algoritmos de minimización, tema que se trata extensamente en la materia 
+"Elementos de calculo numérico". Simplemente es necesario ser conscientes de cómo funciona el método. 
+Se parte de un conjunto de parámetros iniciales y se recorre el camino de mayor pendiente hacia el mínimo. 
+En los casos de ajustes no lineales, encontrar el mínimo global dependerá de la elección de esos parámetros iniciales.
 
-El valor de $\chi^2$ puede usarse para estimar la bondad de un ajuste. Si se comparan varios modelos sobre un mismo conjunto de datos, el que tenga menor $\chi^2$ será, en principio, un mejor ajuste. Sin embargo, $\chi^2$ no puede usarse para saber si un modelo en si mismo es un buen modelo, pues su valor absoluto no tiene un significado intrínseco.
-Si se quiere tener en cuenta que algunos datos fueron medidos con mayor precisión que otros se puede construir la función *(wighted chi-squared)*:
+El valor de $s^2$ puede usarse para estimar la bondad de un ajuste. Si se comparan varios modelos sobre un mismo conjunto de datos, 
+el que tenga menor $s^2$ será, en principio, un mejor ajuste. Sin embargo, $s^2$ no puede usarse para saber si un modelo en sí mismo es un buen modelo, 
+pues su valor absoluto no tiene un significado intrínseco.
+
+Si se quiere tener en cuenta que algunos datos fueron medidos con mayor precisión que otros se puede construir la función *(weighted s^2)*:
 
 
 $$
 \large
-{\chi_{w}}^2(A,B) =
+{s_{w}}^2(A,B) =
 \sum_i \frac{(y_i-f_i)^2}{ {\delta y_i}^2 }
 $$
 

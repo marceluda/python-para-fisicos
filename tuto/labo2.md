@@ -1,6 +1,6 @@
 ---
-title: Instructivo Labo2
-description: Análisis de datos en Python
+title: IPython para Labos
+description: Introducción a Python para laboratorios iniciales
 layout: page
 navbar: labo2
 ---

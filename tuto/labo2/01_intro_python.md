@@ -9,9 +9,7 @@ navbar: labo2
 
 {% include page_navbar.html %}
 
-<div class="alert alert-danger" role="alert" >
-  <strong>Aviso:</strong> La página está en construcción.
-</div>
+
 
 
 
