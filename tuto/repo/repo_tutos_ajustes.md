@@ -236,6 +236,11 @@ Rsq_adj   = 1-(1-Rsq) * (N-1)/(N-P-1)                  # Coeficiente de determin
 # Expresa la correlación que hay entre los datos y la predicción del modelo
 r_pearson = corrcoef( datos_y ,  prediccion_modelo )[0,1]
 
+# Reduced chi squared
+# https://en.wikipedia.org/wiki/Reduced_chi-squared_statistic
+chi2_red  = sum( residuos**2 )/(N-P)
+
+# Chi squared test
 chi2_test = sum( residuos**2 / prediccion_modelo )
 # p-value del ajuste
 p_val  = chi2(dof).cdf( chi2_test )
@@ -249,28 +254,33 @@ CI = sT * SE
 print('R-squared    ',Rsq)
 print('R-sq_adjusted',Rsq_adj)
 print('chi2_test    ',chi2_test)
-
+print('r-pearson    ',r_pearson)
+print('p-value      ',p_val)
+print('')
 print('Error Estandard (SE):')
 for i in range(P):
     print('parametro[{:3d}]: '.format(i) , parametros[i], ' ± ' , SE[i])
-
+print('')
 print('Intervalo de confianza al '+str((1-alpha)*100)+'%:')
 for i in range(P):
     print('parametro[{:3d}]: '.format(i) , parametros[i], ' ± ' , CI[i])
 
 
-
-#R-squared     0.9709054284131089
-#R-sq_adjusted 0.9654501962405668
-#chi2_test     5.459402288696202
-#Error Estandard (SE):
-#parametro[  0]:  0.2592152018458697  ±  0.03386647721544368
-#parametro[  1]:  -0.8001200646799337  ±  0.42099552262737505
-#parametro[  2]:  6.685419630405925  ±  1.0899229407885471
-#Intervalo de confianza al 95.0%:
-#parametro[  0]:  0.2592152018458697  ±  0.07145202119547556
-#parametro[  1]:  -0.8001200646799337  ±  0.8882229118372572
-#parametro[  2]:  6.685419630405925  ±  2.299536399113428
+# R-squared     0.9709054284131089
+# R-sq_adjusted 0.9654501962405668
+# chi2_test     5.459402288696202
+# r-pearson     0.9853453345975252
+# p-value       0.00704534668870643
+#
+# Error Estandard (SE):
+# parametro[  0]:  0.2592152018458697  ±  0.03181201602868888
+# parametro[  1]:  -0.8001200646799337  ±  0.39545643406102493
+# parametro[  2]:  6.685419630405925  ±  1.023804331399124
+#
+# Intervalo de confianza al 95.0%:
+# parametro[  0]:  0.2592152018458697  ±  0.06711748697960664
+# parametro[  1]:  -0.8001200646799337  ±  0.8343401449363104
+# parametro[  2]:  6.685419630405925  ±  2.160038327038956
 
 
 plt.subplot(2,1,1)
