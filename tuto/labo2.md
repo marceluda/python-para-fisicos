@@ -9,9 +9,9 @@ navbar: labo2
 {% include page_navbar.html %}
 
 
-Estas secciones están dedicadas a la introducción de las herramientas que incluye Python 
-para realizar las tareas más habituales en un laboratorio: Cálculo, asálisis, ajustes de modelos,
-generación de gráficos, adquisición de datos. El instructivo incluye también la introducción 
+Estas secciones están dedicadas a la introducción de las herramientas que incluye Python
+para realizar las tareas más habituales en un laboratorio: Cálculo, análisis, ajustes de modelos,
+generación de gráficos, adquisición de datos. El instructivo incluye también la introducción
 teórica a algunos de los conceptos utilizados.
 
 <div class="alert alert-info" role="alert" >
@@ -45,7 +45,10 @@ están los archivos de Python relacionados con los siguientes instructivos:
     1. Transformada de Fourier
     2. Filtros
     3. Análisis gráfico
-    4. Adquisición remota
+  - [Instrumentación y adquisición remota](04_instrumentacion)
+    1. Introducción a instrumetnación
+    2. Control remoto de instrumentos
+    3. Adquisición
 
 ### Recursos en la Web:
   - [De Matlab a Python](https://marceluda.github.io/python-para-fisicos/intro/de-matlab-a-python/)

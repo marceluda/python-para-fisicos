@@ -78,6 +78,8 @@ pagenav:
       url: tuto/labo2/02_intro_analisis
     - title: Herramientas útiles
       url: tuto/labo2/03_herramientas
+    - title: Instrumentación
+      url: tuto/labo2/04_instrumentacion
   repo:
     - title: Índice
       url: repo/repo

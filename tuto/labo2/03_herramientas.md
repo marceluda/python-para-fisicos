@@ -259,9 +259,9 @@ plt.tight_layout()
 
 ## Análisis gráfico
 
-
-## Adquisición remota
-
+<div class="alert alert-danger" role="alert" >
+  <strong>Contenido pendiente</strong>
+</div>
 
 
 {% include page_navbar.html up=1 %}

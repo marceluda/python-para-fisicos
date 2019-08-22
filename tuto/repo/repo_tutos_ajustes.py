@@ -153,6 +153,10 @@ random.seed(0)
 datos_x = linspace(0,12,20)
 datos_y = 0.25*datos_x**2  - 0.5 * datos_x + 4.2 + random.normal(size=len(datos_x))*2
 
+#datos_x = arange(15)
+#datos_y = 0.5*datos_x**2 + sin(datos_x)
+
+
 ###########################################################
 
 grado_del_polinomio = 2

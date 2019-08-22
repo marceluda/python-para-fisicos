@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1024"
+   height="768"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="visa.svg"
+   inkscape:export-filename="/home/lolo/Dropbox/Doctorado/github/python-para-fisicos_pages/tuto/labo2/04_instrumentacion/visa.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="593.08415"
+     inkscape:cy="380.85178"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1600"
+     inkscape:window-height="834"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-284.36218)">
+    <g
+       id="g3301">
+      <flowRoot
+         transform="translate(-280,387.21933)"
+         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:xkcd;-inkscape-font-specification:xkcd"
+         id="flowRoot3048"
+         xml:space="preserve"><flowRegion
+           id="flowRegion3050"><rect
+             y="40.857143"
+             x="322.85715"
+             height="77.14286"
+             width="1021.4286"
+             id="rect3052" /></flowRegion><flowPara
+           style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans"
+           id="flowPara3054"><flowSpan
+   id="flowSpan3056"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">VISA</flowSpan>:  Virtual Instrument Software Architecture</flowPara></flowRoot>      <rect
+         y="415.87808"
+         x="26.754181"
+         height="74.285713"
+         width="985.71429"
+         id="rect3058"
+         style="fill:none;stroke:#000000" />
+    </g>
+    <g
+       id="g3309">
+      <flowRoot
+         transform="translate(-162.54883,267.21933)"
+         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:xkcd;-inkscape-font-specification:xkcd"
+         id="flowRoot3048-6"
+         xml:space="preserve"><flowRegion
+           id="flowRegion3050-7"><rect
+             y="40.857143"
+             x="322.85715"
+             height="77.14286"
+             width="1021.4286"
+             id="rect3052-5" /></flowRegion><flowPara
+           style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans"
+           id="flowPara3054-3">Computadora | programa / software</flowPara></flowRoot>      <rect
+         y="295.87808"
+         x="26.754181"
+         height="74.285713"
+         width="985.71429"
+         id="rect3058-6"
+         style="fill:none;stroke:#000000" />
+    </g>
+    <g
+       id="g3316"
+       transform="translate(0,-24)">
+      <image
+         width="210.0979"
+         height="171.82579"
+         xlink:href="file:///home/lolo/Dropbox/Doctorado/github/python-para-fisicos_pages/tuto/labo2/04_instrumentacion/svg/ethernet.png"
+         id="image3012"
+         x="506.38898"
+         y="577.87781" />
+      <image
+         width="218.83015"
+         height="124.289"
+         xlink:href="file:///home/lolo/Dropbox/Doctorado/github/python-para-fisicos_pages/tuto/labo2/04_instrumentacion/svg/GPIB.png"
+         id="image3023"
+         x="751.18304"
+         y="601.64624" />
+      <image
+         width="211.49507"
+         height="164.63199"
+         xlink:href="file:///home/lolo/Dropbox/Doctorado/github/python-para-fisicos_pages/tuto/labo2/04_instrumentacion/svg/serie.png"
+         id="image3034"
+         x="267.00897"
+         y="581.47473" />
+      <image
+         width="201.30743"
+         height="176.85713"
+         xlink:href="file:///home/lolo/Dropbox/Doctorado/github/python-para-fisicos_pages/tuto/labo2/04_instrumentacion/svg/usb.png"
+         id="image3045"
+         x="41.571411"
+         y="575.36212" />
+      <flowRoot
+         transform="translate(-222.00534,712.27486)"
+         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:xkcd;-inkscape-font-specification:xkcd"
+         id="flowRoot3048-2"
+         xml:space="preserve"><flowRegion
+           id="flowRegion3050-9"><rect
+             y="40.857143"
+             x="322.85715"
+             height="77.14286"
+             width="1021.4286"
+             id="rect3052-1" /></flowRegion><flowPara
+           style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans"
+           id="flowPara3054-2">USB</flowPara></flowRoot>      <flowRoot
+         transform="translate(-200.03841,712.27486)"
+         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:xkcd;-inkscape-font-specification:xkcd"
+         id="flowRoot3048-2-0"
+         xml:space="preserve"><flowRegion
+           id="flowRegion3050-9-9"><rect
+             style="text-align:center;text-anchor:middle"
+             y="40.857143"
+             x="322.85715"
+             height="234.28572"
+             width="500.00006"
+             id="rect3052-1-3" /></flowRegion><flowPara
+           style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Sans;-inkscape-font-specification:Sans"
+           id="flowPara3054-2-6">Serie</flowPara><flowPara
+           id="flowPara3240"
+           style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Sans;-inkscape-font-specification:Sans">RS-232</flowPara></flowRoot>      <flowRoot
+         transform="translate(108.54144,712.27486)"
+         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:xkcd;-inkscape-font-specification:xkcd"
+         id="flowRoot3048-2-0-0"
+         xml:space="preserve"><flowRegion
+           id="flowRegion3050-9-9-6"><rect
+             style="text-align:center;text-anchor:middle"
+             y="40.857143"
+             x="322.85715"
+             height="180"
+             width="357.14291"
+             id="rect3052-1-3-2" /></flowRegion><flowPara
+           style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Sans;-inkscape-font-specification:Sans"
+           id="flowPara3054-2-6-6">Ethernet</flowPara><flowPara
+           id="flowPara3238"
+           style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Sans;-inkscape-font-specification:Sans">RJ-45</flowPara></flowRoot>      <flowRoot
+         transform="translate(490.85007,712.27486)"
+         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:xkcd;-inkscape-font-specification:xkcd"
+         id="flowRoot3048-2-0-0-1"
+         xml:space="preserve"><flowRegion
+           id="flowRegion3050-9-9-6-8"><rect
+             y="40.857143"
+             x="322.85715"
+             height="77.14286"
+             width="1021.4286"
+             id="rect3052-1-3-2-7" /></flowRegion><flowPara
+           style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans"
+           id="flowPara3054-2-6-6-9">GPIB</flowPara></flowRoot>    </g>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3048-20"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:xkcd;-inkscape-font-specification:xkcd"
+       transform="translate(-280,835.21933)"><flowRegion
+         id="flowRegion3050-2"><rect
+           id="rect3052-3"
+           width="1021.4286"
+           height="77.14286"
+           x="322.85715"
+           y="40.857143" /></flowRegion><flowPara
+         id="flowPara3054-7"
+         style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans">Instrumentos</flowPara></flowRoot>    <rect
+       style="fill:none;stroke:#000000;stroke-width:1"
+       id="rect3058-9"
+       width="985.71429"
+       height="174.83539"
+       x="26.754181"
+       y="863.87805" />
+    <g
+       id="g3297"
+       transform="matrix(0.59721596,0,0,0.59721596,-430.38781,569.33342)">
+      <image
+         width="554.52588"
+         height="265.84015"
+         xlink:href="file:///home/lolo/Dropbox/Doctorado/github/python-para-fisicos_pages/tuto/labo2/04_instrumentacion/svg/AFG1022.png"
+         id="image3283"
+         x="1248.7911"
+         y="510.0372" />
+      <image
+         width="524"
+         height="265"
+         xlink:href="file:///home/lolo/Dropbox/Doctorado/github/python-para-fisicos_pages/tuto/labo2/04_instrumentacion/svg/TBS1052b.png"
+         id="image3294"
+         x="1847.1475"
+         y="510.45728" />
+    </g>
+  </g>
+</svg>
