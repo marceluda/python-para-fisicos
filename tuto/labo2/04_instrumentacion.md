@@ -99,15 +99,95 @@ Nos especifica:
 </div>
 
 Luego, debemos conocer cuales son los canales de comunicación con ese instrumental.
-Existe una API masomenos estándar en la industria llamada [VISA](https://en.wikipedia.org/wiki/Virtual_instrument_software_architecture)
+Existe una API estándar en la industria llamada [VISA](https://en.wikipedia.org/wiki/Virtual_instrument_software_architecture)
 (Virtual instrument software architecture), que permite unificar en una sola
 interfaz las diferentes tecnologías de comunicación.
 
 ![grafico](visa.png "VISA")
 
+Cada sistema operativo y software o lenguaje de programación tiene alguna
+implementación propia de VISA (a veces debe ser instalada). En el caso de
+`python` hay que instalar `pyvisa`.
+
+La mayoría de los instrumentos soporta comandos por
+[SCPI](https://en.wikipedia.org/wiki/Standard_Commands_for_Programmable_Instruments),
+que es una sintaxis estándar para escribir instrucciones para instrumentos.
+Las instrucciones consisten en palabras y valores escritos en texto plano, cada
+una asociada a los diferentes valores que puede medir un instrumento o parámetros de
+configuración necesarios para su operación.
+
+<div class="alert alert-info" role="alert" >
+  <strong>Importante:</strong> Cada instrumento tiene su propio conjunto de
+  instrucciones. Para saber cómo operarlo debemos leer el Manual de Programación
+  específico de cada uno.
+</div>
+
+Por ejemplo, para adquirir el vector de números que representan el voltaje medido por
+el canal 1 de un osciloscopio se usan estos dos comandos:
+
+  1. Seleccionar el canal 1
+
+  `'DATA:SOURCE CH%d'`
+
+  2. leer los datos
+
+  `CURV?`
+
+Para establecer la frecuencia de la función de onda de un generador de funciones
+en `50 Hz` usamos este comando:
+
+  `FREQ 50`
+
+Así, en nuestro lenguaje de programación, deberemos crear textos con estas
+instrucciones y enviarlas a cada instrumento mediante la API de VISA.
+
+## Control remoto en Python
+
+Hay varios ejemplos de adquisición remota y control ya armados.
+Algunos están en repositorios compartidos, como los del profesor
+[Hernan Grecco en GitHub](https://github.com/hgrecco/labosdf/tree/master/software/python/instrumentos).
+
+Veamos algun ejemplo:
+
+```python
+from matplotlib import pyplot as plt
+from numpy import *
+import visa
+
+print(__doc__)
+
+# Cargamos el Resource Manager. El manejador de recursos VISA
+rm = visa.ResourceManager()
+
+# Informamos la dirección de acceso al osciloscopio (en este caso, por USB)
+osci = rm.open_resource('USB0::0x0699::0x0363::C065089::INSTR')
+
+# Con el método 'query' podemos enviar instrucciones QUE TIENEN RESPUESTA
+respuesta = osci.query('*IDN?')
+
+# La instruccion '*IDN?' nos permite conocer a que instrumento nos conectamos
+print(respuesta)
 
 
-## Adquisición
+# Le pido algunos parametros de la pantalla, para poder escalear adecuadamente
+xze, xin, yze, ymu, yoff = osci.query_ascii_values('WFMPRE:XZE?;XIN?;YZE?;YMU?;YOFF?;', separator=';')
+
+# Con el método 'write' enviamos instrucciones QUE NO TIENEN RESPUESTA
+# Modo de transmisión: Binario
+osci.write('DAT:ENC RPB')
+osci.write('DAT:WID 1')
+
+# Adquiere los datos del canal 1 y los devuelve en un array de numpy
+data = osci.query_binary_values('CURV?', datatype='B', container=np.array)
+
+tiempo = xze + np.arange(len(data)) * xin
+
+plt.plot(tiempo, data)
+plt.xlabel('Tiempo [s]')
+plt.ylabel('Voltaje [V]')
+```
+
+## Ejemplo de adquisición y control
 
 
 
