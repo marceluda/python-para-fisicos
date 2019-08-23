@@ -1,0 +1,113 @@
+*CLS
+EMEMory{,MIN|MAX}
+EMEMory[,<points>|MINimum|MAXimum]
+*IDN?
+MMEMory:CATalog?
+MMEMory:CDIRectory
+MMEMory:CDIRectory?
+MMEMory:CDIRectory [<directory_name>]
+MMEMory:DELete
+*OPT?
+OUTPut[1|2]:IMPedance
+OUTPut[1|2]:IMPedance? {MINimum|MAXimum}
+OUTPut[1|2][:STATe]?
+OUTPut[1|2][:STATe] {ON|OFF|<NR1>}
+*RCL
+*RST
+*SAV
+[SOURce[1|2]]:AM[:DEPTh]
+[SOURce[1|2]]:AM:INTernal:FREQuency {<frequency>|MINimum|MAXimum}
+[SOURce[1|2]]:AM:INTernal:FREQuency? [MINimum|MAXimum]
+[SOURce[1|2]]:AM:INTernal:FUNCtion {SINusoid|SQUare|RAMP|PRNoise|USER<NR1>|EMEMory|EFILe}
+[SOURce[1|2]]:AM:INTernal:FUNCtion?
+[SOURce[1|2]]:AM:SOURce [INTernal|EXTernal]
+[SOURce[1|2]]:AM:STATe?
+[SOURce[1|2]]:AM:STATe {ON|OFF|<NR1>}
+[SOURce[1|2]]:ASKey:INTernal:RATE
+[SOURce[1|2]]:ASKey:SOURce?
+[SOURce[1|2]]:ASKey:SOURce [INTernal|EXTernal]
+[SOURce[1|2]]:ASKey:STATe?
+[SOURce[1|2]]:ASKey:STATe {ON|OFF|<NR1>}
+[SOURce[1|2]]:BURSt:MODE?
+[SOURce[1|2]]:BURSt:MODE {TRIGgered|GATed}
+[SOURce[1|2]]:BURSt:NCYCles {<cycles>|INFinity|MINimum|MAXimum}
+[SOURce[1|2]]:BURSt:NCYCles? {MINimum|MAXimum}
+[SOURce[1|2]]:BURSt:SOURce?
+[SOURce[1|2]]:BURSt:SOURce [TIMer|MANual|EXTernal]
+[SOURce[1|2]]:BURSt:STATe?
+[SOURce[1|2]]:BURSt:STATe {ON|OFF|<NR1>}
+[SOURce[1|2]]:FM[:DEViation]
+[SOURce[1|2]]:FM:INTernal:FREQuency {<frequency>|MINimum|MAXimum}
+[SOURce[1|2]]:FM:INTernal:FREQuency? [MINimum|MAXimum]
+[SOURce[1|2]]:FM:INTernal:FUNCtion {SINusoid|SQUare|RAMP|PRNoise|USER<NR1>|EMEMory|EFILe}
+[SOURce[1|2]]:FM:SOURce?
+[SOURce[1|2]]:FM:SOURce [INTernal|EXTernal]
+[SOURce[1|2]]:FM:STATe?
+[SOURce[1|2]]:FM:STATe {ON|OFF|<NR1>}
+[SOURce[1|2]]:FREQuency:CENTer {<frequency>|MINimum|MAXimum}
+[SOURce[1|2]]:FREQuency:CONCurrent {ON|OFF|<NR1>}
+[SOURce[1|2]]:FREQuency:CONCurrent?
+[SOURce[1|2]]:FREQuency[:CW|:FIXed]
+[SOURce[1|2]]:FREQuency:SPAN {<frequency>|MINimum|MAXimum}
+[SOURce[1|2]]:FREQuency:STARt {<frequency>|MINimum|MAXimum}
+[SOURce[1|2]]:FREQuency:STOP {<frequency>|MINimum|MAXimum}
+[SOURce[1|2]]:FSKey[:FREQuency]
+[SOURce[1|2]]:FSKey:INTernal:RATE
+[SOURce[1|2]]:FSKey:SOURce?
+[SOURce[1|2]]:FSKey:SOURce [INTernal|EXTernal]
+[SOURce[1|2]]:FSKey:STATe
+[SOURce[1|2]]:FUNCtion:EFILe?
+[SOURce[1|2]]:FUNCtion:EFILe <file_name>
+[SOURce[1|2]]:FUNCtion[:SHAPe] {SINusoid|SQUare|PULSe|RAMP|PRNoise|<Built_in>|USER<NR1>|EMEMory|EFILe}
+[SOURce[1|2]]:FUNCtion[:SHAPe]?
+[SOURce[1|2]]:PHASe[:ADJust]
+[SOURce[1|2]]:PHASe[:ADJust]? {MINimum|MAXimum}
+[SOURce[1|2]]:PHASe:INITiate
+[SOURce[1|2]]:PM[:DEViation]
+[SOURce[1|2]]:PM[:DEViation]? [MINimum|MAXimum]
+[SOURce[1|2]]:PM:INTernal:FREQuency {<frequency>|MINimum|MAXimum}
+[SOURce[1|2]]:PM:INTernal:FREQuency? [MINimum|MAXimum]
+[SOURce[1|2]]:PM:INTernal:FUNCtion {SINusoid|SQUare|RAMP|PRNoise|USER<NR1>|EMEMory|EFILe}
+[SOURce[1|2]]:PM:SOURce?
+[SOURce[1|2]]:PM:SOURce [INTernal|EXTernal]
+[SOURce[1|2]]:PM:STATe?
+[SOURce[1|2]]:PM:STATe {ON|OFF|<NR1>}
+[SOURce[1|2]]:PSKey[:DEViation]
+[SOURce[1|2]]:PSKey[:DEViation]?
+[SOURce[1|2]]:PSKey:INTernal:RATE
+[SOURce[1|2]]:PSKey:SOURce?
+[SOURce[1|2]]:PSKey:SOURce [INTernal|EXTernal]
+[SOURce[1|2]]:PSKey:STATe?
+[SOURce[1|2]]:PSKey:STATe {ON|OFF|<NR1>}
+[SOURce[1|2]]:PULSe:DCYCle
+[SOURce[1|2]]:PULSe:DCYCle? [MINimum|MAXimum]
+[SOURce[1|2]]:PWM[:DEViation]:DCYCle
+[SOURce[1|2]]:PWM[:DEViation]:DCYCle?
+[SOURce[1|2]]:PWM:INTernal:FREQuency {<frequency>|MINimum|MAXimum}
+[SOURce[1|2]]:PWM:INTernal:FREQuency?
+[SOURce[1|2]]:PWM:INTernal:FUNCtion {SINusoid|SQUare|RAMP|PRNoise|USER<NR1>|EMEMory|EFILe}
+[SOURce[1|2]]:PWM:INTernal:FUNCtion:EFILe
+[SOURce[1|2]]:PWM:SOURce?
+[SOURce[1|2]]:PWM:SOURce [INTernal|EXTernal]
+[SOURce[1|2]]:PWM:STATe?
+[SOURce[1|2]]:PWM:STATe {ON|OFF|<NR1>}
+[SOURce[1|2]]:SWEep:SOURce?
+[SOURce[1|2]]:SWEep:SOURce [TIMer|MANual|EXTernal]
+[SOURce[1|2]]:SWEep:SPACing
+[SOURce[1|2]]:SWEep:SPACing?
+[SOURce[1|2]]:SWEep:TIME
+[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate][:AMPLitude]
+[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate][:AMPLitude]?
+[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate]:OFFSet
+[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate]:OFFSet?
+SYSTem:ERRor[:NEXT]?
+TRACe|DATA:CATalog?
+TRACe|DATA:COPY EMEMory,{USER<NR1>}
+TRACe|DATA:COPY <trace_name>,EMEMory
+TRACe|DATA[:DATA]
+TRACe|DATA[:DATA]:VALue? EMEMory,<point>
+TRACe|DATA[:DATA]:VALue EMEMory,<point>,<data>
+TRACe|DATA:POINts
+TRACe|DATA:POINts?
+*TRG
+*WAI

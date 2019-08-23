@@ -1,0 +1,515 @@
+ACQuire?
+ACQuire:MODe?
+ACQuire:MODe { SAMple | PEAKdetect | AVErage }
+ACQuire:NUMACq?
+ACQuire:NUMAVg?
+ACQuire:NUMAVg <NR1>
+ACQuire:STATE?
+ACQuire:STATE { OFF | ON | RUN | STOP | <NR1> }
+ACQuire:STOPAfter
+ACQuire:STOPAfter?
+ACQuire:STOPAfter { RUNSTop | SEQuence}
+ALLEv?
+AUTORange:SETTings?
+AUTORange:SETTings { HORizontal | VERTical | BOTH }
+AUTORange:STATE?
+AUTORange:STATE { OFF | ON | <NR1> }
+AUTOSet:ENABLE
+AUTOSet:SIGNAL?
+AUTOSet:VIEW { MULTICYcle | SINGLECYcle | FFT | RISINGedge |
+BUSY?
+*CAL?
+CALibrate:ABOrt
+CALibrate:CONTINUE
+CALibrate:FACtory
+CALibrate:INTERNAL
+CALibrate:STATUS?
+CH<x>?
+CH<x>:BANdwidth?
+CH<x>:BANdwidth { ON | OFF }
+CH<x>:COUPling?
+CH<x>:COUPling { AC | DC | GND }
+CH<x>:CURRENTPRObe?
+CH<x>:CURRENTPRObe {0.2 | 1 | 2 | 5 | 10 | 50 | 100 | 1000}
+CH<x>:INVert?
+CH<x>:INVert { ON | OFF }
+CH<x>:POSition?
+CH<x>:POSition <NR3>
+CH<x>:PRObe?
+CH<x>:PRObe { 1 | 10 | 20 | 50 | 100 | 500 | 1000 }
+CH<x>:SCAle?
+CH<x>:SCAle <NR3>
+CH<x>:VOLts
+CH<x>:YUNit
+CH<x>:YUNit?
+CH<x>:YUNit <QString>
+*CLS
+COUNTERFreq?
+COUNTERFreq:CH1Level
+COUNTERFreq:CH1Level?
+COUNTERFreq:CH1Level <x>
+COUNTERFreq:CH1State
+COUNTERFreq:CH1State?
+COUNTERFreq:CH1State { OFF | ON | 1 | 0 }
+COUNTERFreq:CH1Value?
+COUNTERFreq:CH2Level
+COUNTERFreq:CH2Level?
+COUNTERFreq:CH2Level <x>
+COUNTERFreq:CH2State
+COUNTERFreq:CH2State?
+COUNTERFreq:CH2State { OFF | ON | 1 | 0 }
+COUNTERFreq:CH2Value?
+CURSor?
+CURSor:FUNCtion?
+CURSor:FUNCtion { HBArs | OFF | VBArs }
+CURSor:HBArs?
+CURSor:HBArs:DELTa?
+CURSor:HBArs:POSITION<x>?
+CURSor:HBArs:POSITION<x> <NR3>
+CURSor:HBArs:UNIts?
+CURSor:SELect:SOUrce?
+CURSor:SELect:SOUrce <wfm>
+CURSor:VBArs?
+CURSor:VBArs:DELTa?
+CURSor:VBArs:HDELTa?
+CURSor:VBArs:HPOS<x>?
+CURSor:VBArs:POSITION<x>?
+CURSor:VBArs:POSITION<x> <NR3>
+CURSor:VBArs:SLOPE?
+CURSor:VBArs:UNIts
+CURSor:VBArs:UNIts?
+CURSor:VBArs:UNIts { SECOnds | HERtz }
+CURSor:VBArs:VDELTa?
+CURVe?
+DATa?
+DATa:DESTination?
+DATa:DESTination REF<x>
+DATa:ENCdg?
+DATa:ENCdg { ASCIi | RIBinary | RPBinary | SRIbinary |
+DATALOGging?
+DATALOGging:DURAtion
+DATALOGging:DURAtion?
+DATALOGging:STATE
+DATALOGging:STATE { OFF | ON | 0 | 1 }
+DATa:SOUrce?
+DATa:SOUrce <wfm>
+DATa:STARt?
+DATa:STARt <NR1>
+DATa:STOP?
+DATa:STOP <NR1>
+DATa:TARget
+DATa:WIDth?
+DATa:WIDth <NR1>
+DATE?
+*DDT?
+*DDT { <Block> | <QString> }
+DEFLT will match the default setting of the printer: on or off.
+DESE?
+DIAg:RESUlt:FLAg?
+DIAg:RESUlt:LOG?
+DISplay?
+DISplay:BACKLight?
+DISplay:BACKLight <NR3>
+DISplay:BRIGHTness?
+DISplay:BRIGHTness { 100 | 90 | 75| 60 | 45 | 30 | 15 | 0 }
+DISplay:CONTRast
+DISplay:CONTRast?
+DISplay:CONTRast <NR1>
+DISplay:FORMat?
+DISplay:FORMat { XY | YT }
+DISplay:INVert
+DISplay:INVert?
+DISplay:INVert { ON | OFF}
+DISplay:PERSistence?
+DISplay:PERSistence { 1 | 2 | 5 | INF | OFF }
+DISplay:STYle?
+DISplay:STYle { DOTs | VECtors }
+ERRLOG:FIRST?
+ERRLOG:NEXT?
+*ESE?
+*ESE <NR1>
+*ESR?
+EVENT?
+EVMsg?
+EVQty?
+FFT?
+FFT:HORizontal:POSition
+FFT:HORizontal:POSition?
+FFT:HORizontal:POSition <NR3>
+FFT:HORizontal:SCAle
+FFT:HORizontal:SCAle?
+FFT:HORizontal:SCAle <NR3>
+FFT:SOURce?
+FFT:SOURce { CH1 | CH2 }
+FFT:SRCWFM
+FFT:SRCWFM?
+FFT:SRCWFM { ON | OFF }
+FFT:VERtical:POSition
+FFT:VERtical:POSition?
+FFT:VERtical:POSition <NR3>
+FFT:VERtical:SCAle
+FFT:VERtical:SCAle?
+FFT:VERtical:SCAle <NR3>
+FFT:WIN
+FFT:WIN?
+FFT:WIN { HANNING | FLATTOP | RECTANGULAR }
+FILESystem?
+FILESystem:CWD?
+FILESystem:CWD <folder path>
+FILESystem:DELEte <file path>
+FILESystem:DIR?
+FILESystem:FORMat <drive>
+FILESystem:FREESpace?
+FILESystem:MKDir <folder path>
+FILESystem:RMDir <folder path>
+HARDCopy?
+HARDCopy:BUTTON?
+HARDCopy:BUTTON { PRINTS | SAVESAll | SAVESImage }
+HARDCopy:INKSaver?
+HARDCopy:INKSaver { ON | OFF }
+HARDCopy:LAYout?
+HARDCopy:LAYout { LANdscape | PORTRait }
+HARDCopy:PORT?
+HARDCopy:PORT { CENtronics | RS232 | GPIb | USB }
+HARmonics?
+HARmonics:ENABle?
+HARmonics:ENABle { ON | OFF }
+HARmonics:FREquency?
+HARmonics:HRMS?
+HARmonics:PERCent?
+HARmonics:PHAse?
+HARmonics:RMS?
+HARmonics:SAVe <file path>
+HARmonics:SELect?
+HARmonics:SELect <NR1>
+HARmonics:SETUp?
+HARmonics:SETUp { MANUAL | AUTOMATIC }
+HARmonics:SHOW?
+HARmonics:SHOW { ALL | ODD | EVEN }
+HARmonics:SOUrce?
+HARmonics:SOUrce { CH<x> }
+HARmonics:THDF?
+HARmonics:THDR?
+HEADer?
+HORizontal?
+HORizontal:DELay?
+HORizontal:DELay:POSition?
+HORizontal:DELay:POSition <NR3>
+HORizontal:DELay:SCAle?
+HORizontal:DELay:SCAle <NR3>
+HORizontal:DELay:SECdiv
+HORizontal:MAIn?
+HORizontal:MAIn:POSition?
+HORizontal:MAIn:POSition <NR3>
+HORizontal:MAIn? (Query Only)
+HORizontal:MAIn:SCAle?
+HORizontal:MAIn:SCAle <NR3>
+HORizontal:MAIn:SECdiv
+HORizontal:POSition
+HORizontal:POSition?
+HORizontal:POSition <NR3>
+HORizontal:RECOrdlength?
+HORizontal:SCAle
+HORizontal:SECdiv
+HORizontal:VIEW
+HORizontal:VIEW?
+HORizontal:VIEW { MAIn | WINDOW | ZONE }
+ID?
+*IDN?
+LIMit?
+LIMit:COMpare?
+LIMit:COMpare :REF<x>
+LIMit:RESUlt:FAIL?
+LIMit:RESUlt:PASS?
+LIMit:RESUlt:TOTAL?
+LIMit:SAVEIMAge
+LIMit:SAVEIMAge?
+LIMit:SAVEIMAge { OFF | ON | 0 | 1 }
+LIMit:SAVEWFM
+LIMit:SAVEWFM?
+LIMit:SAVEWFM { OFF | ON | 0 | 1 }
+LIMit:SOUrce?
+LIMit:SOUrce { CH<x> | MATH }
+LIMit:STATE?
+LIMit:STATE { OFF | ON | 0 | 1 }
+LIMit:STOPAfter:MODe
+LIMit:STOPAfter:MODe?
+LIMit:STOPAfter:TIMe?
+LIMit:STOPAfter:TIMe <NR3>
+LIMit:STOPAfter:VIOLation?
+LIMit:STOPAfter:VIOLation <NR3>
+LIMit:STOPAfter:WAVEform
+LIMit:STOPAfter:WAVEform <NR3>
+LIMit:TEMPLate
+LIMit:TEMPLate APPLY
+LIMit:TEMPLate:DESTination?
+LIMit:TEMPLate:DESTination REF<x>
+LIMit:TEMPlate:DUALSOUrce { CH1 | CH2 | MATH }
+LIMit:TEMPLate:SAVEFIRSource
+LIMit:TEMPLate:SAVEFIRSource (No Query Form)
+LIMit:TEMPLate:SAVESECSource
+LIMit:TEMPLate:SAVESOUrce
+LIMit:TEMPLate:SAVESOUrce (No Query Form)
+LIMit:TEMPLate:SOUrce
+LIMit:TEMPLate:SOUrce?
+LIMit:TEMPLate:SOUrce { CH<x> | MATH }
+LIMit:TEMPLate:TOLerance:HORizontal?
+LIMit:TEMPLate:TOLerance:HORizontal <NR3>
+LIMit:TEMPLate:TOLerance:VERTical?
+LIMit:TEMPLate:TOLerance:VERTical <NR3>
+LOCk?
+*LRN?
+MATH?
+MATH:DEFINE?
+MATH:DEFINE <QString>
+MATH:FFT?
+MATH:FFT:HORizontal:POSition?
+MATH:FFT:HORizontal:POSition <NR3>
+MATH:FFT:HORizontal:SCAle?
+MATH:FFT:HORizontal:SCAle <NR3>
+MATH:FFT:VERtical:POSition?
+MATH:FFT:VERtical:POSition <NR3>
+MATH:FFT:VERtical:SCAle?
+MATH:FFT:VERtical:SCAle <NR3>
+MATH:VERtical?
+MATH:VERtical:POSition?
+MATH:VERtical:POSition <NR3>
+MATH:VERtical:SCAle?
+MATH:VERtical:SCAle <NR3>
+MEASUrement?
+MEASUrement:CLEARSNAPSHOT
+MEASUrement:GATing
+MEASUrement:GATing { OFF | ON | 0 | 1 }
+MEASUrement:IMMed?
+MEASUrement:IMMed:SOUrce[1]?
+MEASUrement:IMMed:SOUrce[1] { CH<x> | MATH }
+MEASUrement:IMMed:SOURCE2?
+MEASUrement:IMMed:SOURCE2 { CH<x> | MATH }
+MEASUrement:IMMed:TYPe { CRMs | CURSORRms | DELay | FALL |
+MEASUrement:IMMed:UNIts?
+MEASUrement:IMMed:VALue?
+MEASUrement:MEAS<x>?
+MEASUrement:MEAS<x>:SOUrce?
+MEASUrement:MEAS<x>:SOUrce { CH<y> | MATH }
+MEASUrement:MEAS<x>:TYPe { CRMs | CURSORRms | DELay | FALL |
+MEASUrement:MEAS<x>:UNIts?
+MEASUrement:MEAS<x>:VALue?
+MEASUrement:SNAPSHOT
+MEASUrement:SNAPSOUrce
+MEASUrement:SNAPSOUrce?
+MEASUrement:SNAPSOUrce { CH1 | CH2 | MATH }
+*OPC
+*OPC?
+PICTBridge:DATEPRINT?
+PICTBridge:DATEPRINT { DEFLT | OFF | ON }
+PICTBridge:DEF
+PICTBRIDGE:DEF sets the parameters for the compatible printer to the default
+PICTBridge:IDPRINT?
+PICTBridge:IDPRINT { DEFLT | OFF | ON }
+PICTBridge:IMAGESIZE?
+PICTBridge:IMAGESIZE { DEFLT | IN2P5BY3P25 | L | IN4BY6 |
+PICTBridge:PAPERSIZE?
+PICTBridge:PAPERSIZE { DEFLT | L | L2 | HAGAKIPCARD |
+PICTBridge:PAPERTYPE?
+PICTBridge:PAPERTYPE { DEFLT | PLAIN | PHOTO | FASTPHOTO}
+PICTBridge:PRINTQUAL?
+PICTBridge:PRINTQUAL { DEFLT | NRMAL | FINE | DRAFT }
+POWer?
+POWer:AC:PRESENt?
+POWerANALYSIS:SOUrces?
+POWerANALYSIS:SOUrces { CH1CH2 | CH3CH4 }
+POWer:BATTERIES:TIME?
+POWer:BATTERY<x>:GASgauge?
+POWer:BATTERY<x>:STATUS?
+POWer:BUTTONLIGHT?
+POWer:BUTTONLIGHT <NR1> | ON | OFF
+*PSC?
+*PSC <NR1>
+*RCL <NR1>
+RECAll:SETUp { FACtory | <NR1> | <file path> }
+RS232?
+RS232:BAUd?
+RS232:BAUd <NR1>
+RS232:HARDFlagging?
+RS232:HARDFlagging { ON | OFF | <NR1> }
+RS232:PARity?
+RS232:PARity { EVEN | ODD | NONe }
+RS232:SOFTFlagging?
+RS232:SOFTFlagging { ON | OFF | <NR1> }
+RS232:TRANsmit:TERMinator?
+RS232:TRANsmit:TERMinator { CR | LF | CRLf | LFCr }
+*RST
+SAVe:IMAge <file path>
+SAVe:SETUp {<NR1> | <file path>}
+SAVe:WAVEform
+*SAV <NR1>
+SELect?
+SELect:FFT
+SELect:FFT?
+SELect:<wfm>
+SELect:<wfm>?
+SELect:<wfm> { OFF | ON | <NR1> }
+SET?
+*SRE?
+*SRE <NR1>
+*STB?
+SWLoss?
+SWLoss:ACQuire
+SWLoss:ACQuire?
+SWLoss:ACQuire { STOPAfter | CONTINUOUS }
+SWLoss:AVErage:CONDUCTION?
+SWLoss:AVErage:N?
+SWLoss:AVErage:TOTAL?
+SWLoss:AVErage:TURNOFF?
+SWLoss:AVErage:TURNON?
+SWLoss:ENABLe?
+SWLoss:ENABLe { ON | OFF }
+SWLoss:LEVELS { DEFault }
+SWLoss:LOG:CONDUCTION?
+SWLoss:LOG:INDEX?
+SWLoss:LOG:INDEX <NR1>
+SWLoss:LOG:TOTAL?
+SWLoss:LOG:TURNOFF?
+SWLoss:LOG:TURNON?
+SWLoss:SAVE?
+SWLoss:SAVE <filename>
+SWLoss:SOURCES?
+SWLoss:SOURCES { CH1CH2 | CH3CH4 }
+SWLoss:STOPAfter?
+SWLoss:STOPAfter <NR1>
+SWLoss:TOFFEND?
+SWLoss:TOFFEND <NR1>
+SWLoss:TOFFSTART
+SWLoss:TOFFSTART?
+SWLoss:TOFFSTART <NR1>
+SWLoss:TONEND?
+SWLoss:TONEND <NR1>
+SWLoss:TONSTART?
+SWLoss:TONSTART <NR1>
+SWLoss:UNITs?
+SWLoss:UNITs { WATTS | JOULES }
+SWLoss:VALue:CONDUCTION?
+SWLoss:VALue:TOTAL?
+SWLoss:VALue:TURNOFF?
+SWLoss:VALue:TURNON?
+SWLoss:VSAT?
+SWLoss:VSAT <NR3>
+TIMe?
+TRENDPLOT?
+TRENDPLOT:STATE
+TRENDPLOT:STATE?
+TRENDPLOT:STATE { RUN | STOP }
+TRENDPLOT:TIME
+TRENDPLOT:TIME?
+TRENDPLOT:TP<x>:AVG?
+TRENDPLOT:TP<x>:AVG? (Query Only)
+TRENDPLOT:TP<x>:MAX?
+TRENDPLOT:TP<x>:MAX? (Query Only)
+TRENDPLOT:TP<x>:MIN?
+TRENDPLOT:TP<x>:MIN? (Query Only)
+TRENDPLOT:TP<x>:SCALE?
+TRENDPLOT:TP<x>:SCALEMAX?
+TRENDPLOT:TP<x>:SCALEMAX? (Query Only)
+TRENDPLOT:TP<x>:SCALEMIN?
+TRENDPLOT:TP<x>:SCALEMIN? (Query Only)
+TRENDPLOT:TP<x>:SOURCE
+TRENDPLOT:TP<x>:SOURCE?
+TRENDPLOT:TP<x>:SOURCE { CH1 | CH2 | MATH | CH1CH2 | CH2CH1
+TRENDPLOT:TP<x>:TYPe
+TRENDPLOT:TP<x>:TYPe { CRMs | FALL | FREQuency | MAXImum |
+*TRG
+TRIGger?
+TRIGger:MAIn?
+TRIGger:MAIn:EDGE?
+TRIGger:MAIn:EDGE:COUPling?
+TRIGger:MAIn:EDGE:COUPling { AC | DC | HFRej | LFRej |
+TRIGger:MAIn:EDGE:SLOpe?
+TRIGger:MAIn:EDGE:SLOpe { FALL | RISe }
+TRIGger:MAIn:EDGE:SOUrce?
+TRIGger:MAIn:EDGE:SOUrce { CH<x> | EXT | EXT5 | EXT10 | LINE
+TRIGger:MAIn:FREQuency?
+TRIGger:MAIn:HOLDOff?
+TRIGger:MAIn:HOLDOff:VALue?
+TRIGger:MAIn:HOLDOff:VALue <NR3>
+TRIGger:MAIn:LEVel?
+TRIGger:MAIn:LEVel <NR3>
+TRIGger:MAIn:MODe?
+TRIGger:MAIn:MODe { AUTO | NORMal }
+TRIGger:MAIn:PULse?
+TRIGger:MAIn:PULse:SOUrce?
+TRIGger:MAIn:PULse:SOUrce { CH<x> | EXT | EXT5 | EXT10 }
+TRIGger:MAIn:PULse:WIDth?
+TRIGger:MAIn:PULse:WIDth:POLarity?
+TRIGger:MAIn:PULse:WIDth:POLarity { POSITIVe | NEGAtive }
+TRIGger:MAIn:PULse:WIDth:WHEN?
+TRIGger:MAIn:PULse:WIDth:WHEN { EQual | NOTEqual | INside |
+TRIGger:MAIn:PULse:WIDth:WIDth?
+TRIGger:MAIn:PULse:WIDth:WIDth <NR3>
+TRIGger:MAIn SETLevel
+TRIGger:MAIn:TYPe?
+TRIGger:MAIn:TYPe { EDGE | VIDeo | PULse }
+TRIGger:MAIn:VIDeo?
+TRIGger:MAIn:VIDeo:LINE?
+TRIGger:MAIn:VIDeo:LINE <NR1>
+TRIGger:MAIn:VIDeo:POLarity?
+TRIGger:MAIn:VIDeo:POLarity { INVERT | NORMal }
+TRIGger:MAIn:VIDeo:SOUrce?
+TRIGger:MAIn:VIDeo:SOUrce { CH<x> | EXT | EXT5 | EXT10 }
+TRIGger:MAIn:VIDeo:STANDard?
+TRIGger:MAIn:VIDeo:STANDard { NTSc | PAL }
+TRIGger:MAIn:VIDeo:SYNC?
+TRIGger:MAIn:VIDeo:SYNC { FIELD | LINE | ODD | EVEN |
+TRIGger:STATE?
+*TST?
+VERBose?
+*WAI
+WAVEFORMANALYSIS:SOUrce?
+WAVEFORMANALYSIS:SOUrce { CH1 | CH2 | CH3 | CH4 | MATH }
+WAVFrm?
+WFMPre?
+WFMPre:BIT_Nr
+WFMPre:BIT_Nr?
+WFMPre:BIT_Nr <NR1>
+WFMPre:BN_Fmt?
+WFMPre:BN_Fmt { RI | RP }
+WFMPre:BYT_Nr?
+WFMPre:BYT_Nr <NR1>
+WFMPre:BYT_Or?
+WFMPre:BYT_Or { LSB | MSB }
+WFMPre:ENCdg?
+WFMPre:ENCdg { ASC | BIN }
+WFMPre:NR_Pt?
+WFMPre:PT_Fmt?
+WFMPre:PT_Fmt { ENV | Y }
+WFMPre:PT_Off
+WFMPre:WFId?
+WFMPre:<wfm>?
+WFMPre:<wfm>:NR_Pt?
+WFMPre:<wfm>:YZEro
+WFMPre:<wfm>:YZEro?
+WFMPre:XINcr?
+WFMPre:XINcr <NR3>
+WFMPre:XUNit?
+WFMPre:XUNit <Qstring>
+WFMPre:XZEro?
+WFMPre:XZEro <NR3>
+WFMPre:YMUlt?
+WFMPre:YMUlt <NR3>
+WFMPre:YOFf?
+WFMPre:YOFf <NR3>
+WFMPre:YUNit?
+WFMPre:YUNit <Qstring>
+WFMPre:YZEro?
+WFMPre:YZEro <NR3>
+ZOOM?
+ZOOM:FACtor
+ZOOM:FACtor?
+ZOOM:FACtor { X1 | X2 | X5 | X10 }
+ZOOM:HORizontal:POSition?
+ZOOM:HORizontal:POSition <NR3>
+ZOOM:HORizontal:SCAle?
+ZOOM:MODE
+ZOOM:MODE?
+ZOOM:MODE { SCALE | POSITION }
+ZOOM:STATE?
+ZOOM:STATE { ON | OFF }

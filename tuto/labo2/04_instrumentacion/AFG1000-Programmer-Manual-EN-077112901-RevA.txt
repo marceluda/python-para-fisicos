@@ -1,0 +1,4356 @@
+xx
+
+ZZZ
+
+AFG1000 Series
+Arbitrary Function Generator
+Programmer Manual
+
+*P077112901*
+077-1129-01
+
+xx
+
+ZZZ
+
+AFG1000 Series
+Arbitrary Function
+Generator
+Programmer Manual
+
+Revision A
+
+www.tek.com
+077-1129-01
+
+Copyright © Tektronix. All rights reserved. Licensed software products are owned by Tektronix or its subsidiaries
+or suppliers, and are protected by national copyright laws and international treaty provisions.
+Tektronix products are covered by U.S. and foreign patents, issued and pending. Information in this publication
+supersedes that in all previously published material. Specifications and price change privileges reserved.
+TEKTRONIX and TEK are registered trademarks of Tektronix, Inc.
+
+Contacting Tektronix
+Tektronix, Inc.
+14150 SW Karl Braun Drive
+P.O. Box 500
+Beaverton, OR 97077
+USA
+For product information, sales, service, and technical support:
+In North America, call 1-800-833-9200.
+Worldwide, visit www.tek.com to find contacts in your area.
+
+Warranty
+
+Tektronix warrants that the product will be free from defects in materials and workmanship for a period of three (3)
+years from the date of original purchase from an authorized Tektronix distributor. If the product proves defective
+during this warranty period, Tektronix, at its option, either will repair the defective product without charge for parts
+and labor, or will provide a replacement in exchange for the defective product. Parts, modules and replacement
+products used by Tektronix for warranty work may be new or reconditioned to like new performance. All replaced
+parts, modules and products become the property of Tektronix.
+In order to obtain service under this warranty, Customer must notify Tektronix of the defect before the expiration
+of the warranty period and make suitable arrangements for the performance of service. Customer shall be
+responsible for packaging and shipping the defective product to the service center designated by Tektronix,
+shipping charges prepaid, and with a copy of customer proof of purchase. Tektronix shall pay for the return of the
+product to Customer if the shipment is to a location within the country in which the Tektronix service center is
+located. Customer shall be responsible for paying all shipping charges, duties, taxes, and any other charges for
+products returned to any other locations.
+This warranty shall not apply to any defect, failure or damage caused by improper use or improper or inadequate
+maintenance and care. Tektronix shall not be obligated to furnish service under this warranty a) to repair damage
+resulting from attempts by personnel other than Tektronix representatives to install, repair or service the product;
+b) to repair damage resulting from improper use or connection to incompatible equipment; c) to repair any damage
+or malfunction caused by the use of non-Tektronix supplies; or d) to service a product that has been modified or
+integrated with other products when the effect of such modification or integration increases the time or difficulty of
+servicing the product.
+THIS WARRANTY IS GIVEN BY TEKTRONIX WITH RESPECT TO THE PRODUCT IN LIEU OF ANY
+OTHER WARRANTIES, EXPRESS OR IMPLIED. TEKTRONIX AND ITS VENDORS DISCLAIM ANY
+IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+TEKTRONIX' RESPONSIBILITY TO REPAIR OR REPLACE DEFECTIVE PRODUCTS IS THE SOLE AND
+EXCLUSIVE REMEDY PROVIDED TO THE CUSTOMER FOR BREACH OF THIS WARRANTY.
+TEKTRONIX AND ITS VENDORS WILL NOT BE LIABLE FOR ANY INDIRECT, SPECIAL, INCIDENTAL,
+OR CONSEQUENTIAL DAMAGES IRRESPECTIVE OF WHETHER TEKTRONIX OR THE VENDOR HAS
+ADVANCE NOTICE OF THE POSSIBILITY OF SUCH DAMAGES.
+[W2 – 15AUG04]
+
+Table of contents
+Getting Started ....................................................................................................................................... 1
+Introduction ...................................................................................................................................... 1
+Connecting the Interface ..........................................................................................................................1
+Using TekVISA .......................................................................................................................................1
+Where to find more information ..............................................................................................................2
+
+Syntax and Commands ........................................................................................................................... 3
+Command Syntax ............................................................................................................................. 3
+Backus-Naur Form Definition .................................................................................................................3
+Command and Query Structure ...............................................................................................................3
+SCPI Commands and Queries .................................................................................................................5
+IEEE 488.2 Common Commands............................................................................................................9
+
+Command Groups ......................................................................................................................... 10
+Command Descriptions................................................................................................................. 14
+AFGControl:CSCopy (No Query Form) ...............................................................................................14
+*CLS (No Query Form) .........................................................................................................................14
+*IDN? (Query Only) ..............................................................................................................................15
+MMEMory:CATalog? (Query Only).....................................................................................................15
+MMEMory:CDIRectory .........................................................................................................................16
+MMEMory:DELete (No Query Form) ....................................................................................................17
+*OPT? (Query Only) .............................................................................................................................17
+OUTPut[1|2]:IMPedance ........................................................................................................................18
+OUTPut[1|2][:STATe] ............................................................................................................................18
+*RCL (No Query Form) ..........................................................................................................................19
+*RST (No Query Form) ..........................................................................................................................20
+*SAV (No Query Form)..........................................................................................................................20
+[SOURce[1|2]]:AM[:DEPTh] ................................................................................................................21
+[SOURce[1|2]]:AM:INTernal:FREQuency ............................................................................................21
+[SOURce[1|2]]:AM:INTernal:FUNCtion ...............................................................................................22
+[SOURce[1|2]]:AM:INTernal:FUNCtion:EFILe ....................................................................................23
+[SOURce[1|2]]:AM:SOURce .................................................................................................................24
+[SOURce[1|2]]:AM:STATe ...................................................................................................................24
+[SOURce[1|2]]:ASKey[:AMPLitude] ...................................................................................................25
+[SOURce[1|2]]:ASKey:INTernal:RATE ................................................................................................26
+[SOURce[1|2]]:ASKey:SOURce ............................................................................................................27
+[SOURce[1|2]]:ASKey:STATe ..............................................................................................................27
+[SOURce[1|2]]:BURSt:MODE .............................................................................................................28
+[SOURce[1|2]]:BURSt:NCYCles..........................................................................................................28
+[SOURce[1|2]]:BURSt:SOURce ............................................................................................................29
+[SOURce[1|2]]:BURSt:STATe ...............................................................................................................30
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+i
+
+Table of Contents
+[SOURce[1|2]]:FM[:DEViation]............................................................................................................ 30
+[SOURce[1|2]]:FM:INTernal:FREQuency............................................................................................. 31
+[SOURce[1|2]]:FM:INTernal:FUNCtion ............................................................................................... 32
+[SOURce[1|2]]:FM:INTernal:FUNCtion:EFILe .................................................................................... 33
+[SOURce[1|2]]:FM:SOURce ................................................................................................................ 33
+[SOURce[1|2]]:FM:STATe .................................................................................................................. 34
+[SOURce[1|2]]:FREQuency:CENTer................................................................................................... 35
+[SOURce[1|2]]:FREQuency:CONCurrent ........................................................................................... 35
+[SOURce[1|2]]:FREQuency[:CW|:FIXed] ........................................................................................... 36
+[SOURce[1|2]]:FREQuency:MODE .................................................................................................... 37
+[SOURce[1|2]]:FREQuency:SPAN ...................................................................................................... 38
+[SOURce[1|2]]:FREQuency:STARt ..................................................................................................... 39
+[SOURce[1|2]]:FREQuency:STOP ...................................................................................................... 39
+[SOURce[1|2]]:FSKey[:FREQuency] .................................................................................................. 40
+[SOURce[1|2]]:FSKey:INTernal:RATE............................................................................................... 41
+[SOURce[1|2]]:FSKey:SOURce........................................................................................................... 42
+[SOURce[1|2]]:FSKey:STATe .............................................................................................................. 42
+[SOURce[1|2]]:FUNCtion:EFILe ......................................................................................................... 43
+[SOURce[1|2]]:FUNCtion[:SHAPe] .................................................................................................... 43
+[SOURce[1|2]]:PHASe[:ADJust] ......................................................................................................... 45
+[SOURce[1|2]]:PHASe:INITiate (No Query Form) ............................................................................. 46
+[SOURce[1|2]]:PM[:DEViation] .......................................................................................................... 46
+[SOURce[1|2]]:PM:INTernal:FREQuency ........................................................................................... 47
+[SOURce[1|2]]:PM:INTernal:FUNCtion .............................................................................................. 48
+[SOURce[1|2]]:PM:INTernal:FUNCtion:EFILe ................................................................................... 49
+[SOURce[1|2]]:PM:SOURce ................................................................................................................ 49
+[SOURce[1|2]]:PM:STATe ................................................................................................................... 50
+[SOURce[1|2]]:PSKey[:DEViation] ...................................................................................................... 51
+[SOURce[1|2]]:PSKey:INTernal:RATE ................................................................................................ 51
+[SOURce[1|2]]:PSKey:SOURce............................................................................................................ 52
+[SOURce[1|2]]:PSKey:STATe .............................................................................................................. 53
+[SOURce[1|2]]:PULSe:DCYCle ........................................................................................................... 53
+[SOURce[1|2]]:PWM:INTernal:FREQuency ......................................................................................... 54
+[SOURce[1|2]]:PWM:INTernal:FUNCtion............................................................................................ 55
+[SOURce[1|2]]:PWM:INTernal:FUNCtion:EFILe................................................................................. 56
+[SOURce[1|2]]:PWM:SOURce ............................................................................................................. 56
+[SOURce[1|2]]:PWM:STATe ................................................................................................................ 57
+[SOURce[1|2]]:PWM[:DEViation]:DCYCle ........................................................................................ 58
+[SOURce[1|2]]:SWEep:SOURce .......................................................................................................... 59
+[SOURce[1|2]]:SWEep:SPACing ......................................................................................................... 59
+[SOURce[1|2]]:SWEep:TIME .............................................................................................................. 60
+[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate]:OFFSet ..................................................................... 61
+
+ii
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Table of Contents
+[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate][:AMPLitude]............................................................61
+SYSTem:ERRor[:NEXT]? (Query Only) ...............................................................................................62
+TRACe|DATA:CATalog? (Query Only) ................................................................................................63
+TRACe|DATA:COPY (No Query Form) ...............................................................................................63
+TRACe|DATA[:DATA]..........................................................................................................................64
+TRACe|DATA[:DATA]:VALue .............................................................................................................64
+TRACe|DATA:POINts ..........................................................................................................................65
+*TRG (No Query Form) .........................................................................................................................66
+*WAI (No Query Form) ........................................................................................................................66
+
+Command Errors .................................................................................................................................. 67
+Index .................................................................................................................................................... 68
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+iii
+
+Getting Started
+Introduction
+This programmer guide provides information to use commands for remotely
+controlling your instrument. With this information, write computer programs that will
+perform functions such as setting the front-panel controls, selecting clock source,
+setting sampling rate, and exporting data for use in other programs.
+
+Connecting the Interface
+The AFG1000 Series has a USB (type B) connector on the rear panel, as shown
+in the following figure. This connector conforms to USB-TMC. Attach a USB
+cable to this connector.
+AC line
+connector
+
+USB (type B)
+connector
+
+Figure 1: USB (type B) connector
+
+Using TekVISA
+TekVISA is Tektronix implementation of VISA (Virtual Instrument Software
+Architecture), an industry-standard communication protocol. VISA provides
+a common standard for software developers so that software from multiple
+vendors, such as instrument drivers, can run on the same platform. TekVISA is
+industry-compliant software, available with selected Tektronix instruments.
+Use this software to write (or draw) interoperable instrument drivers in a
+variety of Application Development Environments (ADEs). It implements a
+subset of Version 2.2 of the VISA specification for controlling USB
+instrument interface locally.
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+1
+
+Getting Started
+
+Installation
+
+Use an internet browser to access the Tektronix Web site
+(www.tek.com/downloads) and download the current TekVISA to your PC.
+Unzip the downloaded file in a temporary directory of your choice and run
+Setup.exe.
+NOTE: The details on TekVISA concepts and operations are explained in the
+TekVISA Programmer Manual that can be also found on the Tektronix Web site.
+
+Where to find more information
+The following table lists related documentation available for your instrument.
+The documentation is available on the Product Documentation CD and on the
+Tektronix Web site (www.tek.com/manuals).
+Item
+
+Purpose
+
+Important
+safety and
+compliance
+instructions
+
+Compliance and
+safety instructions
+
+Built-in Help
+
+UI Help and Operation
+
+Quick Start
+User Manual
+
+Unpacking, Installation,
+Tutorials, Operation,
+and Overviews
+
+Programmer
+Manual
+
+Menu Structures, User
+
+Technical
+
+Specifications and
+performance
+verification procedures
+
+Reference
+
+2
+
+Location
+
+Interface,
+and Programming
+Information
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Syntax and Commands
+Command Syntax
+Control the operations and functions of the instrument through the USB
+interface using commands and queries. The related topics listed below describe
+the syntax of these commands and queries. The topics also describe the
+conventions that the instrument uses to process them. See Command Groups
+(See page 10.) for a listing of the commands by command group, or use the
+index to locate a specific command.
+
+Backus-Naur Form Definition
+This manual describes commands and queries using the Backus-Naur Form
+(BNF) notation. The following table defines the standard BNF symbols.
+Table 1: BNF symbols and meanings
+Symbol
+
+Meaning
+
+< >
+
+Defined element
+
+:=
+
+Is defined as
+
+|
+
+Exclusive OR
+
+{ }
+
+Group; one element is required
+
+[ ]
+
+Optional; can be omitted
+
+.. .
+
+Previous element(s) may be repeated
+
+( )
+
+Comment
+
+Command and Query Structure
+Overview
+
+Commands consist of set commands and query commands (usually simply called
+commands and queries). Commands change instrument settings or perform a
+specific action. Queries cause the instrument to return data and information about
+its status.
+Most commands have both a set form and a query form. The query form of the
+command is the same as the set form except that it ends with a question mark.
+For example, the set command MMEMory:CDIRectory has a query form
+MMEMory:CDIRectory?. Not all commands have both a set and a query form;
+some commands are set only and some are query only.
+
+Messages
+
+A command message is a command or query name, followed by any
+information the instrument needs to execute the command or query. Command
+messages consist of five element types.
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+3
+
+Command Syntax
+Table 2: Command message elements
+
+Commands
+
+Symbol
+
+Meaning
+
+<Header>
+
+The basic command name. If the header ends with a question mark, the
+command is a query. The header may begin with a colon (:) character; if
+the command is concatenated with other commands the beginning colon
+is required. The beginning colon can never be used with command
+headers beginning with a star (*).
+
+<Mnemonic>
+
+A header subfunction. Some command headers have only one mnemonic.
+If a command header has multiple mnemonics, they are always separated
+from each other by a colon (:) character.
+
+<Argument>
+
+A quantity, quality, restriction, or limit associated with the header. Not
+
+<Comma>
+
+A single comma between arguments of multiple-argument commands. It
+may optionally have white space characters before and after the comma.
+
+<Space>
+
+A white space character between command header and argument. It may
+
+all commands have an argument, while other commands have multiple
+arguments. Arguments are separated from the header by a <Space>.
+Arguments are separated from each other by a <Comma>.
+
+optionally consist of multiple white space characters.
+
+Commands cause the instrument to perform a specific function or change one of
+its settings. Commands have the structure:
+[:]<Header>[<Space><Argument>[<Comma><Argument>]...]
+
+A command header is made up of one or more mnemonics arranged in a
+hierarchical or tree structure. The first mnemonic is the base or root of the tree and
+each subsequent mnemonic is a level or branch of the previous one. Commands at
+a higher level in the tree may affect those at a lower level. The leading colon (:)
+always returns you to the base of the command tree.
+
+Queries Queries cause the instrument to return information about its status or settings.
+Queries have the structure:
+
+[:]<Header>?
+[:]<Header>?[<Space><Argument>[<Comma><Argument>]...]
+
+Specify a query at any level within the command tree unless otherwise noted.
+These branch queries return information about all the mnemonics below the
+specified branch or level.
+
+Query Responses When a query is sent to the instrument, only the values are returned. When the
+returned value is a mnemonic, it is noted in abbreviated format.
+
+4
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Syntax
+
+Command Entry
+
+Follow these general rules when entering commands:
+Enter commands in upper or lower case.
+Precede any command with white space characters. White space characters
+include any combination of the ASCII control characters 00 through 09 and
+0B through 20 hexadecimal (0 through 9 and 11 through 32 decimal).
+The instrument ignores commands that consists of just a combination of white
+space characters and line feeds.
+
+SCPI Commands and Queries
+The instrument uses a command language based on the SCPI standard. The SCPI
+(Standard Commands for Programmable Instruments) standard was created by a
+consortium to provide guidelines for remote programming of instruments.
+These guidelines provide a consistent programming environment for instrument
+control and data transfer. This environment uses defined programming messages,
+instrument responses and data formats that operate across all SCPI instruments,
+regardless of manufacturer.
+The SCPI language is based on a hierarchical or tree structure. The top level of
+the tree is the root node; it is followed by one or more lower-level nodes.
+Create commands and queries from these subsystem hierarchy trees. Commands
+specify actions for the instrument to perform. Queries return measurement data
+and information about parameter settings.
+
+Creating Commands
+
+SCPI commands are created by stringing together the nodes of a subsystem
+hierarchy and separating each node by a colon.
+To create a SCPI command, start with the root node and move down the tree
+structure adding nodes until you reach the end of a branch. Most commands and
+some queries have parameters; you must include a value for these parameters. If
+you specify a parameter value that is out of range, the parameter will be set to a
+default value. The command descriptions, list the valid values for all
+parameters.
+
+Creating Queries
+
+To create a query, start at the root node of a tree structure, move down to the end of
+a branch, and add a question mark.
+
+Query Responses
+
+The query causes the instrument to return information about its status or settings.
+When a query is sent to the instrument, only the values are returned. When the
+returned value is a mnemonic, it is noted in abbreviated format.
+
+Parameter Types
+
+Every parameter in the command and query descriptions is of a specified type.
+(See Table 3.) The parameters are enclosed in brackets, such as <value>.
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+5
+
+Command Syntax
+The parameter type is listed after the parameter and is enclosed in parentheses,
+for example, (boolean). Some parameter types are defined specifically for the
+instrument command set and some are defined by SCPI.
+Table 3: Parameter types used in syntax descriptions
+Parameter type
+
+Description
+
+Example
+
+A specified length of
+arbitrary data
+
+#512234xxxxx . . . where
+5 indicates that the following
+5 digits (12234) specify the
+length of the data in bytes;
+xxxxx ... indicates the data or
+#0xxxxx...<LF><&EOI>
+
+boolean
+
+Boolean numbers or values
+
+ON or ≠ 0
+OFF or 0
+
+discrete
+
+A list of specific values
+
+MIN, MAX
+
+binary
+
+Binary numbers
+
+#B0110
+
+octal
+
+Octal numbers
+
+#Q57, #Q3
+
+Hexadecimal numbers
+
+#H AA, #H1
+
+NR1 2 numeric
+
+Integers
+
+0, 1, 15, -1
+
+NR2 2 3 numeric
+
+Decimal numbers
+
+1.2, 3.141516, -6.5
+
+NR3 2 numeric
+
+Floating point numbers
+
+3.1415E-9, -16.1E5
+
+Flexible decimal number that
+may be type NR1, NR2 or NR3
+
+See NR1, NR2, and NR3
+examples
+
+Alphanumeric characters (must
+
+"Testing 1, 2, 3"
+
+arbitrary block
+
+hexadecimal
+
+NRf
+
+Special Characters
+
+6
+
+2
+
+2 numeric
+
+string 4
+
+1
+
+(0-9, A, B, C, D, E, F)
+
+be within quotation marks)
+
+1
+
+Defined in ANSI/IEEE 488.2 as "Definite Length Arbitrary Block Response Data."
+
+2
+
+An ANSI/IEEE 488.2-1992-defined parameter type.
+
+3
+
+Some commands and queries will accept an octal or hexadecimal value even though the parameter type is
+defined as NR1.
+
+4
+
+Defined in ANSI/IEEE 488.2 as "String Response Data."
+
+The Line Feed (LF) character or the New Line (NL) character (ASCII 10), and all
+characters in the range of ASCII 127-255 are defined as special characters. These
+characters are used in arbitrary block arguments only; using these characters in
+other parts of any command yields unpredictable results.
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Syntax
+
+Abbreviating Commands,
+Queries, and Parameters
+
+Abbreviate most SCPI commands, queries, and parameters to an accepted short
+form. This manual shows these short forms as a combination of upper and lower
+case letters. The upper case letters indicate the accepted short form of a
+command. As shown in the following figure, create a short form by using only
+the upper case letters. The accepted short form and the long form are equivalent
+and request the same action of the instrument.
+
+Figure 2: Example of abbreviating a command
+NOTE: The numeric suffix of a command or query may be included in either the
+long form or short form; the instrument will default to "1" if no suffix is used.
+
+Chaining Commands and
+Queries
+
+Chain several commands or queries together into a single message. To create a
+chained message, first create a command or query, add a semicolon (;), and then
+add more commands or queries and semicolons until the message is complete.
+If the command following a semicolon is a root node, precede it with a colon
+(:).The single chained message should end in a command or query, not a
+semicolon. Responses to any queries in your message are separated by
+semicolons.
+If a command or query has the same root and lower-level nodes as the previous
+command or query, you can omit these nodes.
+
+Unit and SI Prefix
+
+If the decimal numeric argument refers to amplitude, frequency, or time, express
+it using SI units instead of using the scaled explicit point input value format
+<NR3>. (SI units are units that conform to the Systeme International d'Unites
+standard.) For example, use the input format 200 mV or 1.0 MHz instead of
+200.0E-3 or 1.0E+6, respectively, to specify voltage or frequency.
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+7
+
+Command Syntax
+
+The following table lists the available units.
+Table 4: Available units
+Symbol
+
+Meaning
+
+DEG
+
+degree (phase)
+
+Hz
+
+hertz (frequency)
+
+PCT
+
+percent (%)
+
+s
+
+second (time)
+
+V
+
+volt
+
+Vpp
+
+volt
+
+You can omit a unit in a command, but you must include the unit when using a SI
+prefix. For example, frequency of 15 MHz can be described as follows
+15.0E6, 1.5E7Hz, 15000000, 15000000Hz, 15MHz, etc.
+("15M" is not allowed.)
+
+General rules for using
+SCPI commands
+
+Here are three general rules for using SCPI commands, queries, and parameters:
+Use single (‘ ’) or double (“ ”) quotation marks for quoted strings, but you cannot
+use both types of quotation marks for the same string.
+correct
+
+"This string uses quotation marks correctly."
+
+correct
+
+‘This string also uses quotation marks correctly.'
+
+incorrect
+
+"This string does not use quotation marks correctly.'
+
+Use upper case, lower case, or a mixture of both cases for all commands, queries,
+and parameters.
+SOURCE1:FREQUENCY 10MHZ
+
+is the same as
+source1:frequency 100mhz
+
+and
+SOURCE1:frequency 10MHZ
+
+NOTE: Literal strings (quoted) are case sensitive, for example, file names.
+No embedded spaces are allowed between or within nodes.
+
+8
+
+correct
+
+SOURCE1:FREQUENCY 10MHZ
+
+incorrect
+
+SOURCE1: FREQUENCY 10MHZ
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Syntax
+
+IEEE 488.2 Common Commands
+Description
+
+Command and Query
+Structure
+
+ANSI/IEEE Standard 488.2 defines the codes, formats, protocols, and usage of
+common commands and queries used on the interface between the controller and
+the instruments. The instrument complies with this standard.
+The syntax for an IEEE 488.2 common command is an asterisk (*) followed by a
+command and, optionally, a space and parameter value. The syntax for an IEEE
+488.2 common query is an asterisk (*) followed by a query and a question mark.
+All of the common commands and queries are listed in the last part of the Syntax
+and Commands section. The following are examples of common commands:
+*CLS
+The following are examples of common queries
+*IDN?
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+9
+
+Command Groups
+This section lists the commands organized by functional group. The Command
+Descriptions section lists all commands alphabetically. (See page 14.)
+
+Memory Commands
+
+Memory commands let you change setup memory attributes. The following table
+lists and describes Memory commands.
+Table 5: Memory commands
+
+Mass Memory Commands
+
+Command
+
+Description
+
+*RCL
+
+Recall instrument setting from setup memory
+
+*SAV
+
+Save instrument setting to setup memory
+
+Mass Memory commands let you change mass memory attributes. The
+following table lists and describes the Mass Memory commands.
+Table 6: Mass Memory commands
+
+Output Commands
+
+Command
+
+Description
+
+MMEMory:CATalog?
+
+Query the status of mass memory
+
+MMEMory:CDIRectory
+
+Set/query current directory
+
+MMEMory:DELete
+
+Delete file or directory in mass memory
+
+Output commands let you set output attributes. The following table lists and
+describes the Output commands.
+Table 7: Output commands
+
+10
+
+Command
+
+Description
+
+OUTPut[1|2]:IMPedance
+
+Set/query impedance
+
+OUTPut[1|2][:STATe]
+
+Set/query output on or off
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Groups
+
+Source Commands
+
+Source commands let you set waveform output parameters. The following table
+lists and describes the Source commands.
+Table 8: Source commands
+Command
+
+Description
+
+[SOURce[1|2]]:AM[:DEPTh]
+
+Set/query amplitude modulation depth
+
+[SOURce[1|2]]:AM:INTernal:FREQuency
+
+Set/query internal modulation frequency
+
+[SOURce[1|2]]:AM:INTernal:FUNCtion
+
+Set/query internal modulation waveform
+
+[SOURce[1|2]]:AM:INTernal:FUNCtion:EFILe
+
+Set/query EFILe setting
+
+[SOURce[1|2]]:AM:SOURce
+
+Set/query amplitude modulation source
+
+[SOURce[1|2]]:AM:STATe
+
+Set/query amplitude modulation status
+
+[SOURce[1|2]]:ASKey[:AMPLitude]
+
+Set/query ASK depth
+
+[SOURce[1|2]]:ASKey:INTernal:RATE
+
+Set/query ASK internal modulation rate
+
+[SOURce[1|2]]:ASKey:SOURce
+
+Set/query ASK source
+
+[SOURce[1|2]]:ASKey:STATe
+
+Set/query ASK status
+
+[SOURce[1|2]]:BURSt:MODE
+
+Set/query burst mode
+
+[SOURce[1|2]]:BURSt:NCYCles
+
+Set/query burst mode waveform output cycle
+
+[SOURce[1|2]]:BURSt:SOURce
+
+Set/query burst mode trigger source
+
+[SOURce[1|2]]:BURSt:STATe
+
+Set/query burst mode status
+
+[SOURce[1|2]]:FM[:DEViation]
+
+Set/query frequency deviation
+
+[SOURce[1|2]]:FM:INTernal:FREQuency
+
+Set/query internal modulation frequency
+
+[SOURce[1|2]]:FM:INTernal:FUNCtion
+
+Set/query internal modulation waveform
+
+[SOURce[1|2]]:FM:INTernal:FUNCtion:EFILe
+
+Set/query EFILe setting
+
+[SOURce[1|2]]:FM:SOURce
+
+Set/query frequency modulation source
+
+[SOURce[1|2]]:FM:STATe
+
+Set/query frequency modulation status
+
+[SOURce[1|2]]:FREQuency:CENTer
+
+Set/query center frequency
+
+[SOURce[1|2]]:FREQuency:CONCurrent
+
+Set/query concurrent change of frequency
+
+[SOURce[1|2]]:FREQuency[:CW|:FIXed]
+
+Set/query output waveform frequency
+
+[SOURce[1|2]]:FREQuency:MODE
+
+Set/query sweep status
+
+[SOURce[1|2]]:FREQuency:SPAN
+
+Set/query sweep frequency span
+
+[SOURce[1|2]]:FREQuency:STARt
+
+Set/query sweep start frequency
+
+[SOURce[1|2]]:FREQuency:STOP
+
+Set/query sweep stop frequency
+
+[SOURce[1|2]]:FSKey[:FREQuency]
+
+Set/query FSK hop frequency
+
+[SOURce[1|2]]:FSKey:INTernal:RATE
+
+Set/query FSK internal modulation rate
+
+[SOURce[1|2]]:FSKey:SOURce
+
+Set/query FSK source
+
+[SOURce[1|2]]:FSKey:STATe
+
+Set/query FSK status
+
+[SOURce[1|2]]:FUNCtion:EFILe
+
+Set/query EFILe name
+
+[SOURce[1|2]]:FUNCtion[:SHAPe]
+
+Set/query output waveform
+
+[SOURce[1|2]]:PHASe[:ADJust]
+
+Set/query output waveform phase
+
+[SOURce[1|2]]:PHASe:INITiate
+
+Initiate output waveform phase synchronization
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+11
+
+Command Groups
+Table 8: Source commands (cont.)
+
+Status Commands
+
+Command
+
+Description
+
+[SOURce[1|2]]:PM[:DEViation]
+
+Set/query phase modulation deviation
+
+[SOURce[1|2]]:PM:INTernal:FREQuency
+
+Set/query internal modulation frequency
+
+[SOURce[1|2]]:PM:INTernal:FUNCtion
+
+Set/query internal modulation waveform
+
+[SOURce[1|2]]:PM:INTernal:FUNCtion:EFILe
+
+Set/query EFILe setting
+
+[SOURce[1|2]]:PM:SOURce
+[SOURce[1|2]]:PM:STATe
+
+Set/query phase modulation source
+
+[SOURce[1|2]]:PSKey[:DEViation]
+
+Set/query phase modulation status
+Set/query PSK deviation
+
+[SOURce[1|2]]:PSKey:INTernal:RATE
+
+Set/query PSK internal modulation rate
+
+[SOURce[1|2]]:PSKey:SOURce
+
+Set/query PSK source
+
+[SOURce[1|2]]:PSKey:STATe
+
+Set/query PSK status
+
+[SOURce[1|2]]:PULSe:DCYCle
+
+Set/query pulse waveform duty cycle
+
+[SOURce[1|2]]:PWM:INTernal:FREQuency
+
+Set/query pulse width modulation frequency
+
+[SOURce[1|2]]:PWM:INTernal:FUNCtion
+
+Set/query pulse width modulation waveform
+
+[SOURce[1|2]]:PWM:INTernal:FUNCtion:EFILe
+
+Set/query EFILe name
+
+[SOURce[1|2]]:PWM:SOURce
+
+Set/query pulse width modulation source
+
+[SOURce[1|2]]:PWM:STATe
+
+Set/query pulse width modulation status
+
+[SOURce[1|2]]:PWM[:DEViation]:DCYCle
+
+Set/query pulse width modulation deviation
+
+[SOURce[1|2]]:SWEep:SOURce
+
+Set/query sweep trigger source
+
+[SOURce[1|2]]:SWEep:SPACing
+
+Set/query sweep spacing
+
+[SOURce[1|2]]:SWEep:TIME
+
+Set/query sweep time
+
+[SOURce[1|2]]:VOLTage[:LEVel]
+[:IMMediate]: OFFSet
+
+Set/query output offset voltage
+
+[SOURce[1|2]]:VOLTage[:LEVel]
+[:IMMediate][: AMPLitude]
+
+Set/query output amplitude
+
+Status commands let you determine the status of the instrument. The following
+table lists and describes the Status commands.
+Table 9: Status commands
+
+System Commands
+
+Command
+
+Description
+
+*CLS
+
+Clear all event registers and queues
+
+System commands let you control miscellaneous instrument functions. The
+following table lists and describes the System commands.
+Table 10: System commands
+
+12
+
+Command
+
+Description
+
+*IDN?
+
+Return identification information
+
+*OPT?
+
+Return option information
+
+*RST
+
+Reset
+
+SYSTem:ERRor[:NEXT]?
+
+Return error event queue
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Groups
+
+Synchronization Commands Synchronization commands let you synchronize the operation of the
+
+instrument. The following table lists and describes the Synchronization
+commands.
+Table 11: Synchronization commands
+
+Trace Commands
+
+Command
+
+Description
+
+*WAI
+
+Wait to continue
+
+Trace commands let you set the edit memory and user waveform memory. The
+following table lists and describes the Trace commands.
+Table 12: Trace commands
+
+Trigger Command
+
+Command
+
+Description
+
+TRACe|DATA:CATalog?
+
+Return user waveform memory status
+
+TRACe|DATA:COPY
+
+Copy edit memory (or user waveform
+memory) content to user waveform memory
+(or edit memory)
+
+TRACe|DATA[:DATA]
+
+Set/query waveform data to edit memory
+
+TRACe|DATA[:DATA]:VALue
+
+Set/query waveform data in edit memory
+
+TRACe|DATA:POINts
+
+Set/query number of points for waveform
+
+data in edit memory
+
+Trigger command lets you control the arbitrary function generator triggering.
+Table 13: Trigger command
+
+AFG Control
+
+Command
+
+Description
+
+*TRG
+
+Force trigger event
+
+AFG Control command copies setups between two channels.
+Table 14: AFG Control command
+Command
+
+Description
+
+AFGControl:CSCopy
+
+Copy CH1 (or CH2) setup parameters to CH2 (or CH1)
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+13
+
+Command Descriptions
+Commands either set or query instrument values. Some commands both set and
+query, some only set, and some only query.
+
+Manual Conventions
+
+This manual uses the following conventions:
+No Query Form indicates set-only commands
+A question mark (?) appended to the commands and Query Only indicates
+query-only commands
+Fully spells out headers, mnemonics, and arguments with the minimal
+spelling shown in upper case; for example, to use the abbreviated form of the
+DISPlay:BRIGhtness command, just type DISP:BRIG
+Syntax of some commands varies, depending on the model of instrument
+you are using; differences are noted
+
+AFGControl:CSCopy (No Query Form)
+This command copies setup parameters for one channel to another channel.
+
+Group
+Syntax
+Arguments
+Examples
+
+AFG Control
+AFGControl:CSCopy {CH1|CH2},{CH1|CH2}
+
+CH1|CH2
+AFGControl:CSCopy CH1,CH2
+
+copies the CH1 setup parameters into CH2.
+
+*CLS (No Query Form)
+This command clears all the event registers and queues, which are used in the
+instrument status and event reporting system.
+
+Group
+
+14
+
+Status
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+
+Syntax
+
+*CLS
+
+Arguments
+
+None
+
+Examples
+
+*CLS
+
+clears all the event registers and queues.
+
+*IDN? (Query Only)
+This query-only command returns identification information on the instrument.
+
+Group
+
+System
+
+Syntax
+
+*IDN?
+
+Arguments
+Returns
+
+None
+<Manufacturer>,<Model>,<Serial
+
+Number>,<Firmware
+
+Level>
+
+where:
+<Manufacturer>::= TEKTRONIX
+<Model>::={AFG1022| AFG1062}
+<Serial Number>
+<Firmware Level>::=SCPI:99.0 FV:2.0.0
+
+Examples
+
+*IDN?
+
+might return the following response:
+TEKTRONIX,AFG1062,1331030,SCPI:99.0 FV:2.0.0
+
+MMEMory:CATalog? (Query Only)
+This query-only command returns the current state of the mass storage system
+(USB memory).
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+15
+
+Command Descriptions
+
+Group
+
+Mass Memory
+
+Syntax
+
+MMEMory:CATalog?
+
+Related Commands
+Arguments
+Returns
+
+MMEMory:CDIRectory
+None
+<NR1>,<NR1>[,<file_name>,<file_type>,<file_size>]...
+
+where:
+
+The first <NR1> indicates that the total amount of storage currently used, in bytes.
+The second <NR1> indicates that the free space of mass storage, in bytes.
+<file_name> is the name of directory or file. If the name exceeds 22 characters in
+length, it will be shortened to 8 characters (without suffix) in 8.3 name format.
+<file_type> is DIR for directory, otherwise it is blank.
+<file_size> is the size of the file, in bytes. This value will be 0 for directory.
+
+Examples
+
+The USB memory includes the Case and PWS4000-Main-CPU-Update folders, a
+SAMPLE1.tfw file, and a Test.zip file. The directory name PWS4000-Main-CPUUpdate will be shortened to PWS400~1.
+MMEMory:CATalog? might return the following response:
+32751616,27970560,"Case,DIR,0","PWS400~1,DIR,0",”SAMPLE1.tfw,
+,5412”,”Test.zip,,1735”
+
+MMEMory:CDIRectory
+This command changes the current working directory in the mass storage system.
+
+Group
+
+Mass Memory
+
+Syntax
+
+MMEMory:CDIRectory [<directory_name>]
+MMEMory:CDIRectory?
+
+Arguments
+
+16
+
+<directory_name>::=<string> indicates the current working directory for the
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+mass storage system.
+
+Returns
+Examples
+
+<directory_name>::=<string>
+MMEMory:CDIRectory ”/AFG/WORK0”
+
+changes the current directory to /AFG/WORK0.
+
+MMEMory:DELete (No Query Form)
+This command deletes a file or directory from the mass storage system. If a
+specified file in the mass storage is not allowed to overwrite or delete, this
+command causes an error. You can delete a directory if it is empty.
+
+Group
+Syntax
+Arguments
+Examples
+
+Mass Memory
+
+MMEMory:DELete
+
+<file_name>
+
+<file_name>::=<string> specifies a file to be deleted and should include full path.
+MMEMory:DELete ”/AFG/WORK0/TEK001.tfw”
+
+deletes the specified file from the /AFG/WORK directory.
+
+*OPT? (Query Only)
+This query-only command returns a list of the options installed in your instrument.
+
+Group
+
+System
+
+Syntax
+
+*OPT?
+
+Arguments
+
+None
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+17
+
+Command Descriptions
+
+Returns
+Examples
+
+<OPT>[,<OPT>[,<OPT>[,<OPT>]]]
+*OPT?
+
+might return 0, which indicates no option is installed in the instrument.
+
+OUTPut[1|2]:IMPedance
+This command sets the output load impedance for the specified channel. The
+specified value is used for amplitude, offset, and high/low level settings. You can
+set the impedance to any value from 1 Ω to 10 kΩ with a resolution of 1 Ω. The
+default value is 50 Ω.
+The query returns the current load impedance setting in ohms. If the load
+impedance is set to INFinity, the query returns “9.9E+37”.
+
+Group
+Syntax
+
+Arguments
+
+Output
+OUTPut[1|2]:IMPedance
+{<ohms>|INFinity|MINimum|MAXimum}
+OUTPut[1|2]:IMPedance? {MINimum|MAXimum}
+
+<ohms>::=<NR3>[<units>]
+where:
+<units>::=OHM
+INFinity sets the load impedance to >10 kΩ.
+MINimum sets the load impedance to 1 Ω.
+MAXimum sets the load impedance to 10 kΩ.
+
+Returns
+Examples
+
+<ohms>::=<NR3>
+OUTPut1:IMPedance
+
+MAXimum
+
+sets the CH 1 load impedance to 10 kΩ.
+
+OUTPut[1|2][:STATe]
+This command sets or query the instrument output state for the specified
+channel.
+
+18
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+
+Group
+Syntax
+
+Arguments
+
+Output
+
+OUTPut[1|2][:STATe] {ON|OFF|<NR1>}
+OUTPut[1|2][:STATe]?
+
+ON or <NR1>≠0 enables the instrument output.
+OFF or <NR1>=0 disables the instrument output.
+
+Returns
+Examples
+
+<NR1>
+
+OUTPut1:STATe ON
+
+sets the instrument CH 1 output to ON.
+
+*RCL (No Query Form)
+This command restores the state of the instrument from a copy of the settings
+stored in the setup memory. The settings are stored using the *SAV command. If
+the specified setup memory is deleted, this command causes an error.
+
+Group
+
+Memory
+
+Syntax
+
+*RCL {0|1|2|…|30|31}
+
+Related Commands
+Arguments
+Examples
+
+*SAV
+0, 1, 2, … 30, or 31 specifies the location of setup memory.
+
+*RCL 3
+
+restores the instrument from a copy of the settings stored in memory location 3.
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+19
+
+Command Descriptions
+
+*RST (No Query Form)
+This command resets the instrument to the factory default settings.
+
+Group
+
+System
+
+Syntax
+
+*RST
+
+Arguments
+
+None
+
+Examples
+
+*RST
+
+resets the instrument settings to the factory defaults.
+
+*SAV (No Query Form)
+This command stores the current settings of the arbitrary function generator to a
+specified setup memory location.
+
+Group
+
+Memory
+
+Syntax
+
+*SAV {0|1|2|…|30|31}
+
+Related Commands
+Arguments
+Examples
+
+*RCL
+0, 1, 2, … 30, or 31 specifies the location of setup memory.
+
+*SAV 2
+
+saves the current instrument state in the memory location 2.
+
+20
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+
+[SOURce[1|2]]:AM[:DEPTh]
+This command sets or queries the modulation depth of AM modulation for the
+specified channel. Set the modulation depth from 0% to 100% with resolution of
+1%.
+
+Conditions
+
+Group
+Syntax
+
+Arguments
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+Source
+
+[SOURce[1|2]]:AM[:DEPTh]
+{<depth>|MINimum|MAXimum}
+[SOURce[1|2]]:AM[:DEPTh]? [MINimum|MAXimum]
+
+<depth>::=<NR2>[<units>]
+where:
+<NR2> is the depth of modulating frequency.
+<units>::=PCT
+MINimum sets the modulation depth to minimum value.
+MAXimum sets the modulation depth to maximum value.
+
+Returns
+Examples
+
+<depth>
+
+SOURce1:AM:DEPth
+
+MAXimum
+
+sets the depth of modulating signal on CH 1 to the maximum value.
+
+[SOURce[1|2]]:AM:INTernal:FREQuency
+This command sets or queries the internal modulation frequency of AM
+modulation for the specified channel. Use this command when the internal
+modulation source is selected. Set the internal modulation frequency from 2
+mHz to 20.00 kHz with resolution of 1 mHz.
+
+Conditions
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+21
+
+Command Descriptions
+
+Group
+Syntax
+Arguments
+
+Source
+
+[SOURce[1|2]]:AM:INTernal:FREQuency
+{<frequency>|MINimum|MAXimum}
+[SOURce[1|2]]:AM:INTernal:FREQuency? [MINimum|MAXimum]
+
+<frequency>::=<NRf>[<units>]
+where:
+<NRf> is the modulation frequency.
+<units>::=[Hz | kHz | MHz]
+
+Returns
+Examples
+
+<frequency>
+
+SOURce1:AM:INTernal:FREQuency
+
+10kHz
+
+sets the CH 1 internal modulation frequency to 10 kHz.
+
+[SOURce[1|2]]:AM:INTernal:FUNCtion
+This command sets or queries the modulating waveform of AM modulation for
+the specified channel. Use this command when the internal modulation source is
+selected.
+If you specify EFILe when there is no EFILe or the EFILe is not yet defined,
+this command causes an error.
+
+Conditions
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+
+Group
+
+Source
+
+Syntax
+
+[SOURce[1|2]]:AM:INTernal:FUNCtion
+
+{SINusoid|SQUare|RAMP|PRNoise
+
+|USER<NR1>|EMEMory|EFILe}
+
+[SOURce[1|2]]:AM:INTernal:FUNCtion?
+
+Related Commands
+
+22
+
+SOURce[1|2]]:AM:SOURce
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+
+Arguments
+
+USER<NR1>|EMEMory
+
+<NR1> specifies the user waveform memory location.
+For the AFG1022, <NR1> can be any number from 0 to 255.
+For the AFG1062, <NR1> can be any number from 0 to 31.
+A user defined waveform saved in the user waveform memory or the
+EMEMory can be selected as a modulating signal.
+EFILe
+
+EFILe is used as a modulating signal.
+
+Returns
+Examples
+
+SIN|SQU|RAMP|PRN|USER<NR1>|EMEMory|EFILe
+
+SOURce1:AM:INTernal:FUNCtion
+
+SQUare
+
+selects Square as the shape of modulating waveform for the CH 1 output.
+
+[SOURce[1|2]]:AM:INTernal:FUNCtion:EFILe
+This command sets or queries an EFILe name used as a modulating waveform for
+AM modulation. A file name must be specified in the mass storage system. This
+command returns “ ” if there is no file in the mass storage.
+
+Conditions
+
+Group
+Syntax
+
+Arguments
+
+Returns
+Examples
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+Source
+[SOURce[1|2]]:AM:INTernal:FUNCtion:EFILe
+<file_name>
+[SOURce[1|2]]:AM:INTernal:FUNCtion:EFILe?
+
+<file_name>::=<string> specifies a file name in the mass storage system. The
+<file_name> includes path. Path separators are forward slashes (/).
+<file_name>
+
+SOURce1:AM:INTernal:FUNCtion:EFILe
+
+“SAMPLE1”
+
+sets a file named “SAMPLE1” in the mass storage.
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+23
+
+Command Descriptions
+
+[SOURce[1|2]]:AM:SOURce
+This command sets or queries the source of modulating signal of AM modulation
+for the specified channel.
+
+Conditions
+
+Group
+Syntax
+
+Arguments
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+Source
+
+[SOURce[1|2]]:AM:SOURce [INTernal|EXTernal]
+[SOURce[1|2]]:AM:SOURce?
+
+INTernal means that the carrier waveform is modulated with an internal source.
+EXTernal means that the carrier waveform is modulated with an external source.
+
+Returns
+Examples
+
+INT|EXT
+
+SOURce1:AM:SOURce
+
+INTernal
+
+sets the CH 1 source of modulating signal to internal.
+
+[SOURce[1|2]]:AM:STATe
+This command enables or disables AM modulation for the specified channel. The
+query returns the state of AM modulation.
+
+Conditions
+Group
+Syntax
+
+24
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+Source
+[SOURce[1|2]]:AM:STATe {ON|OFF|<NR1>}
+[SOURce[1|2]]:AM:STATe?
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+
+Arguments
+
+If [SOURce[1|2]] are omitted, CH 1 is specified automatically.
+ON or <NR1>≠0 enables AM modulation.
+OFF or <NR1>=0 disables AM modulation.
+
+Returns
+Examples
+
+<NR1>
+
+SOURce1:AM:STATe ON
+
+enables the CH 1 AM modulation.
+
+[SOURce[1|2]]:ASKey[:AMPLitude]
+This command is not supported for AFG1022.
+This command sets or queries the modulation amplitude of ASK modulation for
+the specified channel. Set the modulation amplitude from 0 Vpp to the current
+amplitude of the carrier waveform.
+
+Conditions
+Group
+Syntax
+
+Arguments
+
+Units
+
+Amplitude resolution
+
+Vpp
+
+1 mVp-p or four digits
+
+AFG1062 only
+Source
+
+[SOURce[1|2]]:ASKey[:AMPLitude]
+[SOURce[1|2]]:ASKey[:AMPLitude]?
+
+{<amplitude>|MINimum|MAXimum}
+[MINimum|MAXimum]
+
+<amplitude>::=<NRf>[<units>]
+where:
+<NRf> is the modulation amplitude.
+
+<units>::=[Vpp]
+MINimum sets the modulation amplitude to minimum value.
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+25
+
+Command Descriptions
+MAXimum sets the modulation amplitude to maximum value.
+
+Returns
+Examples
+
+<amplitude>
+
+SOURce1:ASKey:AMPLitude
+
+MAXimum
+
+sets the amplitude of modulating signal on CH 1 to the maximum value.
+
+[SOURce[1|2]]:ASKey:INTernal:RATE
+This command sets or queries the internal modulation rate of ASK modulation
+for the specified channel. Use this command when the internal modulation
+source is selected.
+
+Conditions
+Group
+Syntax
+
+Arguments
+
+AFG1062 only
+Source
+
+[SOURce[1|2]]:ASKey:INTernal:RATE
+{<rate>|MINimum|MAXimum}
+[SOURce[1|2]]:ASKey:INTernal:RATE?
+{MINimum|MAXimum}
+
+<rate>::=<NRf>[<units>]
+where:
+<NRf> is the modulation rate.
+<units>::=[Hz | kHz | MHz]
+
+Returns
+Examples
+
+<rate>
+
+SOURce1:ASKey:INTernal:RATE
+
+50Hz
+
+sets the CH 1 internal modulation rate to 50 Hz.
+
+26
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+
+[SOURce[1|2]]:ASKey:SOURce
+This command sets or queries the source of modulation signal of ASK modulation
+for the specified channel.
+
+Conditions
+Group
+Syntax
+
+Arguments
+
+AFG1062 only
+Source
+
+[SOURce[1|2]]:ASKey:SOURce [INTernal|EXTernal]
+[SOURce[1|2]]:ASKey:SOURce?
+
+INTernal means that the carrier waveform is modulated with an internal source.
+EXTernal means that the carrier waveform is modulated with an external source.
+
+Returns
+Examples
+
+INT|EXT
+
+SOURce1:ASKey:SOURce
+
+INTernal
+
+sets the CH 1 source of modulating signal to internal.
+
+[SOURce[1|2]]:ASKey:STATe
+This command enables or disables ASK modulation. The query returns the state
+of ASK modulation. Select a sine, square, ramp, or arbitrary waveform as the
+carrier waveform.
+
+Conditions
+Group
+Syntax
+Arguments
+
+AFG1062 only
+Source
+[SOURce[1|2]]:ASKey:STATe {ON|OFF|<NR1>}
+[SOURce[1|2]]:ASKey:STATe?
+
+ON or <NR1>≠0 enables ASK modulation.
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+27
+
+Command Descriptions
+OFF or <NR1>=0 disables ASK modulation.
+
+Returns
+Examples
+
+<NR1>
+
+SOURce1:ASKey:STATe ON
+
+enables the CH 1 ASK modulation.
+
+[SOURce[1|2]]:BURSt:MODE
+This command sets or queries the burst mode for the specified channel.
+
+Conditions
+
+Group
+Syntax
+
+Arguments
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+Source
+[SOURce[1|2]]:BURSt:MODE {TRIGgered|GATed}
+[SOURce[1|2]]:BURSt:MODE?
+
+TRIGgered means that triggered mode is selected for burst mode.
+GATed means that gated mode is selected for burst mode.
+
+Returns
+Examples
+
+TRIG|GAT
+
+SOURce1:BURSt:MODE
+
+TRIGgered
+
+selects triggered mode.
+
+[SOURce[1|2]]:BURSt:NCYCles
+This command sets or queries the number of cycles (burst count) to be output in
+burst mode for the specified channel. The query returns 9.9E+37 if the burst
+count is set to INFinity.
+
+Conditions
+
+28
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+not apply to CH2 for the AFG1022.
+
+Group
+Syntax
+
+Arguments
+
+Source
+[SOURce[1|2]]:BURSt:NCYCles {<cycles>|INFinity|MINimum|MAXimum}
+[SOURce[1|2]]:BURSt:NCYCles? {MINimum|MAXimum}
+
+<cycles>::=<NRf>
+where:
+<NRf> is the burst count. The burst count ranges from 1 to 1,000,000.
+INFinity sets the burst count to infinite count.
+MINimum sets the burst count to minimum count.
+MAXimum sets the burst count to maximum count.
+
+Returns
+Examples
+
+<cycles>
+
+SOURce1:BURSt:NCYCles
+
+2
+
+sets the CH 1 burst count to 2.
+
+[SOURce[1|2]]:BURSt:SOURce
+This command sets or queries the trigger source in the burst mode for the
+specified channel. This command is available only in the Triggered burst mode.
+
+Conditions
+
+Group
+Syntax
+Arguments
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+Source
+
+[SOURce[1|2]]:BURSt:SOURce [TIMer|MANual|EXTernal]
+[SOURce[1|2]]:BURSt:SOURce?
+TIMer specifies an internal clock as the trigger source.
+MANual specifies a manual trigger input as the trigger source.
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+29
+
+Command Descriptions
+EXTernal specifies an external trigger input as the trigger source.
+
+Returns
+Examples
+
+TIM|MAN|EXT
+
+SOURce1:BURSt:SOURce
+
+EXTernal
+
+sets an external trigger input as the trigger source in the burst mode.
+
+[SOURce[1|2]]:BURSt:STATe
+This command enables or disables the burst mode for the specified channel. The
+query returns the state of burst mode.
+
+Conditions
+
+Group
+Syntax
+
+Arguments
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+Source
+[SOURce[1|2]]:BURSt:STATe {ON|OFF|<NR1>}
+[SOURce[1|2]]:BURSt:STATe?
+
+ON or <NR1>≠0 enables the burst mode.
+OFF or <NR1>=0 disables the burst mode.
+
+Returns
+Examples
+
+<NR1>
+
+SOURce1:BURSt:STATe ON
+
+enables the burst mode for the CH 1.
+
+[SOURce[1|2]]:FM[:DEViation]
+This command sets or queries the peak frequency deviation of FM modulation for
+the specified channel. The setting range of frequency deviation depends on the
+waveform selected as the carrier. For more information, refer to the AFG1000
+Series Specifications and Performance Verification Technical Reference.
+
+30
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+
+Conditions
+
+Group
+Syntax
+
+Arguments
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+Source
+[SOURce[1|2]]:FM[:DEViation]
+{<deviation>|MINimum|MAXimum}
+[SOURce[1|2]]:FM[:DEViation]? [MINimum|MAXimum]
+
+<deviation>::=<NRf>[<units>]
+where:
+<NRf> is the frequency deviation.
+<units>::=[Hz | kHz | MHz]
+
+Returns
+Examples
+
+<deviation>
+SOURce1:FM:DEViation
+
+1.0MHz
+
+sets the CH 1 frequency deviation to 1.0 MHz.
+
+[SOURce[1|2]]:FM:INTernal:FREQuency
+This command sets or queries the internal modulation frequency of FM
+modulation for the specified channel. Use this command when the internal
+modulation source is selected.
+Set the internal modulation frequency from 2 mHz to 20.00 kHz with resolution
+of 1 mHz.
+
+Conditions
+
+Group
+Syntax
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+Source
+[SOURce[1|2]]:FM:INTernal:FREQuency
+{<frequency>|MINimum|MAXimum}
+[SOURce[1|2]]:FM:INTernal:FREQuency? [MINimum|MAXimum]
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+31
+
+Command Descriptions
+
+Arguments
+
+<frequency>::=<NRf>[<units>]
+where:
+<NRf> is the modulation frequency.
+<units>::=[Hz | kHz | MHz]
+
+Returns
+Examples
+
+<frequency>
+
+SOURce1:FM:INTernal:FREQuency 10kHz
+
+sets the CH 1 internal modulation frequency to 10 kHz.
+
+[SOURce[1|2]]:FM:INTernal:FUNCtion
+This command sets or queries the modulating waveform of FM modulation for the
+specified channel. Use this command when the internal modulation source is
+selected.
+If you specify EFILe when there is no EFILe or the EFILe is not yet defined,
+this command causes an error.
+
+Conditions
+
+Group
+Syntax
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+Source
+[SOURce[1|2]]:FM:INTernal:FUNCtion
+
+{SINusoid|SQUare|RAMP|PRNoise
+
+|USER<NR1>|EMEMory|EFILe}
+
+[SOURce[1|2]]:FM:INTernal:FUNCtion?
+
+Related Commands
+Arguments
+
+SOURce[1|2]]:FM:SOURce
+USER<NR1>|EMEMory
+
+<NR1> specifies the user waveform memory location.
+For the AFG1022, <NR1> can be any number from 0 to 255.
+For the AFG1062, <NR1> can be any number from 0 to 31.
+A user defined waveform saved in the user waveform memory or the
+EMEMory can be selected as a modulating signal.
+EFILe
+
+32
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+EFILe is used as a modulating signal.
+
+Returns
+Examples
+
+SIN|SQU|RAMP|PRN|USER<NR1>|EMEMory|EFILe
+
+SOURce1:FM:INTernal:FUNCtion
+
+SQUare
+
+selects Square as the shape of modulating waveform for the CH 1 output.
+
+[SOURce[1|2]]:FM:INTernal:FUNCtion:EFILe
+This command sets or queries an EFILe name used as a modulating waveform
+for FM modulation. A file name must be specified in the mass storage system.
+This command returns “ ” if there is no file in the mass storage.
+
+Conditions
+
+Group
+Syntax
+Arguments
+
+Returns
+Examples
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+Source
+[SOURce[1|2]]:FM:INTernal:FUNCtion:EFILe
+<file_name>
+[SOURce[1|2]]:FM:INTernal:FUNCtion:EFILe?
+
+<file_name>::=<string> specifies a file name in the mass storage system. The
+<file_name> includes path. Path separators are forward slashes (/).
+<file_name>
+
+SOURce1:FM:INTernal:FUNCtion:EFILe
+
+“SAMPLE1”
+
+sets a file named “SAMPLE1” in the mass storage.
+
+[SOURce[1|2]]:FM:SOURce
+This command sets or queries the source of modulating signal of FM modulation
+for the specified channel.
+
+Conditions
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+33
+
+Command Descriptions
+
+Group
+Syntax
+
+Arguments
+
+Source
+
+[SOURce[1|2]]:FM:SOURce [INTernal|EXTernal]
+[SOURce[1|2]]:FM:SOURce?
+
+INTernal means that the carrier waveform is modulated with the internal source.
+EXTernal means that the carrier waveform is modulated with an external source.
+
+Returns
+Examples
+
+INT|EXT
+
+SOURce1:FM:SOURce
+
+INTernal
+
+sets the CH 1 source of modulating signal to internal.
+
+[SOURce[1|2]]:FM:STATe
+This command enables or disables FM modulation. The query returns the state
+of FM modulation.
+
+Conditions
+
+Group
+Syntax
+Arguments
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+Source
+[SOURce[1|2]]:FM:STATe {ON|OFF|<NR1>}
+[SOURce[1|2]]:FM:STATe?
+
+ON or <NR1>≠0 enables FM modulation.
+OFF or <NR1>=0 disables FM modulation.
+
+Returns
+Examples
+
+<NR1>
+
+SOURce1:FM:STATe ON
+
+enables the CH 1 FM modulation.
+
+34
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+
+[SOURce[1|2]]:FREQuency:CENTer
+This command sets or queries the center frequency of sweep for the specified
+channel. This command is always used with the
+[SOURce[1|2]]:FREQuency:SPAN command. The setting range of center
+frequency depends on the waveform selected for sweep.
+
+Conditions
+
+Group
+Syntax
+Related Commands
+Arguments
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+
+Source
+[SOURce[1|2]]:FREQuency:CENTer
+{<frequency>|MINimum|MAXimum}
+[SOURce[1|2]]:FREQuency:CENTer? {MINimum|MAXimum}
+
+[SOURce[1|2]]:FREQuency:SPAN,
+
+[SOURce[1|2]]:FREQuency:MODE
+
+<frequency>::=<NRf>[<units>]
+where:
+<NRf> is the center frequency.
+<units>::=[Hz | kHz | MHz]
+
+Returns
+Examples
+
+<frequency>
+
+SOURce1:FREQuency:CENTer
+
+550kHz
+
+sets the CH 1 center frequency to 550 kHz.
+
+[SOURce[1|2]]:FREQuency:CONCurrent
+This command enables or disables the function to copy the frequency (or period)
+of one channel to another channel.
+The[SOURce[1|2]]:FREQuency:CONCurrent command copies the frequency
+(or period) of the channel specified by the header suffix to another channel. If you
+specify CH 1 with the header, the CH 1 frequency will be copied to CH 2.
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+35
+
+Command Descriptions
+
+When the concurrent copy function is enabled, the FreqLock function is also
+enabled automaticlly. Use general knob to adjust frequency (or period) of the two
+channels sychronously.
+The[SOURce[1|2]]:FREQuency:CONCurrent? command returns “0” (off) or “1”
+(on).
+
+Group
+
+Source
+
+Syntax
+
+[SOURce[1|2]]:FREQuency:CONCurrent
+{ON|OFF|<NR1>}
+[SOURce[1|2]]:FREQuency:CONCurrent?
+
+Arguments
+
+ON or <NR1>≠0 enables the concurrent copy function.
+OFF or <NR1>=0 disables the concurrent copy function.
+
+Returns
+Examples
+
+<NR1>
+SOURce1:FREQuency:CONCurrent ON
+
+copies the frequency value of CH 1 to CH 2.
+
+[SOURce[1|2]]:FREQuency[:CW|:FIXed]
+This command sets or queries the frequency of output waveform for the specified
+channel. This command is available when the Run Mode is set to other than
+Sweep.
+The setting range of output frequency depends on the type of output waveform.
+If you change the type of output waveform, it might change the output frequency
+because changing waveform types impacts on the setting range of output
+frequency. The resolution is 1 μHz or 12 digits. For more information, refer to
+the AFG1000 Series Specifications and Performance Verification Technical
+Reference.
+
+Group
+Syntax
+
+Arguments
+
+36
+
+Source
+[SOURce[1|2]]:FREQuency[:CW|:FIXed]
+{<frequency>|MINimum|MAXimum}
+[SOURce[1|2]]:FREQuency[:CW|:FIXed]? {MINimum|MAXimum}
+
+<frequency>::=<NRf>[<units>]
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+where:
+<NRf> is the output frequency.
+<units>::=[Hz | kHz | MHz]
+
+Returns
+Examples
+
+<frequency>
+
+SOURce1:FREQuency:FIXed
+
+500kHz
+
+sets the CH 1 output frequency to 500 kHz when the Run Mode is set to other
+than Sweep.
+
+[SOURce[1|2]]:FREQuency:MODE
+This command sets or queries the frequency sweep state. Select sine, square or
+ramp waveform for sweep.
+
+Conditions
+
+Group
+Syntax
+
+Related Commands
+Arguments
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+
+Source
+
+[SOURce[1|2]]:FREQuency:MODE {CW|FIXed|SWEep}
+[SOURce[1|2]]:FREQuency:MODE?
+
+[SOURce[1|2]]:FREQuency[:CW|:FIXed]
+
+CW|FIXed means that the frequency is controlled by the
+[SOURce[1|2]]:FREQuency[:CW|:FIXed] command. The sweep
+is invalid.
+SWEep means that the output frequency is controlled by the sweep command
+set. The sweep is valid.
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+37
+
+Command Descriptions
+
+Returns
+Examples
+
+CW|FIXed|SWEep
+
+SOURce1:FREQuency:MODE SWEep specifies the sweep command set for
+
+controlling the CH 1 output frequency.
+
+[SOURce[1|2]]:FREQuency:SPAN
+This command sets or queries the span of frequency sweep for the specified channel.
+This command is always used with the [SOURce[1|2]]:FREQuency:CENTer
+command. The setting range of frequency span depends on the waveform
+selected for sweep.
+
+Conditions
+
+Group
+Syntax
+Related Commands
+Arguments
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+
+Source
+[SOURce[1|2]]:FREQuency:SPAN
+[SOURce[1|2]]:FREQuency:SPAN?
+
+[SOURce[1|2]]:FREQuency:CENTer,
+
+{<frequency>|MINimum|MAXimum}
+{MINimum|MAXimum}
+
+[SOURce[1|2]]:FREQuency:MODE
+
+<frequency>::=<NRf>[<units>]
+where:
+<NRf> is the frequency span.
+<units>::=[Hz | kHz | MHz]
+
+Returns
+Examples
+
+<frequency>
+
+SOURce1:FREQuency:SPAN 900 kHz
+
+sets the CH 1 frequency span to 900 kHz.
+
+38
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+
+[SOURce[1|2]]:FREQuency:STARt
+This command sets or queries the start frequency of sweep for the specified
+channel. This command is always used with the
+[SOURce[1|2]]:FREQuency:STOP command. The setting range of start
+frequency depends on the waveform selected for sweep. For more information,
+refer to the AFG1000 Series Specifications and Performance Verification
+Technical Reference.
+
+Conditions
+
+Group
+Syntax
+Related Commands
+Arguments
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+
+Source
+[SOURce[1|2]]:FREQuency:STARt
+{<frequency>|MINimum|MAXimum}
+[SOURce[1|2]]:FREQuency:STARt? {MINimum|MAXimum}
+
+[SOURce[1|2]]:FREQuency:STOP,
+
+[SOURce[1|2]]:FREQuency:MODE
+
+<frequency>::=<NRf>[<units>]
+where:
+<NRf> is the start frequency.
+<units>::=[Hz | kHz | MHz]
+
+Returns
+Examples
+
+<frequency>
+
+SOURce1:FREQuency:STARt
+
+10kHz
+
+sets the sweep start frequency of CH 1 to 10 kHz.
+
+[SOURce[1|2]]:FREQuency:STOP
+This command sets or queries the stop frequency of sweep for the specified
+channel. This command is always used with the
+[SOURce[1|2]]:FREQuency:STARt command. The setting range of stop
+frequency depends on the waveform selected for sweep. For more information,
+refer to the AFG1000 Series Specifications and Performance Verification
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+39
+
+Command Descriptions
+Technical Reference.
+
+Conditions
+
+Group
+Syntax
+Related Commands
+Arguments
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+Source
+
+[SOURce[1|2]]:FREQuency:STOP
+[SOURce[1|2]]:FREQuency:STOP?
+
+[SOURce[1|2]]:FREQuency:STARt,
+
+{<frequency>|MINimum|MAXimum}
+{MINimum|MAXimum}
+
+[SOURce[1|2]]:FREQuency:MODE
+
+<frequency>::=<NRf>[<units>]
+where:
+<NRf> is the stop frequency.
+<units>::=[Hz | kHz | MHz]
+
+Returns
+Examples
+
+<frequency>
+
+SOURce1:FREQuency:STOP
+
+100KHz
+
+sets the stop frequency of CH 1 to 100 kHz.
+
+[SOURce[1|2]]:FSKey[:FREQuency]
+This command sets or queries the hop frequency of FSK modulation for the
+specified channel.
+
+Conditions
+
+Group
+Syntax
+
+40
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+
+Source
+[SOURce[1|2]]:FSKey[:FREQuency]
+{<frequency>|MINimum|MAXimum}
+[SOURce[1|2]]:FSKey[:FREQuency]? {MINimum|MAXimum}
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+
+Arguments
+
+<frequency>::=<NRf>[<units>]
+where:
+<NRf> is the hop frequency.
+<units>::=[Hz | kHz | MHz]
+
+Returns
+Examples
+
+<frequency>
+
+SOURce1:FSKey:FREQuency
+
+1.0MHz
+
+sets the hop frequency of CH 1 FSK modulation to 1.0 MHz.
+
+[SOURce[1|2]]:FSKey:INTernal:RATE
+This command sets or queries the internal modulation rate of FSK modulation
+for the specified channel. Use this command when the internal modulation
+source is selected.
+
+Conditions
+
+Group
+Syntax
+
+Arguments
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+
+Source
+[SOURce[1|2]]:FSKey:INTernal:RATE
+[SOURce[1|2]]:FSKey:INTernal:RATE?
+
+{<rate>|MINimum|MAXimum}
+{MINimum|MAXimum}
+
+<rate>::=<NRf>[<units>]
+where:
+<NRf> is the modulation rate.
+<units>::=[Hz | kHz | MHz]
+
+Returns
+Examples
+
+<rate>
+SOURce1:FSKey:INTernal:RATE
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+50Hz
+
+41
+
+Command Descriptions
+sets the CH 1 internal modulation rate to 50 Hz.
+
+[SOURce[1|2]]:FSKey:SOURce
+This command sets or queries the source of modulation signal of FSK modulation
+for the specified channel.
+
+Conditions
+
+Group
+Syntax
+Arguments
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+
+Source
+[SOURce[1|2]]:FSKey:SOURce [INTernal|EXTernal]
+[SOURce[1|2]]:FSKey:SOURce?
+
+INTernal means that the carrier waveform is modulated with an internal source.
+EXTernal means that the carrier waveform is modulated with an external source.
+
+Returns
+Examples
+
+INT|EXT
+
+SOURce1:FSKey:SOURce
+
+INTernal
+
+sets the CH 1 source of modulating signal to internal.
+
+[SOURce[1|2]]:FSKey:STATe
+This command enables or disables FSK modulation. The query returns the state
+of FSK modulation. Select a sine, square, ramp, or arbitrary waveform as the
+carrier waveform.
+
+Conditions
+
+42
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+
+Group
+
+Source
+
+Syntax
+
+[SOURce[1|2]]:FSKey:STATe
+
+{ON|OFF|<NR1>}
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+[SOURce[1|2]]:FSKey:STATe?
+
+Arguments
+
+ON or <NR1>≠0 enables FSK modulation.
+OFF or <NR1>=0 disables FSK modulation.
+
+Returns
+Examples
+
+<NR1>
+
+SOURce1:FSKey:STATe ON
+
+enables the CH 1 FSK modulation.
+
+[SOURce[1|2]]:FUNCtion:EFILe
+This command sets or queries an EFILe name used as an output waveform. A file
+name must be specified in the mass storage system. This command returns “ ” if
+there is no file in the mass storage.
+
+Group
+Syntax
+Arguments
+
+Source
+[SOURce[1|2]]:FUNCtion:EFILe <file_name>
+[SOURce[1|2]]:FUNCtion:EFILe?
+
+<file_name>::=<string> specifies a file name in the mass storage system. The
+<file_name> includes path. Path separators are forward slashes (/).
+NOTE: The <file_name> argument is case sensitive.
+
+Returns
+Examples
+
+<file_name>
+
+SOURce1:FUNCtion:EFILe
+
+“SAMPLE1”
+
+sets a file named “SAMPLE1” in the mass storage.
+
+[SOURce[1|2]]:FUNCtion[:SHAPe]
+This command sets or queries the shape of the output waveform. When the
+specified user memory is deleted, this command causes an error if you select the
+user memory.
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+43
+
+Command Descriptions
+
+Group
+
+Source
+
+Syntax
+
+[SOURce[1|2]]:FUNCtion[:SHAPe]
+
+{SINusoid|SQUare|PULSe|RAMP
+|PRNoise|<Built_in>|USER<NR1>|EMEMory|EFILe}
+
+[SOURce[1|2]]:FUNCtion[:SHAPe]?
+
+Arguments
+
+<Built_in>::={StairDown|StairUp|Stair Up&Dwn|Trapezoid|RoundHalf|
+AbsSine|AbsHalfSine|ClippedSine|ChoppedSine|NegRamp|OscRise|OscDecay|
+CodedPulse|PosPulse|NegPulse|ExpRise|ExpDecay|Sinc|Tan|Cotan|SquareRoot|
+X^2|HaverSine|Lorentz|Ln(x)|X^3|CauchyDistr|BesselJ|BesselY|ErrorFunc|Airy|
+Rectangle|Gauss|Hamming|Hanning|Bartlett|Blackman|Laylight|Triangle|DC|
+Heart|Round|Chirp|Rhombus|Cardiac}
+NOTE: The arguments defined in <Built_in> can not be abbreviated, all the
+upper and lower case letters are needed.
+The following table shows the combination of modulation type and the shape of
+output waveform.
+For AFG1022
+Sine, Square, Ramp
+
+Pulse
+
+Noise
+
+Arb
+
+AM
+
+√
+
+√
+
+FM
+
+√
+
+√
+
+PM
+
+√
+
+√
+
+FSK
+
+√
+
+√
+
+Sweep
+
+√
+
+√
+
+Burst
+
+√
+
+√
+
+√
+
+For AFG1062
+Sine, Square, Ramp
+
+Noise
+
+Arb
+
+AM
+
+√
+
+√
+
+FM
+
+√
+
+√
+
+PM
+
+√
+
+√
+√
+
+PWM
+
+44
+
+Pulse
+
+FSK
+
+√
+
+√
+
+ASK
+
+√
+
+√
+
+PSK
+
+√
+
+√
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+Sweep
+
+√
+
+Burst
+
+√
+
+√
+√
+
+√
+
+If you specify EFILe when there is no EFILe or the EFILe is not yet defined,
+this command causes an error.
+If you change the type of output waveform, it might change the output frequency
+because changing waveform types impacts the setting range of output frequency.
+USER<NR1>|EMEMory
+
+<NR1> specifies the user waveform memory location.
+For the AFG1022, <NR1> can be any number from 0 to 255.
+For the AFG1062, <NR1> can be any number from 0 to 31.
+A user defined waveform saved in the user waveform memory or the
+EMEMory can be selected as an output waveform.
+EFILe
+EFILe is specified as an output waveform.
+
+Returns
+Examples
+
+SIN|SQU|PULS|RAMP|PRN|<Built_in>|USER<NR1>|EMEMory|EFILe
+
+SOURce1:FUNCtion:SHAPe
+
+SQUare
+
+selects the shape of CH 1 output waveform to square waveform.
+
+[SOURce[1|2]]:PHASe[:ADJust]
+This command sets or queries the phase of output waveform for the specified
+channel. Set the value in radians or degrees. If no units are specified, the default
+is RAD. The query returns the value in RAD.
+This command is supported when you select a waveform other than DC and
+Noise.
+
+Group
+Syntax
+
+Arguments
+
+Source
+[SOURce[1|2]]:PHASe[:ADJust]
+{<phase>|MINimum|MAXimum}
+[SOURce[1|2]]:PHASe[:ADJust]? {MINimum|MAXimum}
+
+<phase>::=<NR3>[<units>]
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+45
+
+Command Descriptions
+where:
+<NR3> is the phase of output waveform.
+<units>::=[RAD | DEG]
+If <units> are omitted, RAD is specified automatically. The setting ranges are:
+RAD: 0 to +2 PI, relative to phase value
+DEG: 0 to +360, relative to phase value
+
+Returns
+Examples
+
+<phase>
+
+SOURce1:PHASe:ADJust MAXimum
+
+sets the maximum value for the phase of CH 1 output waveform.
+
+[SOURce[1|2]]:PHASe:INITiate (No Query Form)
+This command synchronizes the phase of CH 1 and CH 2 output waveforms. The
+arbitrary/function generator performs the same operation if you specify either
+SOURce1 or SOURce2.
+
+Group
+Syntax
+Arguments
+Examples
+
+Source
+[SOURce[1|2]]:PHASe:INITiate
+
+None
+SOURce1:PHASe:INITiate
+
+synchronizes the phase of CH 1 and CH 2 output signals.
+
+[SOURce[1|2]]:PM[:DEViation]
+This command sets or queries the peak frequency deviation of PM modulation for
+the specified channel.
+
+Conditions
+
+46
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+
+Group
+Syntax
+
+Arguments
+
+Source
+[SOURce[1|2]]:PM[:DEViation]
+{<deviation>|MINimum|MAXimum}
+[SOURce[1|2]]:PM[:DEViation]? [MINimum|MAXimum]
+
+<deviation>::=<NR3>[<units>]
+where:
+<NR3> is the phase deviation.
+<units>::=[RAD | DEG]
+If <units> are omitted, RAD is specified automatically. The setting ranges are:
+RAD: 0 PI to +1 PI, relative to phase value
+DEG: 0 to +180, in 1 degree steps, relative to phase value
+
+Returns
+Examples
+
+<deviation>
+
+SOURce1:PM:DEViation
+
+MAXimum
+
+sets the maximum value for the CH 1 phase deviation.
+
+[SOURce[1|2]]:PM:INTernal:FREQuency
+This command sets or queries the internal modulation frequency of PM
+modulation for the specified channel. Use this command when the internal
+modulation source is selected.
+Set the internal modulation frequency from 2 mHz to 20.00 kHz with resolution
+of 1 mHz.
+
+Conditions
+Group
+Syntax
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+
+Source
+[SOURce[1|2]]:PM:INTernal:FREQuency
+{<frequency>|MINimum|MAXimum}
+[SOURce[1|2]]:PM:INTernal:FREQuency? [MINimum|MAXimum]
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+47
+
+Command Descriptions
+
+Arguments
+
+<frequency>::=<NRf>[<units>]
+where:
+<NRf> is the modulation frequency.
+<units>::=[Hz | kHz | MHz]
+
+Returns
+Examples
+
+<frequency>
+
+SOURce1:PM:INTernal:FREQuency
+
+10kHz
+
+sets the CH 1 internal modulation frequency to 10 kHz.
+
+[SOURce[1|2]]:PM:INTernal:FUNCtion
+This command sets or queries the modulating waveform of PM modulation for the
+specified channel. Use this command when the internal modulation source is
+selected.
+If you specify EFILe when there is no EFILe or the EFILe is not yet defined,
+this command causes an error.
+
+Conditions
+
+Group
+Syntax
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+
+Source
+[SOURce[1|2]]:PM:INTernal:FUNCtion
+
+{SINusoid|SQUare|RAMP|PRNoise
+
+|USER<NR1>|EMEMory|EFILe}
+
+[SOURce[1|2]]:PM:INTernal:FUNCtion?
+
+Related Commands
+Arguments
+
+SOURce[1|2]]:PM:SOURce
+USER<NR1>|EMEMory
+
+<NR1> specifies the user waveform memory location.
+For the AFG1022, <NR1> can be any number from 0 to 255.
+For the AFG1062, <NR1> can be any number from 0 to 31.
+A user defined waveform saved in the user waveform memory or the
+EMEMory can be selected as a modulating signal.
+EFILe
+
+48
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+EFILe
+
+Returns
+Examples
+
+is used as a modulating signal.
+
+SIN|SQU|RAMP|PRN|USER<NR1>|EMEMory|EFILe
+SOURce1:PM:INTernal:FUNCtion
+
+SQUare
+
+selects Square as the shape of modulating waveform for the CH 1 output.
+
+[SOURce[1|2]]:PM:INTernal:FUNCtion:EFILe
+This command sets or queries an EFILe name used as a modulating waveform for
+PM modulation. A file name must be specified in the mass storage system. This
+command returns “ ” if there is no file in the mass storage.
+
+Conditions
+
+Group
+Syntax
+Arguments
+
+Returns
+Examples
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+
+Source
+[SOURce[1|2]]:PM:INTernal:FUNCtion:EFILe
+<file_name>
+[SOURce[1|2]]:PM:INTernal:FUNCtion:EFILe?
+
+<file_name>::=<string> specifies a file name in the mass storage system. The
+<file_name> includes path. Path separators are forward slashes (/).
+<file_name>
+
+SOURce1:PM:INTernal:FUNCtion:EFILe
+
+“SAMPLE1”
+
+sets a file named “SAMPLE1” in the mass storage.
+
+[SOURce[1|2]]:PM:SOURce
+This command sets or queries the source of modulation signal of PM modulation
+for the specified channel.
+
+Conditions
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+49
+
+Command Descriptions
+
+Group
+Syntax
+
+Arguments
+
+Source
+
+[SOURce[1|2]]:PM:SOURce [INTernal|EXTernal]
+[SOURce[1|2]]:PM:SOURce?
+
+INTernal means that the carrier waveform is modulated with an internal source.
+EXTernal means that the carrier waveform is modulated with an external source.
+
+Returns
+Examples
+
+INT|EXT
+
+SOURce1:PM:SOURce
+
+INTernal
+
+sets the CH 1 source of modulating signal to internal.
+
+[SOURce[1|2]]:PM:STATe
+This command enables or disables PM modulation. The query returns the state
+of PM modulation. Select a sine, square, ramp, or arbitrary waveform as the
+carrier waveform.
+
+Conditions
+
+Group
+Syntax
+Arguments
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+Source
+[SOURce[1|2]]:PM:STATe {ON|OFF|<NR1>}
+[SOURce[1|2]]:PM:STATe?
+
+ON or <NR1>≠0 enables PM modulation.
+OFF or <NR1>=0 disables PM modulation.
+
+Returns
+Examples
+
+50
+
+<NR1>
+
+SOURce1:PM:STATe ON
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+enables the CH 1 PM modulation.
+
+[SOURce[1|2]]:PSKey[:DEViation]
+This command sets or queries the peak frequency deviation of PSK modulation
+for the specified channel.
+
+Conditions
+Group
+Syntax
+
+Arguments
+
+AFG1062 only
+
+Source
+[SOURce[1|2]]:PSKey[:DEViation]
+[SOURce[1|2]]:PSKey[:DEViation]?
+
+{<deviation>|MINimum|MAXimum}
+[MINimum|MAXimum]
+
+<deviation>::=<NR3>[<units>]
+where:
+<NR3> is the phase deviation.
+<units>::=[RAD | DEG]
+If <units> are omitted, RAD is specified automatically. The setting ranges are:
+RAD: 0 PI to +1 PI, relative to phase value
+DEG: 0 to +180, in 1 degree steps, relative to phase value
+
+Returns
+Examples
+
+<deviation>
+
+SOURce1:PSKey:DEViation
+
+MAXimum
+
+sets the maximum value for the CH 1 phase deviation.
+
+[SOURce[1|2]]:PSKey:INTernal:RATE
+This command sets or queries the internal modulation rate of PSK modulation
+for the specified channel. Use this command when the internal modulation
+source is selected.
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+51
+
+Command Descriptions
+
+Conditions
+Group
+Syntax
+
+Arguments
+
+AFG1062 only
+Source
+
+[SOURce[1|2]]:PSKey:INTernal:RATE
+{<rate>|MINimum|MAXimum}
+[SOURce[1|2]]:PSKey:INTernal:RATE?
+{MINimum|MAXimum}
+
+<rate>::=<NRf>[<units>]
+where:
+<NRf> is the modulation rate.
+<units>::=[Hz | kHz | MHz]
+
+Returns
+Examples
+
+<rate>
+
+SOURce1:PSKey:INTernal:RATE
+
+50Hz
+
+sets the CH 1 internal modulation rate to 50 Hz.
+
+[SOURce[1|2]]:PSKey:SOURce
+This command sets or queries the source of modulation signal of PSK modulation
+for the specified channel.
+
+Conditions
+Group
+Syntax
+
+Arguments
+
+AFG1062 only
+Source
+
+[SOURce[1|2]]:PSKey:SOURce [INTernal|EXTernal]
+[SOURce[1|2]]:PSKey:SOURce?
+
+INTernal means that the carrier waveform is modulated with an internal source.
+EXTernal means that the carrier waveform is modulated with an external source.
+
+Returns
+
+52
+
+INT|EXT
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+
+Examples
+
+SOURce1:PSKey:SOURce
+
+INTernal
+
+sets the CH 1 source of modulating signal to internal.
+
+[SOURce[1|2]]:PSKey:STATe
+This command enables or disables PSK modulation. The query returns the state
+of PSK modulation. Select a sine, square, ramp, or arbitrary waveform as the
+carrier waveform.
+
+Conditions
+Group
+Syntax
+Arguments
+
+AFG1062 only
+Source
+[SOURce[1|2]]:PSKey:STATe {ON|OFF|<NR1>}
+[SOURce[1|2]]:PSKey:STATe?
+
+ON or <NR1>≠0 enables PSK modulation.
+OFF or <NR1>=0 disables PSK modulation.
+
+Returns
+Examples
+
+<NR1>
+
+SOURce1:PSKey:STATe ON
+
+enables the CH 1 PSK modulation.
+
+[SOURce[1|2]]:PULSe:DCYCle
+This command sets or queries the duty cycle of the pulse waveform for the
+specified channel.
+For frequencies less than 1 MHz, the duty cycle is adjustable within the range of
+0.1% to 99.9% in increments of 0.1. For frequencies greater than 1 MHz, the duty
+cycle is fixed at 50%.
+The instrument will hold the settings of leading edge and trailing edge when the
+duty cycle is varied.
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+53
+
+Command Descriptions
+
+Group
+Syntax
+
+Arguments
+
+Source
+[SOURce[1|2]]:PULSe:DCYCle
+{<percent>|MINimum|MAXimum}
+[SOURce[1|2]]:PULSe:DCYCle? [MINimum|MAXimum]
+
+<percent>::=<NR2>[<units>]
+where:
+<NR2> is the duty cycle.
+<units>::=PCT
+
+Returns
+Examples
+
+<percent>
+
+SOURce1:PULSe:DCYCle
+
+80.5
+
+sets the duty cycle of the pulse waveform on CH 1 to 80.5%.
+
+[SOURce[1|2]]:PWM:INTernal:FREQuency
+This command sets or queries the internal modulation frequency of PWM
+modulation for the specified channel. Use this command when the internal
+modulation source is selected.
+Set the internal modulation frequency from 2 mHz to 20.00 kHz with resolution
+of 1 mHz.
+Select the source of modulating signal by using the
+[SOURce[1|2]]:PWM:SOURce [INTernal|EXTernal] command.
+
+Conditions
+
+AFG1062 only
+
+Group
+
+Source
+
+Syntax
+
+[SOURce[1|2]]:PWM:INTernal:FREQuency
+{<frequency>|MINimum|MAXimum}
+
+[SOURce[1|2]]:PWM:INTernal:FREQuency?
+
+Related Commands
+
+54
+
+[SOURce[1|2]]:PWM:SOURce
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+
+Arguments
+
+<frequency>::=<NRf>[<units>]
+where <NRf> is the modulation frequency.
+<units>::=[Hz | kHz | MHz]
+
+Returns
+Examples
+
+<frequency>
+
+SOURce1:PWM:INTernal:FREQuency
+
+10kHz
+
+sets the CH 1 internal frequency to 10 kHz.
+
+[SOURce[1|2]]:PWM:INTernal:FUNCtion
+This command sets or queries the modulating waveform of PWM modulation
+for the specified channel. Use this command when the internal modulation
+source is selected.
+If you specify EFILe when there is no EFILe or the EFILe is not yet defined,
+this command causes an error.
+
+Conditions
+Group
+Syntax
+
+AFG1062 only
+
+Source
+[SOURce[1|2]]:PWM:INTernal:FUNCtion
+
+{SINusoid|SQUare|RAMP|PRNoise
+
+|USER<NR1>|EMEMory|EFILe}
+
+[SOURce[1|2]]:PWM:INTernal:FUNCtion?
+
+Related Commands
+Arguments
+
+[SOURce[1|2]]:PWM:SOURce
+SINusoid|SQUare|RAMP|PRNoise
+
+One of four types of function waveform can be selected as a modulating signal.
+USER<NR1>|EMEMory
+
+<NR1> specifies the user waveform memory location.
+For the AFG1022, <NR1> can be any number from 0 to 255.
+For the AFG1062, <NR1> can be any number from 0 to 31.
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+55
+
+Command Descriptions
+A user defined waveform saved in the user waveform memory or the
+EMEMory can be selected as a modulating signal.
+EFILe
+
+EFILe is used as a modulating signal.
+
+Returns
+Examples
+
+SIN|SQU|RAMP|PRN|USER<NR1>|EMEMory|EFILe
+
+SOURce1:PWM:INTernal:FUNCtion
+
+SQUare
+
+selects Square as the shape of modulating waveform for the CH 1 output.
+
+[SOURce[1|2]]:PWM:INTernal:FUNCtion:EFILe
+This command sets or queries an EFILe name used as a modulating waveform
+for PWM modulation. A file name must be specified in the mass storage system.
+This command returns “ ” if there is no file in the mass storage.
+
+Conditions
+Group
+Syntax
+Arguments
+
+Returns
+Examples
+
+AFG1062 only
+Source
+[SOURce[1|2]]:PWM:INTernal:FUNCtion:EFILe
+<file_name>
+[SOURce[1|2]]:PWM:INTernal:FUNCtion:EFILe?
+
+<file_name>::=<string> specifies a file name in the mass storage system. The
+<file_name> includes path. Path separators are forward slashes (/).
+<file_name>
+
+SOURce1:PWM:INTernal:FUNCtion:EFILe
+
+“SAMPLE1”
+
+creates a file named “SAMPLE1” in the mass storage.
+
+[SOURce[1|2]]:PWM:SOURce
+This command sets or queries the source of modulating signal of PWM
+modulation for the specified channel.
+
+56
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+
+Conditions
+Group
+Syntax
+Arguments
+
+AFG1062 only
+Source
+[SOURce[1|2]]:PWM:SOURce [INTernal|EXTernal]
+[SOURce[1|2]]:PWM:SOURce?
+
+INTernal means that the carrier waveform is modulated with the internal source.
+EXTernal means that the carrier waveform is modulated with an external source.
+
+Returns
+Examples
+
+INT|EXT
+
+SOURce1:PWM:SOURce
+
+INTernal
+
+sets the source of modulating signal on CH 1 to internal.
+
+[SOURce[1|2]]:PWM:STATe
+This command enables or disables PWM modulation. The query returns the
+state of PWM modulation. Select only pulse waveform as a carrier waveform
+for PWM.
+
+Conditions
+Group
+Syntax
+Arguments
+
+AFG1062 only
+Source
+[SOURce[1|2]]:PWM:STATe {ON|OFF|<NR1>}
+[SOURce[1|2]]:PWM:STATe?
+
+ON or <NR1>≠0 enables PWM modulation.
+OFF or <NR1>=0 disables PWM modulation.
+
+Returns
+
+<NR1>
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+57
+
+Command Descriptions
+
+Examples
+
+SOURce1:PWM:STATe ON
+
+enables the CH 1 PWM modulation.
+
+[SOURce[1|2]]:PWM[:DEViation]:DCYCle
+This command sets or queries the PWM deviation in percent for the specified
+channel.
+The setting range must meet the following conditions:
+Deviation ≤ Pulse Width - PWmin
+Deviation ≤ Pulse Period - Pulse Width - PWmin
+Deviation ≤ Pulse Width - 0.8 × (Leading Edge Time + Trailing Edge Time)
+Deviation ≤ Pulse Period - Pulse Width - 0.8 × (Leading Edge Time + Trailing
+Edge Time)
+where PWmin is the minimum pulse width.
+
+Conditions
+
+AFG1062 only
+
+Group
+
+Source
+
+Syntax
+
+[SOURce[1|2]]:PWM[:DEViation]:DCYCle
+{<percent>|MINimum|MAXimum}
+
+[SOURce[1|2]]:PWM[:DEViation]:DCYCle?
+
+Arguments
+
+<percent>::=<NR2>[<units>]
+where:
+<NR2> is the PWM deviation.
+<units>::=PCT
+
+Returns
+Examples
+
+<percent>
+
+SOURce1:PWM[:DEViation]:DCYCle
+
+5.0
+
+sets the CH 1 PWM deviation to 5.0%.
+
+58
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+
+[SOURce[1|2]]:SWEep:SOURce
+This command sets or queries the trigger source in the sweep mode for the
+specified channel.
+
+Conditions
+
+Group
+Syntax
+Arguments
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+Source
+
+[SOURce[1|2]]:SWEep:SOURce [TIMer|MANual|EXTernal]
+[SOURce[1|2]]:SWEep:SOURce?
+TIMer specifies an internal clock as the trigger source.
+MANual specifies a manual trigger input as the trigger source.
+EXTernal specifies an external trigger input as the trigger source.
+
+Returns
+Examples
+
+TIM|MAN|EXT
+
+SOURce1:SWEep:SOURce
+
+EXTernal
+
+sets an external trigger input as the trigger source in the sweep mode.
+
+[SOURce[1|2]]:SWEep:SPACing
+This command selects linear or logarithmic spacing for the sweep for the
+specified channel.
+The query returns the type for the sweep spacing for the specified channel.
+
+Conditions
+Group
+Syntax
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+Source
+[SOURce[1|2]]:SWEep:SPACing
+{LINear|LOGarithmic}
+[SOURce[1|2]]:SWEep:SPACing?
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+59
+
+Command Descriptions
+
+Arguments
+
+LINear sets the sweep spacing to linear.
+LOGarithmic sets the sweep spacing to logarithmic.
+
+Returns
+Examples
+
+LIN|LOG
+
+SOURce1:SWEep:SPACing
+
+LINear
+
+sets the CH1 sweep spacing to linear.
+
+[SOURce[1|2]]:SWEep:TIME
+This command sets or queries the sweep time for the sweep for the specified
+channel. The sweep time does not include hold time and return time. The setting
+range is 1 ms to 500 s.
+
+Conditions
+Group
+Syntax
+
+Arguments
+
+For the AFG1022, use [SOURce1]. Modulation, sweep, and burst conditions do
+not apply to CH2 for the AFG1022.
+Source
+[SOURce[1|2]]:SWEep:TIME
+{<seconds>|MINimum|MAXimum}
+[SOURce[1|2]]:SWEep:TIME?
+
+<seconds>::=<NRf>[<units>]
+where:
+<NRf> is the sweep time in seconds.
+<units>::=[ns | μs | ms | s]
+
+Returns
+Examples
+
+<seconds>
+
+SOURce1:SWEep:TIME
+
+100ms
+
+sets the CH 1 sweep time to 100 ms.
+
+60
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+
+[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate]:OFFSet
+This command sets or queries the offset level for the specified channel.
+
+Group
+
+Source
+
+Syntax
+
+[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate]:OFFSet
+{<voltage>|MINimum|MAXimum}
+
+[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate]:OFFSet?
+{MINimum|MAXimum}
+
+Arguments
+
+<voltage>::=<NR3>[<units>]
+where:
+<NR3> is the offset voltage level.
+<units>::=[mV | V]
+
+Returns
+Examples
+
+<voltage>
+
+SOURce1:VOLTage:LEVel:IMMediate:OFFSet
+
+500mV
+
+sets the CH 1 offset level to 500 mV.
+
+[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate][:AMPLitude]
+This command sets or queries the output amplitude for the specified channel.
+Units
+
+Amplitude resolution
+
+Vpp
+
+1 mVp-p or four digits
+
+Set the units of output amplitude by using the bezel menu selection.
+
+Group
+
+Source
+
+Syntax
+
+[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate][:AMPLitude]
+{<amplitude>|MINimum|MAXimum}
+
+[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate][:AMPLitude]?
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+61
+
+Command Descriptions
+{MINimum|MAXimum}
+
+Arguments
+
+<amplitude>::=<NR3>[<units>]
+where:
+<NR3> is the output amplitude.
+<units>::=[Vpp]
+
+Returns
+Examples
+
+<amplitude>
+
+SOURce1:VOLTage:LEVel:IMMediate:AMPLitude
+
+1Vpp
+
+sets the CH 1 output amplitude to 1 Vpp.
+
+SYSTem:ERRor[:NEXT]? (Query Only)
+This query-only command returns the contents of the Error/Event queue.
+
+Group
+
+System
+
+Syntax
+
+SYSTem:ERRor[:NEXT]?
+
+Arguments
+Returns
+
+Examples
+
+None
+
+<Error/event
+
+number>::=<NR1>
+
+<Error/event
+
+description>::=<string>
+
+SYSTEM:ERROR:NEXT?
+
+might return the following response:
+-201,"Invalid while in local"
+
+If the instrument detects an error or an event occurs, the event number and event
+message will be returned.
+
+62
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+
+TRACe|DATA:CATalog? (Query Only)
+This query-only command returns the names of user waveform memory and edit
+memory.
+
+Group
+
+Trace
+
+Syntax
+
+TRACe|DATA:CATalog?
+
+Arguments
+Returns
+
+None
+<string>
+
+A series of strings separated by commas is returned. Each string is enclosed
+within quotation marks.
+
+Examples
+
+TRACE|DATA:CATALOG?
+
+might return “USER0”,”USER4”,”EMEM”
+
+TRACe|DATA:COPY (No Query Form)
+This command copies the contents of edit memory (or user waveform memory) to
+a specified user waveform memory (or edit memory).
+
+Group
+Syntax
+Arguments
+
+Trace
+TRACe|DATA:COPY <trace_name>,EMEMory
+TRACe|DATA:COPY EMEMory,{USER<NR1>}
+
+<trace_name>::={USER<NR1>}
+<NR1> specifies the user waveform memory location.
+For the AFG1022, <NR1> can be any number from 0 to 255.
+For the AFG1062, <NR1> can be any number from 0 to 31.
+
+Examples
+
+DATA:COPY
+
+USER0,EMEMory
+
+copies the waveform data in the edit memory to the user waveform memory
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+63
+
+Command Descriptions
+USER0.
+DATA:COPY EMEMory,USER0
+
+copies the waveform data in the user waveform memory USER0 to the edit
+memory.
+
+TRACe|DATA[:DATA]
+This command transfers the waveform data from the external controller to the
+edit memory in the instrument. The query returns the binary block data.
+
+Group
+Syntax
+Arguments
+
+Returns
+Examples
+
+Trace
+TRACe|DATA[:DATA]
+EMEMory,<binary_block_data>
+TRACe|DATA[:DATA]?
+EMEMory
+
+<binary_block_data>
+where <binary_block_data> is the waveform data in binary format.
+<binary_block_data>
+
+DATA:DATA
+
+EMEMory,#42000<DAB><DAB>...<DAB>
+
+transmits a waveform to the edit memory in the instrument. The block data
+element #42000 indicates that 4 is the number of digits in 2000 (byte count) and
+the 2000 bytes of binary data are to be transmitted.
+
+TRACe|DATA[:DATA]:VALue
+This command sets or queries the data value at the specified point in the edit
+memory.
+
+Group
+Syntax
+
+64
+
+Trace
+TRACe|DATA[:DATA]:VALue EMEMory,<point>,<data>
+TRACe|DATA[:DATA]:VALue? EMEMory,<point>
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Descriptions
+
+Arguments
+
+<point>::=<NR1>
+
+where:
+<NR1> is the specified point number in the edit memory.
+<data>::=<NRf>
+
+where:
+<NRf> is the voltage value for the specified point number.
+<units>::=[mV | V]
+
+Returns
+Examples
+
+<NRf>
+DATA:DATA:VALue
+
+EMEMory,500,2.5V
+
+sets the voltage value to 2.5V for the point number 500 in the edit memory.
+DATA:DATA:VALue?
+
+EMEMory,500
+
+might return “2.5000000+e0”.
+This example indicates that the voltage value of point number 500 is set to 2.5V.
+
+TRACe|DATA:POINts
+This command sets or queries the number of data points for the waveform created
+in the edit memory.
+
+Group
+Syntax
+Arguments
+
+Trace
+TRACe|DATA:POINts
+TRACe|DATA:POINts?
+
+EMEMory[,<points>|MINimum|MAXimum]
+EMEMory{,MIN|MAX}
+
+<points>::=<NR1>
+
+where
+
+<NR1> sets the number of points for the waveform created in the edit
+memory.
+For the AFG1022, <NR1> can be any number from 2 to 8192.
+For the AFG1062, <NR1> can be any number from 2 to 1048576.
+
+Returns
+
+<NR1>
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+65
+
+Command Descriptions
+
+Examples
+
+DATA:POINts EMEMory, 500
+
+sets the waveform data points to 500 in the edit memory.
+
+*TRG (No Query Form)
+This command generates a trigger event.
+
+Group
+
+Trigger
+
+Syntax
+
+*TRG
+
+Arguments
+
+None
+
+Examples
+
+*TRG
+
+generates a trigger event.
+
+*WAI (No Query Form)
+This command prevents the instrument from executing further commands or
+queries until all pending commands that generate an OPC message are complete.
+
+Group
+
+Synchronization
+
+Syntax
+
+*WAI
+
+Arguments
+
+None
+
+Examples
+
+*WAI
+
+prevents the instrument from executing any further commands or queries until all
+pending commands that generate an OPC message are complete.
+
+66
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Command Errors
+The following table shows the error messages generated by improper command
+syntax. Check that the command is properly formed and that it follows the rules
+in the Syntax and Commands.
+Table 15: Command messages
+Code
+
+Message
+
+0 (indicates no error)
+
+Error/Event Queue
+
+-101
+
+Invalid character
+
+-102
+
+Syntax error
+
+-108
+
+Parameter not allowed
+
+-201
+
+Invalid while in local
+
+The event queue is an FIFO queue, which stores events as they occur in the
+instrument. The event queue can store up to 64 events.
+The oldest error code and text are retrieved by using the following command:
+SYSTem:ERRor[:NEXT]?
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+67
+
+Index
+A
+
+AFGControl:CSCopy, 14
+
+C
+
+*CLS, 14
+
+I
+
+*IDN?, 15
+
+M
+MMEMory:CATalog?, 15
+MMEMory:CDIRectory, 16
+MMEMory:DELete, 17
+
+O
+
+*OPT?, 17
+OUTPut[1|2]:IMPedance, 18
+OUTPut[1|2][:STATe], 18
+
+R
+
+*RCL, 19
+*RST, 20
+
+S
+
+*SAV, 20
+[SOURce[1|2]]:AM[:DEPTh], 21
+[SOURce[1|2]]:AM:INTernal:FREQuency, 21
+[SOURce[1|2]]:AM:INTernal:FUNCtion, 22
+[SOURce[1|2]]:AM:INTernal:FUNCtion:EFILe, 23
+[SOURce[1|2]]:AM:SOURce, 24
+[SOURce[1|2]]:AM:STATe, 24
+[SOURce[1|2]]:ASKey[:AMPLitude], 25
+[SOURce[1|2]]:ASKey:INTernal:RATE, 26
+[SOURce[1|2]]:ASKey:SOURce, 27
+[SOURce[1|2]]:ASKey:STATe, 27
+
+68
+
+[SOURce[1|2]]:BURSt:MODE, 28
+[SOURce[1|2]]:BURSt:NCYCles, 28
+[SOURce[1|2]]:BURSt:SOURce, 29
+[SOURce[1|2]]:BURSt:STATe, 30
+[SOURce[1|2]]:FM[:DEViation], 30
+[SOURce[1|2]]:FM:INTernal:FREQuency, 31
+[SOURce[1|2]]:FM:INTernal:FUNCtion, 32
+[SOURce[1|2]]:FM:INTernal:FUNCtion:EFILe, 33
+[SOURce[1|2]]:FM:SOURce, 33
+[SOURce[1|2]]:FM:STATe, 34
+[SOURce[1|2]]:FREQuency[:CW|:FIXed], 36
+[SOURce[1|2]]:FREQuency:CENTer, 35
+[SOURce[1|2]]:FREQuency:CONCurrent, 35
+[SOURce[1|2]]:FREQuency:MODE, 37
+[SOURce[1|2]]:FREQuency:SPAN, 38
+[SOURce[1|2]]:FREQuency:STARt, 39
+[SOURce[1|2]]:FREQuency:STOP, 39
+[SOURce[1|2]]:FSKey[:FREQuency], 40
+[SOURce[1|2]]:FSKey:INTernal:RATE, 41
+[SOURce[1|2]]:FSKey:SOURce, 42
+[SOURce[1|2]]:FSKey:STATe, 42
+[SOURce[1|2]]:FUNCtion:EFILe, 43
+[SOURce[1|2]]:FUNCtion[:SHAPe], 43
+[SOURce[1|2]]:PHASe[:ADJust], 45
+[SOURce[1|2]]:PHASe:INITiate, 46
+[SOURce[1|2]]:PM[:DEViation], 46
+[SOURce[1|2]]:PM:INTernal:FREQuency, 47
+[SOURce[1|2]]:PM:INTernal:FUNCtion, 48
+[SOURce[1|2]]:PM:INTernal:FUNCtion:EFILe, 49
+[SOURce[1|2]]:PM:SOURce, 49
+[SOURce[1|2]]:PM:STATe, 50
+[SOURce[1|2]]:PSKey[:DEViation], 51
+[SOURce[1|2]]:PSKey:INTernal:RATE, 51
+[SOURce[1|2]]:PSKey:SOURce, 52
+[SOURce[1|2]]:PSKey:STATe, 53
+[SOURce[1|2]]:PULSe:DCYCle, 53
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+Index
+[SOURce[1|2]]:PWM:INTernal:FREQuency, 54
+[SOURce[1|2]]:PWM:INTernal:FUNCtion, 55
+[SOURce[1|2]]:PWM:INTernal:FUNCtion:
+EFILe, 56
+[SOURce[1|2]]:PWM:SOURce, 56
+[SOURce[1|2]]:PWM:STATe, 57
+[SOURce[1|2]]:PWM[:DEViation]:DCYCle, 58
+[SOURce[1|2]]:SWEep:SOURce, 59
+[SOURce[1|2]]:SWEep:SPACing, 59
+[SOURce[1|2]]:SWEep:TIME, 60
+[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate]:
+OFFSet, 61
+[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate]
+[:AMPLitude], 61
+SYSTem:ERRor[:NEXT]?, 62
+
+T
+
+TRACe|DATA:CATalog?, 63
+TRACe|DATA:COPY, 63
+TRACe|DATA:POINts, 65
+TRACe|DATA[:DATA], 64
+TRACe|DATA[:DATA]:VALue, 64
+*TRG, 66
+
+W
+
+*WAI, 66
+
+AFG1000 Series Arbitrary Function Generator Programmer Manual
+
+69
+
+

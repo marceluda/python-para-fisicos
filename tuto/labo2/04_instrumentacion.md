@@ -147,7 +147,29 @@ Hay varios ejemplos de adquisición remota y control ya armados.
 Algunos están en repositorios compartidos, como los del profesor
 [Hernan Grecco en GitHub](https://github.com/hgrecco/labosdf/tree/master/software/python/instrumentos).
 
-Veamos algun ejemplo:
+
+Veamos dos ejemplos...
+
+### Osciloscopio
+
+Importaremos la librería `visa` y usaremos el Resource Manager de la librería que nos permite
+conectarnos al equipo informándole la dirección. Luego, los métodos `query()` y `write()`
+nos permitirán enviar las instrucciones al equipo y traer la respuesta (en el caso de `query`).
+
+Vamos a usar las siguientes **instrucciones extraídas del manual**.
+Lo que está entre corchetes `[]` o en minúscula es opcional ponerlo.
+
+| Referencia  | Comando (ej) | Función |
+|------------------------------
+
+| `DATa:SOUrce <wfm>`  | `DATA:SOU 1` | Selecciona el canal del osciloscopio |
+| `CURV?`                         | `CURV?`     | Pide los datos medidos del canal actual |
+| `HORizontal:MAIn:SCAle <escala>`                           | `HOR:MAIN:SCA 5E-3`      | Fija la escala temporal del osciloscopio (en segundos) |
+| `WFMPRE:XZE?;XIN?;YZE?;YMU?;YOFF?;` | `WFMPRE:XZE?;XIN?;YZE?;YMU?;YOFF?;` | Adquiere los datos de la escala de la pantalla del osciloscopio |
+
+El último comando son en realidad varios anidados. Permiten obtener la información necesaria para transformar los
+2500 números enteros de 8 bits que adquirimos con `CURV?` en Volts con el espaciado en segundos que corresponda.
+
 
 ```python
 from matplotlib import pyplot as plt
@@ -162,7 +184,9 @@ rm = visa.ResourceManager()
 # Informamos la dirección de acceso al osciloscopio (en este caso, por USB)
 osci = rm.open_resource('USB0::0x0699::0x0363::C065089::INSTR')
 
-# Con el método 'query' podemos enviar instrucciones QUE TIENEN RESPUESTA
+# Con el método 'query()' podemos enviar instrucciones QUE TIENEN RESPUESTA
+# Por ejemplo, la instrucción que nos informa el nombre del instrumento
+# al que nos conectamos
 respuesta = osci.query('*IDN?')
 
 # La instruccion '*IDN?' nos permite conocer a que instrumento nos conectamos
@@ -187,7 +211,67 @@ plt.xlabel('Tiempo [s]')
 plt.ylabel('Voltaje [V]')
 ```
 
-## Ejemplo de adquisición y control
+### Generador de funciones
+
+Vamos a usar las siguientes **instrucciones extraídas del manual**.
+Lo que está entre corchetes `[]` o en minúscula es opcional ponerlo.
+
+| Referencia  | Comando (ej) | Función |
+|------------------------------
+| `[SOURce[1|2]]:VOLTage <amplitude>`                           | `VOLT 0.5`      | Cambiar la amplitud pico a pico (en Volts) |
+| `[SOURce[1|2]]:FREQuency <frequency>`                         | `FREQ 2000`     | Cambiar la frecuencia (en Hz) |
+| `[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate]:OFFSet <voltage>`  | `VOLT:OFFS 0.3` | Cambiar la tensión del centro de la funcion de onda. |
+
+
+
+```python
+import time
+
+from numpy import *
+import visa
+
+# Cargamos el Resource Manager. El manejador de recursos VISA
+rm = visa.ResourceManager()
+
+# Informamos la dirección de acceso al osciloscopio (en este caso, por USB)
+fungen = rm.open_resource('USB0::0x0699::0x0346::C033250::INSTR')
+
+# Con el método 'query()' podemos enviar instrucciones QUE TIENEN RESPUESTA
+# Por ejemplo, la instrucción que nos informa el nombre del instrumento
+# al que nos conectamos
+print(fungen.query('*IDN?'))
+
+# Para enviar instrucciones que no entregan una respuesta se usa
+# el método 'write()'
+
+# Vamos a generar valores de frecuencias con una separación logarítmica
+# vamos de 10^1 a 10^3 , con 20 pasos
+for freq in logspace(1, 3, 20):
+    fungen.write('FREQ {:f}'.format(freq) )
+    print('Comando enviado: ' + 'FREQ {:f}'.format(freq)  )
+    time.sleep(0.1)  # tiempo de espera de 0.1 segundos
+
+# Rampa lineal de amplitudes
+# Vamos a tener 10 pasos que van de 0 V a 1 V
+for amplitude in np.linspace(0, 1, 10):
+    fungen.write('VOLT {:f}'.format(amplitude) )
+    print('Comando enviado: ' + 'VOLT {:f}'.format(amplitude)  )
+    time.sleep(0.1)  # tiempo de espera de 0.1 segundos
+
+
+# Rampa lineal de offset
+# Vamos a tener 10 pasos que van de 0 V a 1 V
+for offset in np.linspace(0, 1, 10):
+    fungen.write('VOLT:OFFS {:f}'.format(offset)  )
+    print('Comando enviado: ' + 'VOLT:OFFS {:f}'.format(offset)   )
+    time.sleep(0.1)  # tiempo de espera de 0.1 segundos
+
+
+# Cuando dejamos de usar el generador de funciones, lo cerramos
+fungen.close()
+
+```
+
 
 
 
