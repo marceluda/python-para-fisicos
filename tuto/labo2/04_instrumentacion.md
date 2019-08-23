@@ -222,7 +222,8 @@ Lo que está entre corchetes `[]` o en minúscula es opcional ponerlo.
 | `[SOURce[1|2]]:FREQuency <frequency>`                         | `FREQ 2000`     | Cambiar la frecuencia (en Hz) |
 | `[SOURce[1|2]]:VOLTage[:LEVel][:IMMediate]:OFFSet <voltage>`  | `VOLT:OFFS 0.3` | Cambiar la tensión del centro de la funcion de onda. |
 
-
+Vamos a realizar distintos tipos de barridos sobre parámetros del generador de funciones. Cuando no especificamos
+el canal, se asumo que es el `SOURCE1`.
 
 ```python
 import time
