@@ -84,7 +84,7 @@ En el manual del generador de funciones (pag 11)
 
 Nos especifica:
   - Datos de la conversión A/D
-    - "Waveform" / Forma de la Onda: hasta `8192` puntos (para definir la forma de onda) de `14 bits` de resolución ($2^14 = 16384$ pasos de digitalización)
+    - "Waveform" / Forma de la Onda: hasta `8192` puntos (para definir la forma de onda) de `14 bits` de resolución ($2^{14} = 16384$ pasos de digitalización)
     - Sample Rate: `125 MS/s`, Hasta 125 Mega Samples por segundo son 125 millones de puntos por segundo (máximo)
     - Amplitud: los `14 bits` se distribuyen en un rango desde `2 mVpp` (mili Volts de pico a pico) hasta `20 Vpp` para una carga "alta" (mucho mayor a `50 Ω` ).
   - Datos de electrónica relevantes:
@@ -127,7 +127,7 @@ el canal 1 de un osciloscopio se usan estos dos comandos:
 
 Seleccionar el canal 1:
 
-  `'DATA:SOURCE CH%d'`
+  `'DATA:SOURCE CH1'`
 
 leer los datos
 
@@ -154,14 +154,13 @@ Veamos dos ejemplos...
 
 Importaremos la librería `visa` y usaremos el Resource Manager de la librería que nos permite
 conectarnos al equipo informándole la dirección. Luego, los métodos `query()` y `write()`
-nos permitirán enviar las instrucciones al equipo y traer la respuesta (en el caso de `query`).
+nos permitirán enviar las instrucciones al equipo y traer la respuesta (en el caso de `query()`).
 
 Vamos a usar las siguientes **instrucciones extraídas del manual**.
 Lo que está entre corchetes `[]` o en minúscula es opcional ponerlo.
 
 | Referencia  | Comando (ej) | Función |
-|------------------------------
-
+|-------------|--------------|---------|
 | `DATa:SOUrce <wfm>`  | `DATA:SOU 1` | Selecciona el canal del osciloscopio |
 | `CURV?`                         | `CURV?`     | Pide los datos medidos del canal actual |
 | `HORizontal:MAIn:SCAle <escala>`                           | `HOR:MAIN:SCA 5E-3`      | Fija la escala temporal del osciloscopio (en segundos) |
