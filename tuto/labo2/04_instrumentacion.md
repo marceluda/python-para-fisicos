@@ -203,9 +203,10 @@ osci.write('DAT:WID 1')
 # Adquiere los datos del canal 1 y los devuelve en un array de numpy
 data = osci.query_binary_values('CURV?', datatype='B', container=np.array)
 
+voltaje =(data-yoff)*ymu+yze;
 tiempo = xze + np.arange(len(data)) * xin
 
-plt.plot(tiempo, data)
+plt.plot(tiempo, voltaje )
 plt.xlabel('Tiempo [s]')
 plt.ylabel('Voltaje [V]')
 ```
