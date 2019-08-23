@@ -125,11 +125,11 @@ configuración necesarios para su operación.
 Por ejemplo, para adquirir el vector de números que representan el voltaje medido por
 el canal 1 de un osciloscopio se usan estos dos comandos:
 
-  1. Seleccionar el canal 1
+Seleccionar el canal 1:
 
   `'DATA:SOURCE CH%d'`
 
-  2. leer los datos
+leer los datos
 
   `CURV?`
 
