@@ -18,7 +18,7 @@ Python para Labos iniciales
 </center>
 
 <center>
-<p> <a href="{{ site.baseurl }}/tuto/repo/" class="btn btn-primary btn-lg" role="button">
+<p> <a href="{{ site.baseurl }}/tuto/repositorio/" class="btn btn-primary btn-lg" role="button">
 Repositorio de ejemplos rápidos
 </a></p>
 </center>

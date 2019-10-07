@@ -1,0 +1,15 @@
+---
+title: Repositorio de ejemplos prácticos
+description: Referencia rápida de código
+layout: page
+navbar: repo
+---
+
+<div class="alert alert-danger" role="alert" >
+  <strong>Aviso:</strong> La página está en construcción.
+</div>
+
+
+  * **[Gráficos (básico)](graficos/)**: Ejemplos para graficar datos de forma rápida
+  * **[Ajuste de modelos a datos](ajustes/)**: Ejemplos de cómo optimizar parámetros de un modelo para ajustar a un conjunto de datos
+  * **[Cargar y guardar datos](IO/)**: Ejemplos leer/importar datos desde varios formatos y guardar/exportar a varios formatos
