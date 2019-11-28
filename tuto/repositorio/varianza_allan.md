@@ -32,6 +32,9 @@ Para FRECUENCIA es:
  $$      \sigma^{2}_{ADEV}(\tau) =  { 1 \over 2 }
         \langle ( \bar{y}_{n+1} - \bar{y}_n )^2 \rangle $$
 
+  - [Fuente de las fórmulas](https://www.nist.gov/publications/handbook-frequency-stability-analysis)
+  - [Código que utiliza la función](https://github.com/aewallin/allantools/blob/master/allantools/allantools.py)
+
 ![grafico](repositorio_allan_000.png "repositorio_allan_000.png")
 
 <a data-toggle="collapse" href="#desplegable000" aria-expanded="false" aria-controls="desplegable000">ver código<span class="caret"></span></a>
@@ -77,6 +80,10 @@ ax.set_ylabel(r'$\sigma^2_{ADEV}(\tau) $')
 
 Cálculo de la varianza de allan "con overlap"
 
+  - [Fuente de las fórmulas](https://www.nist.gov/publications/handbook-frequency-stability-analysis)
+  - [Código que utiliza la función](https://github.com/aewallin/allantools/blob/master/allantools/allantools.py)
+
+
 ![grafico](oadev.png "oadev.png")
 
 ![grafico](repositorio_allan_001.png "repositorio_allan_001.png")
@@ -120,7 +127,7 @@ ax.fill_between( t2, ad-ade, ad+ade , color='C1' , alpha=0.5 )
 ax.grid(b=True,linestyle='--',color='lightgray')
 ax.grid(b=True,linestyle='--',color='lightgray', which='minor', alpha=0.2)
 ax.set_xlabel(r'$\tau$')
-ax.set_ylabel(r'$\sigma^2_{OADEV}(\tau) $')
+ax.set_ylabel(r'$\sigma^2_{y}(\tau) $')
 ax.legend(loc='best')
 
 
