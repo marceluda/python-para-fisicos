@@ -45,14 +45,16 @@ import matplotlib.pyplot as plt
 import allantools as at
 
 
-# Referencie bibliográfica:
+# Referencia bibliográfica:
 # https://www.nist.gov/publications/handbook-frequency-stability-analysis
 
+random.seed(0)
+t = logspace(0, 3, 50)     # valores de Tau de 1 a 1000
+y = at.noise.white(10000)  # Generamos datos de ruido
+r = 12.3                   # sample rate de los datos fabricados/adquiridos
 
-t = logspace(0, 3, 50)  # tau values from 1 to 1000
-y = at.noise.white(10000)  # Generate some frequency data
-r = 12.3  # sample rate in Hz of the input data
-(t2, ad, ade, adn) = at.adev(y, rate=r, data_type="freq", taus=t)  # Compute the overlapping ADEV
+
+(t2, ad, ade, adn) = at.adev(y, rate=r, data_type="freq", taus=t)  # Calculamos la Desviación de Allan
 
 
 fig, ax = plt.subplots()
@@ -67,6 +69,62 @@ ax.set_ylabel(r'$\sigma^2_{ADEV}(\tau) $')
 
 
 # plt.savefig('repositorio_allan_000.png')
+```
+</div>
+
+
+## Varianza de Allan con superposición (overlap)
+
+Cálculo de la varianza de allan "con overlap"
+
+![grafico](oadev.png "oadev.png")
+
+![grafico](repositorio_allan_001.png "repositorio_allan_001.png")
+
+<a data-toggle="collapse" href="#desplegable001" aria-expanded="false" aria-controls="desplegable001">ver código<span class="caret"></span></a>
+
+<div id="desplegable001" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
+
+```python
+
+from numpy import *
+import matplotlib.pyplot as plt
+import allantools as at
+
+
+# Referencia bibliográfica:
+# https://www.nist.gov/publications/handbook-frequency-stability-analysis
+
+random.seed(0)
+t = logspace(0, 3, 50)     # valores de Tau de 1 a 1000
+y = at.noise.white(10000)  # Generamos datos de ruido
+r = 12.3                   # sample rate de los datos fabricados/adquiridos
+
+
+
+fig, ax = plt.subplots()
+
+
+(t2, ad, ade, adn) = at.adev(y, rate=r, data_type="freq", taus=t)  # Calculamos la Desviación de Allan
+ax.plot(t2, ad, '.-', color='C0' , label='adev')
+ax.fill_between( t2, ad-ade, ad+ade , color='C0' , alpha=0.5 )
+ax.semilogx()  # Escala logarítmica en X
+ax.semilogy()  # Escala logarítmica en Y
+
+
+(t2, ad, ade, adn) = at.oadev(y, rate=r, data_type="freq", taus=t)  # Calculamos la Desviación de Allan con superposición
+ax.plot(t2, ad, '.-', color='C1' , label='oadev')
+ax.fill_between( t2, ad-ade, ad+ade , color='C1' , alpha=0.5 )
+
+
+ax.grid(b=True,linestyle='--',color='lightgray')
+ax.grid(b=True,linestyle='--',color='lightgray', which='minor', alpha=0.2)
+ax.set_xlabel(r'$\tau$')
+ax.set_ylabel(r'$\sigma^2_{OADEV}(\tau) $')
+ax.legend(loc='best')
+
+
+# plt.savefig('repositorio_allan_001.png')
 ```
 </div>
 
