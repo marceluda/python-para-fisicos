@@ -9,7 +9,8 @@ mathjax: true
 <div class="alert alert-info" role="alert" >
   <strong>Archivo:</strong> <a href="../repositorio_02_ajustes.py"> repositorio_02_ajustes.py </a>
 </div>
-
+Ejemplos para realizar ajustes de datos
+Se presentan ejemplos de ajustes lineales, polinomiales y no lineales para uso general.
 ## Ejemplo de ajuste lineal simple
 
 Este es el método más rápido para hacer un ajuste lineal

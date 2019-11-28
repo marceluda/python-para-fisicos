@@ -147,6 +147,8 @@ with open(f'../{prefijo}.md', 'w') as base_writer:
         with open( archivo , 'w') as writer:
             writer.write( HEAD.format(titulo , fn) )
             
+            writer.write( texto_apertura  )
+            
             for numero,bloque in enumerate([ y.split('\n') for y in bloques ]):
                 titulo = bloque.pop(0).strip()
                 

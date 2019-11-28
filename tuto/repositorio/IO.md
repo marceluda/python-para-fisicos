@@ -9,7 +9,8 @@ mathjax: true
 <div class="alert alert-info" role="alert" >
   <strong>Archivo:</strong> <a href="../repositorio_03_IO.py"> repositorio_03_IO.py </a>
 </div>
-
+En este archivo se muestran ejemplos prácticos para leer datos desde 
+diferentes formatos de archivos y para guardarlos en diferentes formatos.
 ## Carga de datos a mano
 
 Cargar datos a mano

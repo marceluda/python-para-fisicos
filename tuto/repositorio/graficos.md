@@ -9,7 +9,8 @@ mathjax: true
 <div class="alert alert-info" role="alert" >
   <strong>Archivo:</strong> <a href="../repositorio_01_graficos.py"> repositorio_01_graficos.py </a>
 </div>
-
+Se presentan a continuación ejemplos de graficación de datos
+incluyendo las opciones más habituales.
 ## Ejemplo de graficos varios
 
 Acá se muestra un ejemplo rápido para generar gráficos
