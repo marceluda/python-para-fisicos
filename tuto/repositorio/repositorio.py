@@ -195,6 +195,7 @@ from datetime import datetime
 fecha = datetime.now().isoformat()
 
 os.system('git add .')
+os.system(f'git add ../{prefijo}.md')
 os.system(f'git commit -m "ACTUALIZACION AUTOMATICA {fecha}"')
 os.system('git push')
 
