@@ -164,7 +164,7 @@ with open(f'../{prefijo}.md', 'w') as base_writer:
                     texto, codigo = extraer_codigo( '\n'.join(bloque)  )
                     writer.write( f'\n{texto}\n' )
                     
-                    for archivo_adj in [ y for y in codigo.split("'") if y.split('.')[-1].lower() in filetype ] :
+                    for archivo_adj in unique([ y for y in codigo.split("'") if y.split('.')[-1].lower() in filetype and len(y)>4]) :
                         if os.path.isfile(archivo_adj):
                             os.system(f'mv "{archivo_adj}" "{url}/"')
                         writer.write( f'  * [{archivo_adj}]({archivo_adj})\n' )

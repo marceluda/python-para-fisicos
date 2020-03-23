@@ -280,10 +280,6 @@ Con el paquete `shapefile` vamos a leer estos archivos y extraer los datos relev
 Vamos a usar archivos extraidos de la web [naturalearthdata.com](http://www.naturalearthdata.com/downloads/)
   * [ne_10m_admin_0_countries.dbf](ne_10m_admin_0_countries.dbf)
   * [ne_10m_admin_0_countries.shp](ne_10m_admin_0_countries.shp)
-  * [.shp](.shp)
-  * [.dbf](.dbf)
-  * [ne_10m_admin_0_countries.shp](ne_10m_admin_0_countries.shp)
-  * [ne_10m_admin_0_countries.dbf](ne_10m_admin_0_countries.dbf)
 
 ![grafico](extra_graficos_003.png "extra_graficos_003.png")
 
