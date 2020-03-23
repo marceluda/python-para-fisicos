@@ -117,7 +117,7 @@ CODIGO ="""
 """
 
 
-filetype =  'mat,xls,xlsx,csv,npz'.split(',')
+filetype =  'mat,xls,xlsx,csv,npz,shp,dbf'.split(',')
 
 
 intros = ['### Ejemplos introductorios']
