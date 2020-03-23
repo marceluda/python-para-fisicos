@@ -120,61 +120,70 @@ CODIGO ="""
 filetype =  'mat,xls,xlsx,csv,npz'.split(',')
 
 
+intros = ['### Ejemplos introductorios']
+intros.append('\n<hr />\n### Ejemplos no relacionados con física\n' )
 
-
-
-fns = sort(glob(f'{prefijo}_*.py')).tolist()
+prefs = ['repositorio','extra']
 
 with open(f'../{prefijo}.md', 'w') as base_writer:
     base_writer.write(BASE_HEAD)
-
-    for fn in fns:
-        with open(fn, 'r') as reader:
-            lines = reader.readlines()
+    
+    for entrada,pref in zip(intros,prefs):
+        base_writer.write(entrada)
+        base_writer.write('\n')
         
-        archivo = fn[len(prefijo)+4:-3] + '.md'
-        
-        # Separamos en bloques
-        bloques = ''.join(lines).split('#%%')
-        
-        # Apertura
-        texto_apertura , opt = extraer_main(  bloques.pop(0) )
-        titulo  = opt['TITULO'] if 'TITULO' in opt.keys() else archivo[:-3]
-        resumen = opt['RESUMEN'] if 'RESUMEN' in opt.keys() else texto_apertura.split('\n')[0]
-        url     = archivo[:-3]
-        os.system(f'mkdir -p {url}')
-        base_writer.write(f'  * **[{titulo}]({url}/)**: {resumen}\n')
-        #  * **[Ejemplos para graficar datos](repo_tutos_graficos/)**: Se presentan a continuación ejemplos de graficación de datos incluyendo las opciones mas habituales.
+        fns = sort(glob(f'{pref}_*.py')).tolist()
+        for fn in fns:
+            with open(fn, 'r') as reader:
+                lines = reader.readlines()
+            
+            archivo = fn[len(pref)+4:-3] + '.md'
+            
+            # Separamos en bloques
+            bloques = ''.join(lines).split('#%%')
+            
+            # Apertura
+            texto_apertura , opt = extraer_main(  bloques.pop(0) )
+            titulo  = opt['TITULO']  if 'TITULO'  in opt.keys() else archivo[:-3]
+            resumen = opt['RESUMEN'] if 'RESUMEN' in opt.keys() else texto_apertura.split('\n')[0]
+            url     = archivo[:-3]
+            os.system(f'mkdir -p {url}')
+            base_writer.write(f'  * **[{titulo}]({url}/)**: {resumen}\n')
+            #  * **[Ejemplos para graficar datos](repo_tutos_graficos/)**: Se presentan a continuación ejemplos de graficación de datos incluyendo las opciones mas habituales.
+    
+            with open( archivo , 'w') as writer:
+                writer.write( HEAD.format(titulo , fn) )
+                
+                writer.write( texto_apertura  )
+                
+                for numero,bloque in enumerate([ y.split('\n') for y in bloques ]):
+                    titulo = bloque.pop(0).strip()
+                    
+                    writer.write( f'\n## {titulo}\n' )
+                    
+                    texto, codigo = extraer_codigo( '\n'.join(bloque)  )
+                    writer.write( f'\n{texto}\n' )
+                    
+                    for archivo_adj in [ y for y in codigo.split("'") if y.split('.')[-1].lower() in filetype ] :
+                        if os.path.isfile(archivo_adj):
+                            os.system(f'mv "{archivo_adj}" "{url}/"')
+                        writer.write( f'  * [{archivo_adj}]({archivo_adj})\n' )
+                    
+                    for imagen in [ y for y in codigo.split('\n') if ( 'plt.savefig' in y ) ]:
+                        imgname= imagen.split("'")[1]
+                        if os.path.isfile(imgname):
+                            os.system(f'mv "{imgname}" "{url}/"')
+                        writer.write( f'\n![grafico]({imgname} "{imgname}")\n' )
+                        #print(imgname)
+                    
+                    writer.write( CODIGO.format(numero,codigo) )
+                
+            print( f'{fn} --> {archivo}' )
 
-        with open( archivo , 'w') as writer:
-            writer.write( HEAD.format(titulo , fn) )
-            
-            writer.write( texto_apertura  )
-            
-            for numero,bloque in enumerate([ y.split('\n') for y in bloques ]):
-                titulo = bloque.pop(0).strip()
-                
-                writer.write( f'\n## {titulo}\n' )
-                
-                texto, codigo = extraer_codigo( '\n'.join(bloque)  )
-                writer.write( f'\n{texto}\n' )
-                
-                for archivo_adj in [ y for y in codigo.split("'") if y.split('.')[-1].lower() in filetype ] :
-                    if os.path.isfile(archivo_adj):
-                        os.system(f'mv "{archivo_adj}" "{url}/"')
-                    writer.write( f'  * [{archivo_adj}]({archivo_adj})\n' )
-                
-                for imagen in [ y for y in codigo.split('\n') if ( 'plt.savefig' in y ) ]:
-                    imgname= imagen.split("'")[1]
-                    if os.path.isfile(imgname):
-                        os.system(f'mv "{imgname}" "{url}/"')
-                    writer.write( f'\n![grafico]({imgname} "{imgname}")\n' )
-                    #print(imgname)
-                
-                writer.write( CODIGO.format(numero,codigo) )
-            
-        print( f'{fn} --> {archivo}' )
+    
+    
 
+    
 
 update_local()
 
