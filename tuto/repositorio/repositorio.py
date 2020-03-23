@@ -16,6 +16,8 @@ prefijo = 'repositorio'
 
 import os
 
+os.chdir('/home/lolo/Dropbox/Doctorado/github/python-para-fisicos_pages/tuto/repositorio/')
+
 source_folder = '/home/lolo/Dropbox/Doctorado/github/python-para-fisicos_pages'
 dest_folder   = '/var/www/html/python-para-fisicos/'
 update_cmd = f'jekyll build --source {source_folder} --destination {dest_folder}'
