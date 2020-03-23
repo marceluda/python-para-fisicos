@@ -431,3 +431,145 @@ for r in sfa.shapeRecords():
 ```
 </div>
 
+
+## Otro Ejemplo: mapa con ciudades mas pobladas
+
+En este ejemplo vamos a agregar las cidades mas pobladas al mapa
+  * [ne_10m_populated_places.dbf](ne_10m_populated_places.dbf)
+  * [ne_10m_populated_places.shp](ne_10m_populated_places.shp)
+
+![grafico](extra_graficos_004.png "extra_graficos_004.png")
+
+<a data-toggle="collapse" href="#desplegable004" aria-expanded="false" aria-controls="desplegable004">ver código<span class="caret"></span></a>
+
+<div id="desplegable004" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
+
+```python
+
+from numpy import *
+import matplotlib.pyplot as plt
+import os
+os.environ['PROJ_LIB'] = os.environ['HOME']+'/anaconda3/share/proj'
+from mpl_toolkits.basemap import Basemap
+
+# Importamos shapefile
+import shapefile
+
+# Nueavmente vamos a trabajar con sudamérica
+coordenadas = {  'llcrnrlon': -94.26844086640133,
+                 'llcrnrlat': -59.165673270203285,
+                 'urcrnrlon': -33.54487376284925,
+                 'urcrnrlat': 14.828935756198176}
+
+# Si tenemos los archivos que necesitamos descargados, los usamos:
+if os.path.isfile('ne_10m_populated_places.dbf') and os.path.isfile('ne_10m_populated_places.shp'):
+    myshp = open("ne_10m_populated_places.shp", "rb")
+    mydbf = open("ne_10m_populated_places.dbf", "rb")
+else: # Sino, los descargamos o los leemos desde la web
+    from io import BytesIO
+    from zipfile import ZipFile
+    from urllib.request import urlopen
+    
+    # descargamos el archivo .zip
+    respuesta = urlopen("https://naciscdn.org/naturalearth/10m/cultural/ne_10m_populated_places.zip")
+    zipfile   = ZipFile(BytesIO(respuesta.read()))
+    for archivo in zipfile.namelist():
+        if archivo[-4:]=='.shp' or archivo[-4:]=='.dbf':
+            print(f'Archivo descargado: {archivo}')
+            # con esta linea extraemos el archivo en el directorio actual
+            zipfile.extract(archivo)
+            
+    # pero tambien podemos leer los desde la memoria directamente
+    myshp = zipfile.open('ne_10m_populated_places.shp')
+    mydbf = zipfile.open('ne_10m_populated_places.dbf')
+
+# juntamos las formas y la base de datos para procesarlas
+sf = shapefile.Reader(shp=myshp, dbf=mydbf)
+
+# Dibujamos el mapa de sudamérica como hicimos antes
+fig, ax = plt.subplots( 1,1, figsize=(10,7))
+m = Basemap(projection='mill', ax=ax , 
+            resolution='l',   # Opciones válidas: c l i h f
+            **coordenadas  )
+span = 10
+paralelos  = m.drawparallels(arange(round(m.latmin,-1),round(m.latmax,-1)+span,span),
+                             labels=[1,0,0,0], color='gray')
+meridianos = m.drawmeridians(arange(round(m.lonmin,-1),round(m.lonmax,-1)+span,span),
+                             labels=[0,0,0,1], color='gray')
+
+# m.drawrivers(color='lightblue')
+m.drawcountries(color='lightgray', linewidth=1)
+m.drawcoastlines(color='gray', linewidth=0.5)
+m.drawmapboundary(fill_color='lightblue')
+m.fillcontinents(color='white',lake_color='lightblue')
+ax.set_ylabel('Latitud',labelpad=40)
+ax.set_xlabel('Longitud',labelpad=20)
+for val,mer in meridianos.items():
+    for linea in mer[0]:
+        linea.set_alpha(0.5)
+for val,par in paralelos.items():
+    for linea in par[0]:
+        linea.set_alpha(0.5)
+for val,mer in meridianos.items():
+    for txt in mer[1]:
+        txt.set_text( txt.get_text().replace('W','O') )
+
+
+# Armamos una función auxiliar que nos dice si una coordenada determinada
+# está dentro e nuestro mapa actual o no
+def esta_adentro(m,coord):
+    lon, lat = coord
+    if m.lonmin<lon and lon< m.lonmax:
+        if m.latmin<lat and lat<m.latmax:
+            return True
+    return False
+
+
+# recorremos la base de datos y vamos guardando los datos de las ciudades relevantes
+datos = [ dict(lat=p['LATITUDE'],lon=p['LONGITUDE'],pop=p['GN_POP'],nombre=p['name_es'] if len(p['name_es'])>0 else p['name_en'] ) for p in sf.records()  ]
+
+# Esto se lee así:
+# armá un diccionario con lat,long,pop,nombre como claves
+# y generá una lista de ese diccionario iterando sobre p
+# donde p son los elementos de sf.records()
+
+# De todo eso, filtramos las ciudades en el mapa
+ciudades = [ ciudad for ciudad in datos if esta_adentro(m,  (ciudad['lon'],ciudad['lat']) )  ]
+
+# Guardemos el dato de la ciudad con mayor población.
+max_pop = max( [ p['pop'] for p in ciudades] )
+
+# para poder graficar debemos generar las coordenadas del gráfico para cada ciudad
+coord = array([ m( c['lon'],c['lat'] ) for c in ciudades])
+
+# Y separarlas en coordenadas x e y
+xx      = coord[:,0]
+yy      = coord[:,1]
+
+# Por último la población
+pop     = [ p['pop']  for p in ciudades ]
+
+# Vamos a hacer un scatter sobre el mapa, donde el tamaño y color lo va a fijar 
+# la población de la ciudad
+tamaño  = [ interp( p['pop'] , [0,max_pop],[4,500]) for p in ciudades]
+sc      = ax.scatter(xx, yy, tamaño , pop , cmap=plt.get_cmap('jet') , zorder=10 , alpha=0.5 )
+
+cb = plt.colorbar( sc , pad=0.13)
+cb.set_label('población')
+
+
+for ciudad in ciudades:
+    if ciudad['pop']>1.7e6:
+        ax.text( *m( ciudad['lon'],ciudad['lat'] ) , ciudad['nombre'],
+            horizontalalignment = 'left',
+            verticalalignment   = 'center',
+            fontsize            =  10, 
+            color               = 'black', 
+            alpha               =  1    ,
+            zorder              =  12 ) 
+
+
+# plt.savefig('extra_graficos_004.png')
+```
+</div>
+
