@@ -283,8 +283,8 @@ $r^2$ es una estimación buena sobre **“cuan bien son explicados los datos por
 
 El método de cuadrados mínimos es uno de los más usados para ajustar los parámetros de una función que intenta modelar un conjunto de datos. El método consiste en lo siguiente:
 
-Se tienen N pares de valores de mediciones asociadas a un fenómeno: $x_i$ e $y_i$ . 
-Se tiene una función $F$ que depende de alguna cantidad de parámetros (propongamos por ejemplo que depende de A y B) 
+Se tienen N pares de valores de mediciones asociadas a un fenómeno: $x_i$ e $y_i$ .
+Se tiene una función $F$ que depende de alguna cantidad de parámetros (propongamos por ejemplo que depende de A y B)
 y se quieren encontrar los parámetros A y B tal que los valores
 $f_i = F_{A,B}(x_i)$ aproximen *"lo mejor posible"* a $y_i$.
 El método de cuadrados mínimos propone minimizar la cantidad $s^2$, que consiste en la suma cuadrática de los residuos:
@@ -300,25 +300,25 @@ s^2(A,B) =
 \sum_i \left[ y_i-F_{A,B}(x_i) \right]^2
 $$
 
-Osea, minimizar la suma cuadrática de los “residuos”. **Eso reduce el problema de “buscar los parámetros de un modelo que ajuste los datos” 
+Osea, minimizar la suma cuadrática de los “residuos”. **Eso reduce el problema de “buscar los parámetros de un modelo que ajuste los datos”
 a un problema de minimización**. Hay que notar que la función $s^2$
-se construye a partir de los N datos medidos pero sólo tiene como variables a los parámetros (es este caso, $A$  y $B$). 
+se construye a partir de los N datos medidos pero sólo tiene como variables a los parámetros (en este caso, $A$  y $B$).
 Por ejemplo, si el modelo es una recta $F_{A,B}(x)\,=\, A \cdot x + B$
-la función $s^2$ será uan combinación de térmicos con $A$, $B$, $A^2$ y $B^2$ (un paraboloide en 3D) y se deberá hallar las coordenadas del mínimo.
+la función $s^2$ será una combinación de térmicos con $A$, $B$, $A^2$ y $B^2$ (un paraboloide en 3D) y se deberá hallar las coordenadas del mínimo.
 
 ![grafico](02_06_chi2.png "grafico")
 
 
-Para el caso lineal existen métodos muy eficientes para hallar los  parámetros que corresponden al mínimo global. 
-Pero cuando se utilizan modelos no lineales la función $s^2$ puede resultar más compleja. 
+Para el caso lineal existen métodos muy eficientes para hallar los  parámetros que corresponden al mínimo global.
+Pero cuando se utilizan modelos no lineales la función $s^2$ puede resultar más compleja.
 Si se usan dos o más parámetros, $s^2$ puede ser una superficie con varios mínimos locales y no es trivial hallar el mínimo global.
-No nos vamos a detener a explicar cómo funcionan los diferentes algoritmos de minimización, tema que se trata extensamente en la materia 
-"Elementos de calculo numérico". Simplemente es necesario ser conscientes de cómo funciona el método. 
-Se parte de un conjunto de parámetros iniciales y se recorre el camino de mayor pendiente hacia el mínimo. 
+No nos vamos a detener a explicar cómo funcionan los diferentes algoritmos de minimización, tema que se trata extensamente en la materia
+"Elementos de calculo numérico". Simplemente es necesario ser conscientes de cómo funciona el método.
+Se parte de un conjunto de parámetros iniciales y se recorre el camino de mayor pendiente hacia el mínimo.
 En los casos de ajustes no lineales, encontrar el mínimo global dependerá de la elección de esos parámetros iniciales.
 
-El valor de $s^2$ puede usarse para estimar la bondad de un ajuste. Si se comparan varios modelos sobre un mismo conjunto de datos, 
-el que tenga menor $s^2$ será, en principio, un mejor ajuste. Sin embargo, $s^2$ no puede usarse para saber si un modelo en sí mismo es un buen modelo, 
+El valor de $s^2$ puede usarse para estimar la bondad de un ajuste. Si se comparan varios modelos sobre un mismo conjunto de datos,
+el que tenga menor $s^2$ será, en principio, un mejor ajuste. Sin embargo, $s^2$ no puede usarse para saber si un modelo en sí mismo es un buen modelo,
 pues su valor absoluto no tiene un significado intrínseco.
 
 Si se quiere tener en cuenta que algunos datos fueron medidos con mayor precisión que otros se puede construir la función *(weighted s^2)*:
