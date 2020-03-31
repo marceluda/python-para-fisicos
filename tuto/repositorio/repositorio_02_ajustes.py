@@ -201,7 +201,7 @@ r_pearson = corrcoef( datos_y ,  prediccion_modelo )[0,1]
 chi2_red  = sum( residuos**2 )/(N-P)
 
 # Chi squared test
-chi2_test = sum( residuos**2 / prediccion_modelo )
+chi2_test = sum( residuos**2 / abs(prediccion_modelo) )
 # p-value del ajuste
 p_val  = chi2(dof).cdf( chi2_test )
 
