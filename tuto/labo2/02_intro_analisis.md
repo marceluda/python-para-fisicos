@@ -428,9 +428,6 @@ for i,param in enumerate(popt):
 ![grafico](02_08_ajuste_lineal.png "grafico")
 
 
-## Ejemplo de Ajuste No Lineal
-
-Ver [Ajuste no lineal](https://marceluda.github.io/python-para-fisicos/tuto/analisis/ajuste-no-lineal/)
 
 
 
