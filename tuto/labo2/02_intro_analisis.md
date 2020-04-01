@@ -363,10 +363,10 @@ plt.tight_layout()
 
 chi2 = sum( (y2 - mod)**2 )
 # 142.3236051732523
-R    = corrcoef(x2,y2)[0,1]
+r    = corrcoef(x2,y2)[0,1]
 # 0.97121668087762869
 
-R2   = R**2
+r2   = r**2
 # 0.9432618412149576
 ```
 
@@ -374,65 +374,179 @@ R2   = R**2
 
 
 
-```python
-# Ejemplo de ajuste lineal simple
-
-from scipy.optimize import curve_fit
-
-def modelo(x, A, B):
-    return x*A+B
-
-# Parámetros iniciales con los que vamos a iniciar el proceso de fiteo
-parametros_iniciales=[1,0]
-
-# Hacemos el ajuste con curve_fit
-popt, pcov = curve_fit(modelo, x2, y2, p0=parametros_iniciales)
-
-# curve_fit devuelve dos resultados. El primero (popt) son los
-# parámetros óptimos hallados. El segundo (pcov) es la matriz de
-# covarianza de los parámetros hallados.
-
-x_modelo  = linspace(0, 10, 1000)
-
-plt.figure()
-plt.plot( x2,                 y2,  'o', label='datos')
-plt.plot(x_modelo, modelo(x_modelo, *popt), 'r-', label='modelo ajustado')
-plt.legend(loc='best')
-plt.xlabel('x2')
-plt.ylabel('y2')
-
-plt.tight_layout()
-# plt.savefig('02_08_ajuste_lineal.png')
-
-
-print(popt)
-# [ 1.99396358  3.39185943]
-
-# De la matris de covarinza podemos obtener los valores de desviacion estandar
-# de los parametros hallados
-pstd = sqrt(diag(pcov))
-
-nombres_de_param=['A','B']
-print('Parámetros hallados:')
-for i,param in enumerate(popt):
-    print('{:s} = {:5.3f} ± {:5.3f}'.format( nombres_de_param[i] , param , pstd[i]) )
-#
-# Parámetros hallados:
-#
-# A = 1.994 ± 0.049
-# B = 3.392 ± 0.280
-
-# plt.savefig('02_08_ajuste_lineal.png')
-```
 
 ![grafico](02_08_ajuste_lineal.png "grafico")
 
 
 
+## Estimadores de bondad de ajuste e intervalos de confianza
+
+<div class="alert alert-info" role="info" >
+<strong>Atención:</strong>
+A continuación se comentarán algunos conceptos estadísticos útiles para
+poder valorar de forma CUANTITATIVA qué tan buenos es un ajuste o qué tan bien
+pudimos estimar los parámetros de ese ajuste. Entender algunas de estas herramientas
+requiere un estudio más profundo de estadística y probabilidad, que quedará fuera
+de los alcances de este instructivo. Pero se tratarán de introducir los conceptos
+básicos de forma que se pueda dar uso a las herramientas, aunque no se explique por
+qué o cómo funcionan.
+</div>
+
+
+Para poder reportar que el "modelo propuesto ajusta adecuadamente los datos" debemos
+poder valorar en forma numérica la **bondad de ese ajuste**. Una de las formas más usuales para el acso lineal es una herramienta que ya vimos:
+*calcular la correlación entre la predicción del modelo y los datos medidos*.
+Este estimador de bondad es reportado como el [`r` de Pearson ](https://es.wikipedia.org/wiki/Coeficiente_de_correlaci%C3%B3n_de_Pearson).
+En el ejemplo de abajo guardaremos este valor en la variable `r = corrcoef(y2,prediccion_modelo)[0,1]`.
+Para el caso de un ajuste lineal, `r` nos dice que mientras más cercano a `1` sea más se parecen los datos a un modelo lineal. Pero **OJO**: Este estimador no nos garantiza que los parámetros hallados para el modelo lineal sean óptimos. Sólo nos asegura que el comportamiento de los datos es lineal.
+
+Una herramienta útil para analizar es calcular y estudiar los residuos. Si los datos que
+tenemos son resultados de un modelo que realmente es lineal más  "puro ruido" (no vamos a ser muy precisos en la definición de esto) los residuos deberían estar distribuidos en
+torno a cero... con masomenos la misma cantidad de datos positivos que negativos.
+Un estimador útil, que no se suele reportar pero nos sirve a nosotros para evaluar, es
+calcular el promedio de los residuos y ver si es cercano a cero.
+
+Un estimador de bondad de ajuste que se usa muy seguido (y que sirve para casos de
+ajuste polinomiales y no lineales) es el [**Coeficiente de determinación `R2`**](https://es.wikipedia.org/wiki/Coeficiente_de_determinaci%C3%B3n)
+( por $R^2$ ). Este estimador compara la _varianza de los residuos_ `SSE`
+(por _Resitual Sum of Squares_) con la _varianza de los datos_ `SST`
+(por _Total Sum of Squares_) de la forma:
+
+`R2 = 1 - SSE/SST `
+
+Esta cantidad representa "la proporción de la varianza total de los datos que es explicada por el modelo propuesto". Si el valor se acerca a 1, quiere decir que el 100% de la varianza la puede explicar nuestro modelo de forma exitosa. Mientras más cercano a
+`1` sea `R2`, mejor es la descripción que nuestro modelo hace de los datos.
+
+**Solamente en el caso de ajustes lineales** el Coeficiente de determinación es igual a el cuadrado de `r` de Pearson: $R^2 = r^2$ . Esto es una igualdad matemática que surge del cálculo de esas cantidades. Para otro tipo de ajustes estos valores no tienen por que coincidir.
+
+Por último, el resultado de un ajuste a los datos nos proporciona un conjunto de
+parámetros que mejor permiten predecir los datos con ese modelo.
+Pero: **¿Que tan bien determinados están esos parámetros?**. Queremos poder asignarle
+un valor de certeza a los parámetros hallados. Una cantidad numérica que nos represente cuanto sabemos sobre el valor más probable de ese parámetro (si suponemos que el modelo describe razonablemente bien lo datos).
+
+Para poder hacer eso debemos primero obtener el **Error Estandar** de los parámetros hallados. Esta información se halla disponible en la **Matriz de Covarianza de los parámetros** (`pcov` en el código). Cuando tenemos modelos complejos con muchos parámetros, esta matriz permite identificar parámetros redundantes o que no son del todo independientes. Pero en este caso, sólo nos interesa la diagonal de esa matriz. En la diagonal esta la "auto-covarianza"  de cada parámetro, que como dijimos, es la **varianza**. Por ende, calculando la raíz raíz de los valores de la diagonal podemos obtener los Errores Estandar de cada parámetro.
+
+Pero falta un detalle más. El Error Estándar (`SE` por la siglas en inglés) es una cantidad estadística que nos permite establecer un intervalo para un parámetro $a$:
+$(\bar a - SE_a ,\bar a + SE_a )$. **Dentro de este intervalo hay una determinada probabilidad de que se halle el valor REAL del parámetro $a$**. Estamos haciendo una diferencia entre el valor "real" del parámetro $a$ (que desconocemos) y el valor estimado que tenemos $\bar a$. Ahora, esa "determinado probabilidad" depende de la
+distribución estadística del parámetro.
+
+Si se cumple que:
+  * Nuestros datos tienen todos **Errores Normales** ...
+  * Lo que implica que los residuos van a tener errores normales (**centrados en cero!**)
+  * Entonces los **parámetros del ajuste lineal** van a tener una **distribución estadística llamada T-Student**
+
+Esta información nos permite relacionar el Error Estandar de los parámetros hallados con
+un intervalo que podemos fabricar para que contenga con una probabilidad arbitraria
+el valor real de nuestro parámetro. Usando todo esto, tenemos:
 
 
 
+```python
+#%%  Ejemplo de ajuste lineal con intervalos de confianza
 
+# Con la misma serie de datos que antes, hacemos un ajute por un
+# polinomio de grado 1 (lineal), pidiendo la información de la
+# COVARIANZA de LOS PARÁMETROS
+parametros , pcov = polyfit(x2,y2,1 , cov=True)
+
+# parametros: parametros ajustados.  Y = parametros[0] * X + parametros[1]
+# pcov      : Matris de covarianza DE LOS PARÁMETROS
+
+print('A*x+B')
+print('A:',param[0] , '   B:',param[1])
+
+# A*x+B
+# A: 1.993963578310395    B: 3.391859445249304
+
+# Calculamos la predicción que hace el modelo para los parámetros hallados
+prediccion_modelo = polyval(param,x2)
+
+# Graficamos datos y modelo ajustado
+plt.subplot(211)
+plt.errorbar(x2, y2, yerr=0.5,   fmt='.', label='datos')
+plt.plot(    x2, prediccion_modelo  ,'-', label='modelo')
+#plt.xlabel('x2')
+plt.ylabel('y2')
+plt.legend()
+plt.grid(b=True)
+
+I        = x2.argsort()          # Esto es solo para ordenar los valores de x2 en forma creciente
+residuos = y2-prediccion_modelo  # Calculamos los residuos
+
+# Graficamos residuos
+plt.subplot(212)
+plt.plot(    x2[I], residuos[I]  ,'.-', label='residuos')
+plt.xlabel('x2')
+plt.ylabel('y2')
+plt.legend()
+plt.grid(b=True)
+
+plt.tight_layout()
+# plt.savefig('02_08_ajuste_lineal_cov.png')
+
+# La suma de cudrática de los residuos nos permite comparar ESTE ajuste
+# con OTROS ajustes para EL MISMO CONJUNTO DE DATOS
+chi2 = sum( residuos**2 )
+# 142.3236051732523
+
+
+# Calculamos el r-Pearson
+r    = corrcoef(y2,prediccion_modelo)[0,1]  # Coeficiente de Pearson
+# 0.9712166808776288
+
+r2   = r**2
+# 0.9432618412149578
+
+
+# Calculamos alguna cantidades que nos sirven para algunos estimadores
+N         = len(y2)   # Número de pares de datos ajustados
+P         = 2         # Cantidad de parámetros del modelo. Para una lineal, son dos: a y b
+SSE       = sum(( y2 - prediccion_modelo )**2 )    # Resitual Sum of Squares
+SST       = sum(( y2 - mean(y2))**2)               # Total Sum of Squares
+
+# http://en.wikipedia.org/wiki/Coefficient_of_determination
+# Expresa el porcentaje de la varianza que logra explicar el modelos propuesto
+R2        =  1 - SSE/SST                           # Coeficiente de determinación
+R2_adj    = 1-(1-R2) * (N-1)/(N-P-1)              # Coeficiente de determinación Ajustado   
+
+# El coeficiente R2 ajustado hace una corrección para evitar un sesgo que se produce
+# Cuando tenemos un número de parámetros alto comparado con el número de datos.
+# Es el que suele ser reportado en un informe de laboratorio
+
+# El error estandar es la raiz de la varianza
+# En la diagonal de la matris de covarianza de los parámetros está la varianza de
+# cada parámetro en particular. Extrayendo la diagonal y calculando la raíz tenemos
+# el Error Estandar
+SE        = sqrt(diag( pcov  ))                        # Standar Error / Error estandar de los parámetros
+
+
+# Cargamos función estadística t-student que nos permite calcular a partir de
+# el error estandar cual es el intervalo de confianza de un parámetro
+from scipy.stats.distributions import  t
+
+
+# Para un intervalo de 95% de confianza, necesitamos un alpha de 5% == 0.05
+alpha=0.05
+
+sT = t.ppf(1.0 - alpha/2.0, N - P ) # student T multiplier
+CI = sT * SE
+
+print('R-squared    ',R2)
+print('R-sq_adjusted',R2_adj)
+#print('chi2_test    ',chi2_test)
+print('r-pearson    ',r)
+#print('p-value      ',p_val)
+print('')
+print('Error Estandard (SE):')
+for i in range(P):
+    print('parametro[{:3d}]: '.format(i) , parametros[i], ' ± ' , SE[i])
+print('')
+print('Intervalo de confianza al '+str((1-alpha)*100)+'%:')
+for i in range(P):
+    print('parametro[{:3d}]: '.format(i) , parametros[i], ' ± ' , CI[i])
+
+
+```
 
 
 
