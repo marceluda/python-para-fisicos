@@ -34,18 +34,21 @@ están los archivos de Python relacionados con los siguientes instructivos:
     5. Funciones para cálculo
     6. Estructuras de programación
     7. Funciones definidas por el usuario
-  - [Introducción a análisis de datos y ajustes de modelos](02_intro_analisis)
+  - [Introducción a análisis de datos y ajustes de modelos lineales](02_intro_analisis)
     1. Introducción al análisis de datos
     2. Media, Varianza y Desviación estándar
     3. Covarianza y Correlación
     4. Ajuste de datos mediante cuadrados mínimos
     5. Ejemplo de Ajuste Lineal
     6. Ejemplo de Ajuste No Lineal
-  - [Más herramientas para análisis de datos](03_herramientas)
+  - [Más herramientas para análisis de datos](03_ajustes)
+    1. Herramientas para ajustar modelos no polinómicos
+    2. Conceptos para entender los algoritmos de ajuste
+  - [Más herramientas para análisis de datos](04_herramientas)
     1. Transformada de Fourier
     2. Filtros
     3. Análisis gráfico
-  - [Instrumentación y adquisición remota](04_instrumentacion)
+  - [Instrumentación y adquisición remota](05_instrumentacion)
     1. Introducción a instrumetnación
     2. Control remoto de instrumentos
     3. Adquisición
