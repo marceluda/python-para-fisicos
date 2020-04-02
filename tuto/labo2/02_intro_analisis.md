@@ -443,6 +443,25 @@ el valor real de nuestro parámetro. Usando todo esto, tenemos:
 ![grafico](02_09_ajuste_lineal.png "grafico")
 
 
+Resultados obtenidos:
+
+```txt
+A: 1.9939635783103946    B: 3.3918594452493016
+R-squared     0.9432618412149577
+R-sq_adjusted 0.9420919822709363
+r-pearson     0.9712166808776282
+
+Error Estandard (SE):
+parametro[  0]:  1.9939635783103946  ±  0.049399854487291284
+parametro[  1]:  3.3918594452493016  ±  0.2801405695864281
+
+Intervalo de confianza al 95.0%:
+parametro[  0]:  1.9939635783103946  ±  0.09803240348344393
+parametro[  1]:  3.3918594452493016  ±  0.5559298430088225
+```
+
+
+
 ```python
 #%%  Ejemplo de ajuste lineal con intervalos de confianza
 
@@ -455,13 +474,13 @@ parametros , pcov = polyfit(x2,y2,1 , cov=True)
 # pcov      : Matris de covarianza DE LOS PARÁMETROS
 
 print('A*x+B')
-print('A:',param[0] , '   B:',param[1])
+print('A:',parametros[0] , '   B:',parametros[1])
 
 # A*x+B
 # A: 1.993963578310395    B: 3.391859445249304
 
 # Calculamos la predicción que hace el modelo para los parámetros hallados
-prediccion_modelo = polyval(param,x2)
+prediccion_modelo = polyval(parametros,x2)
 
 # Graficamos datos y modelo ajustado
 plt.subplot(211)
@@ -546,7 +565,6 @@ print('')
 print('Intervalo de confianza al '+str((1-alpha)*100)+'%:')
 for i in range(P):
     print('parametro[{:3d}]: '.format(i) , parametros[i], ' ± ' , CI[i])
-
 
 ```
 
