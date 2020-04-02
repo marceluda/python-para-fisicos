@@ -375,7 +375,6 @@ r2   = r**2
 
 
 
-![grafico](02_08_ajuste_lineal.png "grafico")
 
 
 
@@ -439,6 +438,9 @@ Esta información nos permite relacionar el Error Estandar de los parámetros ha
 un intervalo que podemos fabricar para que contenga con una probabilidad arbitraria
 el valor real de nuestro parámetro. Usando todo esto, tenemos:
 
+
+
+![grafico](02_09_ajuste_lineal.png "grafico")
 
 
 ```python
