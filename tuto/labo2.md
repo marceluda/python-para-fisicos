@@ -75,6 +75,8 @@ están los archivos de Python relacionados con los siguientes instructivos:
   - **Tutorial de Python y Numpy para principiantes**
     - En inglés
     - [http://cs231n.github.io/python-numpy-tutorial/](http://cs231n.github.io/python-numpy-tutorial/)
+  - **Tutorial de Python para Astrónomos/as** (en Español)
+    - [http://research.iac.es/sieinvens/python-course/index.html](http://research.iac.es/sieinvens/python-course/index.html)
 
 <div class="alert alert-info" role="alert" >
   <strong>Aviso:</strong> Esto último no es parte de Python para Física.
