@@ -49,7 +49,7 @@ están los archivos de Python relacionados con los siguientes instructivos:
     2. Filtros
     3. Análisis gráfico
   - [Instrumentación y adquisición remota](05_instrumentacion)
-    1. Introducción a instrumetnación
+    1. Introducción a instrumentación
     2. Control remoto de instrumentos
     3. Adquisición
 
@@ -65,12 +65,12 @@ están los archivos de Python relacionados con los siguientes instructivos:
       serán de especial interés.
     - Es una guía pormenorizada.
   - **Matplotlib Gallery**
-    - [Ejemplos de cómo hacer graficos sofisticados](https://matplotlib.org/gallery.html)
+    - [Ejemplos de cómo hacer gráficos sofisticados](https://matplotlib.org/gallery.html)
       - Hacer clic en cada imagen para ver el código de ejemplo que la genera
     - [Ejemplos introductorios a Matplotlib](http://webs.ucm.es/info/aocg/python/modulos_cientificos/matplotlib/index.html)
     - [Ejemplos más frecuentes de Matplotlib](https://matplotlib.org/users/screenshots.html)
       - Incluyen código para generar cáda imagen
-    - [Galería completa de ejemplos de Matplotlib](https://matplotlib.org/gallery.html)
+    - [Otra galería completa de ejemplos de Matplotlib](https://www.machinelearningplus.com/plots/top-50-matplotlib-visualizations-the-master-plots-python/)
       - Hacer clic en cada imagen para ver el código de ejemplo que la genera
   - **Tutorial de Python y Numpy para principiantes**
     - En inglés
