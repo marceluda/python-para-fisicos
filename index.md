@@ -6,7 +6,7 @@ mathjax: true
 ---
 
 Esta web está dedicada a recopilar y producir material útil para facilitar el uso de Python el laboratoios de
-física. 
+física.
 
 **Recursos disponibles:**
 
@@ -30,7 +30,11 @@ Análisis de datos (en construcción)
 </center>
 
 
-
+<center>
+<p> <a href="{{ site.baseurl }}/tuto/orbitales/" class="btn btn-primary btn-lg" role="button">
+Orbitales atómicos (en construcción)
+</a></p>
+</center>
 
 
 
