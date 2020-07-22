@@ -23,7 +23,8 @@ Scripts de los gráficos
 </a>
 </center>
 
-![grafico](/orbitales_01.png "grafico")
+![grafico](orbitales_01.png "grafico")
+
 
 
 /home/lolo/Dropbox/Doctorado/github/python-para-fisicos_pages/tuto/orbitales/orbitales_01.png
