@@ -53,22 +53,42 @@ $$
 a = \frac{ 4 \pi \epsilon_0 \hbar^2}{m \, e^2} = 0.529 \,\, \unicode{xC5}
 $$
 
-Finalmente, hay que agregar un factor de normalizacion:
+Finalmente, hay que agregar un factor de normalización:
 
 $$
-N{n,l} =
+N_{n,l} =
 \sqrt{  \left( \frac{2}{n\,a} \right)^3  \frac{(n-l-1)!}{2n[(n+l)!]^3} }
 $$
 
-De forma tal de tener la soluciónL
+De forma tal de tener la solución:
 
 $$
 \psi_{n,l,m}=
-N{n,l} \,\cdot\, R_{n,l} \,\cdot\, Y^m_l(\phi,\theta)
+N_{n,l} \,\cdot\, R_{n,l} \,\cdot\, Y^m_l(\phi,\theta)
 $$
 
 
-Todo esto en complejos.
+donde $n,l,m$ son los números cuánticos que caracterizan al estado. $n$ es el nivel, $l$ es el orbital y $m$ es la orientación del orbital.
+
+  - $l$ está asociado a el momento angular total del electrón en el átomo
+  - $m$ es la proyección sobre $\hat z$ del momento angular
+  - $n$ es el nivel. Al orden más bajo la energía del electrón en el estado $\psi_{n,l,m}$ sólo depende de $n$: $E_n$.
+  - Al incorporar términos al hamiltoniano la energía empieza a depender de otros números cuánticos
+
+
+La ecuación de Schrödinger en 3D es:
+
+$$
+i \hbar \frac{\partial \psi}{\partial t}
+=
+\left ( - \frac{\hbar^2}{2m} \nabla^2  + V \right) \psi
+$$
+
+Donde V es el potencial culombiano:
+
+$$
+V = - \frac{e^2}{4 \pi \epsilon_0} \, \frac{1}{r}
+$$
 
 
 ## Graficar orbitales atómicos
