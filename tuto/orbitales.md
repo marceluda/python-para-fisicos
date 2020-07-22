@@ -26,24 +26,62 @@ Scripts python
 </center>
 
 
-$$
-\huge
-A  \leftarrow  \bar{x} \equiv \sum_i \frac{x_i}{N}
-$$
+## Modelo atómico
+
+Los estados electrónicos para el modelo atómico se componen de las siguientes partes...
 
 Armónicos esféricos:
 
 $$
-Y^m_n(\theta,\phi) = \epsilon \sqrt{\frac{2n+1}{4\pi} \frac{(n-m)!}{(n+m)!}}
-      e^{i m \theta} P^m_n(\cos(\phi))
+Y^m_l(\phi,\theta) = \epsilon \sqrt{\frac{2n+1}{4\pi} \frac{(l-m)!}{(l+m)!}}
+      e^{i m \phi} P^m_l(\cos(\theta))
 $$
 
+donde $\epsilon = (-1)^m$ para $m>=0$ y $1$ para $m$ negativos
+
+Esto modela la dependencia angular (en coordenadas esféricas) de la función de onda.
+
+Por otro lado, la coordenada radial esta modelada por:
+
+$$
+R_{n,l} = \left( \frac{2 r}{n\,a} \right) e^{-\frac{r}{n\,a}} L_{n-l-1}^{2l+1} \left( \frac{2r}{n\,a} \right)
+$$
+
+con $a$ el radio de Bohr:
+
+$$
+a = \frac{ 4 \pi \epsilon_0 \hbar^2}{m \, e^2} = 0.529 \,\, \unicode{xC5}
+$$
+
+Finalmente, hay que agregar un factor de normalizacion:
+
+$$
+N{n,l} =
+\sqrt{  \left( \frac{2}{n\,a} \right)^3  \frac{(n-l-1)!}{2n[(n+l)!]^3} }
+$$
+
+De forma tal de tener la soluciónL
+
+$$
+\psi_{n,l,m}=
+N{n,l} \,\cdot\, R_{n,l} \,\cdot\, Y^m_l(\phi,\theta)
+$$
+
+
+Todo esto en complejos.
+
+
 ## Graficar orbitales atómicos
-<div class="alert alert-danger" role="alert" >
-  <strong>Aviso:</strong> Acá va ir la descripción matemática de los orbitales atómicos
-</div>
 
+En el archivo [orbitales_atomicos.py](https://github.com/marceluda/python-para-fisicos/blob/master/tutoriales/orbitales_atomicos/orbitales_atomicos.py) está programado el cálculo de estas funciones para cada estado (n,l,m).
 
+Luego, en [orbitales_atomicos.py](https://github.com/marceluda/python-para-fisicos/blob/master/tutoriales/orbitales_atomicos/orbitales_atomicos.py) se muestra cómo graficar.
+
+A continuación el ejemplo para el estado:
+
+$$
+\psi_{5,2,1} + i \cdot \psi_{5,2,-1}
+$$
 
 
 ![grafico](orbitales_01.png "grafico")
@@ -51,11 +89,7 @@ $$
 
 ### Veriosn Ploy.ly 3D
 
-<!--
 
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>    
-
--->
 
 <div id="e7578db5-5986-4d0a-9b38-29ac6aa08644" class="plotly-graph-div" style="height:800px; width:800px;"></div>
 
