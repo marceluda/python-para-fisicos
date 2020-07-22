@@ -34,7 +34,7 @@ Scripts python
   window.PLOTLYENV=window.PLOTLYENV || {};
 
   if (document.getElementById("e7578db5-5986-4d0a-9b38-29ac6aa08644")) {
-      Plotly.d3.json( lolo.json, function(err, fig) {
+      Plotly.d3.json( "lolo.json", function(err, fig) {
         Plotly.plot("e7578db5-5986-4d0a-9b38-29ac6aa08644", fig.data, fig.layout);
       });
   };  
