@@ -306,3 +306,39 @@ fig.show()
 
 # fig.write_json('orbitales_02_3D.json')
 
+
+
+
+
+#%% Referencia de colores-fase
+
+
+cmap1 = ListedColormap( 'blue,C0,C0,red,red,C1,C1,blue'.split(',') )
+cmap2 = LinearSegmentedColormap.from_list('lolo','blue,C0,C0,red,red,C1,C1,blue'.split(','))
+
+
+
+fig = plt.figure()
+axx = ( fig.add_subplot(1,2,1,polar=True) , fig.add_subplot(1,2,2,polar=True) )
+
+
+theta = linspace(-pi, pi , 360)
+radii = ones(len(theta))
+width = diff(theta).tolist() + [diff(theta)[0]]
+
+for ax,cmap in zip(axx,[cmap1,cmap2]):
+    bars =  ax.bar(theta, radii, width=width, bottom=0.5)
+    
+    for r,bar, angulo in zip(radii, bars,theta):
+        bar.set_facecolor(  cmap(  mpl.colors.Normalize(vmin=-pi,vmax=pi)( angulo ) )  )
+        bar.set_alpha(0.5)
+        
+    #ax.set_xticklabels([])
+    ax.set_yticklabels([])    
+    ax.grid(True)
+
+
+fig.subplots_adjust(hspace=1, wspace=1)
+fig.tight_layout(h_pad=1, w_pad=1)
+
+
