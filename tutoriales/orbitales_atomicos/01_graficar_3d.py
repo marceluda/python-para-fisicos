@@ -251,9 +251,6 @@ N      = 50                      # la grilla tendrá 50³ puntos
 umbral = 0.1                     # umbral para el cálculo de superficies: límite 10% de probabilidad
 
 
-# Selecciono Eje 3D
-ax = axx[0,0] #################################################################
-
 # Definimos una grilla de coordenadas cartesianas 
 # desde -clim hasta +clim con N pts, para cada coordenada
 X,Y,Z       = mgrid[-clim:clim:N*1j,-clim:clim:N*1j,-clim:clim:N*1j]
@@ -293,12 +290,10 @@ x,y,z = zip(*vertices)
 
 colores =  cmap_fase(  mpl.colors.Normalize(vmin=-pi,vmax=pi)( fase ) )
 
-colormap=['rgb(255,105,180)','rgb(255,255,51)','rgb(0,191,255)']
 fig = FF.create_trisurf(x=x,
                         y=y, 
                         z=z, 
                         plot_edges  = False,
-                        colormap    = colormap,
                         simplices   = caras,
                         color_func  = [ f'rgb({int(c[0]*255)}, {int(c[1]*255)}, {int(c[2]*255)})' for c in colores.tolist() ],
                         title       =repr(psi))
