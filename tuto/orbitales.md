@@ -125,25 +125,19 @@ $$
 
 
 
-## Graficar orbitales atómicos
+## Graficar orbitales atómicos (con fase en color)
 
-En el archivo [orbitales_atomicos.py](https://github.com/marceluda/python-para-fisicos/blob/master/tutoriales/orbitales_atomicos/orbitales_atomicos.py) está programado el cálculo de estas funciones para cada estado (n,l,m).
+En el archivo [orbitales_atomicos.py](https://github.com/marceluda/python-para-fisicos/blob/master/tutoriales/orbitales_atomicos/orbitales_atomicos.py) está programado el cálculo de estas funciones $\psi_{n,m,l}$ para cada estado (n,l,m).
 
-Luego, en [orbitales_atomicos.py](https://github.com/marceluda/python-para-fisicos/blob/master/tutoriales/orbitales_atomicos/orbitales_atomicos.py) se muestra cómo graficar.
+Luego, en [01_graficar_3d.py](https://github.com/marceluda/python-para-fisicos/blob/master/tutoriales/orbitales_atomicos/01_graficar_3d.py) se muestra cómo graficar.
 
-A continuación el ejemplo para el estado:
-
-$$
-\psi_{5,2,1} + i \cdot \psi_{5,2,-1}
-$$
+A continuación el ejemplo para el estado: $\psi_{5,2,1} + i \cdot \psi_{5,2,-1}$
 
 
 ![grafico](orbitales_01.png "grafico")
 
 
 ### Veriosn Ploy.ly 3D
-
-
 
 <div id="e7578db5-5986-4d0a-9b38-29ac6aa08644" class="plotly-graph-div" style="height:800px; width:800px;"></div>
 
@@ -154,6 +148,35 @@ $$
   if (document.getElementById("e7578db5-5986-4d0a-9b38-29ac6aa08644")) {
       Plotly.d3.json( "orbitales_02_3D.json", function(err, fig) {
         Plotly.plot("e7578db5-5986-4d0a-9b38-29ac6aa08644", fig.data, fig.layout);
+      });
+  };  
+</script>
+
+
+## Comparar orbitales atómicos (diferenciados por color)
+
+En el archivo [02_comparar_estados.py](https://github.com/marceluda/python-para-fisicos/blob/master/tutoriales/orbitales_atomicos/02_comparar_estados.py) se grafican 3 estados en simultaneo con diferentes colores:
+
+Gráficos de los estados
+$(\psi_{2,1,-1} + i \cdot \psi_{2,1,1})/\sqrt{2}$ (celeste),
+$-i \cdot (\psi_{3,2,-1} - \psi_{3,2,-1})/\sqrt{2}$ (naranja),
+$\psi_{1,0,0}$ (verde) :
+
+
+![grafico](orbitales_03.png "grafico")
+
+### Veriosn Ploy.ly 3D de varios estados
+
+
+<div id="ed77c4d8-e3f3-4bbe-a21d-b637f61b416a" class="plotly-graph-div" style="height:800px; width:800px;"></div>
+
+
+<script type="text/javascript">
+  window.PLOTLYENV=window.PLOTLYENV || {};
+
+  if (document.getElementById("ed77c4d8-e3f3-4bbe-a21d-b637f61b416a")) {
+      Plotly.d3.json( "orbitales_04_3D.json", function(err, fig) {
+        Plotly.plot("ed77c4d8-e3f3-4bbe-a21d-b637f61b416a", fig.data, fig.layout);
       });
   };  
 </script>
