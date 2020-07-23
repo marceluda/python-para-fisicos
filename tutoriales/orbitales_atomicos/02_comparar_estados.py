@@ -53,13 +53,13 @@ def coordenada_maxima(psi,umbral=0.01):
 #%% Grafico de estados apilados
 
 # Armamos 3 estados diferentes para graficar
-px = ( Ψ(2,1,-1) + 1j*Ψ(2,1,1) ) /sqrt(2)
-py = ( Ψ(3,2,1) - Ψ(3,2,-1) ) /sqrt(2)/1j
-pz = Ψ(1,0,0)
+psi0 = ( Ψ(2,1,-1) + 1j*Ψ(2,1,1) ) /sqrt(2)
+psi1 = ( Ψ(3,2,1) - Ψ(3,2,-1) ) /sqrt(2)/1j
+psi2 = Ψ(1,0,0)
 
 
 # Para facilitar, los agrupamos en un tuple
-estados = (px,py,pz)
+estados = (psi0,psi1,psi2)
 
 
 # Creamos la figura y los ejes en 3D
@@ -178,7 +178,7 @@ fig = FF.create_trisurf(x=x,
                         plot_edges  = False,
                         simplices   = caras,
                         color_func  = [ f'rgb({int(c[0]*255)}, {int(c[1]*255)}, {int(c[2]*255)})' for c in colores.tolist() ],
-                        title       =repr(psi))
+                        title       = 'estados varios')
 
 fig['data'][0].update(opacity=0.5)
 for eje in 'x y z'.split():
