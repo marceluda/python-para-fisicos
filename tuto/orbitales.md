@@ -28,26 +28,48 @@ Scripts python
 
 ## Modelo atómico
 
-Los estados electrónicos para el modelo atómico se componen de las siguientes partes...
+El modelo atómico de Schrödinger parte de resolver la ecuación de Schrödinger en 3D para un potencial central para un electrón:
 
-Armónicos esféricos:
+La ecuación de Schrödinger en 3D es:
+
+$$
+i \hbar \frac{\partial \psi}{\partial t}
+=
+\left ( - \frac{\hbar^2}{2m} \nabla^2  + V(r) \right) \psi
+$$
+
+Al proponer una solución en esféricas separable $\psi(r,\theta,\phi) = R(r) \cdto Y(\theta)$ , y depejar $Y$ obtenemos los armónicos esféricos.
+De esta forma se puede separar la ecuación diferencial en dos partes, una que depende de $r$ y otra de los ángulos.
+Ambas partes son equivalentes a una constante que depende de números cuánticos $n$ y $l$.
+
+
+Por su lado, los Armónicos esféricos requieren un número cuántico más para describir su solución: $m$:
 
 $$
 Y^m_l(\phi,\theta) = \epsilon \sqrt{\frac{2n+1}{4\pi} \frac{(l-m)!}{(l+m)!}}
       e^{i m \phi} P^m_l(\cos(\theta))
 $$
 
-donde $\epsilon = (-1)^m$ para $m>=0$ y $1$ para $m$ negativos
+donde $\epsilon = (-1)^m$ para $m>=0$ y $1$ para $m$ negativos, lo que se conoce como la [fase de Condon-Shortley](https://en.wikipedia.org/wiki/Spherical_harmonics#Condon%E2%80%93Shortley_phase).
+$P^m_l(x)$ son los [Polinomios Asociados de Legendre](https://en.wikipedia.org/wiki/Associated_Legendre_polynomials).
 
 Esto modela la dependencia angular (en coordenadas esféricas) de la función de onda.
 
-Por otro lado, la coordenada radial esta modelada por:
+
+
+Luego, se propone un $V(r)$ culombiano:
+
+$$
+V(r) = - \frac{e^2}{4 \pi \epsilon_0} \, \frac{1}{r}
+$$
+
+La solución de la parte radial para este potencial da:
 
 $$
 R_{n,l} = \left( \frac{2 r}{n\,a} \right) e^{-\frac{r}{n\,a}} L_{n-l-1}^{2l+1} \left( \frac{2r}{n\,a} \right)
 $$
 
-con $a$ el radio de Bohr:
+con $a$ el radio de Bohr y $L_{n-l-1}^{2l+1}$ son los [Polinomios Asociados de Laguerre](https://en.wikipedia.org/wiki/Laguerre_polynomials#Generalized_Laguerre_polynomials):
 
 $$
 a = \frac{ 4 \pi \epsilon_0 \hbar^2}{m \, e^2} = 0.529 \,\, \unicode{xC5}
@@ -75,20 +97,32 @@ donde $n,l,m$ son los números cuánticos que caracterizan al estado. $n$ es el 
   - $n$ es el nivel. Al orden más bajo la energía del electrón en el estado $\psi_{n,l,m}$ sólo depende de $n$: $E_n$.
   - Al incorporar términos al hamiltoniano la energía empieza a depender de otros números cuánticos
 
-
-La ecuación de Schrödinger en 3D es:
+Con la norma definida así, vale la siguiente relación de ortonormalidad:
 
 $$
-i \hbar \frac{\partial \psi}{\partial t}
+\int \psi_{n,l,m}^* \psi_{n^\prime,l^\prime,m^\prime} \;\; r^2 sin(\theta) \, d\theta d\phi dr
 =
-\left ( - \frac{\hbar^2}{2m} \nabla^2  + V \right) \psi
+\delta_{l \, l^\prime} \, \delta_{m \, m^\prime}\, \delta_{n \, n^\prime}
 $$
 
-Donde V es el potencial culombiano:
+Que viene de la condición de ortonormalidad de $R_{n,l}$  (REVISAR):
 
 $$
-V = - \frac{e^2}{4 \pi \epsilon_0} \, \frac{1}{r}
+\int_0^\infty R_{n,l}(r)^* R_{n^\prime,l^\prime}(r)  \, r^2 \, dr =  \delta_{n \, n^\prime}
 $$
+
+Condición de normalización de los armónicos esféricos:
+
+$$
+\int_0^{2 \pi} \int_0^{\pi}
+Y_l^m(\theta,\phi)^* \,\cdot\,
+Y_{l^\prime}^{m^\prime}(\theta,\phi)
+\;\;\;
+sin(\theta) \, d\theta \, d\phi
+=
+\delta_{l \, l^\prime} \, \delta_{m \, m^\prime}
+$$
+
 
 
 ## Graficar orbitales atómicos
