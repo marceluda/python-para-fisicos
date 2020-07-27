@@ -50,7 +50,6 @@ graficar_curvas_de_nivel = True
 psi = Ψ(5,2,1) - Ψ(5,2,-1)/1j
 
 
-
 # Creamos 4 conjuntos de ejes... el primero que sea 3D
 fig, axx = plt.subplots(2,2, figsize=(14,9) )
 axx[0,0].remove()
