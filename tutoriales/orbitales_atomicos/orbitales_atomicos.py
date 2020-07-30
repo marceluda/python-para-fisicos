@@ -28,7 +28,7 @@ def CG(J,M,j1,j2,m1,m2):
     if J>j1+j2 or J<abs(j1-j2):
         raise ValueError('J,j1,j2 deben cumplir:  |j1-j2|<=J<=j1+j2')
     
-    if not ( J>0 and j1>0 and j2>0):
+    if not ( J>0 and (j1>0 or j2>0)):
         raise ValueError('Los coeficientes deben J,j1,j2 deben ser mayores a cero')
     
     if not M==m1+m2:
@@ -68,7 +68,7 @@ class Ψ():
         self.l = l
         self.m = m
         self.A = A
-        self.s = 0.5
+        self.s = s
 
     def vec(self):
         """
@@ -80,13 +80,21 @@ class Ψ():
         if self.A==1:
             strA = ''
         else:
-            strA = str(self.A) + ' '
-        return f'{strA}Ψ(n={self.n},l={self.l},m={self.m})'
+            strA = str(array([self.A]).round(2)[0]) + ' '
+        return f'{strA}Ψ(n={self.n},l={self.l},m={self.m},s={self.s})'
+    
+    def __str__(self):
+        # ↑ ↓
+        if self.A==1:
+            strA = ''
+        else:
+            strA = str(array([self.A]).round(2)[0]) + ' '
+        return f'{strA}Ψ({self.n},{self.l},{self.m})' + ('↑' if self.s>0 else '↓' )
 
     def __mul__(self,otro):
         if not ( isreal(otro) or iscomplex(otro) ):
             raise ValueError('usar numeros')
-        return Ψ(n=self.n,l=self.l,m=self.m,A=self.A*otro)
+        return Ψ(n=self.n,l=self.l,m=self.m,A=self.A*otro,s=self.s)
     
     def __truediv__(self,otro):
         return self.__mul__(1/otro)
@@ -106,7 +114,7 @@ class Ψ():
             raise ValueError('No es una funcion de onda Ψ')
     
     def __neg__(self):
-        return Ψ(n=self.n,l=self.l,m=self.m,A=-self.A)
+        return Ψ(n=self.n,l=self.l,m=self.m,A=-self.A,s=self.s)
     
     def __sub__(self,otro):
         return self.__add__(- otro)
@@ -145,13 +153,13 @@ class Ψ():
     def copy(self,A=False):
         if A is False:
             A = self.A
-            
         return Ψ(n=self.n,l=self.l,m=self.m,s=self.s,A=A)
     
     def __call__(self,r,phi,theta,A=0):
         if A==0:
             A=self.A
-        return A * self.Norma() * self.R(r) * self.Y(phi,theta)
+        rta = A * self.Norma() * self.R(r) * self.Y(phi,theta)
+        return array([rta,rta*0]) if self.s>0 else array([rta*0,rta])
 
 
 class WaveFunction():
@@ -177,13 +185,19 @@ class WaveFunction():
     
     def __repr__(self):
         return 'WaveFunction: ' + ' '.join([ repr(p) if p.A<0 else '+ '+repr(p) for p in self.psi_vec ])
+    
+    def __str__(self):
+        return ' '.join([ str(p) if p.A<0 else '+ '+str(p) for p in self.psi_vec ])
 
     def __mul__(self,otro):
         if not ( isreal(otro) or iscomplex(otro) ):
             raise ValueError('usar numeros')
         
         return WaveFunction( [ otro*p for p in self.psi_vec ] )
-
+    
+    def __rmul__(self,otro):
+        return self.__mul__(otro)
+    
     def __truediv__(self,otro):
         return self.__mul__(1/otro)
 
@@ -232,7 +246,7 @@ def autoestado_SO(estado,m=False):
     Si m no está definido, tomo el m más alto posible.
     """
     
-    #estado = '5P3/2'
+    #estado = '5P1/2'
     
     n = int(estado[0])
     L = 's p d f g h i j k'.split().index( estado[1].lower() )
@@ -256,6 +270,66 @@ def autoestado_SO(estado,m=False):
 # psi0 = autoestado_SO('5P3/2', m=1/2)
 
 
+
+
+#%% Autoestados para Hiperfina:
+
+# Tomamos ideas de: doi=10.1.1.704.8856  
+#    Atomic physics: structure, interactions, and entanglement
+#    M. Saffman
+
+
+# Autoestados de la forma: 
+# |IJFM>  =  Sum_mi,mj CG(F,mf,I,mi,J,mj) |I,mi>|J,mj>
+# Con F = J + I         |J-I| <= F <= |J+I| 
+
+def autoestado_HF(estado,F=1,I=3/2,mf=False):
+
+    #    estado = '5P1/2'
+    #    m = False
+    #    F = 1  # 2
+    #    I = 3/2
+    
+    n = int(estado[0])
+    L = 's p d f g h i j k'.split().index( estado[1].lower() )
+    J = eval(estado[2:])
+    S = 1/2
+    posibles_MF = arange(-F,F+1)
+    
+    if not mf in posibles_MF:
+        if mf is False:
+            mf = posibles_MF[-1]
+        else:
+            raise ValueError(f'mf no es un valor válido para F={F}')
+    
+    
+    return  [ (mi, CG(F,mf,I,J,mi,mj)* autoestado_SO(estado,m=mj) ) for mi in arange(-I,I+1) for mj in arange(-J,J+1) if round(mi+mj,2)==round(mf,2)]
+
+
+# Ejemplo de uso:
+# psi0 = autoestado_HF('5P1/2', F=1, I=3/2, mf=0)
+
+
+#%%
+# Funcion para hallar la máxima extensión en r de un estado
+def coordenada_maxima(psi,umbral=0.01):
+    """
+    Función para hallar la máxima extensión en r de un estado, cortando al 1% del máximo.
+    """
+    
+    # Buscamos el estado de mayor extensión en r
+    if type(psi) == Ψ:
+        Ψmax = psi
+    else:
+        Ψmax = [ pp for pp in sorted(psi.psi_vec, key=lambda x: x.n*100 + x.l ) ][-1]
+    maxima_raiz = (Ψmax.n+Ψmax.l + (Ψmax.n-Ψmax.l-2)* sqrt(Ψmax.n+Ψmax.l))*Ψmax.n*0.5/2
+    
+    # Obtenemos el valor en que se vuelve menos al 1% del máximo
+    x0          = linspace(0,maxima_raiz*10,10000)
+    y0          = Ψmax.R(x0)**2 / (Ψmax.R(x0).max()**2)
+    r_max_001   = x0[nonzero(y0>umbral)[0][-1]]
+    
+    return    r_max_001*1.1
 
 
 

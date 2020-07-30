@@ -27,27 +27,7 @@ from matplotlib.colors import ListedColormap, LinearSegmentedColormap   # Para g
 cmap_fase = LinearSegmentedColormap.from_list('fase','blue,C0,C0,red,red,C1,C1,blue'.split(','))
 
 
-# Funcion para hallar la máxima extensión en r de un estado
-def coordenada_maxima(psi,umbral=0.01):
-    """
-    Función para hallar la máxima extensión en r de un estado, cortando al 1% del máximo.
-    """
-    
-    # Buscamos el estado de mayor extensión en r
-    if type(psi) == Ψ:
-        Ψmax = psi
-    else:
-        Ψmax = [ pp for pp in sorted(psi.psi_vec, key=lambda x: x.n*100 + x.l ) ][-1]
-    maxima_raiz = (Ψmax.n+Ψmax.l + (Ψmax.n-Ψmax.l-2)* sqrt(Ψmax.n+Ψmax.l))*Ψmax.n*0.5/2
-    
-    # Obtenemos el valor en que se vuelve menos al 1% del máximo
-    x0          = linspace(0,maxima_raiz*10,10000)
-    y0          = Ψmax.R(x0)**2 / (Ψmax.R(x0).max()**2)
-    r_max_001   = x0[nonzero(y0>umbral)[0][-1]]
-    
-    return    r_max_001*1.1
-
-
+from orbitales_atomicos import coordenada_maxima
 
 
 #%% Grafico de estados apilados
@@ -101,6 +81,9 @@ for ii,psi in enumerate(estados):
     # Calculamos densidad de probabilidad
     WF = abs(psi(r,phi,theta))**2
     
+    # Me quedo con el componente de spin UP
+    WF = WF[0]
+    
     # Buscamos superficies de contorno
     verts, faces,_,_ = measure.marching_cubes_lewiner(WF, WF.max()*umbral , allow_degenerate=False  )
     
@@ -148,7 +131,7 @@ ax.set_ylabel('y [Å]')
 ax.set_zlabel('z [Å]')
 
 
-ax.set_title('Estados:\n' + '\n'.join([ repr(p) for p in estados ]) )
+ax.set_title('Estados:\n' + '\n'.join([ str(p) for p in estados ]) )
 
 
 

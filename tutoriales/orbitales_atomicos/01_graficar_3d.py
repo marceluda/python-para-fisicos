@@ -20,24 +20,8 @@ cmap_fase = LinearSegmentedColormap.from_list('fase','blue,C0,C0,red,red,C1,C1,b
 
 
 # Funcion para hallar la máxima extensión en r de un estado
-def coordenada_maxima(psi):
-    """
-    Función para hallar la máxima extensión en r de un estado, cortando al 1% del máximo.
-    """
-    
-    # Buscamos el estado de mayor extensión en r
-    if type(psi) == Ψ:
-        Ψmax = psi
-    else:
-        Ψmax = [ pp for pp in sorted(psi.psi_vec, key=lambda x: x.n*100 + x.l ) ][-1]
-    maxima_raiz = (Ψmax.n+Ψmax.l + (Ψmax.n-Ψmax.l-2)* sqrt(Ψmax.n+Ψmax.l))*Ψmax.n*0.5/2
-    
-    # Obtenemos el valor en que se vuelve menos al 1% del máximo
-    x0          = linspace(0,maxima_raiz*10,10000)
-    y0          = Ψmax.R(x0)**2 / (Ψmax.R(x0).max()**2)
-    r_max_001   = x0[nonzero(y0>0.01)[0][-1]]
-    
-    return    r_max_001*1.1
+from orbitales_atomicos import coordenada_maxima
+
 
 
 
@@ -47,8 +31,7 @@ graficar_curvas_de_nivel = True
 
 # Primero definimos el estado a graficar
 
-psi = Ψ(5,2,1) - Ψ(5,2,-1)/1j
-
+psi = Ψ(5,2,1) - Ψ(5,2,0)/1j
 
 # Creamos 4 conjuntos de ejes... el primero que sea 3D
 fig, axx = plt.subplots(2,2, figsize=(14,9) )
@@ -56,12 +39,14 @@ axx[0,0].remove()
 axx[0,0]=fig.add_subplot(2,2,1,projection='3d')
 
 
-    
+
 # Parámetros para mallas
-clim   = coordenada_maxima(psi)  # Maxima extensión de ejes
+clim   = coordenada_maxima(psi,umbral=0.1)  # Maxima extensión de ejes
 N      = 50                      # la grilla tendrá 50³ puntos
 umbral = 0.1                     # umbral para el cálculo de superficies: límite 10% de probabilidad
 
+
+clim = 4
 
 # Selecciono Eje 3D
 ax = axx[0,0] #################################################################
@@ -78,7 +63,7 @@ WF = abs(psi(r,phi,theta))**2
 
 # Buscamos superficies de contorno. 
 # Son superficies que encierran el volumen en el que la probabilidad es mayor a umbral*MaximaProbabilidad
-vertices, caras,_,_ = measure.marching_cubes_lewiner(WF, WF.max()*umbral , allow_degenerate=False  )
+vertices, caras,_,_ = measure.marching_cubes_lewiner(WF[0], WF[0].max()*umbral , allow_degenerate=False  )
 
 # La función devuelde los índices de vértices de la grilla y las caras de los triángulos
 # las caras de los triángulos son tripletes de índices que indican cuales vértices de "vertices" conforman el triángulo
@@ -99,7 +84,7 @@ x_tri, y_tri, z_tri = array([  mean([ vertices[i] for i in cara ],0) for cara in
 r_tri,phi_tri,theta_tri = sqrt( x_tri**2 + y_tri**2 + z_tri**2 ) , arctan2(y_tri,x_tri)  ,  arctan2( sqrt(x_tri**2+y_tri**2) , z_tri  )
 
 # Y obtenemos la fase de complejos para la función de onda en esos puntos
-fase = angle( psi(r_tri,phi_tri,theta_tri) )
+fase = angle( psi(r_tri,phi_tri,theta_tri) )[0]
 
 # Asignamos el valor de fase a la superficie graficada
 sup.set_array( fase )
@@ -121,10 +106,10 @@ ax = axx[0,1] #  Plano XY ######################################################
 X,Y,Z       = mgrid[-clim:clim:N*1j,-clim:clim:N*1j,0:1]
 r,phi,theta = sqrt( X**2 + Y**2 + Z**2 ) , arctan2(Y,X)  ,  arctan2( sqrt(X**2+Y**2) , Z  )
 
-# Calculamos la probabilidad
-WF         = abs(  psi(r,phi,theta))**2    # Probabilidad
-fase       = angle(psi(r,phi,theta))       # Fase
-xx, yy, zz = X[:,0,0], Y[0,:,0], Z[0,0,:]  # Ejes de coordenadas
+# Calculamos la probabilidad. Nos quedamos con la componente del spin UP, que es la por defecto.
+WF         = (   abs(  psi(r,phi,theta))**2   )[0]       # Probabilidad
+fase       = (   angle(psi(r,phi,theta))      )[0]       # Fase
+xx, yy, zz = X[:,0,0], Y[0,:,0], Z[0,0,:]                # Ejes de coordenadas
 
 
 # Calculamos imagen coloreada en función de la fase del estado
@@ -155,8 +140,9 @@ ax = axx[1,0] #  Plano YZ ######################################################
 X,Y,Z       = mgrid[0:1,-clim:clim:N*1j,-clim:clim:N*1j]
 r,phi,theta = sqrt( X**2 + Y**2 + Z**2 ) , arctan2(Y,X)  ,  arctan2( sqrt(X**2+Y**2) , Z  )
 
-WF         = abs(  psi(r,phi,theta))**2
-fase       = angle(psi(r,phi,theta))
+# Calculamos la probabilidad. Nos quedamos con la componente del spin UP, que es la por defecto.
+WF         = (   abs(  psi(r,phi,theta))**2   )[0]       # Probabilidad
+fase       = (   angle(psi(r,phi,theta))      )[0]       # Fase
 xx, yy, zz = X[:,0,0], Y[0,:,0], Z[0,0,:]
 
 img        =  cmap_fase(  mpl.colors.Normalize(vmin=-pi,vmax=pi)( fase[0,:,:].T ) )
@@ -182,8 +168,9 @@ ax = axx[1,1] #  Plano XZ ######################################################
 X,Y,Z       = mgrid[-clim:clim:N*1j,0:1,-clim:clim:N*1j]
 r,phi,theta = sqrt( X**2 + Y**2 + Z**2 ) , arctan2(Y,X)  ,  arctan2( sqrt(X**2+Y**2) , Z  )
 
-WF         = abs(  psi(r,phi,theta))**2
-fase       = angle(psi(r,phi,theta))
+# Calculamos la probabilidad. Nos quedamos con la componente del spin UP, que es la por defecto.
+WF         = (   abs(  psi(r,phi,theta))**2   )[0]       # Probabilidad
+fase       = (   angle(psi(r,phi,theta))      )[0]       # Fase
 xx, yy, zz = X[:,0,0], Y[0,:,0], Z[0,0,:]
 
 img        =  cmap_fase(  mpl.colors.Normalize(vmin=-pi,vmax=pi)( fase[:,0,:].T ) )
@@ -260,7 +247,8 @@ r,phi,theta = sqrt( X**2 + Y**2 + Z**2 ) , arctan2(Y,X)  ,  arctan2( sqrt(X**2+Y
 # Calculamos la probabilidad, como el módulo de la función de ona al cuadrado
 WF = abs(psi(r,phi,theta))**2
 
-
+# Me quedo solo con el spin UP:
+WF = WF[0]
 
 
 # Buscamos superficies de contorno. 
@@ -274,14 +262,14 @@ vertices, caras,_,_ = measure.marching_cubes_lewiner(WF, WF.max()*umbral , allow
 # Convertimos los índices de los vértices hallados en las coordenadas cartecianas correspondientes
 vertices = vertices/N*clim*2-clim
 
-# Para colorear la fase, buscamos la posición media de cada triángulo obteniso
+# Para colorear la fase, buscamos la posición media de cada triángulo obtenido
 x_tri, y_tri, z_tri = array([  mean([ vertices[i] for i in cara ],0) for cara in caras ]).T
 
 # Pasamos esas posiciones a polares
 r_tri,phi_tri,theta_tri = sqrt( x_tri**2 + y_tri**2 + z_tri**2 ) , arctan2(y_tri,x_tri)  ,  arctan2( sqrt(x_tri**2+y_tri**2) , z_tri  )
 
 # Y obtenemos la fase de complejos para la función de onda en esos puntos
-fase = angle( psi(r_tri,phi_tri,theta_tri) )
+fase = angle( psi(r_tri,phi_tri,theta_tri) )[0]
 
 
 
@@ -314,7 +302,6 @@ fig.show()
 
 cmap1 = ListedColormap( 'blue,C0,C0,red,red,C1,C1,blue'.split(',') )
 cmap2 = LinearSegmentedColormap.from_list('lolo','blue,C0,C0,red,red,C1,C1,blue'.split(','))
-
 
 
 fig = plt.figure()
