@@ -401,18 +401,13 @@ umbral = 0.1                     # umbral para el cálculo de superficies: lími
 X,Y,Z       = mgrid[-clim:clim:N*1j,-clim:clim:N*1j,-clim:clim:N*1j]
 r,phi,theta = sqrt( X**2 + Y**2 + Z**2 ) , arctan2(Y,X)  ,  arctan2( sqrt(X**2+Y**2) , Z  )
 
-
 psi_fun_g      = autoestado_HF('5S1/2',F=1,mf=0,I=3/2) 
 psi_fun_e      = autoestado_HF('5P3/2',F=1,mf=1,I=3/2)
 
-
-
 WT = linspace(0,pi)
-
 umbral_abs = 8e-5
 
 
-#%
 def update(jj):
     ax.cla()
     print(jj)
