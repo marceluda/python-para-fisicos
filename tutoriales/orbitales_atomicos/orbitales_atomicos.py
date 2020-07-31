@@ -54,7 +54,7 @@ def CG(J,M,j1,j2,m1,m2):
 def _fmt_val(x,max_den=16):
     rta = fractions.Fraction(x**2).limit_denominator(max_den)
     if rta.numerator == 1:
-        return f'/√{str(rta.denominator})'
+        return f'/√{str(rta.denominator)})'
     else:
         return f'√({str(rta)})'
 
