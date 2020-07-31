@@ -81,9 +81,6 @@ for ii,psi in enumerate(estados):
     # Calculamos densidad de probabilidad
     WF = abs(psi(r,phi,theta))**2
     
-    # Me quedo con el componente de spin UP
-    WF = WF[0]
-    
     # Buscamos superficies de contorno
     verts, faces,_,_ = measure.marching_cubes_lewiner(WF, WF.max()*umbral , allow_degenerate=False  )
     
