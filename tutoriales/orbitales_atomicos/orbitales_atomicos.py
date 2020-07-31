@@ -303,7 +303,7 @@ class WaveFunction():
 
 
 
-def autoestado_SO(estado,m=False):
+def autoestado_SO(estado,m=False,I=0,mi=0):
     """
     Defino estado en notación espectral
     Si m no está definido, tomo el m más alto posible.
@@ -326,13 +326,11 @@ def autoestado_SO(estado,m=False):
         else:
             raise ValueError(f'm no es un valor válido para J={J}')
 
-    return sum([ CG(J,M,L,1/2,ml,ms)* Ψ(n=n,l=L,m=ml,s=ms) for ml in arange(-L,L+1) for ms in arange(-S,S+1) if round(ml+ms,1)==round(M,2)])
+    return sum([ CG(J,M,L,1/2,ml,ms)* Ψ(n=n,l=L,m=ml,s=ms,I=I,mi=mi) for ml in arange(-L,L+1) for ms in arange(-S,S+1) if round(ml+ms,1)==round(M,2)])
 
 
 # Ejemplo de uso:
 # psi0 = autoestado_SO('5P3/2', m=1/2)
-
-
 
 
 #%% Autoestados para Hiperfina:
@@ -366,7 +364,9 @@ def autoestado_HF(estado,F=1,I=3/2,mf=False):
             raise ValueError(f'mf no es un valor válido para F={F}')
     
     
-    return  sum([  CG(F,mf,I,J,mi,mj)* autoestado_SO(estado,m=mj)  for mi in arange(-I,I+1) for mj in arange(-J,J+1) if round(mi+mj,2)==round(mf,2)])
+    return  sum([  CG(F,mf,I,J,mi,mj)* autoestado_SO(estado,m=mj,I=I,mi=mi)  for mi in arange(-I,I+1) for mj in arange(-J,J+1) if round(mi+mj,2)==round(mf,2)])
+
+
 
 
 # Ejemplo de uso:
