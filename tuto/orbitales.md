@@ -38,7 +38,7 @@ i \hbar \frac{\partial \psi}{\partial t}
 \left ( - \frac{\hbar^2}{2m} \nabla^2  + V(r) \right) \psi
 $$
 
-Al proponer una solución en esféricas separable $\psi(r,\theta,\phi) = R(r) \cdto Y(\theta)$ , y depejar $Y$ obtenemos los armónicos esféricos.
+Al proponer una solución en esféricas separable $\psi(r,\theta,\phi) = R(r) \cdot Y(\theta)$ , y depejar $Y$ obtenemos los armónicos esféricos.
 De esta forma se puede separar la ecuación diferencial en dos partes, una que depende de $r$ y otra de los ángulos.
 Ambas partes son equivalentes a una constante que depende de números cuánticos $n$ y $l$.
 
