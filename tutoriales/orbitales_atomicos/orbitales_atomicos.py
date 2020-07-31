@@ -173,7 +173,8 @@ class Ψ():
         Ecuación 4.89 de GRiffiths
         """
         n,l,m = self.n, self.l, self.m
-        return sqrt(  (2/n/a)**3 * math.factorial(n-l-1) / ( 2*n* math.factorial(n+l)**3  )   )
+        #return sqrt(  (2/n/a)**3 * math.factorial(n-l-1) / ( 2*n* math.factorial(n+l)**3  )   )
+        return sqrt(  (2/n/a)**3 * math.factorial(n-l-1) / ( 2*n* math.factorial(n+l)  )   )
     
     def R(self,r):
         """
@@ -181,7 +182,9 @@ class Ψ():
         Ecuación 4.89 y 4.75 de Griffiths
         """
         n,l,m = self.n, self.l, self.m
-        return exp(-r/n/a) * (2*r/n/a)**l  *  (genlaguerre(n-l-1,2*l+1) * math.factorial( n+l))( r/n/a )
+        #return exp(-r/n/a) * (2*r/n/a)**l  *  (genlaguerre(n-l-1,2*l+1) * math.factorial( n+l))( r/n/a )
+        #return exp(-r/n/a) * (2*r/n/a)**l  *  genlaguerre(n-l-1,2*l+1)( r/n/a )
+        return genlaguerre(n-l-1,2*l+1)(2*r/n/a)     * exp(-r/n/a) *       (2*r/n/a)**l * sqrt(math.factorial(n-l-1)/(math.factorial(n+l) * (2*n))*(2/n/a)**3 )  
     
     
     def Y(self,phi,theta):
@@ -202,7 +205,7 @@ class Ψ():
     def __call__(self,r,phi,theta,A=0):
         if A==0:
             A=self.A
-        rta = A * self.Norma() * self.R(r) * self.Y(phi,theta)
+        rta = A * self.R(r) * self.Y(phi,theta)
         
         if abs(self.s)>0:
             rta = [rta,rta*0] if self.s>0 else [rta*0,rta]
