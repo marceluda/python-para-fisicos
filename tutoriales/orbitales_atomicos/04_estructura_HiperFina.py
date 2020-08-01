@@ -257,11 +257,12 @@ from matplotlib.animation import FuncAnimation
 
 # Creamos la figura y los ejes en 3D
 fig = plt.figure(figsize=(14,9) )
-ax  = fig.add_subplot(1,1,1,projection='3d')  
+ax2 = fig.add_subplot(2,1,2                , position=[0.05,0.05,0.9,0.25])  
+ax  = fig.add_subplot(2,1,1,projection='3d', position=[0.05,0.3,0.9,0.7])  
 
 
 # Parámetros para mallas
-clim   = 15
+clim   = 7
 N      = 40                      # la grilla tendrá 50³ puntos
 umbral = 0.1                     # umbral para el cálculo de superficies: límite 10% de probabilidad
 
@@ -277,7 +278,18 @@ psi_fun_e      = autoestado_HF('5P3/2',F=1,mf=1,I=3/2)
 
 WT = linspace(0,pi)
 
-umbral_abs = 8e-5
+umbral_abs = 8e-5 / 2
+
+rabi0, = ax2.plot(WT-pi/2, sin(WT-pi/2)**2 , lw=3 )
+rabi1, = ax2.plot(WT[0:1], sin(WT[0:1])**2 , 'o', markersize=10 )
+
+ax2.spines['top'].set_visible(False)
+ax2.spines['right'].set_visible(False)
+#ax2.spines['bottom'].set_visible(False)
+#ax2.spines['left'].set_visible(False)
+ax2.set_yticks([])
+ax2.set_xticks([])
+
 
 
 #%
@@ -285,6 +297,10 @@ def update(jj):
     ax.cla()
     print(jj)
     wt = WT[jj]
+    
+    rabi0.set_ydata( sin(WT-pi/2+wt)**2  )
+    rabi1.set_ydata( sin(WT[0:1]+wt)**2  )
+    
     
     psi = psi_fun_g*cos(wt) + 1j*psi_fun_e*sin(wt)
     
@@ -371,7 +387,9 @@ def update(jj):
 
 update(0)
 
-anim = FuncAnimation(fig, update, frames=range(len(WT)), interval=300, repeat=True)
+#%
+
+anim = FuncAnimation(fig, update, frames=range(len(WT)), interval=100, repeat=True)
 
 anim.save(f'transicion3.gif', dpi=80, writer='imagemagick')
 

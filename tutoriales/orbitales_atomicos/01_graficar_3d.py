@@ -35,6 +35,7 @@ graficar_curvas_de_nivel = True
 # psi = Ψ(5,2,1) - Ψ(5,2,0)/1j
 # psi = Ψ(2,1,1) - Ψ(2,1,0)/1j
 psi = Ψ(5,2,1) - Ψ(5,2,-1)/1j
+# psi = Ψ(4,3,1)
 
 
 # Creamos 4 conjuntos de ejes... el primero que sea 3D
