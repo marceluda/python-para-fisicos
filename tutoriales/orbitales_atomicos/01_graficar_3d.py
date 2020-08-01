@@ -44,9 +44,9 @@ axx[0,0]=fig.add_subplot(2,2,1,projection='3d')
 
 
 # Parámetros para mallas
-clim   = coordenada_maxima(psi,umbral=0.01)  # Maxima extensión de ejes
+clim   = coordenada_maxima(psi,umbral=0.3)  # Maxima extensión de ejes
 N      = 50                      # la grilla tendrá 50³ puntos
-umbral = 0.1                     # umbral para el cálculo de superficies: límite 10% de probabilidad
+umbral = 0.4                     # umbral para el cálculo de superficies: límite 10% de probabilidad
 
 # Selecciono Eje 3D
 ax = axx[0,0] #################################################################
@@ -231,9 +231,9 @@ psi = Ψ(5,2,1) - Ψ(5,2,-1)/1j
 
     
 # Parámetros para mallas
-clim   = coordenada_maxima(psi)  # Maxima extensión de ejes
+clim   = coordenada_maxima(psi,umbral=0.3)  # Maxima extensión de ejes
 N      = 50                      # la grilla tendrá 50³ puntos
-umbral = 0.1                     # umbral para el cálculo de superficies: límite 10% de probabilidad
+umbral = 0.4                     # umbral para el cálculo de superficies: límite 10% de probabilidad
 
 
 # Definimos una grilla de coordenadas cartesianas 
