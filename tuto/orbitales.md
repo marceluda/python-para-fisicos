@@ -8,7 +8,9 @@ navbar: labo2
 ---
 
 <div class="alert alert-danger" role="alert" >
-  <strong>Aviso:</strong> La página está en construcción.
+  <strong>Aviso:</strong> La página está en construcción. El contenido está basado en reportar los contenidos básicos
+  necesarios para visualizar estados electrónicos usando Python.
+  La rigurosidad de algunas afirmaciones teórica está sujeta aún a una revisión más exhaustiva.
 </div>
 
 
@@ -180,3 +182,41 @@ $\psi_{1,0,0}$ (verde) :
       });
   };  
 </script>
+
+
+## Estructura fina e hiperfina
+La estructura fina e hiperfina de la configuración electrónica depende de
+el acoplamiento del Spin electrónico con el momento angular orbital ($L \cdot S$) y de todo esto
+son el spin nuclear ($I$).
+Para describir (y graficar) estos estados se debe extender el espacio de Hilbert contemplando las posibles
+proyecciones del Spin electrónico y Nuclear.
+
+En el repositorio de github se incluyen ejemplos para la creación de autoestados del hamiltoniano con acoplamiento $L\cdot S $
+(estructura fina, archivo [03_estructura_fina.py](https://github.com/marceluda/python-para-fisicos/blob/master/tutoriales/orbitales_atomicos/03_estructura_fina.py))
+y para el hamiltoniano con acoplamiento $J \cdot I$
+(estructura hiperfina, archivo [04_estructura_HiperFina.py](https://github.com/marceluda/python-para-fisicos/blob/master/tutoriales/orbitales_atomicos/04_estructura_HiperFina.py)).
+
+Por ejemplo, a continuación se puede ver una representación gráfica del estado ${}^{87}Rb\,5P_{3/2} \; F=1,mf=1$ :
+
+<div id="86222a18-3078-4973-919f-faa48dc9c961" class="plotly-graph-div" style="height:800px; width:800px;"></div>
+
+
+<script type="text/javascript">
+  window.PLOTLYENV=window.PLOTLYENV || {};
+
+  if (document.getElementById("86222a18-3078-4973-919f-faa48dc9c961")) {
+      Plotly.d3.json( "orbitales_05_3D.json", function(err, fig) {
+        Plotly.plot("86222a18-3078-4973-919f-faa48dc9c961", fig.data, fig.layout);
+      });
+  };  
+</script>
+
+
+En el archivo
+[04_estructura_HiperFina.py](https://github.com/marceluda/python-para-fisicos/blob/master/tutoriales/orbitales_atomicos/04_estructura_HiperFina.py)
+también hay un ejemplo sobre cómo generar animaciones, útiles para ver transiciones entre estados. Esta es una simulación (muy rudimentaria)
+de una transición por oscilaciones de Rabi entre el estado
+
+${}^{87}Rb\,5S_{1/2}\;F=1,mf=0$ y el estado  ${}^{87}Rb\,5S_{3/2}\;F=1,mf=1$
+
+![grafico](transicion3.gif "animacion")
