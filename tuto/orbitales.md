@@ -68,7 +68,7 @@ $$
 La solución de la parte radial para este potencial da:
 
 $$
-R_{n,l} = \left( \frac{2 r}{n\,a} \right) e^{-\frac{r}{n\,a}} L_{n-l-1}^{2l+1} \left( \frac{2r}{n\,a} \right)
+R_{n,l} = \left( \frac{2 r}{n\,a} \right)^l e^{-\frac{r}{n\,a}} L_{n-l-1}^{2l+1} \left( \frac{2r}{n\,a} \right)
 $$
 
 con $a$ el radio de Bohr y $L_{n-l-1}^{2l+1}$ son los [Polinomios Asociados de Laguerre](https://en.wikipedia.org/wiki/Laguerre_polynomials#Generalized_Laguerre_polynomials):
