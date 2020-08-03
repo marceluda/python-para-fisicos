@@ -220,3 +220,18 @@ de una transición por oscilaciones de Rabi entre el estado
 ${}^{87}Rb\,5S_{1/2}\;F=1,mf=0$ y el estado  ${}^{87}Rb\,5S_{3/2}\;F=1,mf=1$
 
 ![grafico](transicion3.gif "animacion")
+
+
+
+## Galería de estados
+
+
+Con el script
+[05_galeria_de_estados_3d.py](https://github.com/marceluda/python-para-fisicos/blob/master/tutoriales/orbitales_atomicos/05_galeria_de_estados_3d.py)
+se generó una galería de estados orbitales hasta el nivel 3:
+
+<center>
+<p> <a href="{{ site.baseurl }}/tuto/orbitales_galeria/" class="btn btn-primary btn-lg" role="button">
+Galería de Orbitales atómicos
+</a></p>
+</center>
