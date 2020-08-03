@@ -373,9 +373,12 @@ def autoestado_HF(estado,F=1,I=3/2,mf=False):
 
 #%%
 # Funcion para hallar la máxima extensión en r de un estado
-def coordenada_maxima(psi,umbral=0.01):
+
+def coordenada_maxima(psi,umbral=0.01,maximo=True):
     """
-    Función para hallar la máxima extensión en r de un estado, cortando al 1% del máximo.
+    Función para hallar la máxima extensión en r de un estado, cortando en el umbral
+    Si maximo==True se interpreta el borde donde Ψ.R()^2 * r^2 == Ψ.R().max()*umbral
+    Sino, se intepreta umbral como el borde donde la integral cubre (1-umbral) del area de Ψ.R()^2 * r^2
     """
     
     # Buscamos el estado de mayor extensión en r
@@ -385,12 +388,19 @@ def coordenada_maxima(psi,umbral=0.01):
         Ψmax = [ pp for pp in sorted(psi.psi_vec, key=lambda x: x.n*100 + x.l ) ][-1]
     maxima_raiz = max(   (Ψmax.n+Ψmax.l + (Ψmax.n-Ψmax.l-2)* sqrt(Ψmax.n+Ψmax.l))*Ψmax.n*0.5/2   ,  1 )
     
-    # Obtenemos el valor en que se vuelve menos al [umbra]% del máximo
-    x0          = linspace(0,maxima_raiz*10,10000)
-    y0          = Ψmax.R(x0)**2 / (Ψmax.R(x0).max()**2)
-    r_max_001   = x0[nonzero(y0>umbral)[0][-1]]
     
-    return    r_max_001*1.1  # le damos un 10% extra
+    if maximo:
+        # Obtenemos el valor en que se vuelve menos al [umbra]% del máximo
+        x0          = linspace(0,maxima_raiz*10,10000)
+        y0          = Ψmax.R(x0)**2 / (Ψmax.R(x0).max()**2)
+        r_max_001   = x0[nonzero(y0>umbral)[0][-1]]
+        
+        return    r_max_001*1.1  # le damos un 10% extra
+    else:
+        x0          = linspace(0,maxima_raiz*10,10000)
+        y0          = cumsum(Ψmax.R(x0)**2*x0**2)
+        r_max_001   = x0[nonzero(y0>(1-umbral))[0][-1]]
+        return r_max_001*1.1
 
 
 #%%
