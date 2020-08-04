@@ -1,6 +1,6 @@
 ---
-title: Orbitales atómicos
-description: Graficar orbitales atómicos
+title: Galería de orbitales atómicos
+description: Galería de orbitales atómicos
 layout: page
 mathjax: true
 plotly: true
@@ -13,7 +13,9 @@ navbar: labo2
   La rigurosidad de algunas afirmaciones teórica está sujeta aún a una revisión más exhaustiva.
 </div>
 
-
+<div class="alert alert-info" role="alert" >
+  <strong>Comentario:</strong> Se grafican los estados para todos los L y m posibles... y las superposiciones de estados con m y -m.
+</div>
 
 
 
