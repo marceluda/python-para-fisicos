@@ -16,32 +16,35 @@ navbar: labo2
 
 
 
+
 ## Figuras estados n=1
 
 
 ![grafico](orb_gal_01.png "grafico")
 
-### Estado: Ψ(1,0,0)
 
+<div id="orb_plot_1" class="plotly-graph-div" style="height:800px; width:800px;"></div>
 
+<p>
+/home/lolo/anaconda3/lib/python3.7/site-packages/plotly/tools.py:592: UserWarning:
 
-<div id="orb1000" class="plotly-graph-div" style="height:800px; width:800px;"></div>
+plotly.tools.FigureFactory.create_trisurf is deprecated. Use plotly.figure_factory.create_trisurf
 
 
 <script type="text/javascript">
   window.PLOTLYENV=window.PLOTLYENV || {};
 
-  if (document.getElementById("orb1000")) {
-      Plotly.d3.json( "orbitales_06_1000.json", function(err, fig) {
-        Plotly.plot("orb1000", fig.data, fig.layout);
+  if (document.getElementById("orb_plot_1")) {
+      Plotly.d3.json( "orbitales_06_10300.json", function(err, fig) {
+        Plotly.plot("orb_plot_1", fig.data, fig.layout);
       });
   };  
 </script>
 
-
-
-
-
+<a href='javascript:Plotly.purge("orb_plot_1");Plotly.d3.json( "orbitales_06_10300.json", function(err, fig) { Plotly.plot("orb_plot_1", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(1,0,0)
+</a>
+</p>
 
 
 
@@ -53,132 +56,40 @@ navbar: labo2
 
 ![grafico](orb_gal_02.png "grafico")
 
-### Estado: Ψ(2,0,0)
 
+<div id="orb_plot_2" class="plotly-graph-div" style="height:800px; width:800px;"></div>
 
-
-<div id="orb2000" class="plotly-graph-div" style="height:800px; width:800px;"></div>
-
+<p>
 
 <script type="text/javascript">
   window.PLOTLYENV=window.PLOTLYENV || {};
 
-  if (document.getElementById("orb2000")) {
-      Plotly.d3.json( "orbitales_06_2000.json", function(err, fig) {
-        Plotly.plot("orb2000", fig.data, fig.layout);
+  if (document.getElementById("orb_plot_2")) {
+      Plotly.d3.json( "orbitales_06_20300.json", function(err, fig) {
+        Plotly.plot("orb_plot_2", fig.data, fig.layout);
       });
   };  
 </script>
 
-
-
-
-
-### Estado: Ψ(2,1,-1)
-
-
-
-<div id="orb21-10" class="plotly-graph-div" style="height:800px; width:800px;"></div>
-
-
-<script type="text/javascript">
-  window.PLOTLYENV=window.PLOTLYENV || {};
-
-  if (document.getElementById("orb21-10")) {
-      Plotly.d3.json( "orbitales_06_21-10.json", function(err, fig) {
-        Plotly.plot("orb21-10", fig.data, fig.layout);
-      });
-  };  
-</script>
-
-
-
-
-
-### Estado: Ψ(2,1,0)
-
-
-
-<div id="orb2100" class="plotly-graph-div" style="height:800px; width:800px;"></div>
-
-
-<script type="text/javascript">
-  window.PLOTLYENV=window.PLOTLYENV || {};
-
-  if (document.getElementById("orb2100")) {
-      Plotly.d3.json( "orbitales_06_2100.json", function(err, fig) {
-        Plotly.plot("orb2100", fig.data, fig.layout);
-      });
-  };  
-</script>
-
-
-
-
-
-### Estado: Ψ(2,1,1)
-
-
-
-<div id="orb2110" class="plotly-graph-div" style="height:800px; width:800px;"></div>
-
-
-<script type="text/javascript">
-  window.PLOTLYENV=window.PLOTLYENV || {};
-
-  if (document.getElementById("orb2110")) {
-      Plotly.d3.json( "orbitales_06_2110.json", function(err, fig) {
-        Plotly.plot("orb2110", fig.data, fig.layout);
-      });
-  };  
-</script>
-
-
-
-
-
-### Estado: WaveFunction: -0.71 Ψ(2,1,-1) + 0.71 Ψ(2,1,1)
-
-
-
-<div id="orb2111" class="plotly-graph-div" style="height:800px; width:800px;"></div>
-
-
-<script type="text/javascript">
-  window.PLOTLYENV=window.PLOTLYENV || {};
-
-  if (document.getElementById("orb2111")) {
-      Plotly.d3.json( "orbitales_06_2111.json", function(err, fig) {
-        Plotly.plot("orb2111", fig.data, fig.layout);
-      });
-  };  
-</script>
-
-
-
-
-
-### Estado: WaveFunction: -0.71j Ψ(2,1,-1) -0.71j Ψ(2,1,1)
-
-
-
-<div id="orb2112" class="plotly-graph-div" style="height:800px; width:800px;"></div>
-
-
-<script type="text/javascript">
-  window.PLOTLYENV=window.PLOTLYENV || {};
-
-  if (document.getElementById("orb2112")) {
-      Plotly.d3.json( "orbitales_06_2112.json", function(err, fig) {
-        Plotly.plot("orb2112", fig.data, fig.layout);
-      });
-  };  
-</script>
-
-
-
-
-
+<a href='javascript:Plotly.purge("orb_plot_2");Plotly.d3.json( "orbitales_06_20300.json", function(err, fig) { Plotly.plot("orb_plot_2", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(2,0,0)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_2");Plotly.d3.json( "orbitales_06_21290.json", function(err, fig) { Plotly.plot("orb_plot_2", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(2,1,-1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_2");Plotly.d3.json( "orbitales_06_21300.json", function(err, fig) { Plotly.plot("orb_plot_2", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(2,1,0)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_2");Plotly.d3.json( "orbitales_06_21310.json", function(err, fig) { Plotly.plot("orb_plot_2", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(2,1,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_2");Plotly.d3.json( "orbitales_06_21311.json", function(err, fig) { Plotly.plot("orb_plot_2", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71 Ψ(2,1,-1) + 0.71 Ψ(2,1,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_2");Plotly.d3.json( "orbitales_06_21312.json", function(err, fig) { Plotly.plot("orb_plot_2", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71j Ψ(2,1,-1) -0.71j Ψ(2,1,1)
+</a>
+</p>
 
 
 
@@ -190,313 +101,343 @@ navbar: labo2
 
 ![grafico](orb_gal_03.png "grafico")
 
-### Estado: Ψ(3,0,0)
 
+<div id="orb_plot_3" class="plotly-graph-div" style="height:800px; width:800px;"></div>
 
-
-<div id="orb3000" class="plotly-graph-div" style="height:800px; width:800px;"></div>
-
+<p>
 
 <script type="text/javascript">
   window.PLOTLYENV=window.PLOTLYENV || {};
 
-  if (document.getElementById("orb3000")) {
-      Plotly.d3.json( "orbitales_06_3000.json", function(err, fig) {
-        Plotly.plot("orb3000", fig.data, fig.layout);
+  if (document.getElementById("orb_plot_3")) {
+      Plotly.d3.json( "orbitales_06_30300.json", function(err, fig) {
+        Plotly.plot("orb_plot_3", fig.data, fig.layout);
       });
   };  
 </script>
 
+<a href='javascript:Plotly.purge("orb_plot_3");Plotly.d3.json( "orbitales_06_30300.json", function(err, fig) { Plotly.plot("orb_plot_3", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(3,0,0)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_3");Plotly.d3.json( "orbitales_06_31290.json", function(err, fig) { Plotly.plot("orb_plot_3", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(3,1,-1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_3");Plotly.d3.json( "orbitales_06_31300.json", function(err, fig) { Plotly.plot("orb_plot_3", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(3,1,0)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_3");Plotly.d3.json( "orbitales_06_31310.json", function(err, fig) { Plotly.plot("orb_plot_3", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(3,1,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_3");Plotly.d3.json( "orbitales_06_31311.json", function(err, fig) { Plotly.plot("orb_plot_3", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71 Ψ(3,1,-1) + 0.71 Ψ(3,1,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_3");Plotly.d3.json( "orbitales_06_31312.json", function(err, fig) { Plotly.plot("orb_plot_3", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71j Ψ(3,1,-1) -0.71j Ψ(3,1,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_3");Plotly.d3.json( "orbitales_06_32280.json", function(err, fig) { Plotly.plot("orb_plot_3", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(3,2,-2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_3");Plotly.d3.json( "orbitales_06_32290.json", function(err, fig) { Plotly.plot("orb_plot_3", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(3,2,-1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_3");Plotly.d3.json( "orbitales_06_32300.json", function(err, fig) { Plotly.plot("orb_plot_3", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(3,2,0)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_3");Plotly.d3.json( "orbitales_06_32310.json", function(err, fig) { Plotly.plot("orb_plot_3", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(3,2,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_3");Plotly.d3.json( "orbitales_06_32311.json", function(err, fig) { Plotly.plot("orb_plot_3", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71 Ψ(3,2,-1) + 0.71 Ψ(3,2,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_3");Plotly.d3.json( "orbitales_06_32312.json", function(err, fig) { Plotly.plot("orb_plot_3", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71j Ψ(3,2,-1) -0.71j Ψ(3,2,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_3");Plotly.d3.json( "orbitales_06_32320.json", function(err, fig) { Plotly.plot("orb_plot_3", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(3,2,2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_3");Plotly.d3.json( "orbitales_06_32321.json", function(err, fig) { Plotly.plot("orb_plot_3", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
++ 0.71 Ψ(3,2,2) -0.71 Ψ(3,2,-2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_3");Plotly.d3.json( "orbitales_06_32322.json", function(err, fig) { Plotly.plot("orb_plot_3", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71j Ψ(3,2,2) -0.71j Ψ(3,2,-2)
+</a>
+</p>
 
 
 
 
-### Estado: Ψ(3,1,-1)
 
 
+## Figuras estados n=4
 
-<div id="orb31-10" class="plotly-graph-div" style="height:800px; width:800px;"></div>
 
+![grafico](orb_gal_04.png "grafico")
+
+
+<div id="orb_plot_4" class="plotly-graph-div" style="height:800px; width:800px;"></div>
+
+<p>
 
 <script type="text/javascript">
   window.PLOTLYENV=window.PLOTLYENV || {};
 
-  if (document.getElementById("orb31-10")) {
-      Plotly.d3.json( "orbitales_06_31-10.json", function(err, fig) {
-        Plotly.plot("orb31-10", fig.data, fig.layout);
+  if (document.getElementById("orb_plot_4")) {
+      Plotly.d3.json( "orbitales_06_40300.json", function(err, fig) {
+        Plotly.plot("orb_plot_4", fig.data, fig.layout);
       });
   };  
 </script>
 
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_40300.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(4,0,0)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_41290.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(4,1,-1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_41300.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(4,1,0)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_41310.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(4,1,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_41311.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71 Ψ(4,1,-1) + 0.71 Ψ(4,1,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_41312.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71j Ψ(4,1,-1) -0.71j Ψ(4,1,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_42280.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(4,2,-2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_42290.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(4,2,-1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_42300.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(4,2,0)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_42310.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(4,2,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_42311.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
++ 0.71 Ψ(4,2,1) -0.71 Ψ(4,2,-1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_42312.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71j Ψ(4,2,1) -0.71j Ψ(4,2,-1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_42320.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(4,2,2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_42321.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
++ 0.71 Ψ(4,2,2) -0.71 Ψ(4,2,-2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_42322.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71j Ψ(4,2,2) -0.71j Ψ(4,2,-2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_43270.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(4,3,-3)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_43280.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(4,3,-2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_43290.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(4,3,-1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_43300.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(4,3,0)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_43310.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(4,3,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_43311.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71 Ψ(4,3,-1) + 0.71 Ψ(4,3,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_43312.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71j Ψ(4,3,-1) -0.71j Ψ(4,3,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_43320.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(4,3,2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_43321.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71 Ψ(4,3,-2) + 0.71 Ψ(4,3,2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_43322.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71j Ψ(4,3,-2) -0.71j Ψ(4,3,2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_43330.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(4,3,3)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_43331.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
++ 0.71 Ψ(4,3,3) -0.71 Ψ(4,3,-3)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_4");Plotly.d3.json( "orbitales_06_43332.json", function(err, fig) { Plotly.plot("orb_plot_4", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71j Ψ(4,3,3) -0.71j Ψ(4,3,-3)
+</a>
+</p>
 
 
 
 
-### Estado: Ψ(3,1,0)
 
 
+## Figuras estados n=5
 
-<div id="orb3100" class="plotly-graph-div" style="height:800px; width:800px;"></div>
 
+![grafico](orb_gal_05.png "grafico")
+
+
+<div id="orb_plot_5" class="plotly-graph-div" style="height:800px; width:800px;"></div>
+
+<p>
 
 <script type="text/javascript">
   window.PLOTLYENV=window.PLOTLYENV || {};
 
-  if (document.getElementById("orb3100")) {
-      Plotly.d3.json( "orbitales_06_3100.json", function(err, fig) {
-        Plotly.plot("orb3100", fig.data, fig.layout);
+  if (document.getElementById("orb_plot_5")) {
+      Plotly.d3.json( "orbitales_06_50300.json", function(err, fig) {
+        Plotly.plot("orb_plot_5", fig.data, fig.layout);
       });
   };  
 </script>
 
-
-
-
-
-### Estado: Ψ(3,1,1)
-
-
-
-<div id="orb3110" class="plotly-graph-div" style="height:800px; width:800px;"></div>
-
-
-<script type="text/javascript">
-  window.PLOTLYENV=window.PLOTLYENV || {};
-
-  if (document.getElementById("orb3110")) {
-      Plotly.d3.json( "orbitales_06_3110.json", function(err, fig) {
-        Plotly.plot("orb3110", fig.data, fig.layout);
-      });
-  };  
-</script>
-
-
-
-
-
-### Estado: WaveFunction: -0.71 Ψ(3,1,-1) + 0.71 Ψ(3,1,1)
-
-
-
-<div id="orb3111" class="plotly-graph-div" style="height:800px; width:800px;"></div>
-
-
-<script type="text/javascript">
-  window.PLOTLYENV=window.PLOTLYENV || {};
-
-  if (document.getElementById("orb3111")) {
-      Plotly.d3.json( "orbitales_06_3111.json", function(err, fig) {
-        Plotly.plot("orb3111", fig.data, fig.layout);
-      });
-  };  
-</script>
-
-
-
-
-
-### Estado: WaveFunction: -0.71j Ψ(3,1,-1) -0.71j Ψ(3,1,1)
-
-
-
-<div id="orb3112" class="plotly-graph-div" style="height:800px; width:800px;"></div>
-
-
-<script type="text/javascript">
-  window.PLOTLYENV=window.PLOTLYENV || {};
-
-  if (document.getElementById("orb3112")) {
-      Plotly.d3.json( "orbitales_06_3112.json", function(err, fig) {
-        Plotly.plot("orb3112", fig.data, fig.layout);
-      });
-  };  
-</script>
-
-
-
-
-
-### Estado: Ψ(3,2,-2)
-
-
-
-<div id="orb32-20" class="plotly-graph-div" style="height:800px; width:800px;"></div>
-
-
-<script type="text/javascript">
-  window.PLOTLYENV=window.PLOTLYENV || {};
-
-  if (document.getElementById("orb32-20")) {
-      Plotly.d3.json( "orbitales_06_32-20.json", function(err, fig) {
-        Plotly.plot("orb32-20", fig.data, fig.layout);
-      });
-  };  
-</script>
-
-
-
-
-
-### Estado: Ψ(3,2,-1)
-
-
-
-<div id="orb32-10" class="plotly-graph-div" style="height:800px; width:800px;"></div>
-
-
-<script type="text/javascript">
-  window.PLOTLYENV=window.PLOTLYENV || {};
-
-  if (document.getElementById("orb32-10")) {
-      Plotly.d3.json( "orbitales_06_32-10.json", function(err, fig) {
-        Plotly.plot("orb32-10", fig.data, fig.layout);
-      });
-  };  
-</script>
-
-
-
-
-
-### Estado: Ψ(3,2,0)
-
-
-
-<div id="orb3200" class="plotly-graph-div" style="height:800px; width:800px;"></div>
-
-
-<script type="text/javascript">
-  window.PLOTLYENV=window.PLOTLYENV || {};
-
-  if (document.getElementById("orb3200")) {
-      Plotly.d3.json( "orbitales_06_3200.json", function(err, fig) {
-        Plotly.plot("orb3200", fig.data, fig.layout);
-      });
-  };  
-</script>
-
-
-
-
-
-### Estado: Ψ(3,2,1)
-
-
-
-<div id="orb3210" class="plotly-graph-div" style="height:800px; width:800px;"></div>
-
-
-<script type="text/javascript">
-  window.PLOTLYENV=window.PLOTLYENV || {};
-
-  if (document.getElementById("orb3210")) {
-      Plotly.d3.json( "orbitales_06_3210.json", function(err, fig) {
-        Plotly.plot("orb3210", fig.data, fig.layout);
-      });
-  };  
-</script>
-
-
-
-
-
-### Estado: WaveFunction: -0.71 Ψ(3,2,-1) + 0.71 Ψ(3,2,1)
-
-
-
-<div id="orb3211" class="plotly-graph-div" style="height:800px; width:800px;"></div>
-
-
-<script type="text/javascript">
-  window.PLOTLYENV=window.PLOTLYENV || {};
-
-  if (document.getElementById("orb3211")) {
-      Plotly.d3.json( "orbitales_06_3211.json", function(err, fig) {
-        Plotly.plot("orb3211", fig.data, fig.layout);
-      });
-  };  
-</script>
-
-
-
-
-
-### Estado: WaveFunction: -0.71j Ψ(3,2,-1) -0.71j Ψ(3,2,1)
-
-
-
-<div id="orb3212" class="plotly-graph-div" style="height:800px; width:800px;"></div>
-
-
-<script type="text/javascript">
-  window.PLOTLYENV=window.PLOTLYENV || {};
-
-  if (document.getElementById("orb3212")) {
-      Plotly.d3.json( "orbitales_06_3212.json", function(err, fig) {
-        Plotly.plot("orb3212", fig.data, fig.layout);
-      });
-  };  
-</script>
-
-
-
-
-
-### Estado: Ψ(3,2,2)
-
-
-
-<div id="orb3220" class="plotly-graph-div" style="height:800px; width:800px;"></div>
-
-
-<script type="text/javascript">
-  window.PLOTLYENV=window.PLOTLYENV || {};
-
-  if (document.getElementById("orb3220")) {
-      Plotly.d3.json( "orbitales_06_3220.json", function(err, fig) {
-        Plotly.plot("orb3220", fig.data, fig.layout);
-      });
-  };  
-</script>
-
-
-
-
-
-### Estado: WaveFunction: + 0.71 Ψ(3,2,2) -0.71 Ψ(3,2,-2)
-
-
-
-<div id="orb3221" class="plotly-graph-div" style="height:800px; width:800px;"></div>
-
-
-<script type="text/javascript">
-  window.PLOTLYENV=window.PLOTLYENV || {};
-
-  if (document.getElementById("orb3221")) {
-      Plotly.d3.json( "orbitales_06_3221.json", function(err, fig) {
-        Plotly.plot("orb3221", fig.data, fig.layout);
-      });
-  };  
-</script>
-
-
-
-
-
-### Estado: WaveFunction: -0.71j Ψ(3,2,2) -0.71j Ψ(3,2,-2)
-
-
-
-<div id="orb3222" class="plotly-graph-div" style="height:800px; width:800px;"></div>
-
-
-<script type="text/javascript">
-  window.PLOTLYENV=window.PLOTLYENV || {};
-
-  if (document.getElementById("orb3222")) {
-      Plotly.d3.json( "orbitales_06_3222.json", function(err, fig) {
-        Plotly.plot("orb3222", fig.data, fig.layout);
-      });
-  };  
-</script>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_50300.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,0,0)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_51290.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,1,-1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_51300.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,1,0)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_51310.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,1,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_51311.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
++ 0.71 Ψ(5,1,1) -0.71 Ψ(5,1,-1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_51312.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71j Ψ(5,1,1) -0.71j Ψ(5,1,-1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_52280.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,2,-2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_52290.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,2,-1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_52300.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,2,0)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_52310.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,2,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_52311.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71 Ψ(5,2,-1) + 0.71 Ψ(5,2,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_52312.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71j Ψ(5,2,-1) -0.71j Ψ(5,2,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_52320.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,2,2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_52321.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71 Ψ(5,2,-2) + 0.71 Ψ(5,2,2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_52322.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71j Ψ(5,2,-2) -0.71j Ψ(5,2,2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_53270.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,3,-3)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_53280.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,3,-2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_53290.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,3,-1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_53300.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,3,0)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_53310.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,3,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_53311.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
++ 0.71 Ψ(5,3,1) -0.71 Ψ(5,3,-1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_53312.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71j Ψ(5,3,1) -0.71j Ψ(5,3,-1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_53320.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,3,2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_53321.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
++ 0.71 Ψ(5,3,2) -0.71 Ψ(5,3,-2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_53322.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71j Ψ(5,3,2) -0.71j Ψ(5,3,-2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_53330.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,3,3)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_53331.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
++ 0.71 Ψ(5,3,3) -0.71 Ψ(5,3,-3)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_53332.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71j Ψ(5,3,3) -0.71j Ψ(5,3,-3)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_54260.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,4,-4)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_54270.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,4,-3)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_54280.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,4,-2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_54290.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,4,-1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_54300.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,4,0)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_54310.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,4,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_54311.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71 Ψ(5,4,-1) + 0.71 Ψ(5,4,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_54312.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71j Ψ(5,4,-1) -0.71j Ψ(5,4,1)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_54320.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,4,2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_54321.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
++ 0.71 Ψ(5,4,2) -0.71 Ψ(5,4,-2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_54322.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71j Ψ(5,4,2) -0.71j Ψ(5,4,-2)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_54330.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,4,3)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_54331.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
++ 0.71 Ψ(5,4,3) -0.71 Ψ(5,4,-3)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_54332.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71j Ψ(5,4,3) -0.71j Ψ(5,4,-3)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_54340.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+Ψ(5,4,4)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_54341.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
++ 0.71 Ψ(5,4,4) -0.71 Ψ(5,4,-4)
+</a>
+<a href='javascript:Plotly.purge("orb_plot_5");Plotly.d3.json( "orbitales_06_54342.json", function(err, fig) { Plotly.plot("orb_plot_5", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+-0.71j Ψ(5,4,4) -0.71j Ψ(5,4,-4)
+</a>
+</p>
+
+## Referencia de colores de fase
+
+La fase está graficada siguiedo el siguiente código de colores:
+
+![grafico](referencia_colores.png "grafico")
