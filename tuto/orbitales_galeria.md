@@ -26,9 +26,6 @@ navbar: labo2
 <div id="orb_plot_1" class="plotly-graph-div" style="height:800px; width:800px;"></div>
 
 <p>
-/home/lolo/anaconda3/lib/python3.7/site-packages/plotly/tools.py:592: UserWarning:
-
-plotly.tools.FigureFactory.create_trisurf is deprecated. Use plotly.figure_factory.create_trisurf
 
 
 <script type="text/javascript">
