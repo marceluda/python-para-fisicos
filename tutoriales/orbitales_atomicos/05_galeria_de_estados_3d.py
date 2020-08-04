@@ -44,10 +44,7 @@ for n in range(1,4):
 
 
 
-template = """
-<div id="LOLO_ID" class="plotly-graph-div" style="height:800px; width:800px;"></div>
-
-
+template0 = """
 <script type="text/javascript">
   window.PLOTLYENV=window.PLOTLYENV || {};
 
@@ -59,6 +56,17 @@ template = """
 </script>
 """
 
+
+
+template = """
+<div id="LOLO_ID" class="plotly-graph-div" style="height:800px; width:800px;"></div>
+"""
+
+template_boton="""
+<a href='javascript:Plotly.purge("LOLO_ID");Plotly.d3.json( "LOLO_JSON", function(err, fig) { Plotly.plot("LOLO_ID", fig.data, fig.layout); });' class="btn btn-primary btn-lg" role="button">
+LOLO_NOMBRE
+</a>
+""".strip()
 
 #%%
 
@@ -80,17 +88,23 @@ umbral = 0.1                     # umbral para el cálculo de superficies: lími
 
 
 
-for n in range(1,4):
+for n in range(1,6):
     print('\n'*5)
     print(f'## Figuras estados n={n}\n')
           
     print(f'\n![grafico](orb_gal_0{n}.png "grafico")\n')
     
-    fig = plt.figure( figsize=(14,9) )
-    ax = []
-    snx,sny = sub_fig_layout[n]
-    for ii in range(sum([ 4*l+1 for l in range(0,n) ])):
-        ax +=  [  fig.add_subplot(snx,sny,ii+1,projection='3d')   ]
+    print(template.replace('LOLO_ID',f'orb_plot_{n}'))
+    
+    print('<p>')
+    
+    
+    if n<4:
+        fig = plt.figure( figsize=(14,9) )
+        ax = []
+        snx,sny = sub_fig_layout[n]
+        for ii in range(sum([ 4*l+1 for l in range(0,n) ])):
+            ax +=  [  fig.add_subplot(snx,sny,ii+1,projection='3d')   ]
     
     li=0
     for l in arange(0,n):
@@ -100,13 +114,13 @@ for n in range(1,4):
 
                 if k==0:
                     psi = Ψ(n,l,m)
-                    pmax = psi.R(clim)**2*clim**2
+                    #pmax = psi.R(clim)**2*clim**2
                 elif k==1:
                     psi = ( Ψ(n,l,m) - Ψ(n,l,-m) )/sqrt(2)
-                    pmax = psi.psi_vec[0].R(clim)**2*clim**2
+                    #pmax = psi.psi_vec[0].R(clim)**2*clim**2
                 else:
                     psi = ( Ψ(n,l,m) + Ψ(n,l,-m) )/sqrt(2)/1j
-                    pmax = psi.psi_vec[0].R(clim)**2*clim**2
+                    #pmax = psi.psi_vec[0].R(clim)**2*clim**2
                 
                 
                 clim   = coordenada_maxima(psi,umbral=umbral )*1.3  # Maxima extensión de ejes
@@ -122,35 +136,38 @@ for n in range(1,4):
                 vertices            = vertices/N*clim*2-clim
                 
                 # graficar
-                sup                 = ax[li].plot_trisurf(vertices[:, 0], vertices[:,1], caras, vertices[:, 2],
-                                              cmap=cmap_fase, 
-                                              lw=1 , alpha=0.5)
+                if n<4:
+                    sup                 = ax[li].plot_trisurf(vertices[:, 0], vertices[:,1], caras, vertices[:, 2],
+                                                  cmap=cmap_fase, 
+                                                  lw=1 , alpha=0.5)
                 
                 # Calcular fase de los triangulos
                 x_tri, y_tri, z_tri     = array([  mean([ vertices[i] for i in cara ],0) for cara in caras ]).T
                 r_tri,phi_tri,theta_tri = sqrt( x_tri**2 + y_tri**2 + z_tri**2 ) , arctan2(y_tri,x_tri)  ,  arctan2( sqrt(x_tri**2+y_tri**2) , z_tri  )
                 fase                    = angle( psi(r_tri,phi_tri,theta_tri) )
                 
-                # colorear
-                sup.set_array( fase )
-                sup.set_clim( -pi , pi )
-                
-                
-                ax[li].set_xlabel('x [Å]')
-                ax[li].set_ylabel('y [Å]')
-                ax[li].set_zlabel('z [Å]')
-                
-                ax[li].set_xlim(-clim,clim)
-                ax[li].set_ylim(-clim,clim)
-                ax[li].set_zlim(-clim,clim)
                 
                 
                 if k==0:
-                    titulo = repr(psi) + ' [pz]' if m==0 else '' 
+                    titulo = repr(psi) + ( ' [pz]' if m==0 else ''  )
                 else:
                     titulo = f'Ψ({n},{l},±{m})' + f' [{"py" if k==1 else "px"}]' 
+                
+                # colorear
+                if n<4:
+                    sup.set_array( fase )
+                    sup.set_clim( -pi , pi )
                     
-                ax[li].set_title(titulo)
+                    
+                    ax[li].set_xlabel('x [Å]')
+                    ax[li].set_ylabel('y [Å]')
+                    ax[li].set_zlabel('z [Å]')
+                    
+                    ax[li].set_xlim(-clim,clim)
+                    ax[li].set_ylim(-clim,clim)
+                    ax[li].set_zlim(-clim,clim)
+                    
+                    ax[li].set_title(titulo)
                 
                 
                 # Guardo version plotly
@@ -173,18 +190,23 @@ for n in range(1,4):
                     fig['layout']['scene'][f'{eje}axis']['range']=[-clim,clim]
                 
                 
-                fig.write_json(f'orbitales_06_{n}{l}{m}{k}.json')
+                fig.write_json(f'orbitales_06_{n}{l}{30+m}{k}.json')
                 
                 
-                print('### Estado: ' + repr(psi) )
-                print('\n')
-                print(template.replace('LOLO_ID',f'orb{n}{l}{m}{k}').replace('LOLO_JSON',f'orbitales_06_{n}{l}{m}{k}.json'))
+                if li==0:
+                    print(template0.replace('LOLO_ID',f'orb_plot_{n}').replace('LOLO_JSON',f'orbitales_06_{n}{l}{30+m}{k}.json')  )
                 
-                print('\n'*3)
+                #print('### Estado: ' + repr(psi) )
+                #print('\n')
+                print(template_boton.replace('LOLO_ID',f'orb_plot_{n}').replace('LOLO_JSON',f'orbitales_06_{n}{l}{30+m}{k}.json').replace('LOLO_NOMBRE',repr(psi).replace('WaveFunction:','').strip())   )
+                
+                #print('\n'*3)
                 
                 li+=1
+    print('</p>')
 
 
 
 
+print(f'\n![grafico](referencia_colores.png "grafico")\n')
 

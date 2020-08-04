@@ -300,7 +300,7 @@ cmap1 = ListedColormap( 'blue,C0,C0,red,red,C1,C1,blue'.split(',') )
 cmap2 = LinearSegmentedColormap.from_list('lolo','blue,C0,C0,red,red,C1,C1,blue'.split(','))
 
 
-fig = plt.figure()
+fig = plt.figure(figsize=(14,8))
 axx = ( fig.add_subplot(1,2,1,polar=True) , fig.add_subplot(1,2,2,polar=True) )
 
 
@@ -314,7 +314,8 @@ for ax,cmap in zip(axx,[cmap1,cmap2]):
     for r,bar, angulo in zip(radii, bars,theta):
         bar.set_facecolor(  cmap(  mpl.colors.Normalize(vmin=-pi,vmax=pi)( angulo ) )  )
         bar.set_alpha(0.5)
-        
+    
+    ax.set_ylim(0,1)
     #ax.set_xticklabels([])
     ax.set_yticklabels([])    
     ax.grid(True)
