@@ -284,6 +284,51 @@ class WaveFunction():
         rta = sum(  [  p(r,phi,theta) for p in self.psi_vec  ]  ,0)
         return rta/N if normalizar else rta
 
+#%%
+
+class Operador():
+    def __init__(self,nombre,funcion=False):
+        self.nombre = nombre
+        
+        if callable(funcion):
+            self.funcion = funcion
+        else:
+            raise ValueError('Se debe definir una función u objeto callable')
+    def __repr__(self):
+        return self.nombre
+    
+    def __call__(self,psi):
+        if type(psi)==Ψ:
+            return self.funcion(psi)
+        elif type(psi)==WaveFunction:
+            return sum( [  self.funcion(p) for p in psi.psi_vec  ] ,0  )
+        else:
+            raise ValueError('el argumento no es una función de onda: Ψ o WaveFunction -->'+ str(type(psi)))
+
+    def __mul__(self,psi):
+        if type(psi)==Ψ or type(psi)==WaveFunction:
+            return self(psi)
+        elif type(psi)==Operador:
+            return Operador(nombre=self.nombre+'·'+psi.nombre, funcion=lambda x: self(psi(x)) )
+        else:
+            return ValueError('No es una funcion de onda ni un operador: '+ str(type(psi)))
+        
+    def __add__(self,psi):
+        return Operador(nombre=self.nombre+' + '+psi.nombre, funcion=lambda x: self(x) + psi(x) )
+
+
+
+L  = Operador( 'L', lambda x: x*x.l )
+Lz = Operador('Lz', lambda x: x*x.m )
+S  = Operador( 'S', lambda x: x*(1/2) )
+Sz = Operador('Lz', lambda x: x*x.s )
+N  = Operador( 'N', lambda x: x*x.n )
+I  = Operador( 'I', lambda x: x*x.I )
+Iz = Operador('Iz', lambda x: x*x.mi )
+
+J  = L + S
+J.nombre='J'
+
 
 
 

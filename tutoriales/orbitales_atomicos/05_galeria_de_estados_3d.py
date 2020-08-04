@@ -32,7 +32,7 @@ from orbitales_atomicos import coordenada_maxima
 psi = Ψ(4,3,1)
 
 ii = 0
-for n in range(1,4):
+for n in range(1,6):
     ii = 0
     for l in arange(0,n):
         print(repr(Ψ(n,l,0)),2*l+1 , l , 4*l+1 )
@@ -80,7 +80,7 @@ from plotly.tools import FigureFactory as FF
 
 
 
-sub_fig_layout = {1:(1,1),2:(2,3),3:(3,5)}
+sub_fig_layout = {1:(1,1),2:(2,3),3:(3,5),4:(5,6),5:(5,9)}
 
 
 N      = 50                      # la grilla tendrá 50³ puntos
@@ -99,7 +99,7 @@ for n in range(1,6):
     print('<p>')
     
     
-    if n<4:
+    if n<6:
         fig = plt.figure( figsize=(14,9) )
         ax = []
         snx,sny = sub_fig_layout[n]
@@ -136,7 +136,7 @@ for n in range(1,6):
                 vertices            = vertices/N*clim*2-clim
                 
                 # graficar
-                if n<4:
+                if n<6:
                     sup                 = ax[li].plot_trisurf(vertices[:, 0], vertices[:,1], caras, vertices[:, 2],
                                                   cmap=cmap_fase, 
                                                   lw=1 , alpha=0.5)
@@ -154,7 +154,7 @@ for n in range(1,6):
                     titulo = f'Ψ({n},{l},±{m})' + f' [{"py" if k==1 else "px"}]' 
                 
                 # colorear
-                if n<4:
+                if n<6:
                     sup.set_array( fase )
                     sup.set_clim( -pi , pi )
                     
@@ -167,7 +167,7 @@ for n in range(1,6):
                     ax[li].set_ylim(-clim,clim)
                     ax[li].set_zlim(-clim,clim)
                     
-                    ax[li].set_title(titulo)
+                    ax[li].set_title(titulo, fontsize=10)
                 
                 
                 # Guardo version plotly
