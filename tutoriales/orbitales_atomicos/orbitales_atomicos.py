@@ -317,6 +317,7 @@ class Operador():
         return Operador(nombre=self.nombre+' + '+psi.nombre, funcion=lambda x: self(x) + psi(x) )
 
 
+psi = Ψ(3,2,1)  +   Ψ(3,2,-1)
 
 L  = Operador( 'L', lambda x: x*x.l )
 Lz = Operador('Lz', lambda x: x*x.m )
@@ -328,6 +329,9 @@ Iz = Operador('Iz', lambda x: x*x.mi )
 
 J  = L + S
 J.nombre='J'
+
+
+
 
 
 
