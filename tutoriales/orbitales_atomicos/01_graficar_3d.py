@@ -249,6 +249,7 @@ WF = abs(psi(r,phi,theta))**2
 
 # Buscamos superficies de contorno. 
 # Son superficies que encierran el volumen en el que la probabilidad es mayor a umbral*MaximaProbabilidad
+# Siguen el algortimo "Marching cubes": https://en.wikipedia.org/wiki/Marching_cubes
 vertices, caras,_,_ = measure.marching_cubes_lewiner(WF, WF.max()*umbral , allow_degenerate=False  )
 
 # La función devuelde los índices de vértices de la grilla y las caras de los triángulos

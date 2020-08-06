@@ -26,10 +26,11 @@ def CG(J,M,j1,j2,m1,m2):
     Chequeado con las tablas del Griffiths
     """
     if J>j1+j2 or J<abs(j1-j2):
-        raise ValueError('J,j1,j2 deben cumplir:  |j1-j2|<=J<=j1+j2')
+        raise ValueError(f'J,j1,j2 deben cumplir:  |j1-j2|<=J<=j1+j2\nJ={J},j1={j1},j2={j2}')
     
-    if not ( J>0 and (j1>0 or j2>0)):
-        raise ValueError('Los coeficientes deben J,j1,j2 deben ser mayores a cero')
+    #if not ( J>0 and (j1>0 or j2>0)):
+    #    return 0
+        #raise ValueError('Los coeficientes deben J,j1,j2 deben ser mayores a cero')
     
     if not M==m1+m2:
         return 0
@@ -48,6 +49,46 @@ def CG(J,M,j1,j2,m1,m2):
     p3 = sum([ (-1)**k / product([ factorial(y) for y in factores(k) ]) for k in range(int(-J-j1-j2),int(J+j1+j2+1)) if all([ y>=0 for y in factores(k) ]) ])
 
     return sqrt(p1*p2)*p3
+
+
+
+
+def W3j(A):
+    """
+    Calucla los coeficientes de Wigner 3-j:
+        ( j1 , j2 , j3 )
+        ( m1 , m2 , m3 )
+    Referencia: https://en.wikipedia.org/wiki/3-j_symbol
+    """
+    A = array(A)
+    
+    if not A.shape == (2,3):
+        raise ValueError('El argumento debe tener un shape==(2,3)')
+    j1,j2,j3 = A[0]
+    m1,m2,m3 = A[1]
+    
+    # Prueba:   W3j([[1,2,3],[0,1,-1]])             debería ser    sqrt(2/105)*2
+    #           W3j([[1,1/2,3/2],[1,-1/2,-1/2]])    deberia ser   -sqrt(1/3)/2
+    #           W3j([[1,2,3],[-1,-2,3]])            deberia ser   sqrt(1/7)
+    
+    # Chequeado con http://www-stone.ch.cam.ac.uk/cgi-bin/wigner.cgi?symbol=3j&j1=1&j2=2&j3=3&m1=-1&m2=-2&m3=3
+    for jj,mm in zip(A[0],A[1]):
+        #   -j <= m <= j
+        if not round(mm,2) in arange(-jj,jj+1).round(2):
+            #print('no cumple mm E +-jj')
+            return 0
+    # m1+m2+m3 == 0
+    if not round(sum(A[1]),2) == 0:
+        #print('no cumple sum mm ==0')
+        return 0
+    
+    # |j1-j2| <= j3 <= j1+j2
+    if not ( abs(j1-j2)<= j3 and j3<= j1+j2  ):
+        #print('no cumple jj E  j-j , jj')
+        return 0
+    
+    # Chequeamos reglas de selección:
+    return (-1)**int(round(j1-j2-m3)) *1/sqrt(2*j3+1) * CG(j3,-m3,j1,j2,m1,m2)
 
 
 
@@ -72,10 +113,11 @@ class Ψ():
     I  : Spin total del nucleo. Si es cero, se desestima el subespacio del spin nuclear
     mi : proyección del Spin del nucleo en z. Debe ser: -I <= mi <= I
     """
-    def __init__(self,n=1,l=0,m=0,s=0,I=0,A=1,mi=0):
+    def __init__(self,n=1,l=0,m=0,s=0,I=0,mi=0,A=1):
         
         if l>=n:
-            raise ValueError('l,n debe ser tal que: 0<=l<n')
+            print('Guarda: l>n no es un autoestado válido! ')
+            #raise ValueError('l,n debe ser tal que: 0<=l<n')
         if abs(m)>l:
             raise ValueError('l,m debe ser tal que: |m|<=l')
         if abs(mi)>I:
@@ -85,6 +127,9 @@ class Ψ():
         if I>0:
             if not round(mi,2) in arange(-I,I+1):
                 raise ValueError(f'mi={mi} no pertenece a los valores permitidos para I={I}')
+        
+        if type(s)==str and s in '↓↑':
+            s = '↓↑'.index(s)-1/2
         
         
         self.n  = n
@@ -224,13 +269,22 @@ class WaveFunction():
         if len(set( [ p.I for p in psi_vec ]  ))>1:
             raise ValueError('Las funciones de onda tienen distintos valores de spin nuclear I')
         
-        self.psi_vec = psi_vec
+        # self.psi_vec = psi_vec
+        # Guarde mejor una verisón ordenada
+        self.psi_vec = sorted(psi_vec, key=lambda x: (x.n,x.l,-x.m,x.I,-x.mi) )
+        
         self._corregir_duplicados()
     def bases(self):
         """
         Devuelte la lista de bases (n,l,m[,s,I,mi]) en que se escribe el estado de superposición
         """
         return [ p.vec() for p in self.psi_vec ]
+    
+    def coef(self):
+        """
+        Devuelte los coeficientes de la base con que se escribe el estado de superposición
+        """
+        return array([ p.A for p in self.psi_vec ])
     
     def _corregir_duplicados(self):
         psi_vec = []
@@ -242,7 +296,8 @@ class WaveFunction():
                 dd['I' ] = base[4]
                 dd['mi'] = base[5]
             dd['A'] = sum([ p.A for p in self.psi_vec if p.vec()==base ]) 
-            psi_vec.append( Ψ( **dd )  ) 
+            if abs(dd['A'])>0:
+                psi_vec.append( Ψ( **dd )  ) 
         self.psi_vec = psi_vec
     
     def __repr__(self):
@@ -284,7 +339,7 @@ class WaveFunction():
         rta = sum(  [  p(r,phi,theta) for p in self.psi_vec  ]  ,0)
         return rta/N if normalizar else rta
 
-#%%
+
 
 class Operador():
     def __init__(self,nombre,funcion=False):
@@ -301,7 +356,8 @@ class Operador():
         if type(psi)==Ψ:
             return self.funcion(psi)
         elif type(psi)==WaveFunction:
-            return sum( [  self.funcion(p) for p in psi.psi_vec  ] ,0  )
+            rta = sum( [  self.funcion(p) for p in psi.psi_vec  ] ,0  )
+            return rta if type(rta)==WaveFunction else WaveFunction([rta])
         else:
             raise ValueError('el argumento no es una función de onda: Ψ o WaveFunction -->'+ str(type(psi)))
 
@@ -310,27 +366,227 @@ class Operador():
             return self(psi)
         elif type(psi)==Operador:
             return Operador(nombre=self.nombre+'·'+psi.nombre, funcion=lambda x: self(psi(x)) )
+        elif isreal(psi) or iscomplex(psi):
+            return Operador(nombre=str(psi)+'·'+self.nombre, funcion=lambda x: self(x)*psi )
         else:
             return ValueError('No es una funcion de onda ni un operador: '+ str(type(psi)))
+    
+    def __rmul__(self,factor):
+        if isreal(factor) or iscomplex(factor):
+            return self.__mul__(factor)
+        else:
+            raise ValueError('no es un número')
+    
+    def __add__(self,O):
+        return Operador(nombre=self.nombre+' + '+O.nombre, funcion=lambda x: self(x) + O(x) )
+    
+    def __neg__(self):
+        return Operador(nombre='-'+self.nombre, funcion=lambda x: (-1)*self(x)  )
+    
+    def __sub__(self,O):
+        return Operador(nombre=self.nombre+' - '+O.nombre, funcion=lambda x: self(x) - O(x) )
         
-    def __add__(self,psi):
-        return Operador(nombre=self.nombre+' + '+psi.nombre, funcion=lambda x: self(x) + psi(x) )
 
 
-psi = Ψ(3,2,1)  +   Ψ(3,2,-1)
-
-L  = Operador( 'L', lambda x: x*x.l )
+L2 = Operador( 'L', lambda x: x*(x.l*(x.l+1)) )
 Lz = Operador('Lz', lambda x: x*x.m )
-S  = Operador( 'S', lambda x: x*(1/2) )
+S2 = Operador( 'S', lambda x: x*(1/2*(1/2+1)) )
 Sz = Operador('Lz', lambda x: x*x.s )
-N  = Operador( 'N', lambda x: x*x.n )
-I  = Operador( 'I', lambda x: x*x.I )
+#N  = Operador( 'N', lambda x: x*x.n )
+I2  = Operador( 'I', lambda x: x*(x.I*(x.I+1)) )
 Iz = Operador('Iz', lambda x: x*x.mi )
 
-J  = L + S
-J.nombre='J'
+J2  = L2 + S2
+J2.nombre='J'
+
+Jz = Lz + Sz
+Jz.nombre = 'Jz'
 
 
+def contract_Ylm(l1,m1,l2,m2):
+    """
+    Regla de contracción de Ylm según:
+        https://en.wikipedia.org/wiki/Spherical_harmonics#Contraction_rule
+    
+    devuelve una lista con los Ylm * coef excritos como:
+        [(li,mi,coef)]
+    """
+    
+    rta = []
+    for c in arange(abs(l1-l2),l1+l2+1):
+        for g in arange(-c,c+1):
+            #print(c,g)
+            coef = sqrt( (2*l1+1)*(2*l2+1)/4/pi ) * (-1)**abs(g) * sqrt(2*c+1) * W3j([[l1,l2,c],[m1,m2,-g]]) * W3j([[l1,l2,c],[0,0,0]])
+            #print(CG(c,0,l1,0,l2,0))
+            # version de https://sahussaintu.files.wordpress.com/2014/03/spherical_harmonics.pdf
+            #coef = sqrt( (2*l1+1)*(2*l2+1)/(2*pi*(2*c+1) ) ) * CG(c,g,l1,l2,m1,m2) * CG(c,0,l1,l2,0,0)
+            
+            if abs(coef) > 1e-6: # esto es parche
+                rta.append( (c,g,coef)  )
+    
+    return rta
+
+
+# contract_Ylm(1,0,1,-1)
+
+
+#%
+
+def _Z(psi):
+    """
+    \hat{z} = - sqrt{4 \pi / 3} \cdot  Y_1^0
+    """
+    if type(psi)==Ψ:
+        psi = WaveFunction([psi])
+    
+    if not type(psi)==WaveFunction:
+        raise ValueError('La entrada no es una funcion de onda')
+    
+    rta = sum([  sqrt(4*pi/3)*WaveFunction([ Ψ(n=p.n,l=T[0], m=T[1], A=p.A*T[2], s=p.s, I=p.I, mi=p.mi) for T in contract_Ylm(1,0,p.l,p.m) ]  )     for p in psi.psi_vec  ] , 0)
+    
+    return rta
+
+# _Z(Ψ(2,1,-1))
+
+
+Z = Operador('Z',funcion=_Z)
+
+
+
+def _X(psi):
+    """
+    \hat{x} = - sqrt{2 \pi / 3} \cdot ( Y_1^1 - Y_1^{-1} )
+    """
+    if type(psi)==Ψ:
+        psi = WaveFunction([psi])
+    
+    if not type(psi)==WaveFunction:
+        raise ValueError('La entrada no es una funcion de onda')
+    
+    # Hago la contracción con Y
+    rta  = sum([ (-sqrt(2*pi/3))* WaveFunction([ Ψ(n=p.n,l=T[0], m=T[1], A=p.A*T[2], s=p.s, I=p.I, mi=p.mi) for T in contract_Ylm(1,1,p.l,p.m) ]  )     for p in psi.psi_vec  ] , 0)
+    
+    rta += sum([ ( sqrt(2*pi/3))* WaveFunction([ Ψ(n=p.n,l=T[0], m=T[1], A=p.A*T[2], s=p.s, I=p.I, mi=p.mi) for T in contract_Ylm(1,-1,p.l,p.m) ]  )     for p in psi.psi_vec  ] , 0)
+    
+    return rta
+
+X = Operador('X',funcion=_X)
+
+
+def _Y(psi):
+    """
+    \hat{x} = - sqrt{2 \pi / 3} \cdot ( Y_1^1 + Y_1^{-1} )/i
+    """
+    if type(psi)==Ψ:
+        psi = WaveFunction([psi])
+    
+    if not type(psi)==WaveFunction:
+        raise ValueError('La entrada no es una funcion de onda')
+    
+    # Hago la contracción con Y
+    rta  = sum([ (1j*sqrt(2*pi/3))* WaveFunction([ Ψ(n=p.n,l=T[0], m=T[1], A=p.A*T[2], s=p.s, I=p.I, mi=p.mi) for T in contract_Ylm(1,1,p.l,p.m) ]  )     for p in psi.psi_vec  ] , 0)
+    
+    rta += sum([ (1j*sqrt(2*pi/3))* WaveFunction([ Ψ(n=p.n,l=T[0], m=T[1], A=p.A*T[2], s=p.s, I=p.I, mi=p.mi) for T in contract_Ylm(1,-1,p.l,p.m) ]  )     for p in psi.psi_vec  ] , 0)
+    
+    return rta
+
+Y = Operador('Y',funcion=_Y)
+
+
+
+from scipy.integrate import tplquad
+
+def prod_interno(bra,ket,funcion=False,grilla=False):
+    """
+    Calcula producto interno de estados WaveFunction y Ψ
+    
+     - prod_interno(bra,ket)     calcula el producto interno <bra|ket> deforma algebraica (sin integrales)
+    
+     - prod_interno(bra,ket,O)   calcula <bra|O|ket>  si O es un Operador
+    
+     - prod_interno(bra,ket,fun) calcula el enbraketamiento de forma integral:
+                                 ∫ bra*(r,theta,phi) · fun(r,theta,phi) · ket(r,theta,phi) · r^2 · sin(theta) ·dr dtheta dphi
+    
+    """
+    
+    if type(bra)==Ψ:
+        bra = WaveFunction([bra])
+    if type(ket)==Ψ:
+        ket = WaveFunction([ket])
+    
+    if not ( type(bra)==WaveFunction  and type(ket)==WaveFunction):
+        return ValueError('Tanto bra como ket deben ser funciones de onda WaveFunction o Ψ')
+    
+    if type(funcion)==Operador:
+        ket     = funcion(ket)
+        funcion = False
+    
+    
+    
+    
+    if not callable(funcion):
+        # Usamos operacion algebráica
+        bases = set(ket.bases() + bra.bases())
+        
+        rta = [ conj(bra.coef()[bra.bases().index(b)])* ket.coef()[ket.bases().index(b)] for b in bases if (b in ket.bases()) and (b in bra.bases())  ]
+        
+        return sum(rta)
+    
+    if grilla is False:
+        # Si se definió una función...
+        
+        if bra(1,1,1).shape == ():
+            S_real = tplquad( lambda r,phi,theta: real(   conj(bra(r,phi,theta))*ket(r,phi,theta) * funcion(r,phi,theta) )*r**2*sin(theta) , 0, pi, -pi, pi, 0,100 )[0]
+            S_imag = tplquad( lambda r,phi,theta: imag(   conj(bra(r,phi,theta))*ket(r,phi,theta) * funcion(r,phi,theta) )*r**2*sin(theta) , 0, pi, -pi, pi, 0,100 )[0]
+            
+            return S_real + 1.j*S_imag
+        else:
+            rta = ones(bra(1,1,1).shape).astype(complex)
+            print(f'Cálculo pesado de {rta.shape[0]*rta.shape[1]} pasos')
+            nn = 0
+            for jj in range(rta.shape[0]):
+                for kk in range(rta.shape[1]):
+                    print(nn,end=' ')
+                    S_real = tplquad( lambda r,phi,theta: real(   conj(bra(r,phi,theta)[jj,kk])*ket(r,phi,theta)[jj,kk] * funcion(r,phi,theta) )*r**2*sin(theta) , 0, pi, -pi, pi, 0,100 )[0]
+                    S_imag = tplquad( lambda r,phi,theta: imag(   conj(bra(r,phi,theta)[jj,kk])*ket(r,phi,theta)[jj,kk] * funcion(r,phi,theta) )*r**2*sin(theta) , 0, pi, -pi, pi, 0,100 )[0]
+                    rta[jj,kk] *= S_real + 1.j*S_imag
+                    
+                    nn+=1
+            
+            return rta
+    
+
+#    ket =  (Ψ(3,2,1,1/2)*1        +   Ψ(3,2,-1,-1/2)*sqrt(3))/sqrt(4)
+#    bra =  (Ψ(3,2,1,1/2)*sqrt(2)  +   Ψ(3,2,0,1/2)  *sqrt(3)  )/sqrt(5)
+#    
+#    base = (3, 2, 1, 0.5)
+#    
+#    
+#    prod_interno(bra,ket)
+#    
+#    
+#    prod_interno(Ψ(3,2,2),Ψ(3,2,2), L2)
+#    
+#    prod_interno(Ψ(3,2,2),Ψ(3,2,2), lambda r,theta,phi: 1 )
+
+
+
+
+#    psi = Ψ(3,2,1,1/2)  +   Ψ(3,2,-1,-1/2)
+#    
+#    
+#    psi = Ψ(3,2,1,1/2,3/2,1/2)  +   Ψ(3,2,-1,-1/2,3/2,-1/2)
+#    
+#    Z * Ψ(2,1,-1)
+#    #  0.45 Ψ(2,2,-1)
+#    
+#    X * Ψ(2,1,-1)
+#    # + 0.45 Ψ(2,2,-2) -0.18 Ψ(2,2,0)
+#    
+#    
+#    Y * Ψ(2,1,-1)
+#    
+#    (X + 1j*Y)*psi
 
 
 
@@ -516,7 +772,24 @@ if __name__ == "__main__":
 
 
 
+    # Prueba de ortogonalidad de los Rnl(r) 
+    print('Prueba de ortogonalidad de los Rnl(r) para distintos n\n')
+    for n1 in range(1,20):
+        for n2 in range(1,20):
+            p_i = quad( lambda r: Ψ(n1,0,0).R(r)*Ψ(n2,0,0).R(r) * r**2 , 0, 1000 )
+            print(f'{int(round(p_i[0])):2}',end=' ')
+        print('')
 
+    print('\n'*2)
+    
+    print('Prueba de ortogonalidad de los Rnl(r) para distintos n y l (redondeado)\n')
+    for n1 in range(1,7):
+        for l1 in arange(-n1,n1+1):
+            for n2 in range(1,7):
+                for l2 in arange(-n2,n2+1):
+                    p_i = quad( lambda r: Ψ(n1,0,0).R(r)*Ψ(n2,0,0).R(r) * r**2 , 0, 100 )
+                    print(f'{int(round(p_i[0])):2}',end=' ')
+            print('')
 
 
 
@@ -915,6 +1188,77 @@ if __name__ == "__main__":
 #    <Ψ(4,3,0)|Ψ(4,2,0)> | *:  0.0
 #    <Ψ(4,3,0)|Ψ(4,2,0)> | S:  0j
 #    -----------------------
-
-
-
+#
+#
+#    Prueba de ortogonalidad de los Rnl(r) para distintos n
+#    
+#     1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  1  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  1  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  1  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  1  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  1  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  1  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  1  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  1  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1 
+#    
+#    Prueba de ortogonalidad de los Rnl(r) para distintos n y l (redondeado)
+#    
+#     1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
+#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
