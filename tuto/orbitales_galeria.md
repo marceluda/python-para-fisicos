@@ -441,6 +441,6 @@ El script con que se generaron es:
 
 ## Referencia de colores de fase
 
-La fase está graficada siguiedo el siguiente código de colores:
+La fase compleja está graficada siguiendo el siguiente código de colores:
 
 ![grafico](referencia_colores.png "grafico")
