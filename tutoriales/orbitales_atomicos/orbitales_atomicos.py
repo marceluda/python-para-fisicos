@@ -12,11 +12,39 @@ from numpy import *
 
 from scipy.special import sph_harm
 from scipy.special import genlaguerre
+from scipy.integrate import quad
 
+import os
 
 a = 0.52917720859  # radio de Bhor en Amnstrongs
 
 from decimal import Decimal as D
+
+from fractions import Fraction as fr
+
+def adivinar_forma(x):
+    
+    opciones = [ (a,b, fr(abs(x)**a*pi**b).limit_denominator() ) for a in [-2,-1,1,2] for b in range(-2,3)  ]
+    
+    # Me quedo con la de menos denominador
+    rta      = list(sorted(opciones , key=lambda x: (x[2].denominator,x[2].numerator)))[0]
+    
+    a,b,rta_frac   =  rta 
+    signo = '-' if sign(x)==-1 else '+'
+    frac  = str(rta_frac) if a>0 else str(1/rta_frac)
+    pival = '' if b==0 else '*pi' if b>0 else '/pi'
+    if abs(a)==2:
+        if abs(b)==1:
+            return f'{signo}sqrt({frac}{pival})'
+        else:
+            return f'{signo}sqrt({frac}){pival}'
+    else:
+        return f'{signo}{frac}{pival}' 
+    
+
+
+
+
 
 
 def CG(J,M,j1,j2,m1,m2):
@@ -103,7 +131,7 @@ def _fmt_val(x,max_den=16):
 class Ψ():
     """
     Clase para generar autoestados del Hamiltoniano más elemental del átomo de Hidróngeno
-    Ψ(n,l,m[,s,I,A])(r,phi,theta)
+    Ψ(n,l,m[,s,I,mi,A=1,lr=l])(r,phi,theta)
     
     n  : números principal
     l  : Momento angular orbital
@@ -112,11 +140,16 @@ class Ψ():
          Un valor de s=0 implica que no se incluye el subespacio del spin en la función de onda.
     I  : Spin total del nucleo. Si es cero, se desestima el subespacio del spin nuclear
     mi : proyección del Spin del nucleo en z. Debe ser: -I <= mi <= I
+    A  : Factor multiplicativo. Por defecto, A=1.
+    lr : Para uso de los operadores. Es el l que usa Rnl, en caso que no coincida con el de Y_l^m
     """
-    def __init__(self,n=1,l=0,m=0,s=0,I=0,mi=0,A=1):
+    def __init__(self,n=1,l=0,m=0,s=0,I=0,mi=0,A=1,lr=False):
+        
+        valido = True
         
         if l>=n:
             print('Guarda: l>n no es un autoestado válido! ')
+            valido = False
             #raise ValueError('l,n debe ser tal que: 0<=l<n')
         if abs(m)>l:
             raise ValueError('l,m debe ser tal que: |m|<=l')
@@ -129,9 +162,8 @@ class Ψ():
                 raise ValueError(f'mi={mi} no pertenece a los valores permitidos para I={I}')
         
         if type(s)==str and s in '↓↑':
-            s = '↓↑'.index(s)-1/2
-        
-        
+            s = '↓↑'.index(s)-1/2    
+                
         self.n  = n
         self.l  = l
         self.m  = m
@@ -139,17 +171,34 @@ class Ψ():
         self.s  = s
         self.I  = I
         self.mi = mi
+        
+        self.lr = l if lr is False else lr
+        self.valido = valido if self.lr==self.l else False
 
-    def vec(self):
+    def vec(self,no_indep=False):
         """
         Imprimir en forma de tuple los números que definen al estado: (n,l,m[,s,I,mi]). No incluye la amplitud A
+        
+        Si se especifica no_indep=True se agrega lr como número. Esto sólo tiene utilidad al trabajar con estados
+        que no son autoestados válidos del Hamiltoniano del átomo de hidrógeno (como puede ser el resultado de aplicar 
+        un operador estado váido).
         """
+        
         rta = [self.n, self.l, self.m]
+        if no_indep:
+            rta += [self.lr]
         if not self.s==0:
             rta += [ self.s ]
         if not self.I==0:
             rta += [ self.I , self.mi ]
+        
         return tuple(rta)
+    
+    def pprint(self,fmt='repr'):
+        if fmt=='repr':
+            return adivinar_forma( self.A).replace('pi','π').replace('sqrt','√') +'*' + repr(self.copy(A=1))
+        else:
+            return adivinar_forma( self.A) +'*' + str(self.copy(A=1))
     
     def __str__(self):
         if self.A==1:
@@ -157,7 +206,8 @@ class Ψ():
         else:
             strA = str(array([self.A]).round(2)[0]) + ' '
         
-        rta = f'{strA}Ψ(n={self.n},l={self.l},m={self.m}'
+        primar = ''  if self.valido else '`'
+        rta = f'{strA}Ψ{primar}(n={self.n},l={self.l},m={self.m}'
         if not self.s==0:
             rta += f',s={self.s}'
         if not self.I==0:
@@ -168,13 +218,16 @@ class Ψ():
     
     def __repr__(self):
         # ↑ ↓
+        f = lambda x: str(fr(x).limit_denominator(2))
         if self.A==1:
             strA = ''
         else:
             strA = str(array([self.A]).round(2)[0]) + ' '
-        rta = f'{strA}Ψ({self.n},{self.l},{self.m}'
+        
+        primar = ''  if self.valido else '`'
+        rta = f'{strA}Ψ{primar}({f(self.n)},{f(self.l)},{f(self.m)}'
         if not self.I==0:
-            rta += f',{self.mi}'
+            rta += f',{f(self.mi)}'
         rta += ')'
         if not self.s==0:
             rta += ('↑' if self.s>0 else '↓' )
@@ -221,7 +274,7 @@ class Ψ():
         El factor de normalización no es exacto el de 4.89 de GRiffiths,
         fue modificado para adaptarse a cómo genera SciPy los Laguerre Generalizados.
         """
-        n,l,m = self.n, self.l, self.m
+        n,l,m = self.n, self.lr, self.m
         #return exp(-r/n/a) * (2*r/n/a)**l  *  (genlaguerre(n-l-1,2*l+1) * math.factorial( n+l))( r/n/a )
         #return exp(-r/n/a) * (2*r/n/a)**l  *  genlaguerre(n-l-1,2*l+1)( r/n/a )
         return genlaguerre(n-l-1,2*l+1)(2*r/n/a)     * exp(-r/n/a) *       (2*r/n/a)**l * sqrt(math.factorial(n-l-1)/(math.factorial(n+l) * (2*n))*(2/n/a)**3 )  
@@ -240,7 +293,7 @@ class Ψ():
     def copy(self,A=False):
         if A is False:
             A = self.A
-        return Ψ(n=self.n,l=self.l,m=self.m,s=self.s,A=A,I=self.I,mi=self.mi)
+        return Ψ(n=self.n,l=self.l,m=self.m,s=self.s,A=A,I=self.I,mi=self.mi,lr=self.lr)
     
     def __call__(self,r,phi,theta,A=0):
         if A==0:
@@ -274,11 +327,12 @@ class WaveFunction():
         self.psi_vec = sorted(psi_vec, key=lambda x: (x.n,x.l,-x.m,x.I,-x.mi) )
         
         self._corregir_duplicados()
-    def bases(self):
+    def bases(self,no_indep=False):
         """
         Devuelte la lista de bases (n,l,m[,s,I,mi]) en que se escribe el estado de superposición
         """
-        return [ p.vec() for p in self.psi_vec ]
+        return [ p.vec(no_indep) for p in self.psi_vec ]
+    
     
     def coef(self):
         """
@@ -288,17 +342,20 @@ class WaveFunction():
     
     def _corregir_duplicados(self):
         psi_vec = []
-        for base in set(self.bases()):
-            dd = dict( n=base[0], l=base[1], m=base[2])
-            if len(base)>3: # Si tenemos Spin electrónico
-                dd['s']= base[3]
-            if len(base)>4: # Si tenemos spin nuclear
-                dd['I' ] = base[4]
-                dd['mi'] = base[5]
-            dd['A'] = sum([ p.A for p in self.psi_vec if p.vec()==base ]) 
+        for base in set(self.bases(True)):
+            dd = dict( n=base[0], l=base[1], m=base[2], lr=base[3])
+            if len(base)>4: # Si tenemos Spin electrónico
+                dd['s']= base[4]
+            if len(base)>5: # Si tenemos spin nuclear
+                dd['I' ] = base[5]
+                dd['mi'] = base[6]
+            dd['A'] = sum([ p.A for p in self.psi_vec if p.vec(True)==base ]) 
             if abs(dd['A'])>0:
                 psi_vec.append( Ψ( **dd )  ) 
         self.psi_vec = psi_vec
+    
+    def pprint(self,fmt='repr'):
+        return ' '.join( [ p.pprint(fmt) for p in self.psi_vec ] )
     
     def __repr__(self):
         return 'WaveFunction: ' + ' '.join([ repr(p) if p.A<0 else '+ '+repr(p) for p in self.psi_vec ])
@@ -442,7 +499,7 @@ def _Z(psi):
     if not type(psi)==WaveFunction:
         raise ValueError('La entrada no es una funcion de onda')
     
-    rta = sum([  sqrt(4*pi/3)*WaveFunction([ Ψ(n=p.n,l=T[0], m=T[1], A=p.A*T[2], s=p.s, I=p.I, mi=p.mi) for T in contract_Ylm(1,0,p.l,p.m) ]  )     for p in psi.psi_vec  ] , 0)
+    rta = sum([  sqrt(4*pi/3)*WaveFunction([ Ψ(n=p.n,l=T[0], m=T[1], A=p.A*T[2], s=p.s, I=p.I, mi=p.mi , lr=p.lr) for T in contract_Ylm(1,0,p.l,p.m) ]  )     for p in psi.psi_vec  ] , 0)
     
     return rta
 
@@ -464,9 +521,9 @@ def _X(psi):
         raise ValueError('La entrada no es una funcion de onda')
     
     # Hago la contracción con Y
-    rta  = sum([ (-sqrt(2*pi/3))* WaveFunction([ Ψ(n=p.n,l=T[0], m=T[1], A=p.A*T[2], s=p.s, I=p.I, mi=p.mi) for T in contract_Ylm(1,1,p.l,p.m) ]  )     for p in psi.psi_vec  ] , 0)
+    rta  = sum([ (-sqrt(2*pi/3))* WaveFunction([ Ψ(n=p.n,l=T[0], m=T[1], A=p.A*T[2], s=p.s, I=p.I, mi=p.mi , lr=p.lr) for T in contract_Ylm(1,1,p.l,p.m) ]  )     for p in psi.psi_vec  ] , 0)
     
-    rta += sum([ ( sqrt(2*pi/3))* WaveFunction([ Ψ(n=p.n,l=T[0], m=T[1], A=p.A*T[2], s=p.s, I=p.I, mi=p.mi) for T in contract_Ylm(1,-1,p.l,p.m) ]  )     for p in psi.psi_vec  ] , 0)
+    rta += sum([ ( sqrt(2*pi/3))* WaveFunction([ Ψ(n=p.n,l=T[0], m=T[1], A=p.A*T[2], s=p.s, I=p.I, mi=p.mi , lr=p.lr) for T in contract_Ylm(1,-1,p.l,p.m) ]  )     for p in psi.psi_vec  ] , 0)
     
     return rta
 
@@ -484,14 +541,57 @@ def _Y(psi):
         raise ValueError('La entrada no es una funcion de onda')
     
     # Hago la contracción con Y
-    rta  = sum([ (1j*sqrt(2*pi/3))* WaveFunction([ Ψ(n=p.n,l=T[0], m=T[1], A=p.A*T[2], s=p.s, I=p.I, mi=p.mi) for T in contract_Ylm(1,1,p.l,p.m) ]  )     for p in psi.psi_vec  ] , 0)
+    rta  = sum([ (1j*sqrt(2*pi/3))* WaveFunction([ Ψ(n=p.n,l=T[0], m=T[1], A=p.A*T[2], s=p.s, I=p.I, mi=p.mi , lr=p.lr) for T in contract_Ylm(1,1,p.l,p.m) ]  )     for p in psi.psi_vec  ] , 0)
     
-    rta += sum([ (1j*sqrt(2*pi/3))* WaveFunction([ Ψ(n=p.n,l=T[0], m=T[1], A=p.A*T[2], s=p.s, I=p.I, mi=p.mi) for T in contract_Ylm(1,-1,p.l,p.m) ]  )     for p in psi.psi_vec  ] , 0)
+    rta += sum([ (1j*sqrt(2*pi/3))* WaveFunction([ Ψ(n=p.n,l=T[0], m=T[1], A=p.A*T[2], s=p.s, I=p.I, mi=p.mi , lr=p.lr) for T in contract_Ylm(1,-1,p.l,p.m) ]  )     for p in psi.psi_vec  ] , 0)
     
     return rta
 
 Y = Operador('Y',funcion=_Y)
 
+
+# prod_int_Rnl = load('prod_int_Rnl.npz',allow_pickle=True)['prod_int_Rnl'].tolist()
+
+try:
+    from prod_int_Rnl import prod_int_Rnl
+except:
+    prod_int_Rnl = {}
+    NT=10
+    for n1 in range(1,NT):
+        for l1 in arange(0,n1):
+            tmp = []
+            for n2 in range(1,NT):
+                for l2 in arange(0,n2):
+                    key = tuple(sorted( ((n1,l1),(n2,l2)) ))
+                    if key in prod_int_Rnl.keys():
+                        continue
+                    if n1==n2 and l1==l2:
+                        prod_int_Rnl[key] = 1
+                    elif l1==l2:
+                        prod_int_Rnl[key] = 0
+                    else:
+                        p_i = quad( lambda r: Ψ(n1,l1,0).R(r)*Ψ(n2,l2,0).R(r) * r**2 , 0, inf )
+                        
+                        prod_int_Rnl[key] = p_i[0] if abs(p_i[0])>1e-10 else 0
+            print('.',end='')
+    
+    
+    #with open('prod_int_Rnl.py', 'w') as aa:
+    #    aa.write('#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\nprod_int_Rnl = ')
+    #    aa.write(str(prod_int_Rnl).replace(', ((',',\n(('))
+
+
+def int_rnl(n1,l1,n2,l2):
+    if n1==n2 and l1==l2:
+        return 1
+    elif l1==l2 and not n1==n2:
+        return 0
+    else:
+        key = tuple(sorted( ((n1,l1),(n2,l2)) ))
+        if key in prod_int_Rnl.keys():
+            return prod_int_Rnl[key]
+        else:
+            return quad( lambda r: Ψ(n1,l1,0).R(r)*Ψ(n2,l2,0).R(r) * r**2 , 0, inf )[0]
 
 
 from scipy.integrate import tplquad
@@ -523,15 +623,20 @@ def prod_interno(bra,ket,funcion=False,grilla=False):
     
     
     
-    
+    # Producto interno algebráico ---------------------------------------------
     if not callable(funcion):
         # Usamos operacion algebráica
         bases = set(ket.bases() + bra.bases())
         
-        rta = [ conj(bra.coef()[bra.bases().index(b)])* ket.coef()[ket.bases().index(b)] for b in bases if (b in ket.bases()) and (b in bra.bases())  ]
+        #rta = [ conj(bra.coef()[bra.bases().index(b)])* ket.coef()[ket.bases().index(b)] 
+        #        for b in bases if (b in ket.bases()) and (b in bra.bases())  ]
+        
+        rta = [ conj(b.A)*k.A *( 1 if b.lr==k.lr else int_rnl(b.n,b.lr,k.n,k.lr) )    
+                for b in bra.psi_vec for k in ket.psi_vec if b.vec()[1:]==k.vec()[1:]  ]   
         
         return sum(rta)
     
+    # Producto interno integral numérica --------------------------------------
     if grilla is False:
         # Si se definió una función...
         
@@ -783,13 +888,30 @@ if __name__ == "__main__":
     print('\n'*2)
     
     print('Prueba de ortogonalidad de los Rnl(r) para distintos n y l (redondeado)\n')
-    for n1 in range(1,7):
-        for l1 in arange(-n1,n1+1):
-            for n2 in range(1,7):
-                for l2 in arange(-n2,n2+1):
-                    p_i = quad( lambda r: Ψ(n1,0,0).R(r)*Ψ(n2,0,0).R(r) * r**2 , 0, 100 )
-                    print(f'{int(round(p_i[0])):2}',end=' ')
+    rta          = []
+    prod_int_Rnl = {}    
+    NT=10
+    refn = '  '.join([ str(n) for n in range(1,NT) for l in range(0,n) ]) 
+    refl = '  '.join([ str(l) for n in range(1,NT) for l in range(0,n) ]) 
+    
+    print(' n|'+refn)
+    print(' l|'+refl)
+    
+    print( 'nl|' + '-'*(len(ref)))
+    
+    for n1 in range(1,NT):
+        for l1 in arange(0,n1):
+            tmp = []
+            print(f'{n1}{l1}|',end='')
+            for n2 in range(1,NT):
+                for l2 in arange(0,n2):
+                    p_i = quad( lambda r: Ψ(n1,l1,0).R(r)*Ψ(n2,l2,0).R(r) * r**2 , 0, inf )
+                    print(f'{int(sign(p_i[0])) if abs(round(p_i[0],5))>0 else 0:2}',end=' ')
+                    tmp += [p_i[0]]
+                    prod_int_Rnl[(n1,l1,n2,l2)] = p_i[0]
             print('')
+            rta += [ tmp ]
+
 
 
 
@@ -1214,51 +1336,54 @@ if __name__ == "__main__":
 #    
 #    Prueba de ortogonalidad de los Rnl(r) para distintos n y l (redondeado)
 #    
-#     1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  0  0  0  0  0  0  0  0 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
-#     0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  1  1  1  1  1 
+#     n|1  2  2  3  3  3  4  4  4  4  5  5  5  5  5  6  6  6  6  6  6  7  7  7  7  7  7  7  8  8  8  8  8  8  8  8  9  9  9  9  9  9  9  9  9
+#     l|0  0  1  0  1  2  0  1  2  3  0  1  2  3  4  0  1  2  3  4  5  0  1  2  3  4  5  6  0  1  2  3  4  5  6  7  0  1  2  3  4  5  6  7  8
+#    nl|-------------------------------------------------------------------------------------------------------------------------------------
+#    10| 1  0  1  0  1  1  0  1  1  1  0  1  1  1  1  0  1  1  1  1  1  0  1  1  1  1  1  1  0  1  1  1  1  1  1  0  0  1  1  1  1  1  1  0  0 
+#    20| 0  1 -1  0  1 -1  0  1 -1 -1  0  1 -1 -1 -1  0  1 -1 -1 -1 -1  0  1 -1 -1 -1 -1 -1  0  1 -1 -1 -1 -1 -1 -1  0  1 -1 -1 -1 -1 -1 -1 -1 
+#    21| 1 -1  1 -1  0  1 -1  0  1  1 -1  0  1  1  1 -1  0  1  1  1  1 -1  0  1  1  1  1  1 -1  0  1  1  1  1  1  1 -1  0  1  1  1  1  1  1  1 
+#    30| 0  0 -1  1 -1  1  0  1 -1  1  0  1 -1  1  1  0  1 -1  1  1  1  0  1 -1  1  1  1  1  0  1 -1  1  1  1  1  1  0  1 -1  1  1  1  1  1  1 
+#    31| 1  1  0 -1  1 -1 -1  0  1 -1 -1  0  1 -1 -1 -1  0  1 -1 -1 -1 -1  0  1 -1 -1 -1 -1 -1  0  1 -1 -1 -1 -1 -1 -1  0  1 -1 -1 -1 -1 -1 -1 
+#    32| 1 -1  1  1 -1  1  1 -1  0  1  1 -1  0  1  1  1 -1  0  1  1  1  1 -1  0  1  1  1  1  1 -1  0  1  1  1  1  1  1 -1  0  1  1  1  1  1  1 
+#    40| 0  0 -1  0 -1  1  1 -1  1 -1  0  1 -1  1 -1  0  1 -1  1 -1 -1  0  1 -1  1  1 -1 -1  0  1 -1  1  1 -1 -1 -1  0  1 -1  1  1 -1 -1 -1 -1 
+#    41| 1  1  0  1  0 -1 -1  1 -1  1 -1  0  1 -1  1 -1  0  1 -1  1  1 -1  0  1 -1 -1  1  1 -1  0  1 -1 -1  1  1  1 -1  0  1 -1 -1  1  1  1  1 
+#    42| 1 -1  1 -1  1  0  1 -1  1 -1  1 -1  0  1 -1  1 -1  0  1 -1 -1  1 -1  0  1 -1 -1 -1  1 -1  0  1 -1 -1 -1 -1  1 -1  0  1 -1 -1 -1 -1 -1 
+#    43| 1 -1  1  1 -1  1 -1  1 -1  1 -1  1 -1  0  1 -1  1 -1  0  1  1 -1  1 -1  0  1  1  1 -1  1 -1  0  1  1  1  1 -1  1 -1  0  1  1  1  1  1 
+#    50| 0  0 -1  0 -1  1  0 -1  1 -1  1 -1  1 -1  1  0  1 -1  1 -1  1  0  1 -1  1 -1 -1  1  0  1 -1  1 -1 -1  1  1  0  1 -1  1 -1 -1  1  1  1 
+#    51| 1  1  0  1  0 -1  1  0 -1  1 -1  1 -1  1 -1 -1  0  1 -1  1 -1 -1  0  1 -1  1  1 -1 -1  0  1 -1  1  1 -1 -1 -1  0  1 -1  1  1 -1 -1 -1 
+#    52| 1 -1  1 -1  1  0 -1  1  0 -1  1 -1  1 -1  1  1 -1  0  1 -1  1  1 -1  0  1 -1 -1  1  1 -1  0  1 -1 -1  1  1  1 -1  0  1 -1 -1  1  1  1 
+#    53| 1 -1  1  1 -1  1  1 -1  1  0 -1  1 -1  1 -1 -1  1 -1  0  1 -1 -1  1 -1  0  1 -1 -1 -1  1 -1  0  1  1 -1 -1 -1  1 -1  0  1  1 -1 -1 -1 
+#    54| 1 -1  1  1 -1  1 -1  1 -1  1  1 -1  1 -1  1  1 -1  1 -1  0  1  1 -1  1 -1  0  1  1  1 -1  1 -1  0  1  1  1  1 -1  1 -1  0  1  1  1  1 
+#    60| 0  0 -1  0 -1  1  0 -1  1 -1  0 -1  1 -1  1  1 -1  1 -1  1 -1  0  1 -1  1 -1  1 -1  0  1 -1  1 -1  1  1 -1  0  1 -1  1 -1 -1  1 -1 -1 
+#    61| 1  1  0  1  0 -1  1  0 -1  1  1  0 -1  1 -1 -1  1 -1  1 -1  1 -1  0  1 -1  1 -1  1 -1  0  1 -1  1 -1 -1  1 -1  0  1 -1  1  1 -1  1  1 
+#    62| 1 -1  1 -1  1  0 -1  1  0 -1 -1  1  0 -1  1  1 -1  1 -1  1 -1  1 -1  0  1 -1  1 -1  1 -1  0  1 -1  1  1 -1  1 -1  0  1 -1  1  1 -1 -1 
+#    63| 1 -1  1  1 -1  1  1 -1  1  0  1 -1  1  0 -1 -1  1 -1  1 -1  1 -1  1 -1  0  1 -1  1 -1  1 -1  0  1 -1 -1  1 -1  1 -1  0  1 -1 -1  1  1 
+#    64| 1 -1  1  1 -1  1 -1  1 -1  1 -1  1 -1  1  0  1 -1  1 -1  1 -1  1 -1  1 -1  0  1 -1  1 -1  1 -1  0  1 -1 -1  1 -1  1 -1  0  1  1 -1 -1 
+#    65| 1 -1  1  1 -1  1 -1  1 -1  1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  0  1 -1  1 -1  1 -1  0  1  1 -1  1 -1  1 -1  0  1  1  1 
+#    70| 0  0 -1  0 -1  1  0 -1  1 -1  0 -1  1 -1  1  0 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1  0  1 -1  1 -1  1 -1  1  0  1 -1  1 -1  1  1 -1  1 
+#    71| 1  1  0  1  0 -1  1  0 -1  1  1  0 -1  1 -1  1  0 -1  1 -1  1 -1  1 -1  1 -1  1 -1 -1  0  1 -1  1 -1  1 -1 -1  0  1 -1  1 -1 -1  1 -1 
+#    72| 1 -1  1 -1  1  0 -1  1  0 -1 -1  1  0 -1  1 -1  1  0 -1  1 -1  1 -1  1 -1  1 -1  1  1 -1  0  1 -1  1 -1  1  1 -1  0  1 -1  1  1 -1  1 
+#    73| 1 -1  1  1 -1  1  1 -1  1  0  1 -1  1  0 -1  1 -1  1  0 -1  1 -1  1 -1  1 -1  1 -1 -1  1 -1  0  1 -1  1 -1 -1  1 -1  0  1 -1  1  1 -1 
+#    74| 1 -1  1  1 -1  1  1 -1 -1  1 -1  1 -1  1  0 -1  1 -1  1  0 -1  1 -1  1 -1  1 -1  1  1 -1  1 -1  0  1 -1  1  1 -1  1 -1  0  1 -1 -1  1 
+#    75| 1 -1  1  1 -1  1 -1  1 -1  1 -1  1 -1 -1  1  1 -1  1 -1  1  0 -1  1 -1  1 -1  1 -1 -1  1 -1  1 -1  0  1 -1 -1  1 -1  1 -1  0  1  1 -1 
+#    76| 1 -1  1  1 -1  1 -1  1 -1  1  1 -1  1 -1  1 -1  1 -1  1 -1  1  1 -1  1 -1  1 -1  1  1 -1  1 -1  1 -1  0  1  1 -1  1 -1  1 -1  0  1  1 
+#    80| 0  0 -1  0 -1  1  0 -1  1 -1  0 -1  1 -1  1  0 -1  1 -1  1 -1  0 -1  1 -1  1 -1  1  1 -1  1 -1  1 -1  1 -1  0  1 -1  1 -1  1 -1  1 -1 
+#    81| 1  1  0  1  0 -1  1  0 -1  1  1  0 -1  1 -1  1  0 -1  1 -1  1  1  0 -1  1 -1  1 -1 -1  1 -1  1 -1  1 -1  1 -1  0  1 -1  1 -1  1 -1  1 
+#    82| 1 -1  1 -1  1  0 -1  1  0 -1 -1  1  0 -1  1 -1  1  0 -1  1 -1 -1  1  0 -1  1 -1  1  1 -1  1 -1  1 -1  1 -1  1 -1  0  1 -1  1 -1  1 -1 
+#    83| 1 -1  1  1 -1  1  1 -1  1  0  1 -1  1  0 -1  1 -1  1  0 -1  1  1 -1  1  0 -1  1 -1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  0  1 -1  1 -1  1 
+#    84| 1 -1  1  1 -1  1  1 -1 -1  1 -1  1 -1  1  0 -1  1 -1  1  0 -1 -1  1 -1  1  0 -1  1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  0  1 -1  1 -1 
+#    85| 1 -1  1  1 -1  1 -1  1 -1  1 -1  1 -1  1  1  1 -1  1 -1  1  0  1 -1  1 -1  1  0 -1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  0  1 -1  1 
+#    86| 1 -1  1  1 -1  1 -1  1 -1  1  1 -1  1 -1  1  1 -1  1 -1 -1  1 -1  1 -1  1 -1  1  0  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  0  1 -1 
+#    87| 0 -1  1  1 -1  1 -1  1 -1  1  1 -1  1 -1  1 -1  1 -1  1 -1  1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  0  1 
+#    90| 0  0 -1  0 -1  1  0 -1  1 -1  0 -1  1 -1  1  0 -1  1 -1  1 -1  0 -1  1 -1  1 -1  1  0 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 
+#    91| 1  1  0  1  0 -1  1  0 -1  1  1  0 -1  1 -1  1  0 -1  1 -1  1  1  0 -1  1 -1  1 -1  1  0 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1 
+#    92| 1 -1  1 -1  1  0 -1  1  0 -1 -1  1  0 -1  1 -1  1  0 -1  1 -1 -1  1  0 -1  1 -1  1 -1  1  0 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 
+#    93| 1 -1  1  1 -1  1  1 -1  1  0  1 -1  1  0 -1  1 -1  1  0 -1  1  1 -1  1  0 -1  1 -1  1 -1  1  0 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1 
+#    94| 1 -1  1  1 -1  1  1 -1 -1  1 -1  1 -1  1  0 -1  1 -1  1  0 -1 -1  1 -1  1  0 -1  1 -1  1 -1  1  0 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 
+#    95| 1 -1  1  1 -1  1 -1  1 -1  1 -1  1 -1  1  1 -1  1  1 -1  1  0  1 -1  1 -1  1  0 -1  1 -1  1 -1  1  0 -1  1 -1  1 -1  1 -1  1 -1  1 -1 
+#    96| 1 -1  1  1 -1  1 -1  1 -1  1  1 -1  1 -1  1  1 -1  1 -1  1  1  1 -1  1  1 -1  1  0 -1  1 -1  1 -1  1  0 -1  1 -1  1 -1  1 -1  1 -1  1 
+#    97| 0 -1  1  1 -1  1 -1  1 -1  1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1  1  1 -1  1 -1  1 -1  1  0 -1  1 -1  1 -1  1 -1  1 -1 
+#    98| 0 -1  1  1 -1  1 -1  1 -1  1  1 -1  1 -1  1 -1  1 -1  1 -1  1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1 -1  1  1 -1  1 -1  1 -1  1 -1  1 
+#    
+
+
