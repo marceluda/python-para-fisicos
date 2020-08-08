@@ -17,7 +17,11 @@ navbar: labo2
   <strong>Comentario:</strong> Se grafican los estados para todos los L y m posibles... y las superposiciones de estados con m y -m.
 </div>
 
+La explicación de los estados generados está en
+[la página de orbitales atómicos]({{ site.baseurl }}/tuto/orbitales/)
 
+El script con que se generaron es:
+[05_galeria_de_estados_3d.py](https://github.com/marceluda/python-para-fisicos/blob/master/tutoriales/orbitales_atomicos/05_galeria_de_estados_3d.py)
 
 ## Figuras estados n=1
 
