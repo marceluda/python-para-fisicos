@@ -81,7 +81,7 @@ Finalmente, hay que agregar un factor de normalización:
 
 $$
 N_{n,l} =
-\sqrt{  \left( \frac{2}{n\,a} \right)^3  \frac{(n-l-1)!}{2n[(n+l)!]^3} }
+\sqrt{  \left( \frac{2}{n\,a} \right)^3  \frac{(n-l-1)!}{2n[(n+l)!]} }
 $$
 
 De forma tal de tener la solución:
