@@ -113,10 +113,10 @@ $$
 \delta_{l \, l^\prime} \, \delta_{m \, m^\prime}\, \delta_{n \, n^\prime}
 $$
 
-Que viene de la condición de ortonormalidad de $R_{n,l}$  (REVISAR):
+Que viene de la condición de ortonormalidad de $R_{n,l}$ (para un mismo $l$) :
 
 $$
-\int_0^\infty R_{n,l}(r)^* R_{n^\prime,l^\prime}(r)  \, r^2 \, dr =  \delta_{n \, n^\prime}
+\int_0^\infty R_{n,l}(r)^* R_{n^\prime,l}(r)  \, r^2 \, dr =  \delta_{n \, n^\prime}
 $$
 
 Condición de normalización de los armónicos esféricos:
