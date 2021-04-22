@@ -1,3 +1,4 @@
+#!/home/lolo/anaconda3/bin/python3
 # -*- coding: utf-8 -*-
 """
 script para armar la web de REPOSITORIO
