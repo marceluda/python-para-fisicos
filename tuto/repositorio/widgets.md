@@ -16,7 +16,8 @@ controlan mediantes widgets
 Usando Widgets se pueden controlar los parámetros de un modelo
 y compararlo con los datos
 
-![grafico](video_widget.mp4 "video_widget.mp4")
+<iframe src='//gifs.com/embed/5QJ6n8' frameborder='0' scrolling='no' width='1260px' height='506px' style='-webkit-backface-visibility: hidden;-webkit-transform: scale(1);' ></iframe>
+
 
 <a data-toggle="collapse" href="#desplegable000" aria-expanded="false" aria-controls="desplegable000">ver código<span class="caret"></span></a>
 
