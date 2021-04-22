@@ -16,7 +16,7 @@ controlan mediantes widgets
 Usando Widgets se pueden controlar los parámetros de un modelo
 y compararlo con los datos
 
-![grafico](repositorio_widget_000.png "repositorio_widget_000.png")
+![grafico](video_widget.mp4 "video_widget.mp4")
 
 <a data-toggle="collapse" href="#desplegable000" aria-expanded="false" aria-controls="desplegable000">ver código<span class="caret"></span></a>
 
@@ -77,7 +77,7 @@ axs[2].set_xticks(      [0, pi/2 , pi, 3/2*pi , 2*pi ] )
 axs[2].set_xticklabels( ['0', r'$\frac{\pi}{2}$', r'$\pi$', r'$\frac{3}{2}\pi$', r'$2\pi$'] )
 
 
-# Creamos una funcion de actualización para que se ejecute cada vez que un 
+# Creamos una funcion de actualización para que se ejecute cada vez que un
 # controlador cambia un valor
 
 def update(val):
@@ -85,7 +85,7 @@ def update(val):
     amplitud   = slider_amplitud.val
     frecuencia = slider_frecuencia.val
     fase       = slider_fase.val
-    
+
     # Luego usamos el objeto pl_modelo para actulizar los valors Y del gráfico
     pl_modelo.set_ydata(   modelo(tiempo,frecuencia,amplitud,fase)    )
     fig.canvas.draw_idle()
@@ -121,4 +121,3 @@ plt.show()
 # plt.savefig('repositorio_widget_000.png')
 ```
 </div>
-
