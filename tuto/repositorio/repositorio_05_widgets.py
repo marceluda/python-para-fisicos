@@ -16,6 +16,9 @@ controlan mediantes widgets
 """
 Usando Widgets se pueden controlar los parámetros de un modelo
 y compararlo con los datos
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-y2uimNWyrs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 """
 
 from numpy import *
