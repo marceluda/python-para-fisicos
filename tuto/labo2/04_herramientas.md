@@ -428,7 +428,7 @@ plt.plot( tiempo_general , datos1_general-datos2_general , '-' , label='datos1-d
 plt.gca().set_xticks( tiempo2 ,minor=True)
 plt.grid(b=True,linestyle=':', color='lightgray')
 
-ax.legend()
+plt.legend()
 # plt.savefig('03_07_interp.png')
 
 ```
