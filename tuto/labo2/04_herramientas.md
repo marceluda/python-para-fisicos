@@ -247,7 +247,7 @@ plt.tight_layout()
 ![grafico](03_05_smooth.png "grafico")
 
 
-
+Comparación de los datos originales con dos series de datos filtrados.
 
 ```python
 from numpy import *
@@ -316,8 +316,16 @@ plt.tight_layout()
 ![grafico](03_05_comparacion.png "grafico")
 
 
-```python
+A continuación se muestra cómo utilizar `scipy.signal.lfilter` para simular filtros.
+La diferencia cualitativa en estos casos es que los filtros operan como los filtros
+en electrónica. Se muestra cómo implementar un filtro RC pasabajos.
+En términos temporales, el `savgol` usa información del pasado y del futuro para
+calcular los datos filtrados. En cambio, `lfilter` simula filtros físicos, donde
+cada punto es construido solamente considerando la información del pasado.
 
+```python
+from numpy import *
+import matplotlib.pyplot as plt
 from scipy.signal import butter, lfilter
 
 # Otra forma de filtrar los datos es simular la utilizacion de un filtro RC
