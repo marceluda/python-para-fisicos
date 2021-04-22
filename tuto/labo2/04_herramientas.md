@@ -372,6 +372,71 @@ plt.tight_layout()
 ![grafico](03_06_filtro.png "grafico")
 
 
+
+## Interpolación
+
+La función `np.interp` de `NumPy` permite obtener una base comun de tiempos para
+realizar operaciones matemáticas entre datos adquiridos
+
+```python
+# La interpolación sirve para poder hacer operaciones entre tiras de datos
+# distintas que no comparten escalas de tiempos (entro otras cosas)
+
+
+from numpy import *
+import matplotlib.pyplot as plt
+
+
+# Datos originales que no comparten base de tiempos
+tiempo1 = linspace(0,4*pi, 50 )
+datos1  = cos(tiempo1)
+
+tiempo2 = linspace(0,4*pi, 33 )
+datos2  = sin(tiempo2)
+
+
+plt.figure()
+
+# Graficamos los datos
+plt.subplot(2,1,1)
+
+plt.plot( tiempo1 , datos1 , '.-' )
+plt.plot( tiempo2 , datos2 , '.-' )
+
+# Señalamos las posiciones temporales de datos2
+plt.gca().set_xticks( tiempo2 ,minor=True)
+plt.grid(b=True,linestyle=':',color='C1', which='minor' , axis='x', alpha=0.5)
+
+
+
+plt.subplot(2,1,2)
+
+# Creamos nuevos vectores de datos que interpolando en forma lineal en las posiciones
+# en que los valores no están definidos
+
+tiempo_general = linspace(0,4*pi, 100 )
+datos1_general = interp( tiempo_general , tiempo1, datos1 )
+datos2_general = interp( tiempo_general , tiempo2, datos2 )
+
+# Ahora que los vecotres tiene la misma base de tiempos, podemos hacer
+# operaciones entre ellos
+plt.plot( tiempo_general , datos1_general                , '-' , label='datos1' )
+plt.plot( tiempo_general , datos2_general                , '-' , label='datos2'  )
+plt.plot( tiempo_general , datos1_general-datos2_general , '-' , label='datos1-datos2', lw=3  )
+
+
+plt.gca().set_xticks( tiempo2 ,minor=True)
+plt.grid(b=True,linestyle=':', color='lightgray')
+
+ax.legend()
+# plt.savefig('03_07_interp.png')
+
+```
+![grafico](03_07_interp.png "grafico")
+
+
+
+
 ## Análisis gráfico
 
 <div class="alert alert-danger" role="alert" >
