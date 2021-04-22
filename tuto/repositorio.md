@@ -15,6 +15,7 @@ navbar: repo
   * **[Ajuste de modelos a datos](ajustes/)**: Ejemplos de cómo optimizar parámetros de un modelo para ajustar a un conjunto de datos
   * **[Cargar y guardar datos](IO/)**: Ejemplos leer/importar datos desde varios formatos y guardar/exportar a varios formatos
   * **[Varianza de Allan con allantools](varianza_allan/)**: Cálculo de la varianza de Allan unsado las herramientas de allantools
+  * **[Widgets](widgets/)**: Ejemplos para agregar interactividad a los gráficos
 
 <hr />
 ### Ejemplos no relacionados con física
