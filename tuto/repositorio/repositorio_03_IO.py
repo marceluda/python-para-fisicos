@@ -122,7 +122,7 @@ import matplotlib.pyplot as plt
 
 # Generamos datos de prueba
 
-datos=load('datos_de_ejemplo.npz')
+datos=load('datos_de_ejemplo.npz', allow_pickle=True)
 
 
 for item in datos.keys():
