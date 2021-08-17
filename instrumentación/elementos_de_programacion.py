@@ -130,3 +130,13 @@ for elem1,elem2 in zip(vec1,vec2):
     print(f'| {elem1:3d}  | {elem2:3d}  |')
 
 
+
+
+
+
+
+
+
+
+
+
