@@ -181,7 +181,7 @@ from numpy import *
 import matplotlib.pyplot as plt
 import pandas as pd  # solo lo vamos a usar para leer EXCEL
 
-datos = pd.read_excel('dolar.xlsx', sheetname=0)
+datos = pd.read_excel('dolar.xlsx', sheet_name=0)
 
 # Veamos cuales son las columnas:
 print(datos.columns.tolist())
