@@ -5,9 +5,11 @@ Aquí se publicará información y scripts de programación para controlar y adq
 Parte del material fue tomado o modificado a partir de lo publicado por [Hernan Grecco](https://github.com/hgrecco/labosdf) y [Diego Shalom](https://github.com/diegoshalom/labosdf) en sus repositorios.
 Para una introducción teórico-práctica al tema ver:
 
-<span  style="color:red" >
+<center>
+<strong>
 <a href="https://marceluda.github.io/python-para-fisicos/tuto/labo2/05_instrumentacion/"  >Introducción a Instrumentación para laboratorios de física</a>
-</span>
+</strong>
+</center>
 
 
 
