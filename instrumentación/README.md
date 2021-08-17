@@ -50,7 +50,7 @@ Manuales:
 
 ### Stanford SR830 ( Amplificador Lock-in )
 
-<img src="imgs/SR830.png" alt="TBS-1000b-EDU" width="350" border="10" />
+<img src="imgs/SR830.png" alt="TBS-1000b-EDU" width="450" border="10" />
 
 Página web:
 - [SR830](https://www.thinksrs.com/products/sr810830.htm)
@@ -59,6 +59,12 @@ Manuales:
 - [Manual de uso y programación SR830](https://www.thinksrs.com/downloads/pdfs/manuals/SR830m.pdf)
 
 
+### National Instruments USB-6212 ( DAQ: adquisición digital )
 
+<img src="imgs/NI-6212.png" alt="TBS-1000b-EDU" width="250" border="10" />
 
-.
+Página web:
+- [NI-USB-6212](https://www.ni.com/es-cr/support/model.usb-6212.html)
+
+Manuales:
+- [Manual](https://www.ni.com/pdf/manuals/371931f.pdf)
