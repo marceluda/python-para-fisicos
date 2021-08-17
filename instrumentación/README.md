@@ -24,6 +24,8 @@ Página web:
 Manuales:
   - [Manual de programación de la web de Tektronix](https://download.tek.com/manual/TBS1000-B-EDU-TDS2000-B-C-TDS1000-B-C-EDU-TDS200-TPS2000-Programmer_EN-US-RevA.pdf)
 
+Script de ejemplo:
+  - [TektronixTDS1002B.py](TektronixTDS1002B.py)
 
 ### Tektronix AFG3000 ( Generador de funciones )
 
@@ -35,6 +37,10 @@ Página web:
 
 Manuales:
   - [Manual de programación AFG3000](https://download.tek.com/manual/AFG3000-Series-Arbitrary-Function-Generator-Programmer-EN.pdf)
+
+
+Script de ejemplo:
+- [TektronixAFG3021B.py](TektronixAFG3021B.py)
 
 
 ### Agilent/Keysight 34401 ( Multímetro de banco )
