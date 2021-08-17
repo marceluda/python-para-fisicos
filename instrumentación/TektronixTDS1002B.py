@@ -43,11 +43,21 @@ osci.write('DAT:ENC RPB')
 osci.write('DAT:WID 1')
 
 
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Ejemplo de adquisición de UN CANAL
+
+canal   = 1
+
+
+
+# Selecciono el canal
+# Las strings"f" (notar la f antes del ' ) permiten incluir variables del
+# entorno que seran convertidas a texto
+osci.write(f'DATA:SOU {canal}')
 
 # Adquiero parámetros necesarios para convertir datos digitales a las 
 # magnitudes físicas originales (segundos y Volts)
 xze, xin, yze, ymu, yoff = osci.query_ascii_values('WFMPRE:XZE?;XIN?;YZE?;YMU?;YOFF?;', separator=';')
-
 
 ##########################
 # ATENCIÓN!              #
@@ -56,18 +66,6 @@ xze, xin, yze, ymu, yoff = osci.query_ascii_values('WFMPRE:XZE?;XIN?;YZE?;YMU?;Y
 # cáda vez que cambien las escalas del osciloscopio van a tener que volver 
 # a levantar xze, xin, yze, ymu, yoff  !!!
 
-
-
-
-#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-# Ejemplo de adquisición
-
-canal   = 1
-
-# Selecciono el canal
-# Las strings"f" (notar la f antes del ' ) permiten incluir variables del
-# entorno que seran convertidas a texto
-osci.write(f'DATA:SOU {canal}')
 
 # Adquiere los datos del canal 1 y los devuelve en un array de numpy
 datos_y = osci.query_binary_values('CURV?', datatype='B', container=np.array)
@@ -87,6 +85,36 @@ plt.ylabel('Voltaje [V]')
 
 # Al finalizar la serie de mediciones ser debe cerrar el instrumento:
 # osci.close()
+
+
+
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Ejemplo de adquisición de DOS CANALES
+
+xze,xin         = osci.query_ascii_values('WFMPRE:XZE?;XIN?',separator=';')           # conf. base de tiempo
+yze1,ymu1,yoff1 = osci.query_ascii_values('WFMPRE:CH1:YZE?;YMU?;YOFF?',separator=';') # conf. vertical canal 1
+yze2,ymu2,yoff2 = osci.query_ascii_values('WFMPRE:CH2:YZE?;YMU?;YOFF?',separator=';') # conf. vertical canal 2
+
+
+#leo las curvas como datos binarios
+osci.write('DAT:SOU CH1' )
+data1  = osci.query_binary_values('CURV?', datatype='B',container=np.array)
+osci.write('DAT:SOU CH2')    
+data2  = osci.query_binary_values('CURV?', datatype='B',container=np.array)
+
+#transformo los datos 
+tiempo = xze + np.arange(len(data1)) * xin  # tiempos en s
+data1V = (data1-yoff1)*ymu1+yze1            # tensión canal 1 en V
+data2V = (data2-yoff2)*ymu2+yze2            # tensión canal 2 en V 
+
+osci.close()
+
+#graficamos los datos
+plt.plot(tiempo,data1V,label='Canal 1')
+plt.plot(tiempo,data2V,label='Canal 2')
+plt.legend()
+
+
 
 
 

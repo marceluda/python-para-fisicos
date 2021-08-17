@@ -131,10 +131,31 @@ for elem1,elem2 in zip(vec1,vec2):
 
 
 
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Funciones con procedimientos programados
+
+# Podemos definir funciones para juntar mucho código en un bloque simple
 
 
+def calcular_elemento_fibonacci(N):
+    
+    a = 1
+    b = 2
+    
+    if N==1:
+        return a
+    if N==2:
+        return b
+    else:
+        tmp = 0
+        for _ in range(N-2):
+            tmp = a+b
+            a   = b
+            b   = tmp
+        return tmp
 
 
+print( calcular_elemento_fibonacci(8) )
 
 
 
