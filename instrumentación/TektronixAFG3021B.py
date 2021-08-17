@@ -9,7 +9,6 @@ Manual P (local): \\Srvlabos\manuales\Tektronix\AFG3012B (Prog Manual).pdf
 
 Para intro teórica, ver:
 https://marceluda.github.io/python-para-fisicos/tuto/labo2/05_instrumentacion/
-
 """
 
 
