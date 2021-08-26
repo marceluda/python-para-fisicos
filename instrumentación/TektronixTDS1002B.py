@@ -55,7 +55,7 @@ canal   = 1
 # entorno que seran convertidas a texto
 osci.write(f'DATA:SOU {canal}')
 
-# Adquiero parámetros necesarios para convertir datos digitales a las 
+# Adquiero parámetros necesarios para convertir datos digitales a las
 # magnitudes físicas originales (segundos y Volts)
 xze, xin, yze, ymu, yoff = osci.query_ascii_values('WFMPRE:XZE?;XIN?;YZE?;YMU?;YOFF?;', separator=';')
 
@@ -63,7 +63,7 @@ xze, xin, yze, ymu, yoff = osci.query_ascii_values('WFMPRE:XZE?;XIN?;YZE?;YMU?;Y
 # ATENCIÓN!              #
 ##########################
 
-# cáda vez que cambien las escalas del osciloscopio van a tener que volver 
+# cáda vez que cambien las escalas del osciloscopio van a tener que volver
 # a levantar xze, xin, yze, ymu, yoff  !!!
 
 
@@ -73,7 +73,7 @@ datos_y = osci.query_binary_values('CURV?', datatype='B', container=np.array)
 volts   = (datos_y-yoff)*ymu+yze;
 tiempo  = xze + np.arange(len(datos_y)) * xin
 
-plt.plot(  tiempo, data )
+plt.plot(  tiempo, volts )
 plt.xlabel('Tiempo [s]' )
 plt.ylabel('Voltaje [V]')
 
@@ -99,13 +99,13 @@ yze2,ymu2,yoff2 = osci.query_ascii_values('WFMPRE:CH2:YZE?;YMU?;YOFF?',separator
 #leo las curvas como datos binarios
 osci.write('DAT:SOU CH1' )
 data1  = osci.query_binary_values('CURV?', datatype='B',container=np.array)
-osci.write('DAT:SOU CH2')    
+osci.write('DAT:SOU CH2')
 data2  = osci.query_binary_values('CURV?', datatype='B',container=np.array)
 
-#transformo los datos 
+#transformo los datos
 tiempo = xze + np.arange(len(data1)) * xin  # tiempos en s
 data1V = (data1-yoff1)*ymu1+yze1            # tensión canal 1 en V
-data2V = (data2-yoff2)*ymu2+yze2            # tensión canal 2 en V 
+data2V = (data2-yoff2)*ymu2+yze2            # tensión canal 2 en V
 
 osci.close()
 
@@ -119,7 +119,7 @@ plt.legend()
 
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-# Elegir canal 
+# Elegir canal
 
 canal   = 1
 osci.write(f'DATA:SOU {canal}')
@@ -129,13 +129,13 @@ osci.write(f'DATA:SOU {canal}')
 # Escalas de tiempo
 
 # Para escala de tiempos por división:
-#    HORizontal:MAIn:SCAle <escala>	
-# donde <escala> está en segundos 
+#    HORizontal:MAIn:SCAle <escala>
+# donde <escala> está en segundos
 # <escala> puede ser: 1  ,  2.5  , 5    con un exponente
 # Ej: 2.5E-3 son 2.5 ms
 #       5E-6 son   5 us
 
-escala = 2.5e-3 
+escala = 2.5e-3
 osci.write(f'HORizontal:MAIn:SCAle {escala:3.1E}')
 
 # Con esto puedo ver la escala actual:
@@ -158,7 +158,7 @@ osci.write(f'HORizontal:MAIn:POS {diff_tiempo}')
 
 # Para escala de voltaje por división del canal <x>:
 #    CH<x>:SCAle <escala>
-# Escala varía entre 2 mV y 5 V, con valores en secuencia 1,2,5 
+# Escala varía entre 2 mV y 5 V, con valores en secuencia 1,2,5
 # Ejemplo: pner en el canal 1 una escala de 100 mV por división:
 
 canal  = 1
@@ -197,7 +197,7 @@ osci.write(f'CH{canal}:POS {div}')
 #    MEASUrement:IMMed:SOUrce  CH<x>
 # Typo
 #   MEASUrement:IMMed:TYPe
-# obtenr valor 
+# obtenr valor
 #    MEASUrement:IMMed:VALue?
 # obtener unidad
 #    MEASUrement:IMMed:UNIts?
@@ -212,18 +212,15 @@ osci.write(f'CH{canal}:POS {div}')
 canal = 1
 osci.write(f'MEASUrement:IMMed:SOUrce CH{canal}')
 
-for parametro in 'FREQ PERI MEAN MINI MAXI RMS AM':
+for parametro in 'FREQ PERI MEAN MINI MAXI RMS AM'.split():
     # digo que tipo de medicion es
     osci.write(f'MEASUrement:IMMed:TYPe {parametro}')
-    
+
     # obtengo valor
-    par_valor  = osci.query('MEASUrement:IMMed:VALue?')
-    
+    par_valor  = osci.query('MEASUrement:IMMed:VALue?').strip()
+
     # obtengo unidad
-    par_unidad = osci.query('MEASUrement:IMMed:UNIts?')
+    par_unidad = osci.query('MEASUrement:IMMed:UNIts?').strip()
 
     # imprimo:
     print(f'{parametro} : {par_valor} {par_unidad}')
-
-
-
