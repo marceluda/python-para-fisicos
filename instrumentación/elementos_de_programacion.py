@@ -42,7 +42,7 @@ print(f'Se leyeron {conteo: 4d} datos en {tiempo:3.1E} segundos')
 print(f'Se leyeron {conteo} datos en {tiempo:3.1E} segundos')
 
 # Formato de Python 3.0 en adelante 
-print('Se leyeron {0} datos en {1:3.1E} segundos'.format(conteo,tiempo))
+print('Se leyeron {0} datos en {1:3.1E} segundos'.format(conteo,tiempo) )
 
 # Formato de Python 2 en adelante 
 print('Se leyeron %d datos en %3.1E segundos' % (conteo,tiempo) )
