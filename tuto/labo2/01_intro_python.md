@@ -695,6 +695,29 @@ aceleracion = datos[2,:]
 
 </div>
 
+
+
+- <a data-toggle="collapse" href="#ayuda_guardar_csv" aria-expanded="false" aria-controls="ayuda_guardar_txt">Cargar datos en el formato CSV<span class="caret"></span></a>
+
+<div id="ayuda_guardar_txt" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
+
+Los datos en CSV estan en formato texto. En principio, se podrían usar las mismas funciones que para el .txt.
+
+Sin embargo, los CSV suelen ser tablas que ingluyen texto además de números. Es por ellos que nos coviene usar otra función para acceder a ellos.
+
+
+```python
+fn = 'Archivo.csv'
+tt = genfromtxt(fn,delimiter=',')[:,3]    # Esto es la columna 3
+yy = genfromtxt(fn,delimiter=',')[:,4]    # Esto es la columna 4
+
+# graficamos
+plt.plot(tt,yy)
+```
+
+</div>
+
+
 ## Funciones útiles para hacer cálculos
 
 Las funciones `sum`, `mean` y `std` (que importamos desde la librería `numpy`) nos permiten obtener rápidamente la suma completa, el promedio y la desviación estándar de todos los elementos de un vector.
