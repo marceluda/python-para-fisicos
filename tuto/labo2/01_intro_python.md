@@ -699,7 +699,7 @@ aceleracion = datos[2,:]
 
 - <a data-toggle="collapse" href="#ayuda_guardar_csv" aria-expanded="false" aria-controls="ayuda_guardar_txt">Cargar datos en el formato CSV<span class="caret"></span></a>
 
-<div id="ayuda_guardar_txt" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
+<div id="ayuda_guardar_csv" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
 
 Los datos en CSV estan en formato texto. En principio, se podrían usar las mismas funciones que para el .txt.
 
