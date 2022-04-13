@@ -151,14 +151,14 @@ pstd = np.sqrt(np.diag(pcov))
 nombres_de_param=['a','b','c','d']
 print('Parámetros hallados:')
 for i,param in enumerate(popt):
-    print('{:s} = {:5.3f} ± {:5.3f}'.format( nombres_de_param[i] , param , pstd[i]/2) )
+    print('{:s} = {:5.3f} ± {:5.3f}'.format( nombres_de_param[i] , param , pstd[i]) )
 #
 # Parámetros hallados:
 #
-# a = 2.823 ± 0.006
-# b = 0.516 ± 0.009
-# c = 4.843 ± 0.011
-# d = 1.484 ± 0.014
+# a = 2.823 ± 0.012
+# b = 0.516 ± 0.018
+# c = 4.843 ± 0.022
+# d = 1.484 ± 0.028
 ```
 
 <div class="alert alert-info" role="alert" >
