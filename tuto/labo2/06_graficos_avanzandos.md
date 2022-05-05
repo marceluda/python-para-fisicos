@@ -14,7 +14,7 @@ navbar: labo2
 </div>
 
 
-## Múltiples gráficos con  `plt.subplots`
+## Múltiples gráficos con  `plt.subplots()`
 
 ![grafico](01_subplots.png "grafico")
 
@@ -25,6 +25,17 @@ Código Fuente
 </center>
 
 
+------
+
+## Múltiples ejes con `ax.twinx()` y `ax.twiny()`
+
+![grafico](02_twin_axis.png "grafico")
+
+<center>
+<p> <a href="https://github.com/marceluda/python-para-fisicos/blob/gh-pages/tuto/labo2/06_graficos_avanzandos/graficos_avanzados_02.py" class="btn btn-primary btn-lg" role="button">
+Código Fuente
+</a> </p>
+</center>
 
 
 

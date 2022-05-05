@@ -100,4 +100,3 @@ fig.align_ylabels(axx[:,0])
 
 # fig.savefig('01_subplots.png')
 
-

@@ -101,3 +101,48 @@ fig.align_ylabels(axx[:,0])
 # fig.savefig('01_subplots.png')
 
 
+#%% Ejes dobles
+"""
+Dos ejemplos, compartir el eje x y el eje y 
+"""
+
+col1 = 'C0'
+col2 = 'C3'
+
+t       = linspace(0,5,500) # tiempo
+g, A, w = 6/10 , 3 , 5  # parámetros
+
+fig, ax = plt.subplots(1,1, figsize=(6,4),  constrained_layout=True)
+
+ax.plot( t , A*exp(-g*t)*cos(w*t) ,  label='posición' , lw=2, color=col1 )
+ax.set_ylabel('posición [cm]')
+ax.set_xlabel('tiempo [s]')
+ax.grid(b=True, ls= ':', color='lightgray')
+
+
+ax2 = ax.twinx()
+ax2.plot( t , A  *exp(-g*t)*( -g*cos(w*t) + w*sin(w*t) ) , label='velocidad' , lw=2, color=col2  )
+ax2.set_ylabel('velocidad [cm/s]')
+
+ax3 = ax.twiny()
+ax3.set_frame_on(False)
+
+ax3.set_xlim( array(ax.get_xlim())*w/pi )
+ax3.set_xticks( arange(9) )
+ax3.set_xticklabels( ['0','$\pi$'] + [ f'{l}$\pi$' for l in range(2,9)] )
+ax3.set_xlabel('Fase [rad]')
+
+ax.set_ylim(  -2.2,3.1)
+ax2.set_ylim(  -2.2*w,3.1*w)
+
+ax.yaxis.label.set_color(col1)
+ax.spines[ "left"].set_edgecolor(col1)
+ax.tick_params(axis='y', colors=col1)
+
+ax2.yaxis.label.set_color(col2)
+ax2.spines["left"].set_edgecolor(col1)
+ax2.spines["right" ].set_edgecolor(col2)
+ax2.tick_params(axis='y', colors=col2)
+
+
+# fig.savefig('02_twin_axis.png')
