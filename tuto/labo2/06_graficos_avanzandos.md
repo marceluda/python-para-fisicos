@@ -14,6 +14,17 @@ navbar: labo2
 </div>
 
 
+<div class="alert alert-info" role="info" >
+  <strong>Referencias Matplotlib:</strong>
+    <ul>
+        <li><a href="https://matplotlib.org/2.0.2/gallery.html">Matplotlib Gallery 2.0</a></li>
+        <li><a href="https://matplotlib.org/stable/gallery/index.html">Matplotlib Examples Stable</a></li>
+        <li><a href="https://github.com/rougier/matplotlib-tutorial">Tutorial</a></li>
+    </ul>
+</div>
+
+-------
+
 ## Múltiples gráficos con  `plt.subplots()`
 
 ![grafico](01_subplots.png "grafico")
@@ -87,6 +98,20 @@ En ese ejemplo se combinan distintas funciones para mostrar gráficos logarítmi
 <div class="alert alert-danger" role="alert" >
   <strong>Contenido pendiente</strong>
 </div>
+------
+
+## Ejemplo de BODE
+
+<div class="alert alert-danger" role="alert" >
+  <strong>Contenido pendiente</strong>
+</div>
+
+## Ejemplo de residuos con  histograma
+
+<div class="alert alert-danger" role="alert" >
+  <strong>Contenido pendiente</strong>
+</div>
+
 
 
 
