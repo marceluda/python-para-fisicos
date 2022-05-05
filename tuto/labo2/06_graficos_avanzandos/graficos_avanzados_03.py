@@ -9,7 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-#%% Ejes dobles
+#%% Escalas logarítmicas
 """
 Escalas logarítmicas
 
