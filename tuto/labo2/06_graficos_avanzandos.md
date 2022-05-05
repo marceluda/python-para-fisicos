@@ -16,6 +16,7 @@ navbar: labo2
 
 ## Múltiples gráficos
 
+![grafico](01_subplots.png "grafico")
 
 
 
