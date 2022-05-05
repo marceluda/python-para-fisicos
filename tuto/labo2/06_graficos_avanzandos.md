@@ -39,6 +39,19 @@ Código Fuente
 
 
 
+------
+
+## Escalas logarítmicas con `ax.semilogx()` y `ax.semilogy()`
+
+![grafico](03_loglog.png "grafico")
+
+<center>
+<p> <a href="https://github.com/marceluda/python-para-fisicos/blob/gh-pages/tuto/labo2/06_graficos_avanzandos/graficos_avanzados_03.py" class="btn btn-primary btn-lg" role="button">
+Código Fuente
+</a> </p>
+</center>
+
+
 <div class="alert alert-danger" role="alert" >
   <strong>Contenido pendiente</strong>
 </div>
