@@ -30,7 +30,7 @@ ax1.semilogy()
 ax1.set_title('semilogy', y=0.7 , bbox=dict(boxstyle="square",ec='black', fc='white' ))
 ax1.grid(b=True, ls= ':', color='lightgray')
 ax1.set_xlabel('eje x [unidades]')
-ax1.set_ylabel('eje y [unidades]')
+ax1.set_ylabel('eje y en log10 [unidades]')
 
 
 # log x
