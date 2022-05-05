@@ -83,6 +83,8 @@ pagenav:
       url: tuto/labo2/04_herramientas
     - title: Instrumentación
       url: tuto/labo2/05_instrumentacion
+    - title: Gráficos Avanzados
+      url: tuto/labo2/06_graficos_avanzandos
   repo:
     - title: Índice
       url: repo/repo
