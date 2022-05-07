@@ -87,7 +87,15 @@ Código Fuente
 </a> </p>
 </center>
 
+Ejemplos de cómo incluir anotaciones
+  - textos con [`ax.text()`](https://matplotlib.org/3.5.0/api/_as_gen/matplotlib.pyplot.text.html)
+  - flechas con [`ax.annotate()`](https://matplotlib.org/3.5.0/api/_as_gen/matplotlib.pyplot.annotate.html)
+  - uso de LaTeX con `$$`
+  - líneas verticales con `ax.axvline()`
+  - líneas horizontales con `ax.axhline()`
 
+
+  
 ------
 
 ## Inclusión de barras o áreas de error
