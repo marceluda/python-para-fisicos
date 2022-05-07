@@ -95,15 +95,33 @@ Ejemplos de cómo incluir anotaciones
   - líneas horizontales con `ax.axhline()`
 
 
-  
+
 ------
 
 ## Inclusión de barras o áreas de error
 
-<div class="alert alert-danger" role="alert" >
-  <strong>Contenido pendiente</strong>
-</div>
 
+![grafico](05_errores_a.png "grafico")
+
+Ejemplo de gráficos en los que se expresan los errores de la medición
+
+Cuando son pocos datos es conveniente usar barras de error con `ax.errorbar()`.
+Esto permite incluir errores en X y en Y.
+
+Por otro lado, cuando se tienen muchos datos, graficar con `ax.errorbar()` puede dar resultados inentendibles.
+En ese caso se pueden usar otros recursos como `ax.fill_between()`
+
+
+![grafico](05_errores_b.png "grafico")
+
+También puede ocurrir que en un gráfico se quieran diferenciar los errores de medición
+de las incertezas de la predicción de un modelo (lo que coloquialmente también le decimos error).
+
+<center>
+<p> <a href="https://github.com/marceluda/python-para-fisicos/blob/gh-pages/tuto/labo2/06_graficos_avanzandos/graficos_avanzados_05.py" class="btn btn-primary btn-lg" role="button">
+Código Fuente
+</a> </p>
+</center>
 ------
 
 ## Ejemplos de mapa de colores
