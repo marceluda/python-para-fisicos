@@ -79,9 +79,14 @@ En ese ejemplo se combinan distintas funciones para mostrar gráficos logarítmi
 
 ## Anotaciones en un gráfico
 
-<div class="alert alert-danger" role="alert" >
-  <strong>Contenido pendiente</strong>
-</div>
+![grafico](04_anotaciones.png "grafico")
+
+<center>
+<p> <a href="https://github.com/marceluda/python-para-fisicos/blob/gh-pages/tuto/labo2/06_graficos_avanzandos/graficos_avanzados_04.py" class="btn btn-primary btn-lg" role="button">
+Código Fuente
+</a> </p>
+</center>
+
 
 ------
 
