@@ -50,9 +50,9 @@ Una vez realizado reiniciar el Spyder.
 
 ## Modo de uso
 
-1) Primero hacer una copia del script
+**1) Primero hacer una copia del script**
 
-2) Modificar el modelo a ajustar por uno propio. Notar que los parámetros están todos en orden dentro de una lista o un array llamado `params`.
+**2) Modificar el modelo a ajustar por uno propio**. Notar que los parámetros están todos en orden dentro de una lista o un array llamado `params`.
 
 ```python
 def modelo(x,params):
@@ -75,7 +75,7 @@ def modelo(x,params):
     return y
 ```
 
-3) Según el modelo definido hay que configurar los parámetros a usar.
+**3) Según el modelo definido hay que configurar los parámetros a usar**
 
 - En la lista `nombres` van los nombres de cada parámetro (es para visualizar los resultados)
 - En `parametros_iniciales` van los valores iniciales para empezar el proceso de ajuste
@@ -88,7 +88,7 @@ parametros_iniciales = [      0 ,        0 ,    10 ,    30 ,   10 ,    70 ,   10
 limites              = [[-10,10],[-100,100],[0,100],[0,100],[0,40],[0,100],[0,40]]
 ```
 
-4) Definir opciones de ajuste:
+**4) Definir opciones de ajuste:**
 
 ```python
 # Opciones de ajuste
@@ -101,7 +101,7 @@ AJUSTAR_CON_ESCALAS  = True   # Usar escalas de parámetros en los ajustes. NO S
 - `AJUSTAR_CON_LIMITES` toma los límites fijados en `limites` como límites estrictos de los parámetros. Se lo puede usar cuando se quiere restringir un parámetro a un subconjunto particular.
 - `AJUSTAR_CON_ESCALAS` define la escala de los cambios aplicados a cada parámetro a partir del ancho del intervalo definido en `limites`.
 
-5) Definir los datos a ajustar. Con `USAR_DATOS_FICTICIOS=True` se generan datos random para probar. Si se lo establece en `False` se pueden usar las líneas post `else` para definir los datos a ajustar.
+**5) Definir los datos a ajustar.** Con `USAR_DATOS_FICTICIOS=True` se generan datos random para probar. Si se lo establece en `False` se pueden usar las líneas post `else` para definir los datos a ajustar.
 
 ```python
 if USAR_DATOS_FICTICIOS:
@@ -116,7 +116,7 @@ else:
     datos_y  =  array([0,1])
 ```
 
-6) Correr el script y ajustar a mano los datos iniciales.
+**6) Correr el script y ajustar a mano los datos iniciales.**
 
 Se verá en pantalla una figura con los gráficos y otra con los `Slider` de cada parámetro.
 
@@ -126,12 +126,12 @@ Luego de variar los parámetros a través de los `Slider` se puede hacercar el m
 
 ![grafico](ajuste_params_2.png "grafico")
 
-7) Hacer clic en el botón `Ajustar`. El algoritmo tratará de optimizar los parámetros.
+**7) Hacer clic en el botón `Ajustar`. El algoritmo tratará de optimizar los parámetros.**
 
 ![grafico](resultados_ajuste1.png "grafico")
 
 
-8) Interpretar los resultados
+**8) Interpretar los resultados**
 
 Como resultado del ajuste se imprimen los parámetros hallados y otras variables relevantes.
 
