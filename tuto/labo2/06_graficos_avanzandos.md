@@ -122,13 +122,28 @@ de las incertezas de la predicción de un modelo (lo que coloquialmente también
 Código Fuente
 </a> </p>
 </center>
+
 ------
 
 ## Ejemplos de mapa de colores
 
-<div class="alert alert-danger" role="alert" >
-  <strong>Contenido pendiente</strong>
-</div>
+![grafico](06_colormap_a.png "grafico")
+
+Los mapas de colores permite codificar información de los gráficos en los colores.
+Puede servir para cuando se muestra la respuesta de un sistema ante dos parámetros (como frecuencia y temperatura).
+Una forma de utilizarlo es asignando el color directamente a cada curva.
+
+![grafico](06_colormap_b.png "grafico")
+
+Otra forma de usarlo es generando imágenes 2D en la que una tercera dimensión a mostrar está codificada en el color. Para ello se puede usar [`ax.imshow()`](https://matplotlib.org/3.5.0/api/_as_gen/matplotlib.pyplot.imshow.html).
+
+
+<center>
+<p> <a href="https://github.com/marceluda/python-para-fisicos/blob/gh-pages/tuto/labo2/06_graficos_avanzandos/graficos_avanzados_06.py" class="btn btn-primary btn-lg" role="button">
+Código Fuente
+</a> </p>
+</center>
+
 ------
 
 ## Ejemplo de BODE
