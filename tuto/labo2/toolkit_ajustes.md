@@ -128,6 +128,9 @@ Luego de variar los parámetros a través de los `Slider` se puede hacercar el m
 
 7) Hacer clic en el botón `Ajustar`. El algoritmo tratará de optimizar los parámetros.
 
+![grafico](resultados_ajuste1.png "grafico")
+
+
 8) Interpretar los resultados
 
 Como resultado del ajuste se imprimen los parámetros hallados y otras variables relevantes.
