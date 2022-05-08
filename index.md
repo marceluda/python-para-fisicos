@@ -24,10 +24,11 @@ Repositorio de ejemplos rápidos
 </center>
 
 <center>
-<p> <a href="{{ site.baseurl }}/tuto/analisis/" class="btn btn-primary btn-lg" role="button">
-Análisis de datos (en construcción)
-</a></p>
+<p> <a href="{{ site.baseurl }}/tuto/labo2/toolkit_ajustes/ajuste_no_lineal.py" class="btn btn-primary btn-lg" role="button">
+Toolkit para ajustes no lineales con interfaz gráfica
+</a> </p>
 </center>
+
 
 
 <center>
