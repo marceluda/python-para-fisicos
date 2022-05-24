@@ -148,9 +148,18 @@ Código Fuente
 
 ## Ejemplo de BODE
 
-<div class="alert alert-danger" role="alert" >
-  <strong>Contenido pendiente</strong>
-</div>
+![grafico](07_bode.png "grafico")
+
+
+Ejemplo de un grafico tipo BODE para análisis de filtros. Arriba se grafica el módulo de la función de transferencia. Abajo, la fase.
+Se suele expresar la amplitud en dB y la fase en grados.
+
+<center>
+<p> <a href="https://github.com/marceluda/python-para-fisicos/blob/gh-pages/tuto/labo2/06_graficos_avanzandos/graficos_avanzados_07.py" class="btn btn-primary btn-lg" role="button">
+Código Fuente
+</a> </p>
+</center>
+
 
 ## Ejemplo de residuos con  histograma
 
