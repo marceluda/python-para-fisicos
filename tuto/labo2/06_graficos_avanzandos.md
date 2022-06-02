@@ -163,7 +163,7 @@ Código Fuente
 
 ## Ejemplo de residuos con  histograma
 
-![grafico](08_residuos "grafico")
+![grafico](08_residuos.png "grafico")
 
 
 Ejemplo ajuste de datos con residuos. Es un ejemplo también de `subplots` con proporciones distintas.
