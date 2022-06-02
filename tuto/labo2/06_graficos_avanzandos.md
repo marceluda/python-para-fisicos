@@ -163,9 +163,16 @@ Código Fuente
 
 ## Ejemplo de residuos con  histograma
 
-<div class="alert alert-danger" role="alert" >
-  <strong>Contenido pendiente</strong>
-</div>
+![grafico](08_residuos "grafico")
+
+
+Ejemplo ajuste de datos con residuos. Es un ejemplo también de `subplots` con proporciones distintas.
+
+<center>
+<p> <a href="https://github.com/marceluda/python-para-fisicos/blob/gh-pages/tuto/labo2/06_graficos_avanzandos/graficos_avanzados_08.py" class="btn btn-primary btn-lg" role="button">
+Código Fuente
+</a> </p>
+</center>
 
 
 
