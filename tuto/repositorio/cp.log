@@ -1,0 +1,8 @@
+INFO: Platform: linux2
+INFO: Version Info: v0.3.0
+DEBUG: Log Path: cp.log
+DEBUG: command: ['/home/lolo/anaconda37/bin/python3', '/home/lolo/Dropbox/Doctorado/github/python-para-fisicos_pages/tuto/repositorio/repositorio.py']
+DEBUG: args: ['/home/lolo/Dropbox/Doctorado/github/python-para-fisicos_pages/tuto/repositorio/repositorio.py']
+DEBUG: repl: /home/lolo/anaconda37/bin/python3
+DEBUG: pause: True
+DEBUG: file: None

@@ -9,7 +9,7 @@ mathjax: true
 <div class="alert alert-info" role="alert" >
   <strong>Archivo:</strong> <a href="../repositorio_03_IO.py"> repositorio_03_IO.py </a>
 </div>
-En este archivo se muestran ejemplos prácticos para leer datos desde 
+En este archivo se muestran ejemplos prácticos para leer datos desde
 diferentes formatos de archivos y para guardarlos en diferentes formatos.
 ## Carga de datos a mano
 
@@ -26,7 +26,7 @@ import matplotlib.pyplot as plt
 
 datos_x1  = arange(0,100,5)
 datos_y1  = [-2.02, -0.16, 1.76, 0.28, 0.37, 1.83, 2.92, 2.11,
-              3.06,  2.36, 0.57, 5.16, 4.64, 4.4 , 7.44, 4.48, 
+              3.06,  2.36, 0.57, 5.16, 4.64, 4.4 , 7.44, 4.48,
               5.22,  6.2,  5.7, 6.64]
 
 
@@ -92,7 +92,7 @@ from numpy import *
 import matplotlib.pyplot as plt
 import pandas as pd  # solo lo vamos a usar para leer EXCEL
 
-datos = pd.read_excel('dolar.xlsx', sheetname=0)
+datos = pd.read_excel('dolar.xlsx', sheet_name=0)
 
 # Veamos cuales son las columnas:
 print(datos.columns.tolist())
