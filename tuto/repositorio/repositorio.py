@@ -21,7 +21,7 @@ os.chdir('/home/lolo/Dropbox/Doctorado/github/python-para-fisicos_pages/tuto/rep
 
 source_folder = '/home/lolo/Dropbox/Doctorado/github/python-para-fisicos_pages'
 dest_folder   = '/var/www/html/python-para-fisicos/'
-update_cmd = f'jekyll build --source {source_folder} --destination {dest_folder}'
+update_cmd = f'bundle exec jekyll build --source {source_folder} --destination {dest_folder}'
 
 def update_local():
     os.system( update_cmd )
