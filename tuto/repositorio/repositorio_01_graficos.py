@@ -5,8 +5,18 @@
 # RESUMEN: Ejemplos para graficar datos de forma rápida
 
 """
-Se presentan a continuación ejemplos de graficación de datos
+Se presentan a continuación ejemplos de gráficos de datos
 incluyendo las opciones más habituales.
+
+Para más información (en inglés) se puede consultar este completo tutorial:
+
+
+<center>
+<p> <a href="https://github.com/rougier/matplotlib-tutorial" class="btn btn-primary btn-lg" role="button">
+matplotlib-tutorial
+</a> </p>
+</center>
+
 """
 
 #%%  Ejemplo de graficos varios
@@ -73,7 +83,7 @@ plt.figure(2)
 plt.plot(x0,y0, '-' ,  label='datos 1' , color='blue' )
 
 # Graficamos x1, y1 considerando errores +-e1
-plt.errorbar(x1,y1,yerr=e1 , fmt='o',  label='datos 2' , color='C1')
+plt.errorbar(x1,y1,yerr=e1 , fmt='o',  label='datos 2' , color='C1', capsize=3)
 
 # Graficamos x2 , y2 con bolitas
 plt.plot(x2,y2,'.-',  label='datos 3' , color='red' , alpha=0.5)
@@ -163,8 +173,8 @@ import matplotlib.pyplot as plt
 random.seed(0)
 
 x0 = linspace(0,1e5,30000)
-y0 = ( 1+1e-4+sin(x0/50 * exp(-x0/10000) ) ) * exp(-x0/10000) 
-y1 = 2*exp(-x0/10000) 
+y0 = ( 1+1e-4+sin(x0/50 * exp(-x0/10000) ) ) * exp(-x0/10000)
+y1 = 2*exp(-x0/10000)
 
 
 plt.figure(8)
@@ -207,3 +217,61 @@ plt.tight_layout()
 
 # plt.savefig('repositorio_graficos_003.png')
 
+
+#%%  Ejemplo de histogramas
+"""
+Acá se muestran ejemplos de gráficos de histogramas
+"""
+from numpy import *
+import matplotlib.pyplot as plt
+
+# Fabricamos algunos datos de ejemplo #####################
+random.seed(0)
+
+# Creamos un vector de datos simulados:
+#   Una distribución normal centrada en 10, con desviación estándar de 2.5
+#   y tamaño muestral de 300
+datos1 = random.normal(loc=10,scale=2.5, size=400)
+
+# Creo otro vector de datos para comparación
+datos2 = random.normal(loc=10,scale=5, size=400)
+
+plt.figure(9)
+
+plt.subplot(2,2,1)
+plt.hist( datos1 )
+plt.xlabel('valores')
+plt.ylabel('apariciones')
+plt.title('10 bines')
+
+plt.subplot(2,2,2)
+# ancho de bin óptimo: 
+#    https://en.wikipedia.org/wiki/Freedman%E2%80%93Diaconis_rule
+iqr = diff(percentile(datos1, [25 ,75]))[0]
+ancho_de_bin = 2*iqr/(len(datos1)**(1/3))
+n_bines = round( (datos1.max()-datos1.min())/ancho_de_bin  )
+plt.hist( datos1 , density=True, bins=n_bines)
+plt.xlabel('valores')
+plt.ylabel('frecuencia')
+plt.title(f'{n_bines} bines')
+
+
+plt.subplot(2,2,3)
+rango = linspace(-5,24,21)
+plt.hist( datos1 , density=True, bins=rango, alpha=0.7)
+plt.hist( datos2 , density=True, bins=rango, alpha=0.7)
+plt.xlabel('valores')
+plt.ylabel('frecuencia')
+plt.title('Dos histogramas')
+
+plt.subplot(2,2,4)
+plt.hist( datos1 , density=True, cumulative=True, histtype='step', lw=3)
+plt.hist( datos2 , density=True, cumulative=True, histtype='step', lw=3)
+plt.xlabel('valores')
+plt.ylabel('Acumulado [%]')
+plt.title('Acumulado')
+plt.grid()
+
+plt.tight_layout()
+
+# plt.savefig('repositorio_graficos_004.png')
