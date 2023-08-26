@@ -59,6 +59,30 @@ plt.xlabel('Eje X')
 plt.ylabel('Eje Y')
 
 
+#%%  Carga de datos desde CSV con tiempos
+
+from numpy import *
+import matplotlib.pyplot as plt
+from datetime import datetime
+
+def tiempo_a_seg(txt):
+    "Funcion para convertir texto con tiempos en segundos"
+    tiempo = datetime.strptime(txt, '%H:%M:%S.%f').time()
+    return tiempo.second+tiempo.microsecond/1e6
+
+# Cargamos los datos completos
+# Especificamos que saltee cabecera y pie de archivo
+# Usamos un conversor para la columna 3
+datos = genfromtxt('datos_tiempos.csv', delimiter=',' ,
+                   skip_header=3 , skip_footer=3 ,
+                   converters = {3: tiempo_a_seg}, encoding='utf-8')
+
+# Extraemos la columna 3
+tiempos = datos[:,3]
+
+plt.plot(tiempos,'.-')
+
+
 
 #%%  Carga de datos desde un excel
 """

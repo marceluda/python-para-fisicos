@@ -77,14 +77,48 @@ plt.ylabel('Eje Y')
 </div>
 
 
+## Carga de datos desde CSV con tiempos
+
+
+  * [datos_tiempos.csv](datos_tiempos.csv)
+
+<a data-toggle="collapse" href="#desplegable002" aria-expanded="false" aria-controls="desplegable002">ver código<span class="caret"></span></a>
+
+<div id="desplegable002" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
+
+```python
+from numpy import *
+import matplotlib.pyplot as plt
+from datetime import datetime
+
+def tiempo_a_seg(txt):
+    "Funcion para convertir texto con tiempos en segundos"
+    tiempo = datetime.strptime(txt, '%H:%M:%S.%f').time()
+    return tiempo.second+tiempo.microsecond/1e6
+
+# Cargamos los datos completos
+# Especificamos que saltee cabecera y pie de archivo
+# Usamos un conversor para la columna 3
+datos = genfromtxt('datos_tiempos.csv', delimiter=',' ,
+                   skip_header=3 , skip_footer=3 ,
+                   converters = {3: tiempo_a_seg}, encoding='utf-8')
+
+# Extraemos la columna 3
+tiempos = datos[:,3]
+
+plt.plot(tiempos,'.-')
+```
+</div>
+
+
 ## Carga de datos desde un excel
 
 Cargar datos desde un archivo tipo excel
   * [dolar.xlsx](dolar.xlsx)
 
-<a data-toggle="collapse" href="#desplegable002" aria-expanded="false" aria-controls="desplegable002">ver código<span class="caret"></span></a>
+<a data-toggle="collapse" href="#desplegable003" aria-expanded="false" aria-controls="desplegable003">ver código<span class="caret"></span></a>
 
-<div id="desplegable002" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
+<div id="desplegable003" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
 
 ```python
 
@@ -114,9 +148,9 @@ plt.grid(True)
 Cargar datos desde un archivo .mat de MATLAB
   * [archivo_matlab.mat](archivo_matlab.mat)
 
-<a data-toggle="collapse" href="#desplegable003" aria-expanded="false" aria-controls="desplegable003">ver código<span class="caret"></span></a>
+<a data-toggle="collapse" href="#desplegable004" aria-expanded="false" aria-controls="desplegable004">ver código<span class="caret"></span></a>
 
-<div id="desplegable003" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
+<div id="desplegable004" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
 
 ```python
 
@@ -153,9 +187,9 @@ plt.grid(True)
 Cargar datos desde un archivo NPZ
   * [datos_de_ejemplo.npz](datos_de_ejemplo.npz)
 
-<a data-toggle="collapse" href="#desplegable004" aria-expanded="false" aria-controls="desplegable004">ver código<span class="caret"></span></a>
+<a data-toggle="collapse" href="#desplegable005" aria-expanded="false" aria-controls="desplegable005">ver código<span class="caret"></span></a>
 
-<div id="desplegable004" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
+<div id="desplegable005" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
 
 ```python
 
@@ -187,9 +221,9 @@ plt.grid(True)
 Guardar datos en un archivo NPZ (de NumPy)
   * [datos_de_ejemplo.npz](datos_de_ejemplo.npz)
 
-<a data-toggle="collapse" href="#desplegable005" aria-expanded="false" aria-controls="desplegable005">ver código<span class="caret"></span></a>
+<a data-toggle="collapse" href="#desplegable006" aria-expanded="false" aria-controls="desplegable006">ver código<span class="caret"></span></a>
 
-<div id="desplegable005" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
+<div id="desplegable006" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
 
 ```python
 
@@ -214,9 +248,9 @@ Guardar datos en un archivo CSV
   * [datos_de_ejemplo.csv](datos_de_ejemplo.csv)
   * [datos_de_ejemplo2.csv](datos_de_ejemplo2.csv)
 
-<a data-toggle="collapse" href="#desplegable006" aria-expanded="false" aria-controls="desplegable006">ver código<span class="caret"></span></a>
+<a data-toggle="collapse" href="#desplegable007" aria-expanded="false" aria-controls="desplegable007">ver código<span class="caret"></span></a>
 
-<div id="desplegable006" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
+<div id="desplegable007" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
 
 ```python
 
@@ -248,9 +282,9 @@ savetxt('datos_de_ejemplo2.csv', array([xx,yy]).T , delimiter="\t" , header='xx 
 Guardar datos en un archivo .mat de MATLAB
   * [datos_de_ejemplo.mat](datos_de_ejemplo.mat)
 
-<a data-toggle="collapse" href="#desplegable007" aria-expanded="false" aria-controls="desplegable007">ver código<span class="caret"></span></a>
+<a data-toggle="collapse" href="#desplegable008" aria-expanded="false" aria-controls="desplegable008">ver código<span class="caret"></span></a>
 
-<div id="desplegable007" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
+<div id="desplegable008" class="collapse" markdown="1" style="padding: 10px; border: 1px solid gray; border-radius: 5px;">
 
 ```python
 
