@@ -5,17 +5,18 @@ script para armar la web de REPOSITORIO
 
 """
 
+
+
+from glob import glob
+from datetime import datetime
+import re
+import os
+
 from numpy import *
 import matplotlib.pyplot as plt
 
-from glob import glob
-
-import re
-
 prefijo = 'repositorio'
 
-
-import os
 
 os.chdir('/home/lolo/Dropbox/Doctorado/github/python-para-fisicos_pages/tuto/repositorio/')
 
@@ -24,7 +25,10 @@ dest_folder   = '/var/www/html/python-para-fisicos/'
 update_cmd = f'bundle exec jekyll build --source {source_folder} --destination {dest_folder}'
 
 def update_local():
+    "Actualiza el repositorio local"
     os.system( update_cmd )
+    print("Ver la web:\nhttp://localhost/python-para-fisicos/tuto/repositorio/")
+
 
 
 
@@ -43,21 +47,7 @@ navbar: repo
 </div>
 """
 
-BASE_HEAD = BASE_HEAD.strip() + '\n\n\n'
-
-
-#  * **[Ejemplos para graficar datos](repo_tutos_graficos/)**: Se presentan a continuación ejemplos de graficación de datos incluyendo las opciones mas habituales.
-#  * **[Ejemplos para cargar y guardar datos](repo_tutos_IO/)**: En este archivo se muestran ejemplos prácticos para leer datos desde  diferentes formatos de archivos y para guardarlos en diferentes formatos.
-#  * **[Ejemplos para realizar ajustes de datos](repo_tutos_ajustes/)**: Se presentan ejemplos de ajustes lineales, polinomiales y no lineales para uso general.
-
-
-
-
-
-
-
-
-
+BASE_HEAD = BASE_HEAD.strip() + '\n'*3
 
 
 #%% Procesar páginas
@@ -170,7 +160,7 @@ with open(f'../{prefijo}.md', 'w') as base_writer:
                             os.system(f'mv "{archivo_adj}" "{url}/"')
                         writer.write( f'  * [{archivo_adj}]({archivo_adj})\n' )
 
-                    for imagen in [ y for y in codigo.split('\n') if ( 'plt.savefig' in y ) ]:
+                    for imagen in [ y for y in codigo.split('\n') if 'plt.savefig' in y  ]:
                         imgname= imagen.split("'")[1]
                         if os.path.isfile(imgname):
                             os.system(f'mv "{imgname}" "{url}/"')
@@ -191,7 +181,6 @@ update_local()
 
 
 #%%
-from datetime import datetime
 
 fecha = datetime.now().isoformat()
 
@@ -199,3 +188,6 @@ os.system('git add .')
 os.system(f'git add ../{prefijo}.md')
 os.system(f'git commit -m "ACTUALIZACION AUTOMATICA {fecha}"')
 os.system('git push')
+
+
+print("Ver la web:\nhttps://marceluda.github.io/python-para-fisicos/tuto/repositorio/")
