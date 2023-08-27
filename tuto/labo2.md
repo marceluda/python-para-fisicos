@@ -72,6 +72,7 @@ están los archivos de Python relacionados con los siguientes instructivos:
       - Incluyen código para generar cáda imagen
     - [Otra galería completa de ejemplos de Matplotlib](https://www.machinelearningplus.com/plots/top-50-matplotlib-visualizations-the-master-plots-python/)
       - Hacer clic en cada imagen para ver el código de ejemplo que la genera
+  - [Tutorial de gráficos en español](https://aprendepython.es/pypi/datascience/matplotlib/)
   - **Material del taller de Python de Estudiantes de física de FCEN-UBA**
     - [fifabsas.github.io/talleresfifabsas](https://fifabsas.github.io/talleresfifabsas/)
     - Es un taller que se dicta anualmente. El material está en español y es muy práctico y accesible.
