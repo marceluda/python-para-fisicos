@@ -173,7 +173,8 @@ El último comando son en realidad varios anidados. Permiten obtener la informac
 ```python
 from matplotlib import pyplot as plt
 from numpy import *
-import visa
+import numpy as np
+import pyvisa as visa
 
 print(__doc__)
 
@@ -194,6 +195,12 @@ print(respuesta)
 
 # Le pido algunos parametros de la pantalla, para poder escalear adecuadamente
 xze, xin, yze, ymu, yoff = osci.query_ascii_values('WFMPRE:XZE?;XIN?;YZE?;YMU?;YOFF?;', separator=';')
+
+#############################################################################
+# Nota: Si falla la línea anterior, corroborá que el canal del osciloscopio #
+# esté encendido. A veces es necesario que ambos estén encendidos para que  #
+# funciones correctamente                                                   #
+#############################################################################
 
 # Con el método 'write' enviamos instrucciones QUE NO TIENEN RESPUESTA
 # Modo de transmisión: Binario
@@ -227,9 +234,9 @@ el canal, se asumo que es el `SOURCE1`.
 
 ```python
 import time
-
 from numpy import *
-import visa
+import numpy as np
+import pyvisa as visa
 
 # Cargamos el Resource Manager. El manejador de recursos VISA
 rm = visa.ResourceManager()
@@ -259,14 +266,12 @@ for amplitude in np.linspace(0, 1, 10):
     print('Comando enviado: ' + 'VOLT {:f}'.format(amplitude)  )
     time.sleep(0.1)  # tiempo de espera de 0.1 segundos
 
-
 # Rampa lineal de offset
 # Vamos a tener 10 pasos que van de 0 V a 1 V
 for offset in np.linspace(0, 1, 10):
     fungen.write('VOLT:OFFS {:f}'.format(offset)  )
     print('Comando enviado: ' + 'VOLT:OFFS {:f}'.format(offset)   )
     time.sleep(0.1)  # tiempo de espera de 0.1 segundos
-
 
 # Cuando dejamos de usar el generador de funciones, lo cerramos
 fungen.close()
