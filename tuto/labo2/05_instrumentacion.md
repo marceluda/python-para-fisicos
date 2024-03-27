@@ -161,7 +161,7 @@ Lo que está entre corchetes `[]` o en minúscula es opcional ponerlo.
 
 | Referencia  | Comando (ej) | Función |
 |-------------|--------------|---------|
-| `DATa:SOUrce <wfm>`  | `DATA:SOU 1` | Selecciona el canal del osciloscopio |
+| `DATa:SOUrce <wfm>`  | `DATA:SOU CH1` | Selecciona el canal del osciloscopio |
 | `CURV?`                         | `CURV?`     | Pide los datos medidos del canal actual |
 | `HORizontal:MAIn:SCAle <escala>`                           | `HOR:MAIN:SCA 5E-3`      | Fija la escala temporal del osciloscopio (en segundos) |
 | `WFMPRE:XZE?;XIN?;YZE?;YMU?;YOFF?;` | `WFMPRE:XZE?;XIN?;YZE?;YMU?;YOFF?;` | Adquiere los datos de la escala de la pantalla del osciloscopio |
