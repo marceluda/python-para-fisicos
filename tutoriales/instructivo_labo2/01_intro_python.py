@@ -235,7 +235,7 @@ savez('datos.npz', varX=varX, varY=varY, texto_mio=texto_mio)
 
 
 #%% linea 538
-datos = load('datos.npz')
+datos = load('datos.npz',allow_pickle=True)
 
 
 
@@ -253,7 +253,7 @@ savez('datos.npz', varX=varX, varY=varY, texto_mio=texto_mio)
 
 
 #%% linea 562
-datos = load('datos.npz')
+datos = load('datos.npz',allow_pickle=True)
 
 datos
 # Out[2]: <numpy.lib.npyio.NpzFile at 0x7f71fa8f25f8>
