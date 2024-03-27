@@ -556,7 +556,7 @@ en un objeto nuevo con nombre.
 Por ejemplo, si se trata de recuperar el archivo guardado en el ejemplo anterior:
 
 ```python
-datos = load('datos.npz')
+datos = load('datos.npz',allow_pickle=True)
 ```
 
 El objeto `datos` será un [diccionario](https://claudiovz.github.io/scipy-lecture-notes-ES/intro/language/basic_types.html#diccionarios),
@@ -580,7 +580,7 @@ savez('datos.npz', varX=varX, varY=varY, texto_mio=texto_mio)
 Luego los recuperamos en el objeto `datos`:
 
 ```python
-datos = load('datos.npz')
+datos = load('datos.npz',allow_pickle=True)
 
 datos
 # Out[2]: <numpy.lib.npyio.NpzFile at 0x7f71fa8f25f8>
