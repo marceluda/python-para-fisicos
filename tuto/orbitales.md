@@ -193,7 +193,7 @@ $\psi_{1,0,0}$ (verde) :
 ## Estructura fina e hiperfina
 La estructura fina e hiperfina de la configuración electrónica depende de
 el acoplamiento del Spin electrónico con el momento angular orbital ($L \cdot S$) y de todo esto
-son el spin nuclear ($I$).
+con el spin nuclear ($I$).
 Para describir (y graficar) estos estados se debe extender el espacio de Hilbert contemplando las posibles
 proyecciones del Spin electrónico y Nuclear.
 
