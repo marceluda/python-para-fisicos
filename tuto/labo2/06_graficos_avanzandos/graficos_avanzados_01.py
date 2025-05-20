@@ -90,7 +90,7 @@ axx[0,2].legend()
 
 # Agregamos una grilla a TODOS los gráficos
 for ax in axx.flatten():
-    ax.grid(b=True, ls= ':', color='lightgray')
+    ax.grid(True, ls= ':', color='lightgray')
 
 for ax in axx.flatten():
     ax.axhline(0 , color='gray' , lw=1 , zorder=-1)
