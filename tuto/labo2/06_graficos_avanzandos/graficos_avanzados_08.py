@@ -87,7 +87,7 @@ ax.set_title('Estadística')
 
 # Grid ************************************************************************
 for ax in axx.flatten():
-    ax.grid(b=True, ls=':', color='lightgray')
+    ax.grid(True, ls=':', color='lightgray')
 
 # fig.savefig('08_residuos.png')
 
