@@ -72,7 +72,7 @@ ax.set_xlim( 0 , max(nu_THz) )
 ax.set_ylim( 0 , ax.get_ylim()[1] )
 
 # Grid
-ax.grid(b=True,ls=':',color='lightgray')
+ax.grid(True,ls=':',color='lightgray')
 
 # Genero una barra de color de referencia
 fig.colorbar( mpl.cm.ScalarMappable(cmap=cm, norm=cn ) , 
