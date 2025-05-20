@@ -58,8 +58,8 @@ fig, ax = plt.subplots()
 
 ax.loglog(t2, ad, '.-') # Plot the results
 ax.errorbar( t2, ad , yerr=ade , color='C0' , alpha=0.5 , ms=0, mew=10)
-ax.grid(b=True,linestyle='--',color='lightgray')
-ax.grid(b=True,linestyle='--',color='lightgray', which='minor', alpha=0.2)
+ax.grid(True,linestyle='--',color='lightgray')
+ax.grid(True,linestyle='--',color='lightgray', which='minor', alpha=0.2)
 ax.set_xlabel(r'$\tau$')
 ax.set_ylabel(r'$\sigma^2_{ADEV}(\tau) $')
 
@@ -111,8 +111,8 @@ ax.plot(t2, ad, '.-', color='C1' , label='oadev')
 ax.fill_between( t2, ad-ade, ad+ade , color='C1' , alpha=0.5 )
 
 
-ax.grid(b=True,linestyle='--',color='lightgray')
-ax.grid(b=True,linestyle='--',color='lightgray', which='minor', alpha=0.2)
+ax.grid(True,linestyle='--',color='lightgray')
+ax.grid(True,linestyle='--',color='lightgray', which='minor', alpha=0.2)
 ax.set_xlabel(r'$\tau$')
 ax.set_ylabel(r'$\sigma^2_{y}(\tau) $')
 ax.legend(loc='best')
