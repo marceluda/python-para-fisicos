@@ -76,8 +76,8 @@ ax.set_xlabel('frecuencia [Hz]')
 
 # Grid
 for ax in axx:
-    ax.grid(b=True, ls=':', color='lightgray')
-    ax.grid(b=True, ls=':', color='lightgray', which ='minor', axis='x', alpha=0.6)
+    ax.grid(True, ls=':', color='lightgray')
+    ax.grid(True, ls=':', color='lightgray', which ='minor', axis='x', alpha=0.6)
 
     ax.axvline( f_cut  , ls='--' , color='C0', alpha=0.5, lw=1 )
     ax.axvline( f_stop , ls='--' , color='C1', alpha=0.5, lw=1 )
