@@ -289,7 +289,7 @@ axx[1].set_xlabel('datos_x [unidad]')
 
 # Ponemos un grid
 for ax in axx:
-    ax.grid(b=True,linestyle= ':',color='lightgray')
+    ax.grid(True,linestyle= ':',color='lightgray')
 
 
 
