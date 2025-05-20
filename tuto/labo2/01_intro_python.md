@@ -478,7 +478,7 @@ plt.xlabel('Día del año [1 = 1ro de Enero ]')
 plt.ylabel('Cotizacion [Pesos Arg]')
 plt.title('Evolucion del dolar en 2018')
 plt.legend()
-plt.grid(b=True)
+plt.grid(True)
 
 # plt.savefig('01_02_dolar.png')
 ```
@@ -496,19 +496,19 @@ plt.plot(dia[0:115]  , dolar[0:115] , '-', color='blue' , linewidth=2)
 plt.plot(dia[219:]   , dolar[219:]  , '-', color='red'  , linewidth=2)
 #plt.xlabel('Día del año [1 = 1ro de Enero ]')
 plt.ylabel('Dolar\n[Pesos Arg]')
-plt.grid(b=True)
+plt.grid(True)
 
 plt.subplot(3,1,2)   # fme posiciono en la segunda
 plt.plot( dia         , dolar/dolar[0] * 100 - 100       , '-')
 #plt.xlabel('Día del año [1 = 1ro de Enero ]')
 plt.ylabel('Aumento\nanual [%]')
-plt.grid(b=True)
+plt.grid(True)
 
 plt.subplot(3,1,3)   # fme posiciono en la segunda
 plt.plot( dia[1:]         , diff(dolar)/dolar[1:] *100       , '-')
 plt.xlabel('Día del año [1 = 1ro de Enero ]')
 plt.ylabel('Aumento\ndiario [%]')
-plt.grid(b=True)
+plt.grid(True)
 
 plt.tight_layout()
 
@@ -761,7 +761,7 @@ plt.plot( (tiempo[:-1]+tiempo[1:])/2  , diff(velocidad)/diff(tiempo) , '-' , lab
 plt.xlabel('tiempo [seg]')
 plt.ylabel('Aceleracion [m/s2]')
 plt.legend()
-plt.grid(b=True)
+plt.grid(True)
 
 # plt.savefig('01_04_derivada.png')
 ```
@@ -776,13 +776,13 @@ plt.fill_between(tiempo  , zeros(len(tiempo)) ,velocidad , alpha=0.5 )
 plt.plot(tiempo  , velocidad , 'o-' )
 plt.ylabel('velocidad [m/s]')
 plt.xlabel('tiempo [seg]')
-plt.grid(b=True)
+plt.grid(True)
 
 plt.subplot(2,1,2)
 plt.plot(tiempo  , cumsum(velocidad * mean(diff(tiempo)) ) , '.-' , label='datos')
 plt.xlabel('tiempo [seg]')
 plt.ylabel('recorrido [m]')
-plt.grid(b=True)
+plt.grid(True)
 
 plt.tight_layout()
 # plt.savefig('01_05_integral.png')
