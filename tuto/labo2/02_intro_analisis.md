@@ -113,13 +113,13 @@ plt.fill_between( [ mean(x)-std(x), mean(x)+std(x) ]  , [0,0] , [len(x)]*2 , lab
 plt.yticks([])
 plt.legend()
 plt.xlabel('x')
-plt.grid(b=True)
+plt.grid(True)
 
 plt.subplot(212)
 plt.hist(x,30)
 plt.ylabel('Conteo')
 plt.xlabel('valores x')
-plt.grid(b=True)
+plt.grid(True)
 
 plt.tight_layout()
 # plt.savefig('02_03_hist.png')
@@ -356,7 +356,7 @@ plt.plot(x2, mod  ,'-', label='modelo')
 plt.xlabel('x2')
 plt.ylabel('y2')
 plt.legend()
-plt.grid(b=True)
+plt.grid(True)
 
 plt.tight_layout()
 # plt.savefig('02_07_ajuste_lineal.png')
@@ -489,7 +489,7 @@ plt.plot(    x2, prediccion_modelo  ,'-', label='modelo')
 #plt.xlabel('x2')
 plt.ylabel('y2')
 plt.legend()
-plt.grid(b=True)
+plt.grid(True)
 
 I        = x2.argsort()          # Esto es solo para ordenar los valores de x2 en forma creciente
 residuos = y2-prediccion_modelo  # Calculamos los residuos
@@ -500,7 +500,7 @@ plt.plot(    x2[I], residuos[I]  ,'.-', label='residuos')
 plt.xlabel('x2')
 plt.ylabel('y2')
 plt.legend()
-plt.grid(b=True)
+plt.grid(True)
 
 plt.tight_layout()
 # plt.savefig('02_08_ajuste_lineal_cov.png')
