@@ -29,7 +29,7 @@ fig, ax = plt.subplots(1,1, figsize=(6,4),  constrained_layout=True)
 ax.plot( t , A*exp(-g*t)*cos(w*t) ,  label='posición' , lw=2, color=col1 )
 ax.set_ylabel('posición [cm]')
 ax.set_xlabel('tiempo [s]')
-ax.grid(b=True, ls= ':', color='lightgray')
+ax.grid(True, ls= ':', color='lightgray')
 
 
 # Creamos otro axis que comparta el eje X con ax
