@@ -91,7 +91,7 @@ plt.ylabel('Amplitud')
 
 plt.semilogx()
 plt.xlabel('Frecuencia [Hz]')
-plt.grid(b=True,linestyle='--',color='lightgray')
+plt.grid(True,linestyle='--',color='lightgray')
 plt.tight_layout()
 # plt.savefig('03_02_fft.png')
 
@@ -115,7 +115,7 @@ plt.plot(tiempo , medicion )
 plt.title('Datos con ruido')
 plt.xlabel('tiempo[seg]')
 plt.ylabel('amplitud [V]')
-plt.grid(b=True)
+plt.grid(True)
 plt.tight_layout()
 
 # plt.savefig('03_03_datos_con_ruido.png')
@@ -140,7 +140,7 @@ plt.semilogy()
 plt.ylabel('Amplitud')
 plt.semilogx()
 plt.xlabel('Frecuencia [Hz]')
-plt.grid(b=True,linestyle='--',color='lightgray')
+plt.grid(True,linestyle='--',color='lightgray')
 
 plt.subplot(1,2,2)
 plt.plot( ff , abs(Y1)  , '.-' , alpha=0.5 )
@@ -152,7 +152,7 @@ plt.ylim(1e-4,1e-2)
 plt.xlabel('Frecuencia [Hz]')
 
 
-plt.grid(b=True,linestyle='--',color='lightgray')
+plt.grid(True,linestyle='--',color='lightgray')
 
 plt.tight_layout()
 # plt.savefig('03_04_datos_FFT.png')
@@ -214,7 +214,7 @@ plt.plot(tiempo , savgol(medicion,101,0)                 , label='101'          
 plt.plot(tiempo , savgol(medicion,1001,0)                , label='1001'           , alpha=0.7)
 plt.plot(tiempo , savgol(savgol(medicion,1001,0),1001,0) , label='1001 dos veces' , linewidth=2)
 plt.legend()
-plt.grid(b=True)
+plt.grid(True)
 plt.xlabel('tiempo[seg]')
 
 plt.subplot(1,2,2)
@@ -233,7 +233,7 @@ plt.plot(tiempo[55899:56900] , 0.38*ones(1001)  , color='C2' , linewidth=2)
 plt.xlim(2.65,3.1)
 plt.ylim(0.3,0.4)
 plt.xlabel('tiempo[seg]')
-plt.grid(b=True)
+plt.grid(True)
 
 
 plt.tight_layout()
@@ -274,7 +274,7 @@ for jj, vector in enumerate(vectores):
 plt.title('Dominio Temporal')
 plt.xlabel('tiempo [seg]')
 plt.ylabel('amplitud [V]')
-plt.grid(b=True,linestyle='--',color='lightgray')
+plt.grid(True,linestyle='--',color='lightgray')
 plt.tight_layout()
 plt.legend()
 
@@ -302,7 +302,7 @@ plt.ylim(5e-5,1e-2)
 plt.xlabel('Frecuencia [Hz]')
 
 plt.title('Dominio de frecuencias')
-plt.grid(b=True,linestyle='--',color='lightgray')
+plt.grid(True,linestyle='--',color='lightgray')
 plt.tight_layout()
 # plt.savefig('03_05_comparacion.png')
 
@@ -335,7 +335,7 @@ plt.plot( tiempo2 , datos2 , '.-' )
 
 # Señalamos las posiciones temporales de datos2
 plt.gca().set_xticks( tiempo2 ,minor=True)
-plt.grid(b=True,linestyle=':',color='C1', which='minor' , axis='x', alpha=0.5)
+plt.grid(True,linestyle=':',color='C1', which='minor' , axis='x', alpha=0.5)
 
 
 
@@ -356,7 +356,7 @@ plt.plot( tiempo_general , datos1_general-datos2_general , '-' , label='datos1-d
 
 
 plt.gca().set_xticks( tiempo2 ,minor=True)
-plt.grid(b=True,linestyle=':', color='lightgray')
+plt.grid(True,linestyle=':', color='lightgray')
 
 plt.legend()
 

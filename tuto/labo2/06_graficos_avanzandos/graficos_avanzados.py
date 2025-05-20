@@ -90,7 +90,7 @@ axx[0,2].legend()
 
 # Agregamos una grilla a TODOS los gráficos
 for ax in axx.flatten():
-    ax.grid(b=True, ls= ':', color='lightgray')
+    ax.grid(True, ls= ':', color='lightgray')
 
 for ax in axx.flatten():
     ax.axhline(0 , color='gray' , lw=1 , zorder=-1)
@@ -117,7 +117,7 @@ fig, ax = plt.subplots(1,1, figsize=(6,4),  constrained_layout=True)
 ax.plot( t , A*exp(-g*t)*cos(w*t) ,  label='posición' , lw=2, color=col1 )
 ax.set_ylabel('posición [cm]')
 ax.set_xlabel('tiempo [s]')
-ax.grid(b=True, ls= ':', color='lightgray')
+ax.grid(True, ls= ':', color='lightgray')
 
 
 ax2 = ax.twinx()
