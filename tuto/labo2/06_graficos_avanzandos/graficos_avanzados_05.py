@@ -53,7 +53,7 @@ ax.errorbar( datos_x, datos_y, xerr=xx_err, yerr=yy_err,
 # Configuraciones generales
 ax.set_xlabel('datos x [unidades]')
 ax.set_ylabel('datos y [unidades]')
-ax.grid(b=True, ls= ':', color='lightgray')
+ax.grid(True, ls= ':', color='lightgray')
 ax.set_title('Errores con errorbar()')
 
 ax.legend()
@@ -88,7 +88,7 @@ ax.fill_between( xx , datos_y-yy_err , datos_y+yy_err ,
 # Configuraciones generales
 ax.set_xlabel('datos x [unidades]')
 ax.set_ylabel('datos y [unidades]')
-ax.grid(b=True, ls= ':', color='lightgray')
+ax.grid(True, ls= ':', color='lightgray')
 ax.set_xlim(-6,6)
 
 ax.set_title('Errores con fill_between()')
@@ -162,7 +162,7 @@ ax.fill_between( modelo_x , modelo_y-modelo_y_err , modelo_y+modelo_y_err ,
 
 ax.set_xlabel('datos x [unidades]')
 ax.set_ylabel('datos y [unidades]')
-ax.grid(b=True, ls= ':', color='lightgray')
+ax.grid(True, ls= ':', color='lightgray')
 ax.legend()
 
 ax.set_xlim(lim)
