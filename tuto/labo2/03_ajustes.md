@@ -391,7 +391,7 @@ parametros_iniciales=[0, 3, 10, 3]  # No ajusta
 
 
 <center>
-<p> <a href="[{{ site.baseurl }}/tuto/labo2/toolkit_ajustes](https://colab.research.google.com/drive/1tzk95NgN2ktUDzaV4EcQHTfa2WSDjzpP?usp=sharing)" class="btn btn-primary btn-lg" role="button">
+<p> <a href="https://colab.research.google.com/drive/1tzk95NgN2ktUDzaV4EcQHTfa2WSDjzpP?usp=sharing" class="btn btn-primary btn-lg" role="button">
 COLAB de google para visualizar ajustes no lineales
 </a> </p>
 </center>
