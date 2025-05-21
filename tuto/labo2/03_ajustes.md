@@ -386,6 +386,16 @@ parametros_iniciales=[0, 3, 10, 3]  # No ajusta
 </div>
 
 
+## Ejemplos interactivos para ajustes no lineales
+
+
+
+<center>
+<p> <a href="[{{ site.baseurl }}/tuto/labo2/toolkit_ajustes](https://colab.research.google.com/drive/1tzk95NgN2ktUDzaV4EcQHTfa2WSDjzpP?usp=sharing)" class="btn btn-primary btn-lg" role="button">
+COLAB de google para visualizar ajustes no lineales
+</a> </p>
+</center>
+
 ## Toolkit para ajustes no lineales
 
 Para facilitar esta tareas se proporciona un script para realizar ajustes no lineales:
@@ -395,6 +405,8 @@ Para facilitar esta tareas se proporciona un script para realizar ajustes no lin
 Toolkit para ajustes no lineales con interfaz gráfica
 </a> </p>
 </center>
+
+
 
 
 {% include page_navbar.html up=1 %}
