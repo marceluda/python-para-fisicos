@@ -9,6 +9,12 @@ navbar: labo2
 
 {% include page_navbar.html %}
 
+
+| colabs / Jupyter | Nombre |
+|---|---|
+|[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marceluda/python-para-fisicos/blob/master/colabs/Herramientas_estadísticas.ipynb)  | Herramientas estadísticas |
+
+
 ## Introducción al análisis de datos
 
 En física **analizamos los fenómenos** proponiendo **modelos matemáticos** que pueden describirlos cualitativa y cuantitativamente para hacer **predicciones** luego. El fenómeno es descripto recolectando datos de **diferentes variables de interés** a las que después se le buscan relaciones. La mayoría de **las leyes físicas son relaciones funcionales entre variables de un sistema**. Por ende, al desarrollar modelos buscamos encontrar funciones que vinculen las diferentes variables y que sean consistentes con los datos que relevamos.
@@ -278,6 +284,10 @@ $r^2 = correlacion(y,f)^2$
 es denominado **coeficiente de determinación**. $r^2$ puede ser interpretado como “el porcentaje de la varianza de  y que se puede explicar a partir de x”. Muchos programas de  análisis de datos ofrecen funciones para hacer una regresión lineal de los datos y reportan el valor de $r^2$ entre los resultados. **Para modelos no lineales el coeficiente de determinación no coincide con esta definición** y esta interpretación deja de ser estrictamente válida.
 
 $r^2$ es una estimación buena sobre **“cuan bien son explicados los datos por un modelo lineal”**, pero no alcanza por si solo para saber si una particular elección de parámetros A y B hacen un buen ajuste. Para ello hay que tener en cuenta otras consideraciones que se comentan a continuación.
+
+
+
+
 
 ## Ajuste de datos mediante cuadrados mínimos
 
