@@ -63,6 +63,6 @@ Grupo 9
 
 
 <div class="alert alert-info" role="alert" >
-  <strong>Aviso:</strong> Cada cronómetro guarda información del grupo de trabajo. Si va a usar la app fuera del contexto de la materia acceda al [este link](https://marceluda.github.io/python-para-fisicos/tuto/labo2/cronometros/cronometro.html).
+  <strong>Aviso:</strong> Cada cronómetro guarda información del grupo de trabajo. Si va a usar la app fuera del contexto de la materia acceda al <a href="https://marceluda.github.io/python-para-fisicos/tuto/labo2/cronometros/cronometro.html">este link</a>.
 </div>
 
