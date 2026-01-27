@@ -82,10 +82,23 @@ están los archivos de Python relacionados con los siguientes instructivos:
   - **Tutorial de Python para Astrónomos/as** (en Español)
     - [http://research.iac.es/sieinvens/python-course/index.html](http://research.iac.es/sieinvens/python-course/index.html)
 
+---------------------
+
+
 <div class="alert alert-info" role="alert" >
   <strong>Aviso:</strong> Esto último no es parte de Python para Física.
 </div>
 
-[Consejos para escribir Informes de Laboratorio 2](informes)
+<p>
+  <a href="informes" class="btn btn-primary btn-lg" role="button">
+  Consejos para escribir Informes de Laboratorio 2
+  </a>
+</p>
+
+<p>
+  <a href="cronometros" class="btn btn-primary btn-lg" role="button">
+  Cronómetros Web para Laboratorio 1
+  </a>
+</p>
 
 {% include page_navbar.html up=1 %}
