@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronómetro Interactivo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #2a3c7f);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .subtitle {
+            color: #aaa;
+            font-size: 1.1rem;
+        }
+        
+        .timer-display {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .time {
+            font-size: 4.5rem;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 2px;
+            margin: 0.5rem 0;
+            color: #4facfe;
+            text-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
+        }
+        
+        .group-info {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            background-color: rgba(155, 89, 182, 0.2);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #9b59b6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .group-number {
+            font-weight: bold;
+            background-color: rgba(155, 89, 182, 0.3);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* MODIFICACIÓN: Eliminar movimiento al pasar el mouse, mantener solo cambio de color */
+        .btn:hover {
+            transform: none;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:active {
+            transform: none;
+        }
+        
+        .btn-start {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .btn-start:hover {
+            background-color: #27ae60;
+        }
+        
+        .btn-stop {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .btn-stop:hover {
+            background-color: #c0392b;
+        }
+        
+        .btn-lap {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-lap:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-clear {
+            background-color: #f39c12;
+            color: white;
+        }
+        
+        .btn-clear:hover {
+            background-color: #d35400;
+        }
+        
+        .btn-download {
+            background-color: #9b59b6;
+            color: white;
+        }
+        
+        .btn-download:hover {
+            background-color: #8e44ad;
+        }
+        
+        .btn i {
+            font-size: 1.2rem;
+        }
+        
+        .key-hint {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-top: 0.2rem;
+        }
+        
+        .records-container {
+            margin-top: 2rem;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+        
+        .records-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #4facfe;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .records-count {
+            background-color: rgba(79, 172, 254, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 1rem;
+        }
+        
+        .records-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border-radius: 10px;
+        }
+        
+        .record-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .record-item:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+        
+        .record-item:first-child {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        
+        .record-item:last-child {
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            border-bottom: none;
+        }
+        
+        .record-number {
+            color: #4facfe;
+            font-weight: bold;
+            min-width: 30px;
+        }
+        
+        .record-time {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .record-diff {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        .keyboard-help {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .keyboard-help h3 {
+            color: #4facfe;
+            margin-bottom: 0.8rem;
+        }
+        
+        .key {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+            margin: 0 0.2rem;
+        }
+        
+        .instructions {
+            color: #aaa;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1.5rem;
+            line-height: 1.5;
+        }
+        
+        .status {
+            text-align: center;
+            padding: 0.5rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            height: 40px; /* Altura fija */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            /* Estado por defecto (sin mensaje) */
+            background-color: rgba(128, 128, 128, 0.2); /* Gris */
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .status:empty::before {
+            content: "Listo";
+            font-weight: normal;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            .time {
+                font-size: 3.5rem;
+            }
+            
+            .btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 1rem;
+            }
+            
+            .controls {
+                gap: 0.7rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .time {
+                font-size: 2.8rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-stopwatch"></i> Cronómetro Interactivo</h1>
+            <p class="subtitle">Controle con el mouse o usando las teclas del teclado</p>
+        </header>
+        
+        <div class="timer-display">
+            <div class="time" id="display">00:00:00.00</div>
+            <div class="group-info">
+                <div>
+                    <span id="groupText">Grupo asignado</span>
+                </div>
+                <div class="group-number" id="groupNumber">0</div>
+            </div>
+            <div class="status" id="status"></div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn btn-start" id="startStopBtn" title="Iniciar/Frenar (Tecla S)">
+                <i class="fas fa-play"></i> Iniciar
+                <div class="key-hint">Tecla S</div>
+            </button>
+            <button class="btn btn-lap" id="lapBtn" title="Registrar (Tecla R)">
+                <i class="fas fa-flag"></i> Registrar
+                <div class="key-hint">Tecla R</div>
+            </button>
+            <button class="btn btn-clear" id="clearBtn" title="Reiniciar (Tecla C)">
+                <i class="fas fa-redo"></i> Reiniciar
+                <div class="key-hint">Tecla C</div>
+            </button>
+            <button class="btn btn-download" id="downloadBtn" title="Descargar (Tecla D)">
+                <i class="fas fa-download"></i> Descargar
+                <div class="key-hint">Tecla D</div>
+            </button>
+        </div>
+        
+        <div class="records-container">
+            <div class="records-title">
+                <span>Registros de Tiempo</span>
+                <span class="records-count" id="recordsCount">0 registros</span>
+            </div>
+            <div class="records-list" id="recordsList">
+                <!-- Los registros aparecerán aquí -->
+                <div class="record-item empty">No hay registros aún</div>
+            </div>
+        </div>
+        
+        <div class="keyboard-help">
+            <h3><i class="fas fa-keyboard"></i> Atajos de Teclado</h3>
+            <p><span class="key">S</span> - Iniciar/Frenar el cronómetro</p>
+            <p><span class="key">R</span> - Registrar tiempo (vuelta parcial)</p>
+            <p><span class="key">C</span> - Reiniciar cronómetro y borrar registros</p>
+            <p><span class="key">D</span> - Descargar registros en formato CSV</p>
+        </div>
+        
+        <p class="instructions">
+            El cronómetro tiene una resolución de 10 milisegundos. Cada vez que registres un tiempo, aparecerá en la lista de abajo.
+            Al frenar el cronómetro se registrará automáticamente el tiempo.
+        </p>
+    </div>
+
+    <script>
+        // Variables del cronómetro
+        let startTime = 0;
+        let elapsedTime = 0;
+        let timerInterval = null;
+        let isRunning = false;
+        let laps = [];
+        let lastLapTime = 0;
+        
+        // Nuevo diccionario de grupos con factores de calibración SECRETOS
+        const Grupos = {
+            0: 1.0,
+            1: 0.98, 
+            2: 1.0, 
+            3: 1.02, 
+            4: 0.99, 
+            5: 0.992, 
+            6: 1.015, 
+            7: 0.99, 
+            8: 1.0, 
+            9: 1.013
+        };
+        
+        // Obtener número de grupo de la URL
+        function getGroupFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const grupoParam = urlParams.get('grupo');
+            const grupoNum = grupoParam ? parseInt(grupoParam) : 0;
+            
+            // Verificar que el grupo existe, sino usar grupo 0
+            return Grupos.hasOwnProperty(grupoNum) ? grupoNum : 0;
+        }
+        
+        // Obtener número de grupo y factor de calibración SECRETO
+        const GRUPO_NUMERO = getGroupFromURL();
+        const CALIBRACION = Grupos[GRUPO_NUMERO]; // Esto es SECRETO, no se muestra al usuario
+        
+        // Elementos del DOM
+        const display = document.getElementById('display');
+        const startStopBtn = document.getElementById('startStopBtn');
+        const lapBtn = document.getElementById('lapBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const recordsList = document.getElementById('recordsList');
+        const recordsCount = document.getElementById('recordsCount');
+        const status = document.getElementById('status');
+        const groupNumber = document.getElementById('groupNumber');
+        const groupText = document.getElementById('groupText');
+        
+        // Inicializar información del grupo (solo el número, NO la calibración)
+        function initGroupInfo() {
+            groupNumber.textContent = GRUPO_NUMERO;
+            groupText.innerHTML = `<i class="fas fa-users"></i> Grupo ${GRUPO_NUMERO}`;
+            
+            // Asignar colores diferentes a cada grupo
+            const groupColors = {
+                0: { bg: 'rgba(52, 152, 219, 0.3)', text: '#3498db' },
+                1: { bg: 'rgba(46, 204, 113, 0.3)', text: '#2ecc71' },
+                2: { bg: 'rgba(231, 76, 60, 0.3)', text: '#e74c3c' },
+                3: { bg: 'rgba(155, 89, 182, 0.3)', text: '#9b59b6' },
+                4: { bg: 'rgba(243, 156, 18, 0.3)', text: '#f39c12' },
+                5: { bg: 'rgba(26, 188, 156, 0.3)', text: '#1abc9c' },
+                6: { bg: 'rgba(149, 165, 166, 0.3)', text: '#95a5a6' },
+                7: { bg: 'rgba(230, 126, 34, 0.3)', text: '#e67e22' },
+                8: { bg: 'rgba(153, 102, 204, 0.3)', text: '#9966cc' },
+                9: { bg: 'rgba(22, 160, 133, 0.3)', text: '#16a085' }
+            };
+            
+            const color = groupColors[GRUPO_NUMERO] || groupColors[0];
+            document.querySelector('.group-info').style.backgroundColor = color.bg.replace('0.3', '0.2');
+            document.querySelector('.group-info').style.color = color.text;
+            document.querySelector('.group-number').style.backgroundColor = color.bg;
+        }
+        
+        // Formatear tiempo a formato mm:ss:ms
+        function formatTime(time) {
+            // time está en milisegundos
+            const hours = Math.floor(time / 3600000);
+            const minutes = Math.floor((time % 3600000) / 60000);
+            const seconds = Math.floor((time % 60000) / 1000);
+            const milliseconds = Math.floor((time % 1000) / 10);
+            
+            return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(2, '0')}`;
+        }
+        
+        // Convertir tiempo a segundos con 2 decimales
+        function formatTimeInSeconds(time) {
+            // time está en milisegundos
+            return (time / 1000).toFixed(2);
+        }
+        
+        // Calcular tiempo calibrado (SECRETO)
+        function getCalibratedTime(realTime) {
+            return realTime * CALIBRACION;
+        }
+        
+        // Actualizar display del cronómetro
+        function updateDisplay() {
+            // CORRECCIÓN: Usar elapsedTime que ya está calibrado
+            display.textContent = formatTime(elapsedTime);
+        }
+        
+        // Actualizar el botón de inicio/freno
+        function updateStartStopButton() {
+            if (isRunning) {
+                // Cambiar a botón de frenar
+                startStopBtn.className = "btn btn-stop";
+                startStopBtn.innerHTML = '<i class="fas fa-pause"></i> Frenar <div class="key-hint">Tecla S</div>';
+                startStopBtn.title = "Frenar (Tecla S)";
+            } else {
+                // Cambiar a botón de iniciar
+                startStopBtn.className = "btn btn-start";
+                startStopBtn.innerHTML = '<i class="fas fa-play"></i> Iniciar <div class="key-hint">Tecla S</div>';
+                startStopBtn.title = "Iniciar (Tecla S)";
+            }
+        }
+        
+        // Función para iniciar o frenar el cronómetro
+        function startStopTimer() {
+            if (!isRunning) {
+                // Iniciar cronómetro
+                isRunning = true;
+                // CORRECCIÓN: Guardar el tiempo real de inicio (sin calibración)
+                startTime = Date.now() - (elapsedTime / CALIBRACION);
+                
+                timerInterval = setInterval(() => {
+                    // Calcular tiempo real transcurrido
+                    const realTime = Date.now() - startTime;
+                    // Aplicar calibración al tiempo
+                    elapsedTime = getCalibratedTime(realTime);
+                    updateDisplay();
+                }, 10); // Actualizar cada 10ms para resolución de centésimas
+                
+                showStatus("Cronómetro en ejecución", "#2ecc71");
+            } else {
+                // Frenar cronómetro
+                isRunning = false;
+                clearInterval(timerInterval);
+                showStatus("Cronómetro detenido", "#e74c3c");
+                
+                // Registrar automáticamente al frenar
+                if (elapsedTime > 0) {
+                    const lapTime = elapsedTime;
+                    const lapDifference = lastLapTime === 0 ? lapTime : lapTime - lastLapTime;
+                    lastLapTime = lapTime;
+                    
+                    laps.push({
+                        time: lapTime,
+                        formattedTime: formatTime(lapTime),
+                        timeInSeconds: formatTimeInSeconds(lapTime),
+                        difference: lapDifference,
+                        formattedDifference: formatTime(lapDifference),
+                        type: 'Final',
+                        grupo: GRUPO_NUMERO // Solo el número de grupo, NO la calibración
+                    });
+                    
+                    updateRecordsList();
+                }
+            }
+            
+            updateStartStopButton();
+        }
+        
+        // Registrar vuelta/tiempo parcial
+        function recordLap() {
+            if (!isRunning && elapsedTime === 0) {
+                showStatus("El cronómetro no está en ejecución", "#e74c3c");
+                return;
+            }
+            
+            const lapTime = elapsedTime;
+            const lapDifference = lastLapTime === 0 ? lapTime : lapTime - lastLapTime;
+            lastLapTime = lapTime;
+            
+            // Agregar registro
+            laps.push({
+                time: lapTime,
+                formattedTime: formatTime(lapTime),
+                timeInSeconds: formatTimeInSeconds(lapTime),
+                difference: lapDifference,
+                formattedDifference: formatTime(lapDifference),
+                type: isRunning ? 'Parcial' : 'Final',
+                grupo: GRUPO_NUMERO // Solo el número de grupo, NO la calibración
+            });
+            
+            updateRecordsList();
+            showStatus(`Registro agregado: ${formatTime(lapTime)}`, "#3498db");
+        }
+        
+        // Reiniciar cronómetro
+        function clearTimer() {
+            isRunning = false;
+            clearInterval(timerInterval);
+            startTime = 0;
+            elapsedTime = 0;
+            lastLapTime = 0;
+            laps = [];
+            
+            updateDisplay();
+            updateStartStopButton();
+            updateRecordsList();
+            showStatus("Cronómetro reiniciado", "#f39c12");
+        }
+        
+        // Descargar registros como CSV
+        function downloadCSV() {
+            if (laps.length === 0) {
+                showStatus("No hay registros para descargar", "#e74c3c");
+                return;
+            }
+            
+            // Crear contenido CSV (sin información de calibración)
+            let csvContent = "Número,Tiempo (formato),Tiempo (segundos),Tipo,Grupo\n";
+            laps.forEach((lap, index) => {
+                const row = `${index + 1},"${lap.formattedTime}",${lap.timeInSeconds},${lap.type},${lap.grupo}\n`;
+                csvContent += row;
+            });
+            
+            // Crear y descargar archivo
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `cronometro_grupo_${GRUPO_NUMERO}_registros_${new Date().toISOString().slice(0, 10)}.csv`;
+            link.click();
+            
+            URL.revokeObjectURL(url);
+            showStatus(`Archivo CSV descargado con ${laps.length} registros`, "#9b59b6");
+        }
+        
+        // Actualizar lista de registros
+        function updateRecordsList() {
+            if (laps.length === 0) {
+                recordsList.innerHTML = '<div class="record-item empty">No hay registros aún</div>';
+                recordsCount.textContent = '0 registros';
+                return;
+            }
+            
+            recordsList.innerHTML = '';
+            laps.forEach((lap, index) => {
+                const recordItem = document.createElement('div');
+                recordItem.className = 'record-item';
+                recordItem.innerHTML = `
+                    <div class="record-number">#${index + 1}</div>
+                    <div class="record-time">${lap.formattedTime}</div>
+                    <div class="record-diff">${lap.formattedDifference}</div>
+                    <div class="record-type">${lap.type}</div>
+                `;
+                recordsList.appendChild(recordItem);
+            });
+            
+            recordsCount.textContent = `${laps.length} registro${laps.length !== 1 ? 's' : ''}`;
+        }
+        
+        // Mostrar mensaje de estado
+        function showStatus(message, color) {
+            status.textContent = message;
+            status.style.backgroundColor = color;
+            status.style.color = "#ffffff";
+            
+            // Restaurar estado por defecto después de 3 segundos
+            setTimeout(() => {
+                status.textContent = "";
+                status.style.backgroundColor = "rgba(128, 128, 128, 0.2)";
+                status.style.color = "rgba(255, 255, 255, 0.5)";
+            }, 3000);
+        }
+        
+        // Asignar eventos a botones
+        startStopBtn.addEventListener('click', startStopTimer);
+        lapBtn.addEventListener('click', recordLap);
+        clearBtn.addEventListener('click', clearTimer);
+        downloadBtn.addEventListener('click', downloadCSV);
+        
+        // Control por teclado
+        document.addEventListener('keydown', (event) => {
+            // Ignorar si se está escribiendo en un campo de texto
+            if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+                return;
+            }
+            
+            const key = event.key.toLowerCase();
+            
+            switch(key) {
+                case 's':
+                    event.preventDefault();
+                    startStopTimer();
+                    break;
+                case 'r':
+                    event.preventDefault();
+                    recordLap();
+                    break;
+                case 'c':
+                    event.preventDefault();
+                    clearTimer();
+                    break;
+                case 'd':
+                    event.preventDefault();
+                    downloadCSV();
+                    break;
+            }
+        });
+        
+        // Inicializar
+        initGroupInfo();
+        updateDisplay();
+        updateStartStopButton();
+        updateRecordsList();
+        
+        // Mostrar mensaje de bienvenida
+        setTimeout(() => {
+            showStatus(`Cronómetro del Grupo ${GRUPO_NUMERO} listo`, "#9b59b6");
+        }, 1000);
+        
+        // DEBUG (solo para pruebas, quitar en producción)
+        console.log(`Grupo: ${GRUPO_NUMERO}, Calibración secreta: ${CALIBRACION}`);
+    </script>
+</body>
+</html>
