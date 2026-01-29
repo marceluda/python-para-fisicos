@@ -62,6 +62,7 @@ Grupo 9
 
 <p>&nbsp; </p>
 
+<center>
 <a href="https://marceluda.github.io/python-para-fisicos/tuto/labo2/cronometros/metronomo.html" class="btn btn-primary btn-lg" role="button">
 Metronomo
 </a>
