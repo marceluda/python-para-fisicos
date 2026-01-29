@@ -62,6 +62,13 @@ Grupo 9
 
 <p>&nbsp; </p>
 
+<a href="https://marceluda.github.io/python-para-fisicos/tuto/labo2/cronometros/metronomo.html" class="btn btn-primary btn-lg" role="button">
+Metronomo
+</a>
+</center>
+
+<p>&nbsp; </p>
+
 <div class="alert alert-info" role="alert" >
   <strong>Aviso:</strong> Cada cronómetro guarda información del grupo de trabajo. Si va a usar la app fuera del contexto de la materia acceda al <a href="https://marceluda.github.io/python-para-fisicos/tuto/labo2/cronometros/cronometro.html">este link</a>.
 </div>
