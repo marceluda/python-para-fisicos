@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metrónomo Visual</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .metronomo {
+            width: 95vw;
+            height: 95vh;
+            max-width: 1200px;
+            max-height: 800px;
+            transition: none !important;
+            border: none;
+        }
+        
+        /* Modo oscuro por defecto */
+        .blanco {
+            background-color: #FFFFFF !important;
+        }
+        
+        .negro {
+            background-color: #000000 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="metronomo" id="metronomo"></div>
+
+    <script>
+        // ============================================
+        // CONFIGURACIÓN NO EDITABLE DESDE LA INTERFAZ
+        // ============================================
+        // Variable de entorno PERIODO (en milisegundos)
+        // NO MODIFICAR - Esta variable está protegida
+        const PERIODO = 1100; // 1.1 segundos = 1100 ms
+        
+        // ============================================
+        // PROTECCIÓN DE LA VARIABLE PERIODO
+        // ============================================
+        // Hacemos la variable inmutable
+        Object.defineProperty(window, 'PERIODO', {
+            value: PERIODO,
+            writable: false,
+            configurable: false,
+            enumerable: false
+        });
+        
+        // Ocultamos la variable de la inspección
+        (function() {
+            const periodoReal = PERIODO;
+            
+            // Sobrescribimos cualquier intento de acceso
+            Object.defineProperty(window, 'getPERIODO', {
+                value: function() { 
+                    console.warn('Acceso a PERIODO no permitido');
+                    return null; 
+                },
+                writable: false
+            });
+        })();
+
+        // ============================================
+        // LÓGICA DEL METRÓNOMO
+        // ============================================
+        const metronomo = document.getElementById('metronomo');
+        let intervalo;
+        let esBlanco = false;
+        
+        // Estado inicial: negro
+        metronomo.className = 'metronomo negro';
+        
+        // Función para alternar entre blanco y negro abruptamente
+        function alternarColor() {
+            if (esBlanco) {
+                // Cambiar a negro abruptamente
+                metronomo.className = 'metronomo negro';
+            } else {
+                // Cambiar a blanco abruptamente
+                metronomo.className = 'metronomo blanco';
+            }
+            
+            // Invertir estado
+            esBlanco = !esBlanco;
+            
+            // Forzar renderizado para cambio abrupto
+            metronomo.offsetHeight;
+        }
+
+        // Iniciar el metrónomo
+        function iniciarMetronomo() {
+            // Usar PERIODO para la frecuencia
+            intervalo = setInterval(alternarColor, PERIODO);
+        }
+
+        // Detener el metrónomo
+        function detenerMetronomo() {
+            if (intervalo) {
+                clearInterval(intervalo);
+                intervalo = null;
+            }
+        }
+
+        // Iniciar automáticamente al cargar
+        window.addEventListener('DOMContentLoaded', iniciarMetronomo);
+        
+        // Detección de intentos de modificación
+        setInterval(() => {
+            // Verificación periódica de que PERIODO no ha sido modificado
+            if (window.PERIODO !== PERIODO && window.PERIODO !== 1100) {
+                console.error('Intento de modificación de PERIODO detectado');
+                // Restaurar valor original
+                Object.defineProperty(window, 'PERIODO', {
+                    value: 1100,
+                    writable: false,
+                    configurable: false,
+                    enumerable: false
+                });
+            }
+        }, 5000);
+
+        // Opcional: Pausar/reanudar con clic
+        metronomo.addEventListener('click', function() {
+            if (intervalo) {
+                detenerMetronomo();
+            } else {
+                iniciarMetronomo();
+            }
+        });
+        
+        // Opcional: Pausar con la tecla Espacio
+        document.addEventListener('keydown', function(event) {
+            if (event.code === 'Space') {
+                event.preventDefault();
+                if (intervalo) {
+                    detenerMetronomo();
+                } else {
+                    iniciarMetronomo();
+                }
+            }
+        });
+        
+        // Mensaje de protección en consola
+        console.log('=======================================');
+        console.log('METRÓNOMO VISUAL - PERIODO PROTEGIDO');
+        console.log('=======================================');
+        console.log('PERIODO configurado: ' + PERIODO + 'ms');
+        console.log('Variable PERIODO protegida contra modificaciones');
+        console.log('=======================================');
+    </script>
+</body>
+</html>
