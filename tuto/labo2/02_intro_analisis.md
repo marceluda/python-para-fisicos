@@ -10,11 +10,11 @@ navbar: labo2
 {% include page_navbar.html %}
 
 
-| colabs / Jupyter | Nombre |
-|---|---|
-|[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marceluda/python-para-fisicos/blob/master/colabs/Herramientas_estadísticas.ipynb)  | [![Herramientas estadísticas](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white)](https://github.com/marceluda/python-para-fisicos/blob/master/colabs/Herramientas_estadísticas.ipynb) |
-|[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marceluda/python-para-fisicos/blob/master/colabs/Histogramas.ipynb)  | Histogramas |
-|[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marceluda/python-para-fisicos/blob/master/colabs/Cuadrados_Mínimos.ipynb)  | Ajuste lineal (y polinómico) |
+| Colab | Jupyter | Nombre |
+|---|---|---|
+|[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marceluda/python-para-fisicos/blob/master/colabs/Herramientas_estadísticas.ipynb)  | [![Herramientas estadísticas](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white)](https://github.com/marceluda/python-para-fisicos/blob/master/colabs/Herramientas_estadísticas.ipynb) | Herramientas estadísticas |
+|[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marceluda/python-para-fisicos/blob/master/colabs/Histogramas.ipynb) | [![Histogramas](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white)](https://github.com/marceluda/python-para-fisicos/blob/master/colabs/Histogramas.ipynb) | Histogramas |
+|[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marceluda/python-para-fisicos/blob/master/colabs/Cuadrados_Mínimos.ipynb) | [![Ajuste lineal (y polinómico)](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white)](https://github.com/marceluda/python-para-fisicos/blob/master/colabs/Cuadrados_Mínimos.ipynb) | Ajuste lineal (y polinómico) |
 
 
 ## Introducción al análisis de datos
