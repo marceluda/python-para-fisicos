@@ -14,7 +14,7 @@ navbar: labo2
 |---|---|
 |[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marceluda/python-para-fisicos/blob/master/colabs/Herramientas_estadísticas.ipynb)  | Herramientas estadísticas |
 |[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marceluda/python-para-fisicos/blob/master/colabs/Histogramas.ipynb)  | Histogramas |
-|[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marceluda/python-para-fisicos/blob/master/colabs/Herramientas_estadísticas.ipynb)  | Ajuste lineal (y polinómico) |
+|[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marceluda/python-para-fisicos/blob/master/colabs/Cuadrados_Mínimos.ipynb)  | Ajuste lineal (y polinómico) |
 
 
 ## Introducción al análisis de datos
