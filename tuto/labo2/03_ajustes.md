@@ -391,7 +391,7 @@ parametros_iniciales=[0, 3, 10, 3]  # No ajusta
 
 
 <center>
-<p> <a href="https://colab.research.google.com/drive/1tzk95NgN2ktUDzaV4EcQHTfa2WSDjzpP?usp=sharing" class="btn btn-primary btn-lg" role="button">
+<p> <a href="https://colab.research.google.com/github/marceluda/python-para-fisicos/blob/master/colabs/Ejemplo_de_ajuste_no_lineal.ipynb" class="btn btn-primary btn-lg" role="button">
 COLAB de google para visualizar ajustes no lineales
 </a> </p>
 </center>
